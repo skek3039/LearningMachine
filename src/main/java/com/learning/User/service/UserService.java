@@ -1,4 +1,4 @@
-package com.learning.user.service;
+package com.learning.User.service;
 
 public class UserService {
 
