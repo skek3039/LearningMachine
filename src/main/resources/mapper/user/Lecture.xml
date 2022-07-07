@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="LectureMapper">
 
-  	<select id="POPLecture" resultType="com.learning.user.Form.LectureForm">
+  	<select id="POPLecture" resultType="com.learning.User.Form.LectureForm">
   		SELECT * FROM lecture_form ORDER BY total_register desc
   	</select>
   
