@@ -25,27 +25,27 @@ public class HomeController {
 		return "lecture";
 	}
 	@GetMapping(value = "/lecture_request")
-	public String practice2() {
+	public String lecture_request() {
 		return "lecture_request";
 	}
 	@GetMapping(value = "/lecture_detail")
-	public String practice3() {
+	public String lecture_detail() {
 		return "lecture_detail";
 	}
 	@GetMapping(value = "/student")
-	public String practice4() {
+	public String student() {
 		return "student";
 	}
 	@GetMapping(value = "/student_list")
-	public String practice5() {
+	public String student_list() {
 		return "student_list";
 	}
 	@GetMapping(value = "/student_ban")
-	public String practice6() {
+	public String student_ban() {
 		return "student_ban";
 	}
 	@GetMapping(value = "/qna")
-	public String practice7() {
+	public String qna() {
 		return "qna";
 	}
 }
