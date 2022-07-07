@@ -1,4 +1,4 @@
-package com.learning.user.controller;
+package com.learning.User.controller;
 
 public class LectureController {
 
