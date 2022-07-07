@@ -5,8 +5,13 @@
 				<div class="card-body p-5 text-left">
 					<h5 style="text-align: left; color: white;">관리자</h5>
 					<details>
+    					<summary>매출관리</summary>
+    						<a href="/payment">매출조회</a> <br>
+    						<a href="#"></a> <br>
+   	 				</details>
+					<details>
     					<summary>학생관리</summary>
-    						<a href="#">학생조회</a> <br>
+    						<a href="/admin_student">학생조회</a> <br>
     						<a href="#">신고리스트</a> <br>
 					</details>
 					<details>
