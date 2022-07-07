@@ -28,14 +28,12 @@ public class LoginController {
 			session.setAttribute("u_authority", dto.getU_authority());
 			if(dto.getU_authority() > 6) {
 				return "redirect:/admin";				
-			}else if(dto.getU_authority() > 3) {
-				
+			}else if(dto.getU_authority() > 3) {				
 				System.out.println("강사");
 				return "redirect:/lecture";								
 			}
 		}
-		
-		return "redirect:/";
+		return "redirect:/usermain";
 	}
 	
 	@GetMapping(value = "/login")

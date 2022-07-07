@@ -71,6 +71,36 @@
     }
 </style>
 
+<script type="text/javascript">
+function search(){
+ 	var u_name= document.getElementById("u_name").value;
+		$.ajax({
+		url:"./admin_studentSearch",
+		type:"get",
+		dataType:"json",
+		data:{"u_name" : u_name},
+		success:function(data){
+			var list = data.list;
+			alert(list);
+		/*	var html =  "<table><tr><th>이름</th><th>아이디</th><th>포인트</th><th>신고횟수</th></tr>";
+			$.each(list, function(){
+				html += "<tr><td>" + list[index].u_name" + </td><td>" + list[index].u_id + "</td>";
+				html += "<tr><td>" + list[index].u_paypoint" + </td><td>" + list[index].u_banned + "</td></tr>";
+			});
+			html += "</table>";
+			$("#student").empty();
+			$("#student").append(html); */
+		},error:function(request, status, error){
+			alert("문제발생"+error);
+		}
+	}); 
+}
+ 
+
+
+</script>
+
+
 </head>
 
 <body>
@@ -92,12 +122,13 @@
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
 		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;학생리스트</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px;">
-				<div style="padding-top: 10px; padding-left: 1200px;">
-					<button type="button" class="btn btn-outline-dark">신청</button>
+		<div style="padding-top: 10px; margin-left: 310px;">
+				<div style="padding-top: 10px;">
+					 <input type="search" id="u_name" name="u_name" class="form-control" required="required" placeholder="학생이름을 입력해주세요." style="width: 250px; float: left;"> &nbsp; 
+					 <button class="btn btn-danger" id="search" style="width: 100px" onclick="search()">search</button>
 				</div><br>
+			<div  id="student" >
 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
-
 					<tr>
 						<th>이름</th>
 						<th>ID</th>
@@ -112,7 +143,8 @@
 						<td>${list.u_banned }</td>
 					</tr>
 					</c:forEach>
-			</table>
+				</table>
+			</div>
 		</div>
 
 </div>
@@ -146,6 +178,7 @@
 
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
+	<script src="./resources/js/admin_student.js"></script>
 </body>
 
 </html>

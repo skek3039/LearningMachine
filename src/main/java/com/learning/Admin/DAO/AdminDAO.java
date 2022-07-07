@@ -17,4 +17,8 @@ public class AdminDAO {
 		return sqlSession.selectList("Admin.userList");
 	}
 
+	public List<userDTO> userSearch(String u_name) {
+		return sqlSession.selectList("Admin.userSearch",u_name);
+	}
+
 }

@@ -16,5 +16,9 @@ public class AdminService {
 	public List<userDTO> userList() {
 		return adminDAO.userList();
 	}
+
+	public List<userDTO> userSearch(String u_name) {
+		return adminDAO.userSearch(u_name);
+	}
 	
 }
