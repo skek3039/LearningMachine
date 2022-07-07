@@ -6,7 +6,7 @@
   		select * from user where u_authority IN (1,2,3)
   	</select>
   	<select id="userSearch" parameterType="string" resultType="userDTO">
-  		select * from user where u_name LIKE '%[#{u_name}]%' 
+  		select * from user where u_name LIKE '%' #{u_name } '%'	
   	</select>
   
   </mapper>

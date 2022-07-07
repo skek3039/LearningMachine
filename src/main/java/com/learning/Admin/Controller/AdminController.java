@@ -51,6 +51,7 @@ public class AdminController {
 	public ModelAndView admin_studentSearch(HttpServletRequest request, HttpSession session) {	
 		if((int)session.getAttribute("u_authority") ==7) {
 			String u_name = request.getParameter("u_name"); 
+			System.out.println(u_name);
 			List<userDTO> list = adminService.userSearch(u_name);	
 			
 			ModelAndView mv = new ModelAndView("admin_student");
