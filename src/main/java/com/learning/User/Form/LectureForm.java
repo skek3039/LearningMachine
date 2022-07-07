@@ -13,5 +13,6 @@ public class LectureForm {
 	private String l_thumbnail;
 	private String l_date;
 	
+	private int total_register;
 	private int payment_whether;
 }

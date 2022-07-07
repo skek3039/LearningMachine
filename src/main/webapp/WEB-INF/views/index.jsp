@@ -30,6 +30,15 @@
 
     <!-- Template Stylesheet -->
     <link href="./resources/css/style.css" rel="stylesheet">
+    <style type="text/css">
+    #user_main{
+    	margin-top: 70px;
+    }
+    .col-lg-5{
+    	margin : auto;
+    	margin-bottom: 20px;
+    }
+    </style>
 </head>
 
 <body>
