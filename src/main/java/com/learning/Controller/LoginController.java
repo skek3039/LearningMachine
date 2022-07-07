@@ -26,8 +26,12 @@ public class LoginController {
 			HttpSession session = request.getSession();
 			session.setAttribute("u_id",dto.getU_id());
 			session.setAttribute("u_authority", dto.getU_authority());
-			if(dto.getU_authority() == 7) {
+			if(dto.getU_authority() > 6) {
 				return "redirect:/admin";				
+			}else if(dto.getU_authority() > 3) {
+				
+				System.out.println("강사");
+				return "redirect:/lecture";								
 			}
 		}
 		

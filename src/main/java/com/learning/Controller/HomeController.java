@@ -15,10 +15,13 @@ public class HomeController {
 	public String contact() {
 		return "contact";
 	}
-	@GetMapping(value = "/practice")
-	public String practice() {
-		return "practice";
+	@GetMapping(value = "/lecture")
+	public String lecture() {
+		return "lecture";
 	}
+	
+	
+	
 	@GetMapping(value = "/practice2")
 	public String practice2() {
 		return "practice2";
