@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.learning.DTO.NoticeDTO;
-import com.learning.DTO.userDTO;
 
 @Repository
 public class NoticeDAO {
