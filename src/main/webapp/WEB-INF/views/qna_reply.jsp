@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -69,6 +71,48 @@
         font-size: 17px;
         padding: 15px 0;
     }
+    #writeform{
+		min-height: 500px;
+		height: auto;
+		width: 800px;
+		background-color: white;
+		padding: 10px;
+	}
+	#writeform input{
+		height: 30px;
+		width: 100%;
+		margin-bottom: 5px;
+	}
+	#writeform textarea {
+		height: 540px;
+		width: 100%;
+	}
+	#detail{
+	margin: 0 auto;
+	width: 90%;
+	height: 100%;
+	display: block;	
+}
+table {
+	margin: 0 auto;
+	width: 100%;
+	max-height: 600px;
+	border-collapse: collapse;
+	margin-bottom: 10px;
+}
+th{
+	background-color: #D3D3D3;
+	width: 100px;
+}
+td, th{
+	height:30px;
+	border-bottom: 1px white solid;
+	padding: 10px;
+}
+#hcontent{
+	height: 200px;
+	vertical-align: top;
+}
 </style>
 
 </head>
@@ -108,44 +152,34 @@
 			</div>
 		 </div>
 		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;Q&A</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 40px;">
-				<a href="#">
-				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
-					<tr>
-						<td onMouseOver="this.style.backgroundColor='#D3D3D3'" onMouseOut="this.style.backgroundColor=''">
-						<div class="question-list__question e-detail">
-								<div class="question__info">
-									<div class="question__info-cover">
-										<div class="question__info--main">
-											<div class="question__title">
-												<h3 class="title__text">
-													<span>title</span>
-
-												</h3>
-											</div>
-											<p class="question__body">- content</p>
-
-										</div>
-										<div class="question__info-footer">
-											<div class="footer__cover">
-												<span class="footer__name">user_id</span> 
-												<span class="footer__dot"> ·</span> 
-												<span class="footer__info">date</span>
-												<span class="footer__dot"> ·</span> 
-												<span class="footer__lecture">lecture</span>
-											</div>
-										</div>
-									</div>
-
-								</div>
-							</div>
-						</td>
+		<div style="padding-top: 10px; padding-left: 400px">
+				<table>
+					<tr id="he">
+						<th>제목</th>
+						<td></td>
 					</tr>
-			</table></a>
+					<tr id="he">
+						<th>작성자</th>
+						<td></td>
+					</tr>
+					<tr id="he">
+						<th>작성일</th>
+						<td></td>
+					</tr>
+					<tr id="hcontent">
+						<td colspan="2">adsfawefwaefweqfqwefqwefqwefeqrgas</td>
+					</tr>
+				</table>
+				<div id="writeform">
+				<form action="./write" method="post" onsubmit="return check();" enctype="multipart/form-data">
+					<textarea name="content" id="summernote" required="required" ></textarea>
+					<input type="hidden" name="b_cate" value="">
+					<button type="submit" style="float:right;">답변등록</button>
+				</form>
+			</div>
 		</div>
 
 </div>
-		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
 
 
@@ -177,5 +211,9 @@
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
 </body>
-
+<script>
+$(document).ready(function() {$("#summernote").summernote({height : 200});});
+</script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 </html>
