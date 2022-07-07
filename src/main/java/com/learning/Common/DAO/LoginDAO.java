@@ -1,4 +1,4 @@
-package com.learning.DAO;
+package com.learning.Common.DAO;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;

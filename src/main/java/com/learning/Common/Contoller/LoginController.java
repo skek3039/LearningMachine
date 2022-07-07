@@ -1,4 +1,4 @@
-package com.learning.Controller;
+package com.learning.Common.Contoller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.learning.Common.Service.LoginService;
 import com.learning.DTO.userDTO;
-import com.learning.Service.LoginService;
 @Controller
 public class LoginController {
 	@Autowired

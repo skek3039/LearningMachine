@@ -1,9 +1,9 @@
-package com.learning.Service;
+package com.learning.Common.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.learning.DAO.LoginDAO;
+import com.learning.Common.DAO.LoginDAO;
 import com.learning.DTO.userDTO;
 
 @Service

@@ -1,4 +1,4 @@
-package com.learning.Controller;
+package com.learning.Admin.Controller;
 
 import java.util.List;
 
@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
-
+import com.learning.Admin.Service.*;
 import com.learning.DTO.userDTO;
-import com.learning.Service.AdminService;
 
 @Controller
 public class AdminController {
+	public class Admin {
+
+	}
 	@Autowired
 	private AdminService adminService;
 

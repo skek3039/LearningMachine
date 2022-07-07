@@ -1,13 +1,12 @@
-package com.learning.Service;
+package com.learning.Common.Service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.learning.DAO.NoticeDAO;
+import com.learning.Common.DAO.NoticeDAO;
 import com.learning.DTO.NoticeDTO;
-import com.learning.DTO.userDTO;
 
 @Service
 public class BoardService {
