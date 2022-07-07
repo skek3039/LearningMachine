@@ -24,31 +24,28 @@ public class HomeController {
 	public String lecture() {
 		return "lecture";
 	}
-	
-	
-	
-	@GetMapping(value = "/practice2")
+	@GetMapping(value = "/lecture_request")
 	public String practice2() {
-		return "practice2";
+		return "lecture_request";
 	}
-	@GetMapping(value = "/practice3")
+	@GetMapping(value = "/lecture_detail")
 	public String practice3() {
-		return "practice3";
+		return "lecture_detail";
 	}
-	@GetMapping(value = "/practice4")
+	@GetMapping(value = "/student")
 	public String practice4() {
-		return "practice4";
+		return "student";
 	}
-	@GetMapping(value = "/practice5")
+	@GetMapping(value = "/student_list")
 	public String practice5() {
-		return "practice5";
+		return "student_list";
 	}
-	@GetMapping(value = "/practice6")
+	@GetMapping(value = "/student_ban")
 	public String practice6() {
-		return "practice6";
+		return "student_ban";
 	}
-	@GetMapping(value = "/practice7")
+	@GetMapping(value = "/qna")
 	public String practice7() {
-		return "practice7";
+		return "qna";
 	}
 }
