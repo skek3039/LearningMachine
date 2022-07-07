@@ -33,7 +33,7 @@ public class LoginController {
 				return "redirect:/lecture";								
 			}
 		}
-		return "redirect:/usermain";
+		return "redirect:/";
 	}
 	
 	@GetMapping(value = "/login")

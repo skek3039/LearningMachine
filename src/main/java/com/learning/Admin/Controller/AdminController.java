@@ -7,7 +7,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,25 +47,18 @@ public class AdminController {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	@GetMapping(value = "/admin_studentSearch" , produces="text/plain;charset=utf-8")
-	@ResponseBody
-	public String admin_studentSearch(HttpServletRequest request, HttpSession session) {
-		
+	public ModelAndView admin_studentSearch(HttpServletRequest request, HttpSession session) {	
 		if((int)session.getAttribute("u_authority") ==7) {
 			String u_name = request.getParameter("u_name"); 
-			List<userDTO> list1 = adminService.userSearch(u_name);
-			List<String> list = new ArrayList<String>();
-			for(int i=0; i< list1.size() ; i++) {
-		//		list.add(list1.get(i));
-			}
-			JSONObject json = new JSONObject();
-			json.put("list", list);
-			System.out.println(list.toString());
+			List<userDTO> list = adminService.userSearch(u_name);	
 			
-			return json.toJSONString();
+			ModelAndView mv = new ModelAndView("admin_student");
+			mv.addObject("list",list);
+			return mv; 
 		}else {
-			return "redirect:/404";
+			ModelAndView mv = new ModelAndView("404");
+			return mv;
 		}
 	}
 	

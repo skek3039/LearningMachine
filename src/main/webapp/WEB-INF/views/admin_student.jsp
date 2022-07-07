@@ -73,6 +73,13 @@
 
 <script type="text/javascript">
 function search(){
+	var u_name= document.getElementById("u_name").value;
+	location.href = "./admin_studentSearch?u_name="+u_name;
+	
+}
+
+
+/* function search(){
  	var u_name= document.getElementById("u_name").value;
 		$.ajax({
 		url:"./admin_studentSearch",
@@ -89,12 +96,12 @@ function search(){
 			});
 			html += "</table>";
 			$("#student").empty();
-			$("#student").append(html); */
+			$("#student").append(html); 
 		},error:function(request, status, error){
 			alert("문제발생"+error);
 		}
 	}); 
-}
+} */
  
 
 
