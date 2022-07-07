@@ -40,7 +40,7 @@ public class LoginController {
 	}
 
 	// 로그아웃처리
-	@GetMapping
+	@GetMapping (value = "/logout")
 	public String logout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("u_id") != null) {
