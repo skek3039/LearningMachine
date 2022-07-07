@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
         <!-- Navbar & Hero Start -->
         <div class="container-xxl position-relative p-0" style="background-color: #00B98E;">
             <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0"  style="background-color: #00B98E;">
@@ -26,7 +27,12 @@
                             </div>
                         </div>
                     </div>
-                    <a href="./login" class="btn btn-light rounded-pill text-primary py-2 px-4 ms-lg-5">Login</a>
+                    <c:if test="${sessionScope.u_id eq null }">
+                    	<a href="./login" class="btn btn-light rounded-pill text-primary py-2 px-4 ms-lg-5">Login</a>
+               		</c:if>
+                    <c:if test="${sessionScope.u_id ne null }">
+                    	<a href="./logout" class="btn btn-light rounded-pill text-primary py-2 px-4 ms-lg-5">Logout</a>
+               		</c:if>
                 </div>
             </nav>
 

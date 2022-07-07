@@ -1,6 +1,7 @@
 package com.learning.Controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,14 @@ public class LoginController {
 		dto.setU_pw(request.getParameter("pw"));
 		
 		dto = loginService.login(dto);
+		if(dto != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("u_id",dto.getU_id());
+			session.setAttribute("u_authority", dto.getU_authority());
+			if(dto.getU_authority() == 7) {
+				return "redirect:/admin";				
+			}
+		}
 		
 		return "redirect:/";
 	}
@@ -29,5 +38,15 @@ public class LoginController {
 	public String login() {
 		return "login";
 	}
-	
+
+	// 로그아웃처리
+	@GetMapping
+	public String logout(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		if (session.getAttribute("u_id") != null) {
+			session.removeAttribute("u_id");
+		}
+		return "redirect:/login";
+	}
+
 }
