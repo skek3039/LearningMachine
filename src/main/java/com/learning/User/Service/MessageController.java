@@ -1,4 +1,4 @@
-package com.learning.User.service;
+package com.learning.User.Service;
 
 public class MessageController {
 
