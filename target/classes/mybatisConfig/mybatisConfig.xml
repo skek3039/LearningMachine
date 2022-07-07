@@ -6,6 +6,7 @@
   
 	<typeAliases>
 		<typeAlias type="com.learning.DTO.userDTO" alias="userDTO"/>
+		<typeAlias type="com.learning.DTO.NoticeDTO" alias="NoticeDTO"/>
 	</typeAliases>  
   
   </configuration>
