@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?> <!-- 맵퍼파일 -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="login">
+  <mapper namespace="Admin">
 
-  	<select id="login"  parameterType="userDTO" resultType="userDTO">
-  		select * from user where u_id=#{u_id} and u_pw = #{u_pw}
+  	<select id="userList" resultType="userDTO">
+  		select * from user where u_authority IN (1,2,3)
   	</select>
   
   </mapper>

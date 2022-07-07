@@ -13,9 +13,6 @@ import com.learning.DTO.userDTO;
 
 @Controller
 public class AdminController {
-	public class Admin {
-
-	}
 	@Autowired
 	private AdminService adminService;
 
@@ -33,6 +30,7 @@ public class AdminController {
 		if((int)session.getAttribute("u_authority") ==7) {
 			ModelAndView mv = new ModelAndView("admin_student");
 			List<userDTO> list = adminService.userList();
+			mv.addObject("list",list);
 			
 			return mv;
 		}else {

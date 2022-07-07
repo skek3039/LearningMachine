@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -97,16 +97,21 @@
 					<button type="button" class="btn btn-outline-dark">신청</button>
 				</div><br>
 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
+
 					<tr>
-						<th>Firstname</th>
-						<th>Lastname</th>
-						<th>Email</th>
+						<th>이름</th>
+						<th>ID</th>
+						<th>Point</th>
+						<th>신고받은횟수</th>						
 					</tr>
+					<c:forEach items="${list }" var="list">
 					<tr>
-						<td>John</td>
-						<td>Doe</td>
-						<td>john@example.com</td>
+						<td>${list.u_name }</td>
+						<td>${list.u_id }</td>
+						<td>${list.u_paypoint }</td>						
+						<td>${list.u_banned }</td>
 					</tr>
+					</c:forEach>
 			</table>
 		</div>
 
