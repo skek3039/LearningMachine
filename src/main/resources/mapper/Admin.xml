@@ -29,5 +29,12 @@
  	<update id="userReport" parameterType="String">
  		update user set u_del = 2 where u_id = #{u_id}
  	</update>
+ 	<update id="back" parameterType="String">
+ 		update user set u_del = 0 where u_id = #{u_id}
+ 	</update>
+ 	
+ 	<delete id="backdelete" parameterType="String">
+ 		delete from user_banned where u_id=#{u_id}
+ 	</delete>
  	
   </mapper>

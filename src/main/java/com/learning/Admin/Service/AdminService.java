@@ -38,5 +38,9 @@ public class AdminService {
 		adminDAO.user_report(u_id);
 	}
 
+	public void back(String u_id) {
+		adminDAO.back(u_id);
+	}
+
 	
 }

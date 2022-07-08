@@ -38,4 +38,9 @@ public class AdminDAO {
 		sqlSession.update("Admin.userReport",u_id);
 	}
 
+	public void back(String u_id) {
+		sqlSession.update("Admin.back",u_id);
+		sqlSession.delete("Admin.backdelete", u_id);
+	}
+
 }

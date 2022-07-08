@@ -150,7 +150,7 @@ function report(u_id,u_name){
 					 <input type="search" id="u_name" name="u_name" class="form-control" required="required" placeholder="학생이름을 입력해주세요." style="width: 250px; float: left;"> &nbsp; 
 					 <button class="btn btn-danger" id="search" style="width: 100px" onclick="search()">search</button>
 				</div><br>
-			<div  id="student" >
+			<div  id="student" style="width: 500px;">
 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
 						<th>이름</th>
@@ -168,6 +168,11 @@ function report(u_id,u_name){
 					</c:forEach>				
 				</table>
 			</div>
+			<div id="student1" style="width: 500px;">
+				<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;학생정지리스트</h3><hr style="border: solid 1px;"></div>
+			
+			</div>
+			
 		</div>
 
 </div>

@@ -80,7 +80,7 @@ public class AdminController {
 	}
 	
 	//신고리스트 불러오기
-	@GetMapping(value = "admin_student_report")
+	@GetMapping(value = "/admin_student_report")
 	public ModelAndView admin_student_report(HttpServletRequest request , HttpSession session) {
 		if((int)session.getAttribute("u_authority") ==7) { 
 			ModelAndView mv = new ModelAndView("admin_student_report");
@@ -94,7 +94,7 @@ public class AdminController {
 		}	
 	}
 	//학생 신고처리하기.
-	@PostMapping(value = "admin_student_report")
+	@PostMapping(value = "/admin_student_report")
 	public void admin_student_report(HttpServletRequest request, HttpSession session ,HttpServletResponse response) throws Exception {
 		if((int)session.getAttribute("u_authority") ==7) { 
 			int result = 0;
@@ -112,7 +112,7 @@ public class AdminController {
 			pw.print(count);
 		}	
 	}
-	@GetMapping(value = "admin_report")
+	@GetMapping(value = "/admin_report")
 	public ModelAndView admin_report(HttpServletRequest request, HttpSession session) {
 		if((int)session.getAttribute("u_authority") ==7) { 	
 			ModelAndView mv = new ModelAndView("admin_report");
@@ -123,6 +123,18 @@ public class AdminController {
 		}else {
 			ModelAndView mv = new ModelAndView("404");
 			return mv;
+		}
+	}
+	
+	@GetMapping(value = "/admin_student_back")
+	public String admin_student_back(HttpServletRequest request, HttpSession session) {
+		if((int)session.getAttribute("u_authority") ==7) { 	
+			String u_id = request.getParameter("u_id");
+			adminService.back(u_id);
+			
+			return "redirect:/admin_studentLecture?u_id="+u_id;
+		}else {
+			return "/404";
 		}
 	}
 	

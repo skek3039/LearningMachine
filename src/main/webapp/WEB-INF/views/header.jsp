@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
         <!-- Navbar & Hero Start -->
         <div class="container-xxl position-relative p-0" style="background-color: #00B98E;">
-            <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0"  style="background-color: #00B98E;">
+            <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0"  style="position:relative; background-color: #00B98E;">
                 <a href="/web" class="navbar-brand p-0">
                     <h1 class="m-0">Learning Machine</h1>
                     <!-- <img src="img/logo.png" alt="Logo"> -->

@@ -87,30 +87,19 @@
 
 
 		<jsp:include page="./header.jsp" />
-		<div style=" width: 100%; height: 800px; padding-top: 90px;">
-		<div style="padding-top: 5px;">
-		<jsp:include page="./admin_nav.jsp"/>
-		 </div>
-		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;강의신청</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px;">
-				<div style="padding-top: 10px; padding-left: 1200px;">
-					<button type="button" class="btn btn-outline-dark">신청</button>
-				</div><br>
-				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
-					<tr>
-						<th>Firstname</th>
-						<th>Lastname</th>
-						<th>Email</th>
-					</tr>
-					<tr>
-						<td>John</td>
-						<td>Doe</td>
-						<td>john@example.com</td>
-					</tr>
-			</table>
+		<div style="width: 100%; height: 800px;">
+				<jsp:include page="./admin_nav.jsp" />
+				<div>
+				<div style="padding-top: 50px;">
+					<h3>&nbsp;&nbsp;관리자님 안녕하세요.</h3>
+					<hr style="border: solid 1px;">
+				</div>
+				<div style="padding-top: 10px; width: 100%; height: 600px; background-color: pink">
+					<div class="card-body">
+						<p class="card-text">왁왁왁왁!!!!!!</p>
+					</div>
+				</div>
 		</div>
-
-</div>
 		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
 
