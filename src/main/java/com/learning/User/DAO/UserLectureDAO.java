@@ -8,7 +8,7 @@ import com.learning.User.DTO.*;
 import com.learning.User.Form.*;
 
 @Repository
-public class LectureDAO {
+public class UserLectureDAO {
 
 	private final String namespace = "LectureMapper";
 	

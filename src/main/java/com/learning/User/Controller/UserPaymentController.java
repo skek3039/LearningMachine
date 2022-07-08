@@ -1,5 +1,5 @@
 package com.learning.User.Controller;
 
-public class PaymentController {
+public class UserPaymentController {
 
 }

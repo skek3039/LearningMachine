@@ -3,7 +3,7 @@ package com.learning.User.DTO;
 import lombok.Data;
 
 @Data
-public class LectureDTO {
+public class UserLectureDTO {
 
 	private String l_code;
 	private String t_id;

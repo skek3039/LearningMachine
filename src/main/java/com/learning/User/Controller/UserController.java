@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.learning.User.Service.LectureService;
+import com.learning.User.Service.UserLectureService;
 
 @Controller
 public class UserController {
 
 	@Autowired
-	private LectureService lectureService;
+	private UserLectureService lectureService;
 	
 	@RequestMapping("/usermain")
 	public String userMain(HttpServletRequest rq) {

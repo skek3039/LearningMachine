@@ -1,5 +1,5 @@
 package com.learning.User.Service;
 
-public class PaymentService {
+public class UserPaymentService {
 
 }
