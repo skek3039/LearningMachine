@@ -14,8 +14,8 @@ public class StudentService {
 	@Autowired
 	private StudentDAO studentDAO;
 
-	public List<LectureDTO> lectureList() {
-		return studentDAO.lectureList();
+	public List<LectureDTO> lectureList(String u_id) {
+		return studentDAO.lectureList(u_id);
 	}
 	
 	

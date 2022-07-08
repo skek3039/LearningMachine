@@ -91,7 +91,7 @@
 		<div style="padding-top: 5px;">
 		<jsp:include page="./lecture_nav.jsp"/>
 		 </div>
-		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;강의조회</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;강의신청</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px; text-align: center;">
 				<div style="padding-top: 10px; padding-left: 1200px;">
 					<button type="button" class="btn btn-outline-dark">신청</button>

@@ -10,8 +10,8 @@
   
   	<select id="student_lectureList" resultType="lectureDTO">
   		SELECT *
-  		FROM lecture
-  		WHERE u_id = #{u_id} 	
+  		FROM user_lecture_view
+  		WHERE t_id = #{u_id} 	
   	</select>
   	
   	<select id="studentList" parameterType="String" resultType="Hashmap">
