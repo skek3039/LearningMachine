@@ -21,9 +21,10 @@ public class StudentController {
 	private StudentService studentService;
 	//수강생관리 첫페이지 (강의리스트 불러오기)
 	@RequestMapping(value = "/student")
-	public ModelAndView student(HttpServletRequest request) {
+	public ModelAndView student(HttpServletRequest request, HttpSession session) {
 		ModelAndView mv = new ModelAndView("student");
-		List<LectureDTO> lectureList = studentService.lectureList();
+		String u_id = (String)session.getAttribute("u_id");
+		List<LectureDTO> lectureList = studentService.lectureList(u_id);
 		mv.addObject("lectureList", lectureList);
 		return mv;
 	}
