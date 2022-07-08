@@ -128,27 +128,22 @@ function search(){
 		<div style="padding-top: 5px;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
-		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;학생리스트</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;학생강의리스트</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px; margin-left: 310px;">
-				<div style="padding-top: 10px;">
-					 <input type="search" id="u_name" name="u_name" class="form-control" required="required" placeholder="학생이름을 입력해주세요." style="width: 250px; float: left;"> &nbsp; 
-					 <button class="btn btn-danger" id="search" style="width: 100px" onclick="search()">search</button>
-				</div><br>
-			<div  id="student" >
-				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
-					<tr>
-						<th>이름</th>
-						<th>ID</th>
-						<th>Point</th>						
-						<th>신고받은횟수</th>	
-											
+		<div  id="student" >
+			이름 : ${list[0].u_name } <br>
+			아이디 : ${list[0].u_id } <br>
+			포인트 : ${list[0].u_paypoint } <br>
+ 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
+					<tr>					
+						<th>강의이름</th>		
+						<th>수강일자</th>		
+																
 					</tr>
 					<c:forEach items="${list }" var="list">
 					<tr>
-						<td><a href="./admin_studentLecture?u_id=${list.u_id }">${list.u_name }</a></td>
-						<td>${list.u_id }</td>
-						<td>${list.u_paypoint }</td>						
-						<td>${list.u_banned }</td>
+						<td>${list.l_name }</td>
+						<td>${list.lr_date }</td>						
 					</tr>
 					</c:forEach>
 				</table>
