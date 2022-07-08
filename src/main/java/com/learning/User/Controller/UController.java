@@ -1,36 +1,37 @@
 package com.learning.User.Controller;
 
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.learning.User.Service.ULectureService;
+import com.learning.User.Service.UserService;
 
 @Controller
 public class UController {
 
+	
+	@Autowired
+	private UserService userService;
+	
 	@Autowired
 	private ULectureService lectureService;
-	
-	@GetMapping(value = "/")
-	public String index() {
-		return "index";
-	}
-	
-	@RequestMapping("/usermain")
-	public String userMain(HttpServletRequest rq) {
+
+	@RequestMapping(value = "/")
+	public String index(HttpServletRequest rq) {
 		
-		if(rq.getSession().getAttribute("u_id") != null) {
+
+		String u_id = (String) rq.getSession().getAttribute("u_id");
+		
+		rq.setAttribute("popLecture", lectureService.popLecture());
+		
+		if (u_id != null) {
+			rq.setAttribute("RecentVideo", userService.RecentVideo(u_id));
 			
-			rq.setAttribute("popLecture", lectureService.popLecture());
-			
-			return "user/main";
-		}else {
-			
-			return "redirect:/login";
+			return "index";
+		} else {
+			return "index";
 		}
 	}
 }
