@@ -21,4 +21,8 @@ public class AdminDAO {
 		return sqlSession.selectList("Admin.userSearch",u_name);
 	}
 
+	public List<String> studentLecture(String u_id) {
+		return sqlSession.selectList("Admin.studentLecture", u_id);
+	}
+
 }

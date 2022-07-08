@@ -20,5 +20,9 @@ public class AdminService {
 	public List<userDTO> userSearch(String u_name) {
 		return adminDAO.userSearch(u_name);
 	}
+
+	public List<String> studentLecture(String u_id) {
+		return adminDAO.studentLecture(u_id);
+	}
 	
 }

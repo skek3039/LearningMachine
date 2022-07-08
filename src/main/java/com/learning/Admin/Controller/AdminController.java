@@ -3,6 +3,7 @@ package com.learning.Admin.Controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -47,11 +48,11 @@ public class AdminController {
 		}
 	}
 	
+	//학생검색불러오기
 	@GetMapping(value = "/admin_studentSearch" , produces="text/plain;charset=utf-8")
 	public ModelAndView admin_studentSearch(HttpServletRequest request, HttpSession session) {	
 		if((int)session.getAttribute("u_authority") ==7) {
 			String u_name = request.getParameter("u_name"); 
-			System.out.println(u_name);
 			List<userDTO> list = adminService.userSearch(u_name);	
 			
 			ModelAndView mv = new ModelAndView("admin_student");
@@ -62,6 +63,20 @@ public class AdminController {
 			return mv;
 		}
 	}
-	
-	
+	//선택된 학생의 강의 불러오기
+	@GetMapping(value = "/admin_studentLecture")
+	public ModelAndView admin_studentLecture(HttpServletRequest request, HttpSession session) {
+		if((int)session.getAttribute("u_authority") ==7) {
+			ModelAndView mv = new ModelAndView("admin_studentLecture");
+			String u_id = request.getParameter("u_id");
+			List<String> list = adminService.studentLecture(u_id);
+			System.out.println(list.toString());
+			mv.addObject("list",list);
+			
+			return mv;
+		}else {
+			ModelAndView mv = new ModelAndView("404");
+			return mv;
+		}	
+	}
 }

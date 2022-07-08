@@ -10,7 +10,7 @@ import com.learning.User.Form.*;
 @Repository
 public class ULectureDAO {
 
-	private final String namespace = "LectureMapper";
+	private final String namespace = "ULectureMapper";
 	
 	@Autowired
 	private SqlSession sqlSession;
