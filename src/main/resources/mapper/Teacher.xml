@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="Teacher">
 
-  	<select id="lectureList" parameterType="String" resultType="LectureDTO">
+  	<select id="lectureList" parameterType="String" resultType="lectureDTO">
   		SELECT *
 		FROM lecture
 		WHERE t_id = #{u_id} 

@@ -21,13 +21,12 @@ public class LectureController {
 	@Autowired
 	private LectureService lectureService;
 	
+	//강사첫페이지(강사의 강의리스트 불러오기)
 	@RequestMapping(value = "/lecture")
 	public ModelAndView lecture(HttpServletRequest request , HttpSession session) {
-		System.out.println("ㅋ");
 		ModelAndView mv = new ModelAndView("lecture");
 		String u_id = (String)session.getAttribute("u_id");
 		List<LectureDTO> lectureList = lectureService.lectureList(u_id);
-		System.out.println(lectureList.toString());
 		mv.addObject("lectureList", lectureList);
 		return mv;
 	}
