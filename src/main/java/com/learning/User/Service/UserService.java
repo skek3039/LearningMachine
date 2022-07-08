@@ -23,6 +23,30 @@ public class UserService {
 	
 	public List<LectureForm> RegistedLecture(String u_id){
 		
-		return userDAO.RegistedLecture(u_id);
+		List<LectureForm> ResistedLecture = userDAO.RegistedLecture(u_id);
+		
+		List<LectureForm> lectureList = null;
+		List<LectureForm> userLecture = null;
+		if(ResistedLecture == null) {
+			
+			return null;
+		}else {
+			
+			lectureList = lectureDAO.LectureList();
+			userLecture = new ArrayList<LectureForm>();
+			
+			for(LectureForm lectureform : lectureList) {
+				for(LectureForm regiform : ResistedLecture) {
+					
+					if(lectureform.getL_code().equals(regiform.getL_code())) {
+						
+						userLecture.add(lectureform);
+					}
+				}
+			}
+
+			return userLecture;
+		}
+		
 	}
 }
