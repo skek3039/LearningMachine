@@ -15,6 +15,7 @@ public class LectureForm {
 	private String l_date;
 	private String l_category;
 	
+	private String grade_avg;
 	private int total_register;
 	private int payment_whether;
 }
