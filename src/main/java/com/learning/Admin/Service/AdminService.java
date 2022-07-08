@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.learning.Admin.DAO.AdminDAO;
+import com.learning.DTO.BannedDTO;
 import com.learning.DTO.userDTO;
 
 @Service
@@ -27,6 +28,14 @@ public class AdminService {
 
 	public List<String> studentReport(String u_id) {
 		return adminDAO.studentReport(u_id);
+	}
+
+	public int report(BannedDTO dto) {
+		return adminDAO.report(dto);
+	}
+
+	public void user_report(String u_id) {
+		adminDAO.user_report(u_id);
 	}
 
 	

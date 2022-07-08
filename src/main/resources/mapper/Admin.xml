@@ -12,10 +12,22 @@
   		select * from user_lecture_view where u_id = #{u_id} group by l_code
   	</select>
   	<select id="studentReport" parameterType="string" resultType="HashMap"> 
-  		select * from user_teacher_reported_View
+  		select * from user_teacher_reported_View 
   		<if test = "u_id != null">
-  			where u_id = #{u_id}		
+  			where u_id = #{u_id} and u_del = 0
+  		</if>
+  		<if test = "u_id == null">
+  			where u_del = 0
   		</if>
   	</select>
-  
+  	
+  	<insert id="report" parameterType="bannedDTO">
+      INSERT INTO user_banned(u_id,admin_id, bu_reason) 
+      VALUES (#{u_id}, #{admin_id},#{bu_reason})
+   </insert>
+ 
+ 	<update id="userReport" parameterType="String">
+ 		update user set u_del = 2 where u_id = #{u_id}
+ 	</update>
+ 	
   </mapper>
