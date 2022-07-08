@@ -6,8 +6,8 @@
 					<h5 style="text-align: left; color: white;">강사페이지</h5>
 					<details>
     					<summary>강의관리</summary>
-    						<a href="./lecture">강의조회</a> <br>
-    						<a href="./lecture_request">강의신청</a> <br>
+    						<a href="./lecture_detail">강의조회</a> <br>
+    						<a href="./lecture">강의신청</a> <br>
 					</details>
 					<details>
     					<summary>수강생관리</summary>
