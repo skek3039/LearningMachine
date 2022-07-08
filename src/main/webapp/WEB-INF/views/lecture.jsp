@@ -94,15 +94,17 @@
 		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;강의신청</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px; text-align: center;">
 				<div style="padding-top: 10px; padding-left: 1200px;">
-					<button type="button" class="btn btn-outline-dark">신청</button>
+					<button type="button" class="btn btn-outline-dark" onclick="location.href='./lecture_request'">신청</button>
 				</div><br>
 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
+					<%-- <button onclick="location.href='./write?b_cate=${b_cate}'">글쓰기</button> --%>
 					<tr>
 						<th>강사 이름</th>
 						<th>강의 이름</th>
 						<th>카테고리</th>
 						<th>커리큘럼</th>
 						<th>강의 가격</th>
+						<th>승인 여부</th>
 					</tr>
 					
 					<c:forEach items="${lectureList}" var="l">
@@ -112,6 +114,7 @@
 						<td>${l.l_category }</td>
 						<td>${l.l_curriculum }</td>
 						<td>${l.l_price }</td>
+						<td></td>
 					</tr>
 					</c:forEach>
 			</table>
