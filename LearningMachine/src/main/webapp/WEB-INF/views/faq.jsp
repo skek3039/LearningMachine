@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,7 +39,7 @@
 <!-- Template Stylesheet -->
 <link href="./resources/css/style.css" rel="stylesheet">
 <link href="./resources/css/admin.css" rel="stylesheet">
-<link href="./css/notice.css" rel="stylesheet">
+<link href="./resources/css/notice.css" rel="stylesheet">
 
 <style type="text/css">
     <style>@font-face {
@@ -98,23 +97,19 @@
 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
 						<th>번호</th>
-						<th>제목</th>
+						<th>내용</th>
 						<th>조회수</th>
-						<th>날짜</th>
 					</tr>
 					<c:forEach items="${noticelist}" var="n">
 					<tr onclick="location.href='noticedetail?n_no=${n.n_no}'">
-						<th>${n.n_no }</th>
-						<c:if test="${n.fileCount gt 0 }">
-						<th>${n.n_title }</th>
-						</c:if>
-						<th>${n.n_view}</th>
-						<th>${n.n_date }</th>
+						<th id="r1">${n.n_no }</th>
+						<th id="r3">${n.n_title }</th>
+						<th id="r1">${n.n_content }</th>
 					</tr>
 					</c:forEach>
 			</table>
 		</div>
-<div id="pagination"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
+
 </div>
 		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />

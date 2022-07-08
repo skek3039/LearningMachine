@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,7 +39,6 @@
 <!-- Template Stylesheet -->
 <link href="./resources/css/style.css" rel="stylesheet">
 <link href="./resources/css/admin.css" rel="stylesheet">
-<link href="./css/notice.css" rel="stylesheet">
 
 <style type="text/css">
     <style>@font-face {
@@ -73,6 +71,43 @@
     }
 </style>
 
+<script type="text/javascript">
+function search(){
+	var u_name= document.getElementById("u_name").value;
+	location.href = "./admin_studentSearch?u_name="+u_name;
+	
+}
+
+
+/* function search(){
+ 	var u_name= document.getElementById("u_name").value;
+		$.ajax({
+		url:"./admin_studentSearch",
+		type:"get",
+		dataType:"json",
+		data:{"u_name" : u_name},
+		success:function(data){
+			var list = data.list;
+			alert(list);
+		/*	var html =  "<table><tr><th>이름</th><th>아이디</th><th>포인트</th><th>신고횟수</th></tr>";
+			$.each(list, function(){
+				html += "<tr><td>" + list[index].u_name" + </td><td>" + list[index].u_id + "</td>";
+				html += "<tr><td>" + list[index].u_paypoint" + </td><td>" + list[index].u_banned + "</td></tr>";
+			});
+			html += "</table>";
+			$("#student").empty();
+			$("#student").append(html); 
+		},error:function(request, status, error){
+			alert("문제발생"+error);
+		}
+	}); 
+} */
+ 
+
+
+</script>
+
+
 </head>
 
 <body>
@@ -91,30 +126,30 @@
 		<jsp:include page="./header.jsp" />
 		<div style=" width: 100%; height: 800px; padding-top: 90px;">
 		<div style="padding-top: 5px;">
-		<jsp:include page="./notice_nav.jsp"/>
+		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
-		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;공지사항</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px;">
-				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>조회수</th>
-						<th>날짜</th>
+		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;학생강의리스트</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 10px; margin-left: 310px;">
+		<div  id="student" >
+			이름 : ${list[0].u_name } <br>
+			아이디 : ${list[0].u_id } <br>
+			포인트 : ${list[0].u_paypoint } <br>
+ 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
+					<tr>					
+						<th>강의이름</th>		
+						<th>수강일자</th>		
+																
 					</tr>
-					<c:forEach items="${noticelist}" var="n">
-					<tr onclick="location.href='noticedetail?n_no=${n.n_no}'">
-						<th>${n.n_no }</th>
-						<c:if test="${n.fileCount gt 0 }">
-						<th>${n.n_title }</th>
-						</c:if>
-						<th>${n.n_view}</th>
-						<th>${n.n_date }</th>
+					<c:forEach items="${list }" var="list">
+					<tr>
+						<td>${list.l_name }</td>
+						<td>${list.lr_date }</td>						
 					</tr>
 					</c:forEach>
-			</table>
+				</table>
+			</div>
 		</div>
-<div id="pagination"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
+
 </div>
 		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
@@ -123,6 +158,17 @@
 		<!-- Back to Top -->
 		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
 			class="bi bi-arrow-up"></i></a>
+		<script type="text/javascript">
+			$('body > ul > li').click(function() {
+				if ($(this).hasClass('active')) {
+					$(this).find(' > ul').stop().slideUp(300);
+					$(this).removeClass('active');
+				} else {
+					$(this).find(' > ul').stop().slideDown(300);
+					$(this).addClass('active');
+				}
+			});
+		</script>
 	</div>
 
 	<!-- JavaScript Libraries -->
@@ -135,6 +181,7 @@
 
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
+	<script src="./resources/js/admin_student.js"></script>
 </body>
 
 </html>

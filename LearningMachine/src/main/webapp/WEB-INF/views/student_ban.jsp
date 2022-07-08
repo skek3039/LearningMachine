@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,7 +39,6 @@
 <!-- Template Stylesheet -->
 <link href="./resources/css/style.css" rel="stylesheet">
 <link href="./resources/css/admin.css" rel="stylesheet">
-<link href="./css/notice.css" rel="stylesheet">
 
 <style type="text/css">
     <style>@font-face {
@@ -72,7 +70,6 @@
         padding: 15px 0;
     }
 </style>
-
 </head>
 
 <body>
@@ -90,32 +87,43 @@
 
 		<jsp:include page="./header.jsp" />
 		<div style=" width: 100%; height: 800px; padding-top: 90px;">
-		<div style="padding-top: 5px;">
-		<jsp:include page="./notice_nav.jsp"/>
-		 </div>
-		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;공지사항</h3><hr style="border: solid 1px;"></div>
+			<div style="padding-top: 5px;">
+				<div class="card bg-dark text-white"
+					style="width: 20%; height: 801px; float: left;">
+
+					<div class="card-body p-5 text-left">
+						<h5 style="text-align: left; color: white;">강사 페이지</h5>
+						<details>
+    					<summary>강의관리</summary>
+    						<a href="#">강의조회</a> <br>
+    						<a href="#">강의신청</a> <br>
+					</details>
+					<details>
+    					<summary>수강생관리</summary>
+    						<a href="#">수강생조회</a> <br>
+    						<a href="#">신고리스트</a> <br>
+    						<a href="#">Q&A</a> <br>
+   	 				</details>
+					</div>
+				</div>
+			</div>
+			<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;신고자리스트</h3><hr style="border: solid 1px;"></div>
+		 			<div class="col-sm-offset-9" style=" text-align: center; padding-left: 890px"></div>
 		<div style="padding-top: 10px;">
-				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
+			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>조회수</th>
-						<th>날짜</th>
+						<th>Firstname</th>
+						<th>Lastname</th>
+						<th>Email</th>
 					</tr>
-					<c:forEach items="${noticelist}" var="n">
-					<tr onclick="location.href='noticedetail?n_no=${n.n_no}'">
-						<th>${n.n_no }</th>
-						<c:if test="${n.fileCount gt 0 }">
-						<th>${n.n_title }</th>
-						</c:if>
-						<th>${n.n_view}</th>
-						<th>${n.n_date }</th>
+					<tr>
+						<td>John</td>
+						<td>Doe</td>
+						<td>john@example.com</td>
 					</tr>
-					</c:forEach>
 			</table>
 		</div>
-<div id="pagination"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
-</div>
+	</div>
 		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
 
@@ -123,11 +131,23 @@
 		<!-- Back to Top -->
 		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
 			class="bi bi-arrow-up"></i></a>
+		<script type="text/javascript">
+			$('body > ul > li').click(function() {
+				if ($(this).hasClass('active')) {
+					$(this).find(' > ul').stop().slideUp(300);
+					$(this).removeClass('active');
+				} else {
+					$(this).find(' > ul').stop().slideDown(300);
+					$(this).addClass('active');
+				}
+			});
+		</script>
 	</div>
 
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="./resources/lib/wow/wow.min.js"></script>
 	<script src="./resources/lib/easing/easing.min.js"></script>
 	<script src="./resources/lib/waypoints/waypoints.min.js"></script>

@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+
+.adminform{
+		position: relative;
+    
+	padding-top: 70px;
+
+}
+
+.navbar2{
+	position: relative;
+    padding-top: 70px;
+	width: 250px;
+	height: 800px;
+}
+

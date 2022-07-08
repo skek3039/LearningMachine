@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,7 +39,6 @@
 <!-- Template Stylesheet -->
 <link href="./resources/css/style.css" rel="stylesheet">
 <link href="./resources/css/admin.css" rel="stylesheet">
-<link href="./css/notice.css" rel="stylesheet">
 
 <style type="text/css">
     <style>@font-face {
@@ -91,30 +89,27 @@
 		<jsp:include page="./header.jsp" />
 		<div style=" width: 100%; height: 800px; padding-top: 90px;">
 		<div style="padding-top: 5px;">
-		<jsp:include page="./notice_nav.jsp"/>
+		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
-		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;공지사항</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;강의신청</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px;">
+				<div style="padding-top: 10px; padding-left: 1200px;">
+					<button type="button" class="btn btn-outline-dark">신청</button>
+				</div><br>
 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>조회수</th>
-						<th>날짜</th>
+						<th>Firstname</th>
+						<th>Lastname</th>
+						<th>Email</th>
 					</tr>
-					<c:forEach items="${noticelist}" var="n">
-					<tr onclick="location.href='noticedetail?n_no=${n.n_no}'">
-						<th>${n.n_no }</th>
-						<c:if test="${n.fileCount gt 0 }">
-						<th>${n.n_title }</th>
-						</c:if>
-						<th>${n.n_view}</th>
-						<th>${n.n_date }</th>
+					<tr>
+						<td>John</td>
+						<td>Doe</td>
+						<td>john@example.com</td>
 					</tr>
-					</c:forEach>
 			</table>
 		</div>
-<div id="pagination"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
+
 </div>
 		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
@@ -123,6 +118,17 @@
 		<!-- Back to Top -->
 		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
 			class="bi bi-arrow-up"></i></a>
+		<script type="text/javascript">
+			$('body > ul > li').click(function() {
+				if ($(this).hasClass('active')) {
+					$(this).find(' > ul').stop().slideUp(300);
+					$(this).removeClass('active');
+				} else {
+					$(this).find(' > ul').stop().slideDown(300);
+					$(this).addClass('active');
+				}
+			});
+		</script>
 	</div>
 
 	<!-- JavaScript Libraries -->
