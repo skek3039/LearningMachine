@@ -2,16 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:choose>
-	<c:when test="${sessionScope.u_id eq null }">
+	<c:when test="${sessionScope.u_authority > 3 || sessionScope.u_authority eq null}">
 		<div class="container-xxl bg-primary hero-header">
 			<div class="container">
 				<div class="row g-5 align-items-center">
 					<div class="col-lg-6 text-center text-lg-start">
 						<h1 class="text-white mb-4 animated zoomIn">Learning Machine</h1>
 						<p class="text-white pb-3 animated zoomIn">나누는 보람만큼 커지는 보상</p>
-						<a href=""
-							class="btn btn-outline-light rounded-pill border-2 py-3 px-5 animated slideInRight">Learn
-							More</a>
+						<a href="./LectureList"
+							class="btn btn-outline-light rounded-pill border-2 py-3 px-5 animated slideInRight">강의 살펴보기</a>
 					</div>
 					<div class="col-lg-6 text-center text-lg-start">
 						<img class="img-fluid animated zoomIn" src="img/hero.png" alt="">
@@ -27,6 +26,7 @@
 				<div class="row g-5">
 					<div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
 						<div class="d-inline-block border rounded-pill text-primary px-4 mb-3">내 강의</div>
+						${RegistedLecture}
 						<table class="table">
 							<thead>
 								<tr>
@@ -131,6 +131,7 @@
 					<div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
 						<div
 							class="d-inline-block border rounded-pill text-primary px-4 mb-3">최근 쪽지</div>
+							${RecentMessage}
 						<table class="table">
 							<thead>
 								<tr>

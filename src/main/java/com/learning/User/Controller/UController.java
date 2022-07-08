@@ -34,6 +34,7 @@ public class UController {
 			
 			rq.setAttribute("RecentVideo", userService.RecentVideo(u_id));
 			rq.setAttribute("RecentMessage", messageService.RecentMessage(u_id));
+			rq.setAttribute("RegistedLecture", userService.RegistedLecture(u_id));
 			
 			return "index";
 		} else {

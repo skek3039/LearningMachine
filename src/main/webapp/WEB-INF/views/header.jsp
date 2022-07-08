@@ -13,7 +13,7 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
                         <a href="./notice" class="nav-item nav-link">공지사항</a>
-                        <a href="about.html" class="nav-item nav-link">강의</a>
+                        <a href="./LectureList" class="nav-item nav-link">강의</a>
                         <a href="service.html" class="nav-item nav-link">커뮤니티</a>
                         <a href="./contact" class="nav-item nav-link">장바구니</a>
                         <div class="nav-item dropdown">

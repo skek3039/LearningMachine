@@ -20,4 +20,9 @@ public class UserService {
 		
 		return userDAO.RecentVideo(u_id);
 	}
+	
+	public List<LectureForm> RegistedLecture(String u_id){
+		
+		return userDAO.RegistedLecture(u_id);
+	}
 }

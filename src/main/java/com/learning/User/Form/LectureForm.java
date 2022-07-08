@@ -7,6 +7,7 @@ public class LectureForm {
 
 	private String l_code;
 	private String t_id;
+	private String t_nickname;
 	private String l_name;
 	private int l_price;
 	private String l_curriculum;
