@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 <meta charset="utf-8">
-<title>Learning Machine</title>
+<title>Learning Machine:강사 페이지</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
@@ -106,23 +107,29 @@
 				</div>
 			</div>
 		 </div>
-		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;강의신청</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px;">
+		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;강의조회</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 10px; text-align: center;">
 				<div style="padding-top: 10px; padding-left: 1200px;">
 					<button type="button" class="btn btn-outline-dark">신청</button>
 				</div><br>
 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
-						<th>Firstname</th>
-						<th>Lastname</th>
-						<th>Email</th>
+						<th>강사 이름</th>
+						<th>강의 이름</th>
+						<th>카테고리</th>
+						<th>커리큘럼</th>
+						<th>강의 가격</th>
 					</tr>
-					<
+					
+					<c:forEach items="${lectureList}" var="l">
 					<tr>
-						<td>John</td>
-						<td>Doe</td>
-						<td>john@example.com</td>
+						<td>${l.t_id }</td>
+						<td>${l.l_name }</td>
+						<td>${l.l_category }</td>
+						<td>${l.l_curriculum }</td>
+						<td>${l.l_price }</td>
 					</tr>
+					</c:forEach>
 			</table>
 		</div>
 
