@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.learning.User.Service.UserLectureService;
+import com.learning.User.Service.ULectureService;
 
 @Controller
-public class UserLectureController {
+public class ULectureController {
 	
 	@Autowired
-	private UserLectureService lectureService;
+	private ULectureService lectureService;
 	
 	@RequestMapping("/lectureList")
 	public String lectureList() {

@@ -3,6 +3,7 @@ package com.learning.Teacher.Controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,12 @@ public class LectureController {
 	@Autowired
 	private LectureService lectureService;
 	
+	//강사첫페이지(강사의 강의리스트 불러오기)
 	@RequestMapping(value = "/lecture")
-	public ModelAndView lecture(HttpServletRequest request) {
+	public ModelAndView lecture(HttpServletRequest request , HttpSession session) {
 		ModelAndView mv = new ModelAndView("lecture");
-		
-		List<LectureDTO> lectureList = lectureService.lectureList();
+		String u_id = (String)session.getAttribute("u_id");
+		List<LectureDTO> lectureList = lectureService.lectureList(u_id);
 		mv.addObject("lectureList", lectureList);
 		return mv;
 	}

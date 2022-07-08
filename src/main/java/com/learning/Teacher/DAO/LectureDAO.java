@@ -14,8 +14,9 @@ public class LectureDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public List<LectureDTO> lectureList(){
-		return sqlSession.selectList("lecturn.lecturnList");
+	public List<LectureDTO> lectureList(String u_id){
+		System.out.println("??");
+		return sqlSession.selectList("Teacher.lectureList",u_id);
 	}
 
 }
