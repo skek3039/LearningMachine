@@ -14,10 +14,7 @@ public class NoticeDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
-	/*
-	 * public List<userDTO> write(userDTO dto) { return
-	 * sqlSession.selectList("notice.write", write); }
-	 */
+	
 	public List<NoticeDTO> list(PageDTO page) {
 		return sqlSession.selectList("notice.notice",page);
 	}

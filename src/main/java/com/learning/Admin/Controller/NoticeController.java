@@ -85,7 +85,6 @@ public class NoticeController {
 
 		List<NoticeDTO> noticeList = noticeService.noticeList(page);
 		
-		System.out.println(noticeList.toString());
 		mv.addObject("noticeList", noticeList);
 		mv.addObject("paginationInfo", paginationInfo);
 		mv.addObject("pageNo", pageNo);
