@@ -4,15 +4,21 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.learning.User.Service.UserLectureService;
+import com.learning.User.Service.ULectureService;
 
 @Controller
-public class UserController {
+public class UController {
 
 	@Autowired
-	private UserLectureService lectureService;
+	private ULectureService lectureService;
+	
+	@GetMapping(value = "/")
+	public String index() {
+		return "index";
+	}
 	
 	@RequestMapping("/usermain")
 	public String userMain(HttpServletRequest rq) {
