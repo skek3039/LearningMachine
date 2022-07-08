@@ -2,8 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="notice">
 
-  	<select id="notice"  resultType="noticeDTO" >
-  		select * from notice where n_category = 1;
+  	<select id="notice"  parameterType="PageDTO" resultType="noticeDTO" >
+  		select * from notice 
+  		where n_category = 1 
+  		LIMIT #{startPage} , #{lastPage}
   	</select>
   
   	<select id="noticedetail" parameterType="Integer" resultType="noticeDTO" >
@@ -15,5 +17,6 @@
   		FROM page 
   		WHERE n_cate = #{n_cate}
   	</select>
+  
   
   </mapper>

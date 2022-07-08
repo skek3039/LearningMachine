@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -102,14 +104,10 @@
 						<th>조회수</th>
 						<th>날짜</th>
 					</tr>
-					ddddddddddddddddd
-					<c:forEach items="${noticelist}" var="n">
+					<c:forEach items="${noticeList}" var="n">
 					<tr onclick="location.href='noticedetail?n_no=${n.n_no}'">
-					ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
 						<th>${n.n_no }</th>
-						<c:if test="${n.fileCount gt 0 }">
-						<th>${n.n_title }</th>
-						</c:if>
+							<th>${n.n_title }</th>
 						<th>${n.n_view}</th>
 						<th>${n.n_date }</th>
 					</tr>
@@ -126,7 +124,8 @@
 		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
 			class="bi bi-arrow-up"></i></a>
 	</div>
-
+	
+	
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -137,6 +136,9 @@
 
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
+
+	<script type="text/javascript">function linkPage(pageNo){location.href = "./notice?n_cate${n_cate}&pageNo=" + pageNo;}</script>		
+	
 </body>
 
 </html>

@@ -14,7 +14,7 @@ public class NoticeService {
 	private NoticeDAO noticeDAO;
 
 	public List<NoticeDTO> noticeList(PageDTO page) {
-		return noticeDAO.list();
+		return noticeDAO.list(page);
 	}
 	public NoticeDTO noticeDetail(int n_no) {
 		return noticeDAO.noticedetail(n_no);

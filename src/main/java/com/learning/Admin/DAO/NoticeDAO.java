@@ -7,18 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.learning.DTO.NoticeDTO;
+import com.learning.DTO.PageDTO;
 
 @Repository
 public class NoticeDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
-	/*
-	 * public List<userDTO> write(userDTO dto) { return
-	 * sqlSession.selectList("notice.write", write); }
-	 */
-	public List<NoticeDTO> list() {
-		return sqlSession.selectList("notice.notice");
+	
+	public List<NoticeDTO> list(PageDTO page) {
+		return sqlSession.selectList("notice.notice",page);
 	}
 
 	public NoticeDTO noticedetail(int n_no) {

@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.learning.DTO.BannedDTO;
 import com.learning.DTO.userDTO;
 
 @Repository
@@ -27,6 +28,14 @@ public class AdminDAO {
 
 	public List<String> studentReport(String u_id) {
 		return sqlSession.selectList("Admin.studentReport",u_id);
+	}
+
+	public int report(BannedDTO dto) {
+		return sqlSession.insert("Admin.report",dto);
+	}
+
+	public void user_report(String u_id) {
+		sqlSession.update("Admin.userReport",u_id);
 	}
 
 }

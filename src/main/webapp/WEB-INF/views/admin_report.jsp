@@ -79,14 +79,17 @@ function search(){
 }
 
 function report(u_id,u_name){
+	let ur_reason = document.all["reason"].value;
 	if(confirm(u_name + "학생을 정말 정지하시겠습니까?")){
 		$.ajax({
 			url:"./admin_student_report",
 			type:"post",
 			dataType:"html",
-			data : {"u_id" : u_id},
+			data : {"u_id" : u_id , 
+					"ur_reason" : ur_reason	
+			},
 			success : function(data){
-				alert("ㅋ");
+				location.href = "./admin_student_report";
 			},error:function(request, status, error){
 				alert("문제발생"+error);
 			}
@@ -144,29 +147,34 @@ function report(u_id,u_name){
 		<div style="padding-top: 5px;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
-		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;학생신고리스트</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;학생정지처리</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px; margin-left: 310px;">
-				<div style="padding-top: 10px;">
-					 <input type="search" id="u_name" name="u_name" class="form-control" required="required" placeholder="학생이름을 입력해주세요." style="width: 250px; float: left;"> &nbsp; 
-					 <button class="btn btn-danger" id="search" style="width: 100px" onclick="search()">search</button>
-				</div><br>
+
 			<div  id="student" >
-				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
+				이름 : ${list[0].u_name }
+				아이디 : ${list[0].u_id }
+				신고횟수 : ${list[0].count }
+				
+				<table class="table table-bordered table-sm" style="width: 900px;">
 					<tr>
-						<th>이름</th>
-						<th>ID</th>
-						<th>Point</th>		
 						<th>신고강사</th>								
+						<th>신고사유</th>								
 					</tr>
-					<c:forEach items="${list }" var="i">
+					<c:forEach items="${list }" var="list">
 					<tr>
-						<td><a href="./admin_report?u_id=${i.u_id }"> ${i.u_name }</a> </td>
-						<td>${i.u_id }</td> 
-						<td>${i.u_paypoint }</td>						
-						<td>${i.t_name}</td>						
+						<td>${list.t_name}</td>					
+						<td>${list.ur_reason}</td>					
+					</tr>		
+					</c:forEach>		
+					<tr>
+						<td colspan="2">
+							<textarea name="reason" placeholder="정지사유를 적어주세요." required="required" style="width: 100%; height: 100px;" ></textarea>
+						</td>
 					</tr>
-					</c:forEach>				
 				</table>
+				<div style="padding-top: 10px;">
+					<button type="submit" onclick="report('${list[0].u_id}','${list[0].u_name }')" class="btn btn-outline-dark">정지처리</button>
+				</div>
 			</div>
 		</div>
 

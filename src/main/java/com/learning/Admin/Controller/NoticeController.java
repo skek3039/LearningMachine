@@ -79,11 +79,12 @@ public class NoticeController {
 		// 서버로 보내기
 		PageDTO page = new PageDTO();
 		page.setStartPage(startPage);
-		page.setLastePage(lastpage);
+		page.setLastPage(lastpage);
 		page.setN_cate(n_cate);
 
 
 		List<NoticeDTO> noticeList = noticeService.noticeList(page);
+		
 		mv.addObject("noticeList", noticeList);
 		mv.addObject("paginationInfo", paginationInfo);
 		mv.addObject("pageNo", pageNo);
