@@ -39,7 +39,7 @@
 <!-- Template Stylesheet -->
 <link href="./resources/css/style.css" rel="stylesheet">
 <link href="./resources/css/admin.css" rel="stylesheet">
-<link href="./css/notice.css" rel="stylesheet">
+<link href="./resources/css/notice.css" rel="stylesheet">
 
 <style type="text/css">
     <style>@font-face {
@@ -97,16 +97,14 @@
 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
 						<th>번호</th>
-						<th>제목</th>
+						<th>내용</th>
 						<th>조회수</th>
-						<th>날짜</th>
 					</tr>
 					<c:forEach items="${noticelist}" var="n">
 					<tr onclick="location.href='noticedetail?n_no=${n.n_no}'">
-						<th>${n.n_no }</th>
-						<th>${n.n_title }</th>
-						<th>${n.n_view}</th>
-						<th>${n.n_date }</th>
+						<th id="r1">${n.n_no }</th>
+						<th id="r3">${n.n_title }</th>
+						<th id="r1">${n.n_content }</th>
 					</tr>
 					</c:forEach>
 			</table>

@@ -21,5 +21,9 @@ public class NoticeDAO {
 		return sqlSession.selectList("notice.notice");
 	}
 
+	public NoticeDTO noticedetail(int n_no) {
+		return sqlSession.selectOne("notice.noticedetail",n_no);
+	}
+
 
 }

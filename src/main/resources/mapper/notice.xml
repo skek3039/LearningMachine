@@ -3,7 +3,12 @@
   <mapper namespace="notice">
 
   	<select id="notice"  resultType="noticeDTO">
-  		select * from notice;
+  		select * from notice where n_category = 1;
   	</select>
+  
+  	<select id="noticedetail" parameterType="Integer" resultType="noticeDTO" >
+  		select * from notice WHERE n_no = #{n_no}
+  	</select>
+  
   
   </mapper>

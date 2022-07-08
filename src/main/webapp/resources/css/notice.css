@@ -8,16 +8,14 @@
 table {
 	margin: 0 auto;
 	width: 100%;
-	max-height: 800px;
+	height: 600px;
 	border-collapse: collapse;
 	margin-bottom: 10px;
-	background-color: #7FFFD4;
-	border-bottom: 1px solid aqua;
+	background-color: #FFF8DC;
 }
 
 th {
 	height: 50px;
-	border-bottom: 1px solid aqua;
 }
 
 tr {
@@ -59,3 +57,22 @@ small {
 	color: purple;
 	background-color: white;
 }
+h2 {
+	border-bottom: 2px solid black;
+	text-align: center;
+}
+#noticeform{
+	padding-left: 20%;	
+	height: 800px;
+}
+
+
+#noticedetail{
+	height: 100%;
+	width: 800px;
+	float: left;
+	margin: 0 auto;
+	margin-left: 20px;
+}
+
+

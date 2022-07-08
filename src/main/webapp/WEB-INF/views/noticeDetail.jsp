@@ -89,30 +89,16 @@
 
 		<jsp:include page="./header.jsp" />
 		<div style=" width: 100%; height: 800px; padding-top: 90px;">
-		<div style="padding-top: 5px;">
-		<jsp:include page="./notice_nav.jsp"/>
-		 </div>
-		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;공지사항</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px;">
-				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>조회수</th>
-						<th>날짜</th>
-					</tr>
-					<c:forEach items="${noticelist}" var="n">
-					<tr onclick="location.href='noticedetail?n_no=${n.n_no}'">
-						<th>${n.n_no }</th>
-						<th>${n.n_title }</th>
-						<th>${n.n_view}</th>
-						<th>${n.n_date }</th>
-					</tr>
-					</c:forEach>
-			</table>
-		</div>
+			<div style="padding-top: 5px;">
+				<jsp:include page="./notice_nav.jsp"/>
+		 	</div>
+		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;${dto.n_title }</h3><hr style="border: solid 1px;"></div>
+			<div id ="noticedetail">
+				<h5>관리자</h5>
+				${dto.n_content }
+			</div>
 
-</div>
+		</div>
 		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
 

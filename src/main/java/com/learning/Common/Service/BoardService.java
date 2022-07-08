@@ -15,5 +15,8 @@ public class BoardService {
 	public List<NoticeDTO> noticeList() {
 		return noticeDAO.list();
 	}
+	public NoticeDTO noticeDetail(int n_no) {
+		return noticeDAO.noticedetail(n_no);
+	}
 	
 }
