@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?> <!-- 맵퍼파일 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="UserMapper">
+
+  	<select id="RecentVideo" parameterType = "String" resultType="com.learning.User.Form.UserAttendanceForm">
+  		SELECT * FROM user_lecture_video_attendance_info_view
+  		where
+  			u_id = #{u_id}
+  		ORDER BY va_date desc
+  	</select>
+  
+  	<select id="RegistedLecture" parameterType = "String" resultType = "com.learning.User.Form.LectureForm">
+  		
+  		SELECT * from user_lecture_view WHERE u_id = #{u_id}
+  		
+  	</select>
+  </mapper>

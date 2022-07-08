@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?> <!-- 맵퍼파일 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="Teacher">
+
+  	<select id="lectureList" parameterType="String" resultType="lectureDTO">
+  		SELECT *
+		FROM lecture
+		WHERE t_id = #{u_id} 
+  	</select>
+  
+  	<select id="student_lectureList" resultType="lectureDTO">
+  		SELECT *
+  		FROM lecture
+  		WHERE u_id = #{u_id} 	
+  	</select>
+  	
+  	<select id="studentList" parameterType="String" resultType="Hashmap">
+  		SELECT *
+  		FROM user_lecture_view
+  		WHERE t_id = #{t_id} 
+  	</select>
+  </mapper>
