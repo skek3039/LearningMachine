@@ -102,8 +102,10 @@
 						<th>조회수</th>
 						<th>날짜</th>
 					</tr>
+					ddddddddddddddddd
 					<c:forEach items="${noticelist}" var="n">
 					<tr onclick="location.href='noticedetail?n_no=${n.n_no}'">
+					ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
 						<th>${n.n_no }</th>
 						<c:if test="${n.fileCount gt 0 }">
 						<th>${n.n_title }</th>

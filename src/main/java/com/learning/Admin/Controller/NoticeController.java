@@ -83,8 +83,8 @@ public class NoticeController {
 		page.setN_cate(n_cate);
 
 
-		List<NoticeDTO> boardList = noticeService.noticeList(page);
-		mv.addObject("boardList", boardList);
+		List<NoticeDTO> noticeList = noticeService.noticeList(page);
+		mv.addObject("noticeList", noticeList);
 		mv.addObject("paginationInfo", paginationInfo);
 		mv.addObject("pageNo", pageNo);
 		mv.addObject("n_cate", n_cate);
