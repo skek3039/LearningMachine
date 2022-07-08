@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class PageDTO {
-	private int startPage,lastePage,n_cate;
+	private int startPage,lastPage,n_cate;
 }

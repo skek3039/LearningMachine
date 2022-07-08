@@ -102,14 +102,10 @@
 						<th>조회수</th>
 						<th>날짜</th>
 					</tr>
-					ddddddddddddddddd
-					<c:forEach items="${noticelist}" var="n">
+					<c:forEach items="${noticeList}" var="n">
 					<tr onclick="location.href='noticedetail?n_no=${n.n_no}'">
-					ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
 						<th>${n.n_no }</th>
-						<c:if test="${n.fileCount gt 0 }">
-						<th>${n.n_title }</th>
-						</c:if>
+							<th>${n.n_title }</th>
 						<th>${n.n_view}</th>
 						<th>${n.n_date }</th>
 					</tr>
