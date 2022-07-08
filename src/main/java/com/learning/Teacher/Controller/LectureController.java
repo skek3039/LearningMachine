@@ -3,6 +3,7 @@ package com.learning.Teacher.Controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,12 @@ public class LectureController {
 	private LectureService lectureService;
 	
 	@RequestMapping(value = "/lecture")
-	public ModelAndView lecture(HttpServletRequest request) {
+	public ModelAndView lecture(HttpServletRequest request , HttpSession session) {
+		System.out.println("ㅋ");
 		ModelAndView mv = new ModelAndView("lecture");
-		
-		List<LectureDTO> lectureList = lectureService.lectureList();
+		String u_id = (String)session.getAttribute("u_id");
+		List<LectureDTO> lectureList = lectureService.lectureList(u_id);
+		System.out.println(lectureList.toString());
 		mv.addObject("lectureList", lectureList);
 		return mv;
 	}
