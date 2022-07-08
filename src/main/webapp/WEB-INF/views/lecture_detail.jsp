@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -103,15 +103,22 @@
 		<div style="padding-top: 10px;">
 			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
-						<th>Firstname</th>
-						<th>Lastname</th>
-						<th>Email</th>
+						<th>강사 이름</th>
+						<th>강의 이름</th>
+						<th>카테고리</th>
+						<th>커리큘럼</th>
+						<th>강의 가격</th>
 					</tr>
+					
+					<c:forEach items="${lectureList}" var="l">
 					<tr>
-						<td>John</td>
-						<td>Doe</td>
-						<td>john@example.com</td>
+						<td>${l.t_id }</td>
+						<td>${l.l_name }</td>
+						<td>${l.l_category }</td>
+						<td>${l.l_curriculum }</td>
+						<td>${l.l_price }</td>
 					</tr>
+					</c:forEach>
 			</table>
 		</div>
 	</div>
