@@ -15,6 +15,11 @@ public class ULectureDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	public List<LectureForm> LectureList(){
+		
+		return sqlSession.selectList(namespace + ".LectureList");
+	}
+	
 	public List<LectureForm> popLecture(){
 		
 		return sqlSession.selectList(namespace + ".popLecture");
