@@ -128,24 +128,7 @@
 		<jsp:include page="./header.jsp" />
 		<div style=" width: 100%; height: 800px; padding-top: 90px;">
 			<div style="padding-top: 5px;">
-				<div class="card bg-dark text-white"
-					style="width: 20%; height: 801px; float: left;">
-
-					<div class="card-body p-5 text-left">
-						<h5 style="text-align: left; color: white;">강사 페이지</h5>
-						<details>
-    					<summary>강의관리</summary>
-    						<a href="#">강의조회</a> <br>
-    						<a href="#">강의신청</a> <br>
-					</details>
-					<details>
-    					<summary>수강생관리</summary>
-    						<a href="#">수강생조회</a> <br>
-    						<a href="#">신고리스트</a> <br>
-    						<a href="#">Q&A</a> <br>
-   	 				</details>
-					</div>
-				</div>
+				<jsp:include page="./lecture_nav.jsp"/>
 			</div>
 			<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;강의신청</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px; text-align: center;">
