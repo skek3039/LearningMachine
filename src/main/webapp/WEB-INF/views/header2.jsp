@@ -130,7 +130,7 @@
 					</div>
 					<div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
 						<div
-							class="d-inline-block border rounded-pill text-primary px-4 mb-3">쪽지</div>
+							class="d-inline-block border rounded-pill text-primary px-4 mb-3">최근 쪽지</div>
 						<table class="table">
 							<thead>
 								<tr>

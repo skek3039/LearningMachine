@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MessageMapper">
+
+	<select id = "RecentMessage" parameterType = "String" resultType = "com.learning.DTO.MessageDTO">
+	
+		SELECT * FROM message_list WHERE to_id = #{u_id}
+	
+	</select>
+	
+</mapper>

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import com.learning.Common.Service.MessageService;
 import com.learning.User.Service.ULectureService;
 import com.learning.User.Service.UserService;
 
@@ -17,6 +18,9 @@ public class UController {
 	
 	@Autowired
 	private ULectureService lectureService;
+	
+	@Autowired
+	private MessageService messageService;
 
 	@RequestMapping(value = "/")
 	public String index(HttpServletRequest rq) {
@@ -27,7 +31,9 @@ public class UController {
 		rq.setAttribute("popLecture", lectureService.popLecture());
 		
 		if (u_id != null) {
+			
 			rq.setAttribute("RecentVideo", userService.RecentVideo(u_id));
+			rq.setAttribute("RecentMessage", messageService.RecentMessage(u_id));
 			
 			return "index";
 		} else {
