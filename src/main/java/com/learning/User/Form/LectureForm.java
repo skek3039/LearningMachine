@@ -18,4 +18,5 @@ public class LectureForm {
 	private String grade_avg;
 	private int total_register;
 	private int payment_whether;
+	private double attendance_rate;
 }

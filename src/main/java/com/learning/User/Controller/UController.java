@@ -36,6 +36,8 @@ public class UController {
 			rq.setAttribute("RecentMessage", messageService.RecentMessage(u_id));
 			rq.setAttribute("RegistedLecture", userService.RegistedLecture(u_id)); //유저가 수강하는 강의 목록
 			
+			System.out.println(userService.RegistedLecture(u_id).get(0).getAttendance_rate());
+			
 			return "index";
 		} else {
 			return "index";
