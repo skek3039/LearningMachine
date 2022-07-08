@@ -12,7 +12,8 @@
 					<details>
     					<summary>학생관리</summary>
     						<a href="./admin_student">학생조회</a> <br>
-    						<a href="#">신고리스트</a> <br>
+    						<a href="./admin_student_report">신고리스트</a> <br>
+    						<a href="./admin_student_refund">환불신청내역</a> <br>
 					</details>
 					<details>
     					<summary>강사관리</summary>

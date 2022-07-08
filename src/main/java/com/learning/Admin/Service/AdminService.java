@@ -24,5 +24,10 @@ public class AdminService {
 	public List<String> studentLecture(String u_id) {
 		return adminDAO.studentLecture(u_id);
 	}
+
+	public List<String> studentReport(String u_id) {
+		return adminDAO.studentReport(u_id);
+	}
+
 	
 }

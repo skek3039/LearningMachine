@@ -75,6 +75,23 @@
 function search(){
 	var u_name= document.getElementById("u_name").value;
 	location.href = "./admin_studentSearch?u_name="+u_name;
+	
+}
+
+function report(u_id,u_name){
+	if(confirm(u_name + "학생을 정말 정지하시겠습니까?")){
+		$.ajax({
+			url:"./admin_student_report",
+			type:"post",
+			dataType:"html",
+			data : {"u_id" : u_id},
+			success : function(data){
+				alert("ㅋ");
+			},error:function(request, status, error){
+				alert("문제발생"+error);
+			}
+		});
+	}
 }
 
 
@@ -127,7 +144,7 @@ function search(){
 		<div style="padding-top: 5px;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
-		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;학생리스트</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;학생신고리스트</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px; margin-left: 310px;">
 				<div style="padding-top: 10px;">
 					 <input type="search" id="u_name" name="u_name" class="form-control" required="required" placeholder="학생이름을 입력해주세요." style="width: 250px; float: left;"> &nbsp; 
@@ -138,15 +155,17 @@ function search(){
 					<tr>
 						<th>이름</th>
 						<th>ID</th>
-						<th>Point</th>											
+						<th>Point</th>		
+						<th>신고강사</th>								
 					</tr>
-					<c:forEach items="${list }" var="list">
+					<c:forEach items="${list }" var="i">
 					<tr>
-						<td><a href="./admin_studentLecture?u_id=${list.u_id }">${list.u_name }</a></td>
-						<td>${list.u_id }</td>
-						<td>${list.u_paypoint }</td>						
+						<td><img src="./img/banned.png" height="20px" width="20px" onclick="report('${i.u_id}','${i.u_name }');" style="cursor:pointer;"> ${i.u_name }</td>
+						<td>${i.u_id }</td> 
+						<td>${i.u_paypoint }</td>						
+						<td>${i.t_name}</td>						
 					</tr>
-					</c:forEach>
+					</c:forEach>				
 				</table>
 			</div>
 		</div>

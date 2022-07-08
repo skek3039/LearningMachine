@@ -134,19 +134,54 @@ function search(){
 			이름 : ${list[0].u_name } <br>
 			아이디 : ${list[0].u_id } <br>
 			포인트 : ${list[0].u_paypoint } <br>
- 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
+			신고횟수 : ${list[0].count } <br>		
+			<br>
+ 					<h5>강의내역</h5>
+ 				<table class="table table-bordered table-sm">
 					<tr>					
 						<th>강의이름</th>		
-						<th>수강일자</th>		
-																
+						<th>수강일자</th>													
 					</tr>
 					<c:forEach items="${list }" var="list">
 					<tr>
 						<td>${list.l_name }</td>
-						<td>${list.lr_date }</td>						
+						<td>${list.lr_date }</td>															
 					</tr>
 					</c:forEach>
 				</table>
+				<br>
+				<div id="main_bottom1">
+					<h5>신고내역</h5>
+				<table class="table table-bordered table-sm">
+					<tr>
+						<th>신고사유</th>
+						<th>신고강사</th>
+						<th>신고일자</th>
+					</tr>
+					<c:forEach items="${report }" var="r">
+					<tr>
+						<td>${r.ur_reason }</td>
+						<td>${r.t_name }</td>
+						<td>${r.u_date }</td>
+					</tr>		
+					</c:forEach>				
+				</table>
+				</div>	
+				<div id="main_bottom2">
+					<h5>결재내역</h5>
+				<table class="table table-bordered table-sm">
+					<tr>
+						<th>결제내역</th>
+						<th>결제일자</th>
+						<th>결제수단</th>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>						
+				</table>
+				</div>
 			</div>
 		</div>
 

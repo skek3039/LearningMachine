@@ -11,5 +11,11 @@
   	<select id="studentLecture" parameterType="string" resultType="HashMap">
   		select * from user_lecture_view where u_id = #{u_id} group by l_code
   	</select>
+  	<select id="studentReport" parameterType="string" resultType="HashMap"> 
+  		select * from user_teacher_reported_View
+  		<if test = "u_id != null">
+  			where u_id = #{u_id}		
+  		</if>
+  	</select>
   
   </mapper>
