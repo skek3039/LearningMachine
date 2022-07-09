@@ -1,5 +1,7 @@
 package com.learning.User.Controller;
 
+import java.text.ParseException;
+
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +25,7 @@ public class UController {
 	private MessageService messageService;
 
 	@RequestMapping(value = "/")
-	public String index(HttpServletRequest rq) {
+	public String index(HttpServletRequest rq) throws ParseException {
 		
 
 		String u_id = (String) rq.getSession().getAttribute("u_id");
@@ -35,6 +37,8 @@ public class UController {
 			rq.setAttribute("RecentVideo", userService.RecentVideo(u_id));
 			rq.setAttribute("RecentMessage", messageService.RecentMessage(u_id));
 			rq.setAttribute("RegistedLecture", userService.RegistedLecture(u_id)); //유저가 수강하는 강의 목록
+			
+			
 			
 			return "index";
 		} else {

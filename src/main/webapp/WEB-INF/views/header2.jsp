@@ -1,4 +1,4 @@
-..........<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -27,61 +27,87 @@
 				<div class="row g-5">
 					<div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
 						<div class="d-inline-block border rounded-pill text-primary px-4 mb-3">내 강의</div>
-						<c:if test="${fn:length(RegistedLecture) eq 0}">
-						등록한 강의가 없습니다...
-						</c:if>
-						${RegistedLecture}
-						<table class="table">
-							<tbody>
-								<c:if test="{RegistedLecture == null}">
-									<tr>
-										<td>수강하는 강의가 없어요</td>
-									</tr>
-								</c:if>
-							</tbody>
+						<table class="table" style="text-align: center;">
+							<c:choose>
+								<c:when test="${fn:length(RegistedLecture) eq 0}">
+									<thead\>
+										<tr>
+											<th>수강하는 강의가 없어요</th>
+										</tr>
+									</thead>
+								</c:when>
+								<c:otherwise>
+									<tbody>
+									<c:forEach items ="${RegistedLecture}" var="i">
+											<tr>
+												<th scope="row">${i.l_name}</th>
+												<td>${i.t_nickname}</td>
+												<td><small>출석률 : ${i.attendance_rate}%</small></td>
+											</tr>
+									</c:forEach>
+									<c:forEach var="i" begin="0" end="${4 - fn:length(RegistedLecture)}">
+											<tr>
+												<th scope="row"> </th>
+												<td> .</td>
+												<td> </td>
+											</tr>
+									</c:forEach>
+								</tbody>
+								</c:otherwise>
+							</c:choose>
 						</table>
 					</div>
 					<div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
-						<div
-							class="d-inline-block border rounded-pill text-primary px-4 mb-3">최근들은
+						<div class="d-inline-block border rounded-pill text-primary px-4 mb-3">최근들은
 							강의</div>
-							${RecentVideo}
-							<table class="table">
-							<thead>
-								<tr>
-									<th scope="col">#</th>
-									<th scope="col">First</th>
-									<th scope="col">Last</th>
-									<th scope="col">Handle</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th scope="row">1</th>
-									<td>Mark</td>
-									<td>Otto</td>
-									<td>@mdo</td>
-								</tr>
-								<tr>
-									<th scope="row">2</th>
-									<td>Jacob</td>
-									<td>Thornton</td>
-									<td>@fat</td>
-								</tr>
-								<tr>
-									<th scope="row">3</th>
-									<td colspan="2">Larry the Bird</td>
-									<td>@twitter</td>
-								</tr>
-							</tbody>
+						<table class="table" style="text-align: center;">
+							<c:choose>
+								<c:when test="${fn:length(RecentVideo) eq 0}">
+									<thead\>
+										<tr>
+											<th>최근에 들은 강의가 없어요</th>
+										</tr>
+									</thead>
+								</c:when>
+								<c:when test="${fn:length(RecentVideo) > 5}">
+									<tbody>
+										<c:forEach items="${RecentVideo}" var="i" begin ="0" end = "4">
+											<tr>
+												<th scope="row">${i.l_name}</th>
+												<td>${i.t_nickname}</td>
+												<td><small>${i.v_videotitle}</small></td>
+												<td><small>${i.va_date}</small></td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</c:when>
+								<c:otherwise>
+									<tbody>
+										<c:forEach items="${RecentVideo}" var="i">
+											<tr>
+												<th scope="row">${i.l_name}</th>
+												<td>${i.t_nickname}</td>
+												<td><small>${i.v_videotitle}</small></td>
+												<td><small>${i.va_date}</small></td>
+											</tr>
+										</c:forEach>
+										<c:forEach var="i" begin="0" end="${4 - fn:length(RecentVideo)}">
+											<tr>
+												<th scope="row"> </th>
+												<td> </td>
+												<td> .</td>
+												<td> </td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</c:otherwise>
+							</c:choose>
 						</table>
-
 					</div>
 					<div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
-						<div
-							class="d-inline-block border rounded-pill text-primary px-4 mb-3">내
+						<div class="d-inline-block border rounded-pill text-primary px-4 mb-3">내
 							질문</div>
-							<table class="table">
+						<table class="table">
 							<thead>
 								<tr>
 									<th scope="col">#</th>
@@ -110,12 +136,11 @@
 								</tr>
 							</tbody>
 						</table>
-
+	
 					</div>
 					<div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
-						<div
-							class="d-inline-block border rounded-pill text-primary px-4 mb-3">최근 쪽지</div>
-							${RecentMessage}
+						<div class="d-inline-block border rounded-pill text-primary px-4 mb-3">최근 쪽지</div>
+						${RecentMessage}
 						<table class="table">
 							<thead>
 								<tr>
@@ -150,4 +175,4 @@
 			</div>
 		</div>
 	</c:otherwise>
-</c:choose>
+	</c:choose>

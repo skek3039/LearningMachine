@@ -2,10 +2,13 @@ package com.learning.User.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.text.ParseException;
 import java.util.*;
 
 import com.learning.User.DAO.*;
 import com.learning.User.Form.*;
+import com.learning.utill.Util;
 
 @Service
 public class UserService {
@@ -16,9 +19,16 @@ public class UserService {
 	@Autowired
 	private ULectureDAO lectureDAO;
 	
-	public List<UserAttendanceForm> RecentVideo(String u_id){
+	public List<UserAttendanceForm> RecentVideo(String u_id) throws ParseException{
 		
-		return userDAO.RecentVideo(u_id);
+		List<UserAttendanceForm> list = userDAO.RecentVideo(u_id);
+		
+		for(UserAttendanceForm form : list) {
+			
+			
+			form.setVa_date(Util.YMDHM(form.getVa_date()));
+		}
+		return list;
 	}
 	
 	public List<LectureForm> RegistedLecture(String u_id){
@@ -40,6 +50,7 @@ public class UserService {
 					
 					if(lectureform.getL_code().equals(regiform.getL_code())) {
 						
+						lectureform.setAttendance_rate(regiform.getAttendance_rate());
 						userLecture.add(lectureform);
 					}
 				}
