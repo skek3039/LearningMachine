@@ -126,14 +126,15 @@
 
 
 		<jsp:include page="./header.jsp" />
-		<div style=" width: 100%; height: 800px; padding-top: 90px;">
-			<div style="padding-top: 5px;">
-				<jsp:include page="./lecture_nav.jsp"/>
+		<div style="width: 100%; height: 705px;">
+			<jsp:include page="./lecture_nav.jsp" />
+			<div style="padding-top: 50px;">
+				<h3>&nbsp;&nbsp;강의신청</h3>
+				<hr style="border: solid 1px;">
 			</div>
-			<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;강의신청</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px; text-align: center;">
-			<h5>■개인정보처리방침</h5>
-			<textarea style="width: 900px; height: 200px;" rows="" cols="">< Learning Machine >('www.Learning Machine.com'이하 'Learning Machine')은(는) 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다.
+			<div style="padding-top: 10px; text-align: center;">
+				<h5>■개인정보처리방침</h5>
+				<textarea style="width: 900px; height: 200px;" rows="" cols="">< Learning Machine >('www.Learning Machine.com'이하 'Learning Machine')은(는) 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다.
 
 ○ 이 개인정보처리방침은 2022년 1월 1부터 적용됩니다.
 
@@ -199,45 +200,48 @@
 ② < Learning Machine >은(는) 위탁계약 체결시 「개인정보 보호법」 제26조에 따라 위탁업무 수행목적 외 개인정보 처리금지, 기술적․관리적 보호조치, 재위탁 제한, 수탁자에 대한 관리․감독, 손해배상 등 책임에 관한 사항을 계약서 등 문서에 명시하고, 수탁자가 개인정보를 안전하게 처리하는지를 감독하고 있습니다.
 
 ③ 위탁업무의 내용이나 수탁자가 변경될 경우에는 지체없이 본 개인정보 처리방침을 통하여 공개하도록 하겠습니다.</textarea>
-		</div>
-		
-		<div style="padding-left: 1000px;">
-		개인정보취급방침에 동의합니다<input type="checkbox">
-		</div><br>
-		<div style="text-align: center">
-		<h5 >&nbsp;&nbsp;■강의계획</h5>
-				<div style="padding-top: 10px; padding-left: 340px">
+			</div>
 
+			<div style="padding-left: 1000px;">
+				개인정보취급방침에 동의합니다<input type="checkbox">
+			</div>
+			<br>
+			<div style="text-align: center">
+				<h5>&nbsp;&nbsp;■강의계획</h5>
+				<div id="requestform" style="padding-top: 10px; padding-left: 340px">
+					<form action="./lecture_request.do" method="post">
 					<table class="tg" style="table-layout: fixed; width: 900px">
 						<colgroup>
 							<col style="width: 100px">
 							<col style="width: 800px">
 						</colgroup>
-						<thead>
-							<tr>
-								<th class="tg-llyw">강의개설명</th>
-								<th class="tg-0pky"><input style="width: 790px;" type="text"></th>
-							</tr>
-						</thead>
 						<tbody>
 							<tr>
-								<td class="tg-llyw">교육시간</td>
-								<td class="tg-0pky"><input style="width: 790px;" type="text"></td>
+								<td class="tg-llyw">강의 이름</td>
+								<td class="tg-0pky"><input name="l_name" style="width: 790px;"
+									type="text"></td>
 							</tr>
 							<tr>
-								<td class="tg-llyw">교육목표</td>
-								<td class="tg-0pky"><input style="width: 790px;" type="text"></td>
+								<td class="tg-llyw">강의 정보</td>
+								<td class="tg-0pky"><input name="l_info" style="width: 790px;"
+									type="text"></td>
 							</tr>
 							<tr>
-								<td class="tg-llyw">동영상 링크</td>
-								<td class="tg-0pky"><input style="width: 790px;" type="text"></td>
+								<td class="tg-llyw">카테고리</td>
+								<td class="tg-0pky"><input name="l_category" style="width: 790px;"
+									type="text"></td>
+							</tr>
+							<tr>
+								<td class="tg-llyw">커리큘럼</td>
+								<td class="tg-0pky"><input name="l_curriculum" style="width: 790px;"
+									type="text"></td>
 							</tr>
 						</tbody>
 					</table>
+					<div style="padding-top: 10px; padding-left: 765px;">
+						<button type="submit" class="btn btn-outline-dark">저장</button>
+					</div></form>
 				</div>
-			</div>
-			<div style="padding-top: 10px; padding-left: 1184px;">
-				<button type="button" class="btn btn-outline-dark">저장</button>
 			</div>
 		</div>
 		<%-- <jsp:include page="./team.jsp"/> --%>

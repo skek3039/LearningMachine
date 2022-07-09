@@ -17,4 +17,10 @@ public class LectureService {
 	public List<LectureDTO> lectureList(String u_id){
 		return lectureDAO.lectureList(u_id);
 	}
+
+	public int lecture_request(LectureDTO lecture_request) {
+		return lectureDAO.lecture_request(lecture_request);
+	}
+
+	
 }

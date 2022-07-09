@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?> <!-- 맵퍼파일 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="Teacher">
+
+  	<select id="lectureList" parameterType="String" resultType="LectureDTO">
+  		SELECT *
+		FROM lecture
+		WHERE t_id = #{u_id} 
+  	</select>
+
+	<insert id="lecture_request" parameterType="LectureDTO">
+		INSERT INTO lecture_apply (t_id, l_name, l_category, l_info, l_curriculum)
+		VALUES (#{t_id}, #{l_name}, #{l_category}, #{l_info}, #{l_curriculum})
+	</insert> 
+	
+  </mapper>

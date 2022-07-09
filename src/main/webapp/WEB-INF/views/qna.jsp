@@ -87,13 +87,11 @@
 
 
 		<jsp:include page="./header.jsp" />
-		<div style=" width: 100%; height: 800px; padding-top: 90px;">
-		<div style="padding-top: 5px;">
+		<div style=" width: 100%; height: 705px;">
 		 <jsp:include page="./lecture_nav.jsp"/>
-		 </div>
 		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;Q&A</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 40px;">
-				<a href="#">
+				<a href="./qna_reply">
 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
 						<td onMouseOver="this.style.backgroundColor='#D3D3D3'" onMouseOut="this.style.backgroundColor=''">

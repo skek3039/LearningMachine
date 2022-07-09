@@ -87,10 +87,8 @@
 
 
 		<jsp:include page="./header.jsp" />
-		<div style=" width: 100%; height: 800px; padding-top: 90px;">
-		<div style="padding-top: 5px;">
+		<div style=" width: 100%; height: 705px;">
 		<jsp:include page="./lecture_nav.jsp"/>
-		 </div>
 		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;강의신청</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px; text-align: center;">
 				<div style="padding-top: 10px; padding-left: 1200px;">

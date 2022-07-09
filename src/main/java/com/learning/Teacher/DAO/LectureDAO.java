@@ -18,4 +18,8 @@ public class LectureDAO {
 		return sqlSession.selectList("Teacher.lectureList",u_id);
 	}
 
+	public int lecture_request(LectureDTO lecture_request) {
+		return sqlSession.insert("Teacher.lecture_request", lecture_request);
+	}
+
 }
