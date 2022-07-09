@@ -1,6 +1,7 @@
 ..........<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:choose>
 	<c:when test="${sessionScope.u_authority > 3 || sessionScope.u_authority eq null}">
 		<div class="container-xxl bg-primary hero-header">
@@ -26,6 +27,9 @@
 				<div class="row g-5">
 					<div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
 						<div class="d-inline-block border rounded-pill text-primary px-4 mb-3">내 강의</div>
+						<c:if test="${fn:length(RegistedLecture) eq 0}">
+						등록한 강의가 없습니다...
+						</c:if>
 						${RegistedLecture}
 						<table class="table">
 							<tbody>
