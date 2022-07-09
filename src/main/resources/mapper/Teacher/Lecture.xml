@@ -4,7 +4,7 @@
 
   	<select id="lectureList" parameterType="String" resultType="LectureDTO">
   		SELECT *
-		FROM lecture
+		FROM lecture_apply
 		WHERE t_id = #{u_id} 
   	</select>
 
