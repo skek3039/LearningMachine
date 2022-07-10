@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -102,13 +102,13 @@
 					<tr>
 						<th>이름</th>
 						<th>ID</th>
-						<th>Point</th>											
+						<th>수강하는 학생수</th>											
 					</tr>
 					<c:forEach items="${list }" var="list">
 					<tr>
-						<td><a href="./admin_studentLecture?u_id=${list.u_id }">${list.u_name }</a></td>
-						<td>${list.u_id }</td>
-						<td>${list.u_paypoint }</td>						
+						<td><a href="./admin_studentLecture?u_id=${list.t_id }">${list.t_nickname }</a></td>
+						<td>${list.t_id }</td>
+						<td>${list.total_register }</td>						
 					</tr>
 					</c:forEach>
 				</table>
@@ -134,7 +134,6 @@
 			});
 		</script>
 	</div>
-</div>
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

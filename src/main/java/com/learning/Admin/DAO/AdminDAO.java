@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.learning.DTO.BannedDTO;
+import com.learning.DTO.TeacherDTO;
 import com.learning.DTO.userDTO;
 
 @Repository
@@ -41,6 +42,10 @@ public class AdminDAO {
 	public void back(String u_id) {
 		sqlSession.update("Admin.back",u_id);
 		sqlSession.delete("Admin.backdelete", u_id);
+	}
+
+	public List<String> teacherList() {
+		return sqlSession.selectList("Admin.teacherList");
 	}
 
 }

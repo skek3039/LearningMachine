@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.learning.Admin.DAO.AdminDAO;
 import com.learning.DTO.BannedDTO;
+import com.learning.DTO.TeacherDTO;
 import com.learning.DTO.userDTO;
 
 @Service
@@ -40,6 +41,10 @@ public class AdminService {
 
 	public void back(String u_id) {
 		adminDAO.back(u_id);
+	}
+
+	public List<String> teacherList() {
+		return adminDAO.teacherList();
 	}
 
 	

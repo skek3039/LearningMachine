@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.learning.Admin.Service.AdminService;
 import com.learning.DTO.BannedDTO;
+import com.learning.DTO.TeacherDTO;
 import com.learning.DTO.userDTO;
 
 @Controller
@@ -30,6 +31,24 @@ public class AdminController {
 			return "redirect:/404";
 		}
 	}
+
+	
+	@GetMapping(value = "/admin_teacher")
+	public ModelAndView admin_teacher(HttpServletRequest request, HttpSession session) {
+		if ((int)session.getAttribute("u_authority") == 7) {
+		ModelAndView mv = new ModelAndView("admin_teacher");
+			
+		List<String> list = adminService.teacherList();
+		
+		mv.addObject("list",list);
+		
+		return mv;
+		} else {
+			ModelAndView mv = new ModelAndView("404");
+			return mv;
+		}
+	}
+	
 	//학생리스트 불러오기
 	@GetMapping(value = "/admin_student")
 	public ModelAndView admin_student(HttpSession session) {
