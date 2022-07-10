@@ -49,4 +49,8 @@
  		select * from lecture_info_view where t_nickname LIKE '%' #{t_nickname } '%'	
  	</select>
  	
+ 	<select id="refundList" resultType="hashmap">
+ 		select * from payment_refund_apply 
+ 	</select>
+ 	
   </mapper>

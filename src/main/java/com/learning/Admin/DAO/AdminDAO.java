@@ -56,4 +56,8 @@ public class AdminDAO {
 		return sqlSession.selectList("Admin.teacherSerch", t_nickname);
 	}
 
+	public List<String> refundList() {
+		return sqlSession.selectList("Admin.refundList");
+	}
+
 }

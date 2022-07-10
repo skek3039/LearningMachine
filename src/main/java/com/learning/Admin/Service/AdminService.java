@@ -55,5 +55,9 @@ public class AdminService {
 		return adminDAO.teacherSearch(t_nickname);
 	}
 
+	public List<String> refundList() {
+		return adminDAO.refundList();
+	}
+
 	
 }
