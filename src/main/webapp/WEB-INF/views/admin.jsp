@@ -1,5 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%
+	Date nowTime = new Date();
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
+	
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -87,22 +93,69 @@
 
 
 		<jsp:include page="./header.jsp" />
-		<div style="width: 100%; height: 800px;">
+		<div style="width: 100%; height: 800px; ">
+				<div style="position: relative;">
 				<jsp:include page="./admin_nav.jsp" />
-				<div>
-				<div style="padding-top: 50px;">
+				</div>
+				<div style="padding-top: 30px;">
 					<h3>&nbsp;&nbsp;관리자님 안녕하세요.</h3>
 					<hr style="border: solid 1px;">
 				</div>
-				<div style="padding-top: 10px; width: 100%; height: 600px; background-color: pink">
-					<div class="card-body">
-						<p class="card-text">왁왁왁왁!!!!!!</p>
-					</div>
+				<div style="height: 100px">
+				현재 날짜와 시간은 <%= sf.format(nowTime) %> 입니다.
+				<br>
+				
+				
 				</div>
+				
+				 <div class="row g-4">
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="service-item rounded h-100">
+                            <div class="d-flex justify-content-between">
+                                <a class="service-btn" href="">
+                                    <i class="fa fa-link fa-2x"></i>
+                                </a>
+                            </div>
+                            <div class="p-5">
+                                <h5 class="mb-3">신고리스트</h5>
+                                <span>강의 1</span>
+                                <span>강의 1</span>
+                                <span>강의 1</span>
+                                <span>강의 1</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="service-item rounded h-100">
+                            <div class="d-flex justify-content-between">
+                                <a class="service-btn" href="">
+                                    <i class="fa fa-link fa-2x"></i>
+                                </a>
+                            </div>
+                            <div class="p-5">
+                                <h5 class="mb-3">강의카테고리1</h5>
+                                <span>강의 1</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="service-item rounded h-100">
+                            <div class="d-flex justify-content-between">
+                                <a class="service-btn" href="">
+                                    <i class="fa fa-link fa-2x"></i>
+                                </a>
+                            </div>
+                            <div class="p-5">
+                                <h5 class="mb-3">강의카테고리1</h5>
+                                <span>강의 1</span>
+                            </div>
+                        </div>
+                    </div>					
+			</div>
 		</div>
 		<%-- <jsp:include page="./team.jsp"/> --%>
+		</div>
 		<jsp:include page="./footer.jsp" />
-
 
 		<!-- Back to Top -->
 		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
@@ -118,8 +171,6 @@
 				}
 			});
 		</script>
-	</div>
-
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -170,7 +170,18 @@ function report(u_id,u_name){
 			</div>
 			<div id="student1" style="width: 500px;">
 				<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;학생정지리스트</h3><hr style="border: solid 1px;"></div>
-			
+				<table class="table table-bordered table-sm">
+				<tr>
+					<th>이름</th>
+					<th>ID</th>
+					<th>Point</th>		
+					<th>신고강사</th>								
+					<th>신고횟수</th>								
+				</tr>
+				<tr>
+					
+				</tr>
+				</table>
 			</div>
 			
 		</div>
