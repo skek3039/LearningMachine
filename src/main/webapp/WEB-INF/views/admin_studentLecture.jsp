@@ -127,8 +127,8 @@ function backup(u_id){
 
 
 		<jsp:include page="./header.jsp" />
-		<div style=" width: 100%; height: 800px; padding-top: 90px;">
-		<div style="padding-top: 5px;">
+		<div style="width: 100%; height: 800px; ">
+		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
 		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;학생강의리스트</h3><hr style="border: solid 1px;"></div>
