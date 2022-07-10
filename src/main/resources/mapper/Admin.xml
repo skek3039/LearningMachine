@@ -45,4 +45,8 @@
  		select * from user_banned
  	</select>
  	
+ 	<select id="teacherSerch" parameterType="String" resultType="hashmap">
+ 		select * from lecture_info_view where t_nickname LIKE '%' #{t_nickname } '%'	
+ 	</select>
+ 	
   </mapper>

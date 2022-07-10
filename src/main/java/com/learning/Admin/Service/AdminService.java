@@ -51,5 +51,9 @@ public class AdminService {
 		return adminDAO.studentBanList();
 	}
 
+	public List<userDTO> teacherSearch(String t_nickname) {
+		return adminDAO.teacherSearch(t_nickname);
+	}
+
 	
 }
