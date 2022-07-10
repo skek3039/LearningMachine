@@ -177,9 +177,12 @@ function report(u_id,u_name){
 					<th>Point</th>		
 					<th>신고강사</th>														
 				</tr>
+				<c:forEach items="${ban }" var="b">
 				<tr>
 					
+					
 				</tr>
+				</c:forEach>
 				</table>
 			</div>
 			

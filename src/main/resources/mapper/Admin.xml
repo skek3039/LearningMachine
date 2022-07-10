@@ -41,4 +41,8 @@
  		select * from lecture_info_view
  	</select>
  	
+ 	<select id="studentBanList" resultType="HashMap">
+ 		select * from user_banned
+ 	</select>
+ 	
   </mapper>

@@ -47,5 +47,9 @@ public class AdminService {
 		return adminDAO.teacherList();
 	}
 
+	public List<String> studentBanList() {
+		return adminDAO.studentBanList();
+	}
+
 	
 }

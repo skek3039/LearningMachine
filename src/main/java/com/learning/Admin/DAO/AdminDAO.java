@@ -48,4 +48,8 @@ public class AdminDAO {
 		return sqlSession.selectList("Admin.teacherList");
 	}
 
+	public List<String> studentBanList() {
+		return sqlSession.selectList("Admin.studentBanList");
+	}
+
 }
