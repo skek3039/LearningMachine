@@ -139,15 +139,18 @@ function search(){
 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
 						<th>강사이름</th>
-						<th>강의제목</th>
+						<th>강의이름</th>
 						<th>카테고리</th>											
 						<th>커리큘럼</th>											
+						<th>신청일자</th>											
 					</tr>
 					<c:forEach items="${list }" var="list">
 					<tr>
-						<td><a href="./admin_studentLecture?u_id=${list.u_id }">${list.u_name }</a></td>
-						<td>${list.u_id }</td>
-						<td style="text-align: right"><fmt:formatNumber value="${list.u_paypoint }" pattern="#,###"  /></td>						
+						<td>${list.t_id}</td>
+						<td>${list.l_name }</td>
+						<td>카테고리</td>
+						<td>${list.l_info }</td>						
+						<td>${list.l_date }</td>						
 					</tr>
 					</c:forEach>
 				</table>

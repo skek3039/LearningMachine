@@ -21,7 +21,7 @@
     					<summary>강사관리</summary>
     						<a href="./admin_teacher">강사조회</a> <br>
     						<a href="#">강의관리</a> <br>
-    						<a href="./admin_lectureRequest">강의신청내역</a> <br>
+    						<a href="./admin_lecture_request">강의신청내역</a> <br>
    	 				</details>
 				</div>
 			</div>
