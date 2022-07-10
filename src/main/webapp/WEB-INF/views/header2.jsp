@@ -33,8 +33,24 @@
 									<thead\>
 										<tr>
 											<th>수강하는 강의가 없어요</th>
+											<c:forEach var="i" begin="0" end="${3 - fn:length(RegistedLecture)}">
+											<tr>
+												<td> .</td>
+											</tr>
+									</c:forEach>
 										</tr>
 									</thead>
+								</c:when>
+								<c:when test="${fn:length(RegistedLecture) > 5}">
+									<tbody>
+										<c:forEach items="${RegistedLecture}" var="i" begin ="0" end = "4">
+											<tr>
+												<th scope="row">${i.l_name}</th>
+												<td>${i.t_nickname}</td>
+												<td><small>출석률 : ${i.attendance_rate}%</small></td>
+											</tr>
+										</c:forEach>
+									</tbody>
 								</c:when>
 								<c:otherwise>
 									<tbody>
@@ -47,9 +63,9 @@
 									</c:forEach>
 									<c:forEach var="i" begin="0" end="${4 - fn:length(RegistedLecture)}">
 											<tr>
-												<th scope="row"> </th>
-												<td> .</td>
-												<td> </td>
+												<td colspan="3"> .</td>
+												<td></td>
+												<td></td>
 											</tr>
 									</c:forEach>
 								</tbody>
@@ -66,6 +82,11 @@
 									<thead\>
 										<tr>
 											<th>최근에 들은 강의가 없어요</th>
+											<c:forEach var="i" begin="0" end="${3 - fn:length(RecentVideo)}">
+											<tr>
+												<td> .</td>
+											</tr>
+										</c:forEach>
 										</tr>
 									</thead>
 								</c:when>
@@ -93,10 +114,10 @@
 										</c:forEach>
 										<c:forEach var="i" begin="0" end="${4 - fn:length(RecentVideo)}">
 											<tr>
-												<th scope="row"> </th>
-												<td> </td>
-												<td> .</td>
-												<td> </td>
+												<td colspan="4"> .</td>
+												<td></td>
+												<td></td>
+												<td></td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -136,39 +157,54 @@
 								</tr>
 							</tbody>
 						</table>
-	
+						
 					</div>
 					<div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
-						<div class="d-inline-block border rounded-pill text-primary px-4 mb-3">최근 쪽지</div>
-						${RecentMessage}
-						<table class="table">
-							<thead>
-								<tr>
-									<th scope="col">#</th>
-									<th scope="col">First</th>
-									<th scope="col">Last</th>
-									<th scope="col">Handle</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th scope="row">1</th>
-									<td>Mark</td>
-									<td>Otto</td>
-									<td>@mdo</td>
-								</tr>
-								<tr>
-									<th scope="row">2</th>
-									<td>Jacob</td>
-									<td>Thornton</td>
-									<td>@fat</td>
-								</tr>
-								<tr>
-									<th scope="row">3</th>
-									<td colspan="2">Larry the Bird</td>
-									<td>@twitter</td>
-								</tr>
-							</tbody>
+						<div class="d-inline-block border rounded-pill text-primary px-4 mb-3">최근 온 쪽지</div>
+							<table class="table" style="text-align: center;">
+							<c:choose>
+								<c:when test="${fn:length(RecentMessage) eq 0}">
+									<thead\>
+										<tr>
+											<th>최근에 온 쪽지가 없어요</th>
+											<c:forEach var="i" begin="0" end="${3 - fn:length(RecentMessage)}">
+											<tr>
+												<td> .</td>
+											</tr>
+										</c:forEach>
+										</tr>
+									</thead>
+								</c:when>
+								<c:when test="${fn:length(RecentMessage) > 5}">
+									<tbody>
+										<c:forEach items="${RecentMessage}" var="i" begin ="0" end = "4">
+											<tr>
+												<th scope="row">${i.from_nickname}</th>
+												<td>${i.le_content}</td>
+												<td><small>${i.le_date}</small></td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</c:when>
+								<c:otherwise>
+									<tbody>
+										<c:forEach items="${RecentMessage}" var="i">
+											<tr>
+												<th scope="row">${i.from_nickname}</th>
+												<td>${i.le_content}</td>
+												<td><small>${i.le_date}</small></td>
+											</tr>
+										</c:forEach>
+										<c:forEach var="i" begin="0" end="${4 - fn:length(RecentMessage)}">
+											<tr>
+												<td colspan="3"> .</td>
+												<td></td>
+												<td></td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</c:otherwise>
+							</c:choose>
 						</table>
 					</div>
 				</div>

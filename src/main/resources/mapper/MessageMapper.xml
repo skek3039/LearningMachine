@@ -4,7 +4,7 @@
 
 	<select id = "RecentMessage" parameterType = "String" resultType = "com.learning.DTO.MessageDTO">
 	
-		SELECT * FROM message_list WHERE to_id = #{u_id}
+		SELECT * FROM message_list WHERE to_id = #{u_id} and le_confirm = 0
 	
 	</select>
 	

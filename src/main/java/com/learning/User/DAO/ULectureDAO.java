@@ -17,12 +17,6 @@ public class ULectureDAO {
 	
 	public List<LectureForm> LectureList(){
 		
-		return sqlSession.selectList(namespace + ".LectureList");
+		return sqlSession.selectList(namespace + ".ULectureList");
 	}
-	
-	public List<LectureForm> popLecture(){
-		
-		return sqlSession.selectList(namespace + ".popLecture");
-	}
-	
 }

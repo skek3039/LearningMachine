@@ -26,7 +26,7 @@ public class UserService {
 		for(UserAttendanceForm form : list) {
 			
 			
-			form.setVa_date(Util.YMDHM(form.getVa_date()));
+			form.setVa_date(Util.YMD(form.getVa_date()));
 		}
 		return list;
 	}

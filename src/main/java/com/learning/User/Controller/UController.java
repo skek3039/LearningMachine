@@ -30,7 +30,7 @@ public class UController {
 
 		String u_id = (String) rq.getSession().getAttribute("u_id");
 		
-		rq.setAttribute("popLecture", lectureService.popLecture());
+		rq.setAttribute("popLecture", lectureService.PopularLectureList(u_id));
 		
 		if (u_id != null) {
 			

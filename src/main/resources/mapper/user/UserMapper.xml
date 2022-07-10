@@ -11,7 +11,7 @@
   
   	<select id="RegistedLecture" parameterType = "String" resultType = "com.learning.User.Form.LectureForm">
   		
-  		SELECT * from user_lecture_view WHERE u_id = #{u_id}
+  		SELECT * from user_lecture_view WHERE u_id = #{u_id} ORDER BY lr_date ASC
   		
   	</select>
   </mapper>
