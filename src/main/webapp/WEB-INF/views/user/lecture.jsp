@@ -96,7 +96,13 @@ details>summary {
 			<h3>&nbsp;&nbsp;강의목록</h3>
 			<hr style="border: solid 1px;">
 		</div>
-		${LectureList}
+		<c:forEach items ="${PopularList}" var = "i">
+			${i}<br>
+		</c:forEach>
+		<br><br>
+		<c:forEach items ="${RecentList }" var = "i">
+			${i}<br>
+		</c:forEach>
 		<div style="padding-top: 10px; text-align: center;">
 			<div class="row">
 				<div class="col-sm-6 col-md-4">

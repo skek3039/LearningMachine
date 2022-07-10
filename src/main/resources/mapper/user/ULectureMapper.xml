@@ -4,7 +4,7 @@
 	
 	<select id = "ULectureList" resultType = "com.learning.User.Form.LectureForm">
 	
-		SELECT * FROM lecture_info_view ORDER BY total_register ASC
+		SELECT * FROM lecture_info_view ORDER BY total_register DESC
 	
 	</select>
   </mapper>
