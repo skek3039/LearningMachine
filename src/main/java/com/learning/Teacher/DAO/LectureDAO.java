@@ -14,15 +14,15 @@ public class LectureDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	public List<LectureDTO> lectureApplyList(String u_id) {
-		return sqlSession.selectList("Teacher.lectureApplyList",u_id);
+		return sqlSession.selectList("lecture.lectureApplyList",u_id);
 	}
 	
 	public List<LectureDTO> lectureList(String u_id){
-		return sqlSession.selectList("Teacher.lectureList",u_id);
+		return sqlSession.selectList("lecture.lectureList",u_id);
 	}
 
 	public int lecture_request(LectureDTO lecture_request) {
-		return sqlSession.insert("Teacher.lecture_request", lecture_request);
+		return sqlSession.insert("lecture.lecture_request", lecture_request);
 	}
 
 
