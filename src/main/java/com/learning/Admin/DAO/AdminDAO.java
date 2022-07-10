@@ -63,5 +63,12 @@ public class AdminDAO {
 	public List<String> admin_lectureRequest() {
 		return sqlSession.selectList("Admin.lectureRequest");
 	}
+	public List<String> teachervideo(String t_nickname) {
+		return sqlSession.selectList("Admin.teachervideo");
+	}
+
+	public List<String> teacherBanList() {
+		return sqlSession.selectList("Admin.teacgerBanList");
+	}
 
 }

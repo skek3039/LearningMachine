@@ -31,6 +31,7 @@ public class AdminController {
 		}
 	}
 	
+
 	@GetMapping(value = "/admin_lecture_request")
 	public ModelAndView admin_lecture_request(HttpSession session, HttpServletRequest request) {
 		if ((int)session.getAttribute("u_authority") == 7) {
@@ -45,7 +46,22 @@ public class AdminController {
 				return mv;
 			}
 	}
-	
+	@GetMapping(value = "/admin_teacher_video")
+	public ModelAndView admin_teacher_video(HttpServletRequest request , HttpSession session) {
+		if((int)session.getAttribute("u_authority") ==7) { 
+			ModelAndView mv = new ModelAndView("admin_teacher_video");
+			String t_nickname = null;
+			List<String> list = adminService.teachervideo(t_nickname);
+			List<String> list1 = adminService.teacherBanList();
+			
+			mv.addObject("list",list);
+			mv.addObject("ban",list1);
+			return mv;
+		}else {
+			ModelAndView mv = new ModelAndView("404");
+			return mv;
+		}	
+}
 	@GetMapping(value = "/admin_teacher")
 	public ModelAndView admin_teacher(HttpServletRequest request, HttpSession session) {
 		if ((int)session.getAttribute("u_authority") == 7) {
@@ -92,7 +108,7 @@ public class AdminController {
 			return mv;
 		}
 	}
-	
+	//강사 검색 불러오기
 	@GetMapping(value = "/admin_teacherSearch" , produces="text/plain;charset=utf-8")
 	public ModelAndView admin_teacherSearch(HttpServletRequest request, HttpSession session) {	
 		if((int)session.getAttribute("u_authority") ==7) {
