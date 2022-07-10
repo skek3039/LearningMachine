@@ -142,7 +142,7 @@ function backup(u_id){
 			포인트 : ${list[0].u_paypoint } <br>
 			신고횟수 : ${list[0].count } 
 			<c:if test="${list[0].u_del ne 0 }">
-				<img src="./img/banned.png" height="20px" width="20px" onclick="location.href='./admin_student_report'" style="cursor:pointer;"> 
+				<img src="./img/banned.png" height="20px" width="20px" onclick="location.href='./admin_report?u_id=${list[0].u_id}'" style="cursor:pointer;"> 
 				<img src="./img/backup.png" alt="복구" height="20px" width="20px" onclick="backup('${list[0].u_id}')" style="cursor:pointer;"> 
 			</c:if>
 			<br>

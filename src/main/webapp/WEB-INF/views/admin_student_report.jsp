@@ -172,15 +172,15 @@ function report(u_id,u_name){
 				<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;학생정지리스트</h3><hr style="border: solid 1px;"></div>
 				<table class="table table-bordered table-sm">
 				<tr>
-					<th>이름</th>
+					<th>관리자ID</th>
 					<th>ID</th>
-					<th>Point</th>		
-					<th>신고강사</th>														
+					<th>정지사유</th>														
 				</tr>
 				<c:forEach items="${ban }" var="b">
 				<tr>
-					
-					
+					<td>${b.admin_id }</td>
+					<td>${b.u_id }</td>
+					<td>${b.bu_reason }</td>					
 				</tr>
 				</c:forEach>
 				</table>
