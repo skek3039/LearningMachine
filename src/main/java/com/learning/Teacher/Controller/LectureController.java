@@ -27,8 +27,8 @@ public class LectureController {
 		if ((int) session.getAttribute("u_authority") > 3) {
 			ModelAndView mv = new ModelAndView("lecture");
 			String u_id = (String) session.getAttribute("u_id");
-			List<LectureDTO> lectureList = lectureService.lectureList(u_id);
-			mv.addObject("lectureList", lectureList);
+			List<LectureDTO> lectureApplyList = lectureService.lectureApplyList(u_id);
+			mv.addObject("lectureApplyList", lectureApplyList);
 			return mv;
 		} else {
 			ModelAndView mv = new ModelAndView("404");
@@ -68,7 +68,6 @@ public class LectureController {
 			lecture_request.setL_info(request.getParameter("l_info"));
 			lecture_request.setL_category(request.getParameter("l_category"));
 			lecture_request.setL_curriculum(request.getParameter("l_curriculum"));
-
 			lectureService.lecture_request(lecture_request);
 			return "redirect:/lecture";
 		} else {

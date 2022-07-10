@@ -13,14 +13,19 @@ public class LectureService {
 
 	@Autowired
 	private LectureDAO lectureDAO;
+	public List<LectureDTO> lectureApplyList(String u_id) {
+		return lectureDAO.lectureApplyList(u_id);
+	}
 	
 	public List<LectureDTO> lectureList(String u_id){
 		return lectureDAO.lectureList(u_id);
 	}
+	
 
 	public int lecture_request(LectureDTO lecture_request) {
 		return lectureDAO.lecture_request(lecture_request);
 	}
+
 
 	
 }

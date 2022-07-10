@@ -95,22 +95,23 @@
 					<button type="button" class="btn btn-outline-dark" onclick="location.href='./lecture_request'">신청</button>
 				</div><br>
 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
-					<%-- <button onclick="location.href='./write?b_cate=${b_cate}'">글쓰기</button> --%>
 					<tr>
 						<th>강사 이름</th>
 						<th>강의 이름</th>
 						<th>카테고리</th>
 						<th>커리큘럼</th>
+						<th>신청 날짜</th>
 						<th>승인 여부</th>
 					</tr>
 					
-					<c:forEach items="${lectureList}" var="l">
+					<c:forEach items="${lectureApplyList}" var="l">
 					<tr>
 						<td>${l.t_id }</td>
 						<td>${l.l_name }</td>
 						<td>${l.l_category }</td>
 						<td>${l.l_curriculum }</td>
-						<td></td>
+						<td>${l.l_date }</td>
+						<td>${l.l_recognize }</td>
 					</tr>
 					</c:forEach>
 			</table>

@@ -13,6 +13,9 @@ public class LectureDAO {
 	
 	@Autowired
 	private SqlSession sqlSession;
+	public List<LectureDTO> lectureApplyList(String u_id) {
+		return sqlSession.selectList("Teacher.lectureApplyList",u_id);
+	}
 	
 	public List<LectureDTO> lectureList(String u_id){
 		return sqlSession.selectList("Teacher.lectureList",u_id);
@@ -21,5 +24,6 @@ public class LectureDAO {
 	public int lecture_request(LectureDTO lecture_request) {
 		return sqlSession.insert("Teacher.lecture_request", lecture_request);
 	}
+
 
 }

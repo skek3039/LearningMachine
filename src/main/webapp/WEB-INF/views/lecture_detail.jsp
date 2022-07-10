@@ -88,7 +88,7 @@
 		<jsp:include page="./header.jsp" />
 		<div style=" width: 100%; height: 705px;">
 			<jsp:include page="./lecture_nav.jsp"/>	
-			<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;강의조회</h3><hr style="border: solid 1px;"></div>
+			<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;내 강의관리</h3><hr style="border: solid 1px;"></div>
 		 			<div class="col-sm-offset-9" style=" text-align: center; padding-left: 890px">
                           <form action="" method="get">
                               <select name="search" id="">
@@ -105,6 +105,7 @@
 						<th>강의 이름</th>
 						<th>카테고리</th>
 						<th>커리큘럼</th>
+						<th>날짜</th>
 						<th>강의 가격</th>
 					</tr>
 					
@@ -114,6 +115,7 @@
 						<td>${l.l_name }</td>
 						<td>${l.l_category }</td>
 						<td>${l.l_curriculum }</td>
+						<td>${l.l_date }</td>
 						<td>${l.l_price }</td>
 					</tr>
 					</c:forEach>
