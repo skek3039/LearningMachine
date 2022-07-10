@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -139,7 +140,7 @@ function backup(u_id){
 			</c:if>
 			이름 : ${list[0].u_name } <br>
 			아이디 : ${list[0].u_id } <br>
-			포인트 : ${list[0].u_paypoint } <br>
+			포인트 : ${list[0].u_paypoint }<br>
 			신고횟수 : ${list[0].count } 
 			<c:if test="${list[0].u_del ne 0 }">
 				<img src="./img/banned.png" height="20px" width="20px" onclick="location.href='./admin_report?u_id=${list[0].u_id}'" style="cursor:pointer;"> 

@@ -1,7 +1,15 @@
+<%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%
+	Date nowTime = new Date();
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
+	Calendar date = Calendar.getInstance();
+	
+	int month = date.get(Calendar.MONTH) +1 ; 
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -77,23 +85,6 @@
 function search(){
 	var u_name= document.getElementById("u_name").value;
 	location.href = "./admin_studentSearch?u_name="+u_name;
-	
-}
-
-function report(u_id,u_name){
-	if(confirm(u_name + "학생을 정말 정지하시겠습니까?")){
-		$.ajax({
-			url:"./admin_student_report",
-			type:"post",
-			dataType:"html",
-			data : {"u_id" : u_id},
-			success : function(data){
-				alert("ㅋ");
-			},error:function(request, status, error){
-				alert("문제발생"+error);
-			}
-		});
-	}
 }
 
 
@@ -146,48 +137,28 @@ function report(u_id,u_name){
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
-		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;학생신고리스트</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;결제내역</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px; margin-left: 310px;">
 				<div style="padding-top: 10px;">
-					 <input type="search" id="u_name" name="u_name" class="form-control" required="required" placeholder="학생이름을 입력해주세요." style="width: 250px; float: left;"> &nbsp; 
-					 <button class="btn btn-danger" id="search" style="width: 100px" onclick="search()">search</button>
+				◀	<%= month %>월 결제내역   ▶
 				</div><br>
-			<div  id="student" style="width: 500px;">
+			<div  id="student" >
 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
-						<th>이름</th>
-						<th>ID</th>
-						<th>Point</th>		
-						<th>신고강사</th>								
+						<th style="width: 80px;">내역일자</th>
+						<th>회원ID(이름)</th>
+						<th>금액</th>											
+						<th>매출내역</th>											
 					</tr>
-					<c:forEach items="${list }" var="i">
+					<c:forEach items="${list }" var="list">
 					<tr>
-						<td><a href="./admin_report?u_id=${i.u_id }"> ${i.u_name }</a> </td>
-						<td>${i.u_id }</td> 
-						<td><fmt:formatNumber value="${i.u_paypoint }" pattern="#,###"  /></td>						
-						<td>${i.t_name}</td>						
+						<td><a href="./admin_studentLecture?u_id=${list.u_id }">${list.u_name }</a></td>
+						<td>${list.u_id }</td>
+						<td>${list.u_paypoint }</td>						
 					</tr>
-					</c:forEach>				
+					</c:forEach>
 				</table>
 			</div>
-			<div id="student1" style="width: 500px;">
-				<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;학생정지리스트</h3><hr style="border: solid 1px;"></div>
-				<table class="table table-bordered table-sm">
-				<tr>
-					<th>관리자ID</th>
-					<th>ID</th>
-					<th>정지사유</th>														
-				</tr>
-				<c:forEach items="${ban }" var="b">
-				<tr>
-					<td>${b.admin_id }</td>
-					<td>${b.u_id }</td>
-					<td>${b.bu_reason }</td>					
-				</tr>
-				</c:forEach>
-				</table>
-			</div>
-			
 		</div>
 
 </div>

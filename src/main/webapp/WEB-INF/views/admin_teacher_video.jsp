@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -75,18 +73,18 @@
 
 <script type="text/javascript">
 function search(){
-	var u_name= document.getElementById("u_name").value;
-	location.href = "./admin_studentSearch?u_name="+u_name;
+	var t_nickname= document.getElementById("t_nickname").value;
+	location.href = "./admin_teacherSearch?t_nickname="+t_nickname;
 	
 }
 
 function report(u_id,u_name){
-	if(confirm(u_name + "학생을 정말 정지하시겠습니까?")){
+	if(confirm(t_nickname + "강사를 정말 정지하시겠습니까?")){
 		$.ajax({
-			url:"./admin_student_report",
+			url:"./admin_teacher_report",
 			type:"post",
 			dataType:"html",
-			data : {"u_id" : u_id},
+			data : {"t_nickname" : t_nickname},
 			success : function(data){
 				alert("ㅋ");
 			},error:function(request, status, error){
@@ -146,10 +144,10 @@ function report(u_id,u_name){
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
-		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;학생신고리스트</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;강사신고리스트</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px; margin-left: 310px;">
 				<div style="padding-top: 10px;">
-					 <input type="search" id="u_name" name="u_name" class="form-control" required="required" placeholder="학생이름을 입력해주세요." style="width: 250px; float: left;"> &nbsp; 
+					 <input type="search" id="t_nickname" name="t_nickname" class="form-control" required="required" placeholder="강사이름을 입력해주세요." style="width: 250px; float: left;"> &nbsp; 
 					 <button class="btn btn-danger" id="search" style="width: 100px" onclick="search()">search</button>
 				</div><br>
 			<div  id="student" style="width: 500px;">
@@ -162,16 +160,15 @@ function report(u_id,u_name){
 					</tr>
 					<c:forEach items="${list }" var="i">
 					<tr>
-						<td><a href="./admin_report?u_id=${i.u_id }"> ${i.u_name }</a> </td>
-						<td>${i.u_id }</td> 
-						<td><fmt:formatNumber value="${i.u_paypoint }" pattern="#,###"  /></td>						
-						<td>${i.t_name}</td>						
+						<td><a href="./admin_report?u_id=${i.t_id }"> ${i.t_nickname }</a> </td>
+						<td>${i.t_id }</td> 
+						<td>${i.t_nickname}</td>						
 					</tr>
 					</c:forEach>				
 				</table>
 			</div>
 			<div id="student1" style="width: 500px;">
-				<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;학생정지리스트</h3><hr style="border: solid 1px;"></div>
+				<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;강사정지리스트</h3><hr style="border: solid 1px;"></div>
 				<table class="table table-bordered table-sm">
 				<tr>
 					<th>관리자ID</th>
@@ -180,9 +177,9 @@ function report(u_id,u_name){
 				</tr>
 				<c:forEach items="${ban }" var="b">
 				<tr>
-					<td>${b.admin_id }</td>
-					<td>${b.u_id }</td>
-					<td>${b.bu_reason }</td>					
+					<%-- <td>${b.admin_id }</td> --%>
+					<td>${b.t_id }</td>
+					<%-- <td>${b.bu_reason }</td> --%>					
 				</tr>
 				</c:forEach>
 				</table>

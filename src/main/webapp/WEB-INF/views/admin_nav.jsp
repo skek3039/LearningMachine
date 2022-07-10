@@ -8,7 +8,8 @@
 					<details>
     					<summary>매출관리</summary>
     						<a href="./payment">매출조회</a> <br>
-    						<a href="#"></a> <br>
+    						<a href="./payment_list">결제내역조회</a> <br>
+    						<a href="./payment_refunt">환불내역조회</a><br>
    	 				</details>
 					<details>
     					<summary>학생관리</summary>
@@ -20,6 +21,7 @@
     					<summary>강사관리</summary>
     						<a href="./admin_teacher">강사조회</a> <br>
     						<a href="#">강의관리</a> <br>
+    						<a href="./admin_lectureRequest">강의신청내역</a> <br>
    	 				</details>
 				</div>
 			</div>

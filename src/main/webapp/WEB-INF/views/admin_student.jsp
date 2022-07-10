@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -144,7 +146,7 @@ function search(){
 					<tr>
 						<td><a href="./admin_studentLecture?u_id=${list.u_id }">${list.u_name }</a></td>
 						<td>${list.u_id }</td>
-						<td>${list.u_paypoint }</td>						
+						<td style="text-align: right"><fmt:formatNumber value="${list.u_paypoint }" pattern="#,###"  /></td>						
 					</tr>
 					</c:forEach>
 				</table>

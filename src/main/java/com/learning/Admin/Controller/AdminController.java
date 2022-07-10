@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.learning.Admin.Service.AdminService;
 import com.learning.DTO.BannedDTO;
-import com.learning.DTO.TeacherDTO;
 import com.learning.DTO.userDTO;
 
 @Controller
@@ -31,8 +30,38 @@ public class AdminController {
 			return "redirect:/404";
 		}
 	}
-
 	
+
+	@GetMapping(value = "/admin_lecture_request")
+	public ModelAndView admin_lecture_request(HttpSession session, HttpServletRequest request) {
+		if ((int)session.getAttribute("u_authority") == 7) {
+			ModelAndView mv = new ModelAndView("admin_lecture_request");
+				
+			List<String> list = adminService.admin_lectureRequest();
+			
+			mv.addObject("list",list);
+			return mv;
+			} else {
+				ModelAndView mv = new ModelAndView("404");
+				return mv;
+			}
+	}
+	@GetMapping(value = "/admin_teacher_video")
+	public ModelAndView admin_teacher_video(HttpServletRequest request , HttpSession session) {
+		if((int)session.getAttribute("u_authority") ==7) { 
+			ModelAndView mv = new ModelAndView("admin_teacher_video");
+			String t_nickname = null;
+			List<String> list = adminService.teachervideo(t_nickname);
+			List<String> list1 = adminService.teacherBanList();
+			
+			mv.addObject("list",list);
+			mv.addObject("ban",list1);
+			return mv;
+		}else {
+			ModelAndView mv = new ModelAndView("404");
+			return mv;
+		}	
+}
 	@GetMapping(value = "/admin_teacher")
 	public ModelAndView admin_teacher(HttpServletRequest request, HttpSession session) {
 		if ((int)session.getAttribute("u_authority") == 7) {
@@ -79,7 +108,7 @@ public class AdminController {
 			return mv;
 		}
 	}
-	
+	//강사 검색 불러오기
 	@GetMapping(value = "/admin_teacherSearch" , produces="text/plain;charset=utf-8")
 	public ModelAndView admin_teacherSearch(HttpServletRequest request, HttpSession session) {	
 		if((int)session.getAttribute("u_authority") ==7) {
@@ -122,7 +151,10 @@ public class AdminController {
 			ModelAndView mv = new ModelAndView("admin_student_report");
 			String u_id = null;
 			List<String> list = adminService.studentReport(u_id);
+			List<String> list1 = adminService.studentBanList();
+			
 			mv.addObject("list",list);
+			mv.addObject("ban",list1);
 			return mv;
 		}else {
 			ModelAndView mv = new ModelAndView("404");
@@ -171,6 +203,34 @@ public class AdminController {
 			return "redirect:/admin_studentLecture?u_id="+u_id;
 		}else {
 			return "/404";
+		}
+	}
+	//환불신청내역 불러오기
+	@GetMapping(value = "/admin_student_refund")
+	public ModelAndView admin_student_refund(HttpSession session, HttpServletRequest request) {
+		if((int)session.getAttribute("u_authority") ==7) { 	
+			ModelAndView mv = new ModelAndView("admin_student_refund");
+			List<String> list = adminService.refundList();
+			mv.addObject("list",list);
+			
+			return mv;
+		}else {
+			ModelAndView mv = new ModelAndView("404");
+			return mv;
+		}
+	}
+	
+	@GetMapping(value = "/payment_list")
+	public ModelAndView payment_list (HttpServletRequest request, HttpSession session) {
+		if((int)session.getAttribute("u_authority") ==7) { 	
+			ModelAndView mv = new ModelAndView("admin_payment_list");
+		//	List<String> list = adminService.paymentList();
+		//	mv.addObject("list",list);
+			
+			return mv;
+		}else {
+			ModelAndView mv = new ModelAndView("404");
+			return mv;
 		}
 	}
 	
