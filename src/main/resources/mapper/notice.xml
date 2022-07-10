@@ -14,8 +14,8 @@
   
   	<select id="totalCount" parameterType="integer" resultType="integer">
   		SELECT count(*) as count 
-  		FROM page 
-  		WHERE n_cate = #{n_cate}
+  		FROM notice
+  		WHERE n_category = #{n_category}
   	</select>
   
   

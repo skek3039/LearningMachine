@@ -49,9 +49,9 @@ public class NoticeController {
 		ModelAndView mv = new ModelAndView("notice");
 		
 		//카테고리 잡기
-		int n_cate = 1;
-		if (request.getParameter("n_cate") != null) {
-			n_cate = util.str2int(request.getParameter("n_cate"));
+		int n_category = 1;
+		if (request.getParameter("n_category") != null) {
+			n_category = util.str2int(request.getParameter("n_category"));
 		}
 		
 		int pageNo = 1;
@@ -63,7 +63,7 @@ public class NoticeController {
 		// pageSize = 페이지 리스트에 게시되는 페이지 수 yes
 		int pageScale = 10;			
 		// totalRecordCount 전체 게시물 건수				
-		int totalCount = noticeService.totalCount(n_cate);
+		int totalCount = noticeService.totalCount(n_category);
 		
 		// 전자정부페이징 호출
 		PaginationInfo paginationInfo = new PaginationInfo();
@@ -80,15 +80,16 @@ public class NoticeController {
 		PageDTO page = new PageDTO();
 		page.setStartPage(startPage);
 		page.setLastPage(lastpage);
-		page.setN_cate(n_cate);
+		page.setN_cate(n_category);
 
 
 		List<NoticeDTO> noticeList = noticeService.noticeList(page);
 		
+		
 		mv.addObject("noticeList", noticeList);
 		mv.addObject("paginationInfo", paginationInfo);
 		mv.addObject("pageNo", pageNo);
-		mv.addObject("n_cate", n_cate);
+		mv.addObject("n_cate", n_category);
 		
 		return mv;
 	}
