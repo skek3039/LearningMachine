@@ -2,7 +2,10 @@ package com.learning.Admin.Controller;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,9 +39,40 @@ public class NoticeController {
 	}
 	//공지사항 상세보기페이지구현
 	@GetMapping(value = "/noticedetail")
-	public ModelAndView noticedetail(HttpServletRequest request) {
+	public ModelAndView noticedetail(HttpServletRequest request,HttpServletResponse response, HttpSession session) {
 		ModelAndView mv = new ModelAndView("noticeDetail");
-		NoticeDTO dto = noticeService.noticeDetail(Integer.parseInt(request.getParameter("n_no"))); 
+		int n_no = Integer.parseInt(request.getParameter("n_no"));
+		NoticeDTO detail = new NoticeDTO();
+		
+	      detail.setN_no(n_no);
+	   
+	      Cookie[] cookies = request.getCookies();
+	      Cookie viewCookie = null;
+	      
+	      if(cookies != null && cookies.length > 0) {
+	         for(int i=0; i<cookies.length ; i++) {
+	            if(cookies[i].getName().equals("cookie"+n_no)) {
+	               viewCookie = cookies[i];
+	            }
+	         }
+	      }
+	      NoticeDTO dto = noticeService.noticeDetail(detail);
+	      if(detail !=null ) {
+	         if(viewCookie == null) {
+	            Cookie newCookie = new Cookie("cookie"+n_no , "|" + n_no + "|" );
+	            response.addCookie(newCookie);
+	            int result = noticeService.noticecountUp(n_no);
+	            if(result > 0) {
+	               System.out.println("조회수 증가");
+	            }else {
+	               System.out.println("조회수 증가에러");
+	            }
+	         }else {
+	            String value= viewCookie.getValue();
+	         }
+	      }
+
+	
 		mv.addObject("dto", dto);			
 		return mv;
 	}

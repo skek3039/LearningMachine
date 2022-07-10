@@ -19,12 +19,16 @@ public class NoticeDAO {
 		return sqlSession.selectList("notice.notice",page);
 	}
 
-	public NoticeDTO noticedetail(int n_no) {
-		return sqlSession.selectOne("notice.noticedetail",n_no);
+	public NoticeDTO noticedetail(NoticeDTO detail) {
+		return sqlSession.selectOne("notice.noticedetail",detail);
 	}
 
 	public int totalCount(int n_cate) {
 		return sqlSession.selectOne("notice.totalCount",n_cate);
+	}
+
+	public int noticecountUp(int n_no) {
+		return sqlSession.update("notice.noticecountUp",n_no);
 	}
 
 

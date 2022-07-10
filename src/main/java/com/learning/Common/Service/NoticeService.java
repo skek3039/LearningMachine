@@ -16,11 +16,14 @@ public class NoticeService {
 	public List<NoticeDTO> noticeList(PageDTO page) {
 		return noticeDAO.list(page);
 	}
-	public NoticeDTO noticeDetail(int n_no) {
-		return noticeDAO.noticedetail(n_no);
+	public NoticeDTO noticeDetail(NoticeDTO detail) {
+		return noticeDAO.noticedetail(detail);
 	}
 	public int totalCount(int n_cate) {
 		return noticeDAO.totalCount(n_cate);
+	}
+	public int noticecountUp(int n_no) {
+		return noticeDAO.noticecountUp(n_no);
 	}
 	
 }

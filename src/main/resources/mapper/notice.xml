@@ -17,6 +17,10 @@
   		FROM notice
   		WHERE n_category = #{n_category}
   	</select>
-  
+  	
+  	<update id="noticecountUp" parameterType="integer">
+  		UPDATE notice SET n_view=n_view+1 WHERE n_no=#{n_no}
+  	</update>
+  	
   
   </mapper>
