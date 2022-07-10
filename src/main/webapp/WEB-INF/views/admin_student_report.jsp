@@ -140,8 +140,8 @@ function report(u_id,u_name){
 
 
 		<jsp:include page="./header.jsp" />
-		<div style=" width: 100%; height: 800px; padding-top: 90px;">
-		<div style="padding-top: 5px;">
+		<div style="width: 100%; height: 800px; ">
+		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
 		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;학생신고리스트</h3><hr style="border: solid 1px;"></div>
@@ -175,8 +175,7 @@ function report(u_id,u_name){
 					<th>이름</th>
 					<th>ID</th>
 					<th>Point</th>		
-					<th>신고강사</th>								
-					<th>신고횟수</th>								
+					<th>신고강사</th>														
 				</tr>
 				<tr>
 					
