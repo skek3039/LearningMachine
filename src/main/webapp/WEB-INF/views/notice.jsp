@@ -42,7 +42,6 @@
 <!-- Template Stylesheet -->
 <link href="./resources/css/style.css" rel="stylesheet">
 <link href="./resources/css/admin.css" rel="stylesheet">
-<link href="./css/notice.css" rel="stylesheet">
 
 <style type="text/css">
     <style>@font-face {
@@ -73,6 +72,7 @@
         font-size: 17px;
         padding: 15px 0;
     }
+    
 </style>
 
 </head>
@@ -91,13 +91,14 @@
 
 
 		<jsp:include page="./header.jsp" />
-		<div style=" width: 100%; height: 800px; padding-top: 90px;">
+		<div style=" width: 100%; height: 800px;">
+		<div style="position: relative;">
 		<div style="padding-top: 5px;">
 		<jsp:include page="./notice_nav.jsp"/>
 		 </div>
 		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;공지사항</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px;">
-				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
+				 <table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;"> 
 					<tr>
 						<th>번호</th>
 						<th>제목</th>
@@ -105,18 +106,18 @@
 						<th>날짜</th>
 					</tr>
 					<c:forEach items="${noticeList}" var="n">
-					<tr onclick="location.href='noticedetail?n_no=${n.n_no}'">
+					<tr onclick="location.href='noticedetail?n_no=${n.n_no}'"style="cursor: pointer;">
 						<th>${n.n_no }</th>
-							<th>${n.n_title }</th>
+						<th>${n.n_title }</th>
 						<th>${n.n_view}</th>
 						<th>${n.n_date }</th>
 					</tr>
 					</c:forEach>
 			</table>
 		</div>
-<div id="pagination"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
+		<br>
+<div id="pagination" style="border-top: 1px solid black; text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
 </div>
-		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
 
 
@@ -125,7 +126,7 @@
 			class="bi bi-arrow-up"></i></a>
 	</div>
 	
-	
+	</div>
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
