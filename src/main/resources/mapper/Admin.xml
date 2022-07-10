@@ -45,12 +45,23 @@
  		select * from user_banned
  	</select>
  	
- 	<select id="teacherSerch" parameterType="String" resultType="hashmap">
+ 	<select id="teacherSerch" parameterType="String" resultType="HashMap">
  		select * from lecture_info_view where t_nickname LIKE '%' #{t_nickname } '%'	
  	</select>
  	
  	<select id="refundList" resultType="hashmap">
  		select * from payment_refund_apply 
  	</select>
+ 	
+ 	<select id="teachervideo" parameterType="String" resultType="HashMap">
+ 		select * from lecture_info_view 
+ 		<if test = "t_id != null">
+  			where t_id = #{t_id} and t_del = 0
+  		</if>
+  		<if test = "t_id == null">
+  			where t_del = 0
+  		</if>
+  	</select>
+ 	
  	
   </mapper>
