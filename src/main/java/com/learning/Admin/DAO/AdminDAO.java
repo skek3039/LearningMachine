@@ -52,4 +52,8 @@ public class AdminDAO {
 		return sqlSession.selectList("Admin.studentBanList");
 	}
 
+	public List<userDTO> teacherSearch(String t_nickname) {
+		return sqlSession.selectList("Admin.teacherSerch", t_nickname);
+	}
+
 }
