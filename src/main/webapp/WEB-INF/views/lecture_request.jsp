@@ -111,6 +111,9 @@
         font-size: 17px;
         padding: 15px 0;
     }
+    .box.on{
+    color:#999;
+    }
 </style>
 <body>
 	<div class="container-xxl bg-white p-0">
@@ -202,8 +205,9 @@
 ③ 위탁업무의 내용이나 수탁자가 변경될 경우에는 지체없이 본 개인정보 처리방침을 통하여 공개하도록 하겠습니다.</textarea>
 			</div>
 
-			<div style="padding-left: 1000px;">
-				개인정보취급방침에 동의합니다<input type="checkbox">
+			<div style="padding-left: 990px;">
+				<label>개인정보취급방침에 동의합니다.</label>
+				<input id="chk" type="checkbox"/>
 			</div>
 			<br>
 			<div style="text-align: center">
@@ -238,7 +242,7 @@
 							</tr>
 						</tbody>
 					</table>
-					<div style="padding-top: 10px; padding-left: 765px;">
+					<div class="box on" style="padding-top: 10px; padding-left: 765px;">
 						<button type="submit" class="btn btn-outline-dark">저장</button>
 					</div></form>
 				</div>
@@ -275,6 +279,20 @@
 
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
+	
+	<script type="text/javascript">
+	$(".box button").attr("disabled", true);
+    $("#chk").on('click',function(){
+        var chk = $('input:checkbox[id="chk"]').is(":checked");
+        if(chk==true){
+            $(".box button").removeAttr('disabled');
+            $(".box").removeClass("on");
+        }else{
+            $(".box button").attr("disabled", true);
+            $(".box").addClass("on");
+        }
+    });
+	</script>
 </body>
 
 </html>
