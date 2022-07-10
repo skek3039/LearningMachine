@@ -60,4 +60,8 @@ public class AdminDAO {
 		return sqlSession.selectList("Admin.refundList");
 	}
 
+	public List<String> admin_lectureRequest() {
+		return sqlSession.selectList("Admin.lectureRequest");
+	}
+
 }

@@ -1,15 +1,7 @@
-<%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.Date" %>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%
-	Date nowTime = new Date();
-	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
-	Calendar date = Calendar.getInstance();
-	
-	int month = date.get(Calendar.MONTH) +1 ; 
-%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -137,24 +129,25 @@ function search(){
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
-		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;결제내역</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;강의신청내역</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px; margin-left: 310px;">
 				<div style="padding-top: 10px;">
-				◀	<%= month %>월 결제내역   ▶
+					 <input type="search" id="u_name" name="u_name" class="form-control" required="required" placeholder="학생이름을 입력해주세요." style="width: 250px; float: left;"> &nbsp; 
+					 <button class="btn btn-danger" id="search" style="width: 100px" onclick="search()">search</button>
 				</div><br>
 			<div  id="student" >
 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
-						<th style="width: 80px;">내역일자</th>
-						<th>회원ID(이름)</th>
-						<th>금액</th>											
-						<th>매출내역</th>											
+						<th>강사이름</th>
+						<th>강의제목</th>
+						<th>카테고리</th>											
+						<th>커리큘럼</th>											
 					</tr>
 					<c:forEach items="${list }" var="list">
 					<tr>
 						<td><a href="./admin_studentLecture?u_id=${list.u_id }">${list.u_name }</a></td>
 						<td>${list.u_id }</td>
-						<td>${list.u_paypoint }</td>						
+						<td style="text-align: right"><fmt:formatNumber value="${list.u_paypoint }" pattern="#,###"  /></td>						
 					</tr>
 					</c:forEach>
 				</table>

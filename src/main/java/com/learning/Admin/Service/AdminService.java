@@ -59,5 +59,9 @@ public class AdminService {
 		return adminDAO.refundList();
 	}
 
+	public List<String> admin_lectureRequest() {
+		return adminDAO.admin_lectureRequest();
+	}
+
 	
 }

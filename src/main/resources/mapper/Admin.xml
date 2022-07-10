@@ -53,4 +53,8 @@
  		select * from payment_refund_apply 
  	</select>
  	
+ 	<select id="lectureRequest" resultType="hashmap">
+ 		select * from lecture_apply
+ 	</select>
+ 	
   </mapper>

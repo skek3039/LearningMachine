@@ -30,7 +30,21 @@ public class AdminController {
 			return "redirect:/404";
 		}
 	}
-
+	
+	@GetMapping(value = "/admin_lecture_request")
+	public ModelAndView admin_lecture_request(HttpSession session, HttpServletRequest request) {
+		if ((int)session.getAttribute("u_authority") == 7) {
+			ModelAndView mv = new ModelAndView("admin_lecture_request");
+				
+			List<String> list = adminService.admin_lectureRequest();
+			
+			mv.addObject("list",list);
+			return mv;
+			} else {
+				ModelAndView mv = new ModelAndView("404");
+				return mv;
+			}
+	}
 	
 	@GetMapping(value = "/admin_teacher")
 	public ModelAndView admin_teacher(HttpServletRequest request, HttpSession session) {

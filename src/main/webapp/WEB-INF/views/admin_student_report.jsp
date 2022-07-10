@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -162,7 +164,7 @@ function report(u_id,u_name){
 					<tr>
 						<td><a href="./admin_report?u_id=${i.u_id }"> ${i.u_name }</a> </td>
 						<td>${i.u_id }</td> 
-						<td>${i.u_paypoint }</td>						
+						<td><fmt:formatNumber value="${i.u_paypoint }" pattern="#,###"  /></td>						
 						<td>${i.t_name}</td>						
 					</tr>
 					</c:forEach>				
