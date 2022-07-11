@@ -12,4 +12,5 @@ public class ULectureDTO {
 	private String l_curriculum;
 	private String l_thumbnail;
 	private String l_date;
+	private int l_del;
 }

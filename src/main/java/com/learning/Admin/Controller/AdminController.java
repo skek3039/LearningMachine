@@ -2,13 +2,16 @@ package com.learning.Admin.Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.remoting.httpinvoker.AbstractHttpInvokerRequestExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.learning.Admin.Service.AdminService;
 import com.learning.DTO.BannedDTO;
 import com.learning.DTO.userDTO;
+import com.learning.User.DTO.ULectureDTO;
 
 @Controller
 public class AdminController {
@@ -33,13 +37,28 @@ public class AdminController {
 		}
 	}
 	
-
+	@GetMapping(value = "/admin_lectureDetail")
+	public ModelAndView admin_lectureDetail(HttpSession session, HttpServletRequest request) {
+		if ((int)session.getAttribute("u_authority") == 7) {
+			ModelAndView mv = new ModelAndView("admin_lectureDetail");
+			String la_no = request.getParameter("la_no");	
+			List<String> list = adminService.admin_lectureRequest(la_no);
+			
+			mv.addObject("list",list);
+		return mv;
+		} else {
+			ModelAndView mv = new ModelAndView("404");
+			return mv;
+		}
+	}
+	
+	//강의신청리스트 보기.
 	@GetMapping(value = "/admin_lecture_request")
 	public ModelAndView admin_lecture_request(HttpSession session, HttpServletRequest request) {
 		if ((int)session.getAttribute("u_authority") == 7) {
 			ModelAndView mv = new ModelAndView("admin_lecture_request");
-				
-			List<String> list = adminService.admin_lectureRequest();
+			String la_no = null;
+			List<String> list = adminService.admin_lectureRequest(la_no);
 			
 			mv.addObject("list",list);
 			return mv;
@@ -48,6 +67,32 @@ public class AdminController {
 				return mv;
 			}
 	}
+	
+	/*
+	 * @GetMapping(value = "/admin_lecture_get") public String
+	 * admin_lecture_get(HttpServletRequest request, HttpSession session ,
+	 * HttpServletResponse response) throws Exception {
+	 * request.setCharacterEncoding("UTF-8"); String check = null; String c1 =
+	 * request.getParameter("check"); int result = 0; if(c1.equals("1")) {
+	 * if((int)session.getAttribute("u_authority") ==7) { ULectureDTO dto = new
+	 * ULectureDTO(); dto.setL_curriculum(request.getParameter("l_curriculum"));
+	 * dto.setL_name(request.getParameter("l_name"));
+	 * dto.setL_price(Integer.parseInt(request.getParameter("l_price")));
+	 * dto.setT_id(request.getParameter("t_id"));
+	 * dto.setL_code(UUID.randomUUID().toString().replace("-", ""));
+	 * 
+	 * result = adminService.admin_lectureGet(dto);
+	 * adminService.admin_lectureGet1(request.getParameter("la_no")); if(result ==1)
+	 * { check= "redirect:/admin_lecture_request"; }else { System.out.println("1");
+	 * check = "redirect:/404"; } }else if(c1.equals("2")){//승인거부 했을때.
+	 * System.out.println("ㅠㅠㅠ"); if((int)session.getAttribute("u_authority") ==7) {
+	 * System.out.println("와라~~~");
+	 * adminService.admin_lectureGet2(request.getParameter("la_no")); check=
+	 * "redirect:/admin_lecture_request";
+	 * 
+	 * }else { System.out.println("3"); check = "redirect:/404"; } } } return check;
+	 * }
+	 */
 	@GetMapping(value = "/admin_teacher_video")
 	public ModelAndView admin_teacher_video(HttpServletRequest request , HttpSession session) {
 		if((int)session.getAttribute("u_authority") ==7) { 
@@ -62,7 +107,8 @@ public class AdminController {
 			ModelAndView mv = new ModelAndView("404");
 			return mv;
 		}	
-}
+	}
+	//강사리스트 불러오기
 	@GetMapping(value = "/admin_teacher")
 	public ModelAndView admin_teacher(HttpServletRequest request, HttpSession session) {
 		if ((int)session.getAttribute("u_authority") == 7) {
@@ -160,7 +206,7 @@ public class AdminController {
 			return mv;
 		}	
 	}
-	//학생 신고처리하기.
+
 	@PostMapping(value = "/admin_student_report")
 	public void admin_student_report(HttpServletRequest request, HttpSession session ,HttpServletResponse response) throws Exception {
 		if((int)session.getAttribute("u_authority") ==7) { 
@@ -179,6 +225,8 @@ public class AdminController {
 			pw.print(count);
 		}	
 	}
+	
+	//신고내역불러오기
 	@GetMapping(value = "/admin_report")
 	public ModelAndView admin_report(HttpServletRequest request, HttpSession session) {
 		if((int)session.getAttribute("u_authority") ==7) { 	
@@ -192,7 +240,7 @@ public class AdminController {
 			return mv;
 		}
 	}
-	
+	//정지된 학생 복구처리
 	@GetMapping(value = "/admin_student_back")
 	public String admin_student_back(HttpServletRequest request, HttpSession session) {
 		if((int)session.getAttribute("u_authority") ==7) { 	

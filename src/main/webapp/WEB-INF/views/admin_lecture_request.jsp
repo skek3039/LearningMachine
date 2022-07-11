@@ -80,32 +80,6 @@ function search(){
 }
 
 
-/* function search(){
- 	var u_name= document.getElementById("u_name").value;
-		$.ajax({
-		url:"./admin_studentSearch",
-		type:"get",
-		dataType:"json",
-		data:{"u_name" : u_name},
-		success:function(data){
-			var list = data.list;
-			alert(list);
-		/*	var html =  "<table><tr><th>이름</th><th>아이디</th><th>포인트</th><th>신고횟수</th></tr>";
-			$.each(list, function(){
-				html += "<tr><td>" + list[index].u_name" + </td><td>" + list[index].u_id + "</td>";
-				html += "<tr><td>" + list[index].u_paypoint" + </td><td>" + list[index].u_banned + "</td></tr>";
-			});
-			html += "</table>";
-			$("#student").empty();
-			$("#student").append(html); 
-		},error:function(request, status, error){
-			alert("문제발생"+error);
-		}
-	}); 
-} */
- 
-
-
 </script>
 
 
@@ -147,7 +121,7 @@ function search(){
 					<c:forEach items="${list }" var="list">
 					<tr>
 						<td>${list.t_id}</td>
-						<td>${list.l_name }</td>
+						<td><a href="./admin_lectureDetail?la_no=${list.la_no }"> ${list.l_name }</a></td>
 						<td>카테고리</td>
 						<td>${list.l_info }</td>						
 						<td>${list.l_date }</td>						
@@ -158,6 +132,8 @@ function search(){
 		</div>
 
 </div>
+
+
 		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
 

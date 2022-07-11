@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.learning.DTO.BannedDTO;
-import com.learning.DTO.TeacherDTO;
 import com.learning.DTO.userDTO;
+import com.learning.User.DTO.ULectureDTO;
 
 @Repository
 public class AdminDAO {
@@ -60,8 +60,8 @@ public class AdminDAO {
 		return sqlSession.selectList("Admin.refundList");
 	}
 
-	public List<String> admin_lectureRequest() {
-		return sqlSession.selectList("Admin.lectureRequest");
+	public List<String> admin_lectureRequest(String la_no) {
+		return sqlSession.selectList("Admin.lectureRequest",la_no);
 	}
 	public List<String> teachervideo(String t_nickname) {
 		return sqlSession.selectList("Admin.teachervideo");
@@ -74,6 +74,18 @@ public class AdminDAO {
 	public int lecture_refund(String p_no, String u_id) {
 		sqlSession.delete("Admin.lecture_refund1",p_no);
 		return sqlSession.update("Admin.lecture_refund", p_no);
+	}
+
+	public int lectureGet(ULectureDTO dto ) {
+		
+		return sqlSession.insert("Admin.lectureGet",dto);
+	}
+
+	public void lectureGet1(String la_no) {
+		sqlSession.update("Admin.lectureGet2",la_no);				
+	}
+	public void lectureGet2(String la_no) {
+		sqlSession.update("Admin.lectureGet3",la_no);
 	}
 
 }

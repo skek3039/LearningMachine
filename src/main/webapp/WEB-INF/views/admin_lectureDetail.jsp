@@ -21,9 +21,7 @@
 	rel="stylesheet">
 
 <!-- Icon Font Stylesheet -->
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
-	rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
 	rel="stylesheet">
@@ -71,22 +69,15 @@
     }
 </style>
 
-
-
 <script type="text/javascript">
 function search(){
-	var t_nickname= document.getElementById("t_nickname").value;
-	location.href = "./admin_teacherSearch?t_nickname="+t_nickname;
-}
-
-function enterkey() {
-	if (window.event.keyCode == 13) {
-		search();
-	}
+	var u_name= document.getElementById("u_name").value;
+	location.href = "./admin_studentSearch?u_name="+u_name;
 	
 }
 
 </script>
+
 
 </head>
 
@@ -104,36 +95,42 @@ function enterkey() {
 
 
 		<jsp:include page="./header.jsp" />
-		<div style=" width: 100%; height: 800px; ">
-		<div style="padding-top: 5px;">
+		<div style="width: 100%; height: 800px; ">
+		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
-		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;강사리스트</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;강의신청</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px; margin-left: 310px;">
-				<div style="padding-top: 10px; width: 100%; height: px;">
-					 <input type="search" id="t_nickname" name="t_nickname" class="form-control" required="required" placeholder="강사이름을 입력하세요." style="width: 250px; float: left;" onkeyup="enterkey()"> &nbsp; 
-					 <button class="btn btn-danger" id="search" style="width: 100px; "onclick="search()">search</button>
-				</div><br>
 			<div  id="student" >
-				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
+				<form action="./admin_lecture_get?check=1" method="get">
+				<input type="hidden" name="t_id" value="${list[0].t_id}">
+				<input type="hidden" name="la_no" value="${list[0].la_no}">
+				<input type="hidden" name="l_name" value="${list[0].l_name }">
+				<input type="hidden" name="l_curriculum" value="${list[0].l_curriculum }">
+				<table class="table table-bordered table-sm" style="width: 900px;">
 					<tr>
-						<th>이름</th>
-						<th>ID</th>
-						<th>총 수강학생수</th>											
-						<th>총 강의수</th>											
-					</tr>
-					<c:forEach items="${list }" var="list">
+						<th>강사아이디 | ${list[0].t_id}</th>																
+						<th>강의이름 | ${list[0].l_name }</th>								
+					</tr>	
 					<tr>
-						<td><a href="./admin_studentLecture?u_id=${list.t_id }">${list.t_nickname }</a></td>
-						<td>${list.t_id }</td>
-						<td>${list.COUNT }</td>						
-						<td>${list.t_idcount }</td>						
+						<td colspan="2">
+							<textarea name="curri"style="width: 100%; height: 100px;" >${list[0].l_curriculum }</textarea>
+						</td>
 					</tr>
-					</c:forEach>
+					<tr>
+						<td colspan="2">
+							<label>강의가격</label>
+							<input type="text" id= "l_price" name="l_price" placeholder="강의가격을 입력해주세요." required="required">	 
+						</td>
+					</tr>
 				</table>
+					<button type="submit" style="float: left; margin-right : 10px;" class="btn btn-outline-dark">승인</button>
+				</form>
+					<button type="submit" onclick="location.href='./admin_lecture_get?check=2'" class="btn btn-outline-dark">승인거부</button>
 			</div>
-			</div>
-</div>		
+		</div>
+
+</div>
 		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
 
@@ -153,6 +150,7 @@ function enterkey() {
 			});
 		</script>
 	</div>
+
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -163,6 +161,7 @@ function enterkey() {
 
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
+	<script src="./resources/js/admin_student.js"></script>
 </body>
 
 </html>

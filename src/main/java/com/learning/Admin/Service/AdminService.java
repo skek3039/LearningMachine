@@ -9,6 +9,7 @@ import com.learning.Admin.DAO.AdminDAO;
 import com.learning.DTO.BannedDTO;
 import com.learning.DTO.TeacherDTO;
 import com.learning.DTO.userDTO;
+import com.learning.User.DTO.ULectureDTO;
 
 @Service
 public class AdminService {
@@ -58,10 +59,8 @@ public class AdminService {
 	public List<String> refundList() {
 		return adminDAO.refundList();
 	}
-
-
-	public List<String> admin_lectureRequest() {
-		return adminDAO.admin_lectureRequest();
+	public List<String> admin_lectureRequest(String la_no) {
+		return adminDAO.admin_lectureRequest(la_no);
 	}
 	public List<String> teachervideo(String t_nickname) {
 		return adminDAO.teachervideo(t_nickname);
@@ -73,6 +72,18 @@ public class AdminService {
 
 	public int lecture_refund(String p_no, String u_id) {
 		return adminDAO.lecture_refund(p_no, u_id);
+	}
+
+	public int admin_lectureGet(ULectureDTO dto) {
+		return adminDAO.lectureGet(dto);
+	}
+
+	public void admin_lectureGet1(String la_no) {
+		adminDAO.lectureGet1(la_no);
+	}
+
+	public void admin_lectureGet2(String la_no) {
+		adminDAO.lectureGet2(la_no);
 	}
 
 	

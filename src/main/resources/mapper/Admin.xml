@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?> <!-- 맵퍼파일 -->
+<?xml version="1.0" encoding="UTF-8"?> <!-- 맵퍼파일 -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="Admin">
 
@@ -38,7 +38,7 @@
  	</delete>
  	
  	<select id="teacherList" resultType="HashMap">
- 		select * from lecture_info_view
+ 		SELECT *,SUM(total_register)AS COUNT, COUNT(t_id) AS t_idcount from lecture_info_view GROUP BY t_id
  	</select>
  	
  	<select id="studentBanList" resultType="HashMap">
@@ -46,7 +46,8 @@
  	</select>
  	
  	<select id="teacherSerch" parameterType="String" resultType="HashMap">
- 		select * from lecture_info_view where t_nickname LIKE '%' #{t_nickname } '%'
+ 		SELECT *,SUM(total_register)AS COUNT, COUNT(t_id) AS t_idcount from lecture_info_view  
+ 		where t_nickname LIKE '%' #{t_nickname } '%' 		
  		group by t_nickname	
  	</select>
  	
@@ -55,22 +56,37 @@
  	</select>
  	
 
- 	<select id="lectureRequest" resultType="hashmap">
- 		select * from lecture_apply
- 	</select>
+ 	<select id="lectureRequest" parameterType="String" resultType="hashmap">
+ 		select * from lecture_apply where l_recognize = 0
+ 		<if test = "la_no != null">
+  			and la_no = #{la_no}
+  		</if>
+  	</select>
 
  	<select id="teachervideo" parameterType="String" resultType="HashMap">
  		select * from lecture_info_view 
 
   	</select>
   	
-  	<delete id="lecture_refund1" parameterType="String">
+  	<delete id="lecture_refund1" parameterType="String" >
   		delete from payment_refund_apply where p_no = #{p_no}
   	</delete>
   	
-  	<update id="lecture_refund" parameterType="String">
+  	<update id="lecture_refund" parameterType="String" >
  		update payment_log set p_refund = 1 where p_no = #{p_no}
  	</update>
+ 	
+ 	<insert id="lectureGet" parameterType="com.learning.User.DTO.ULectureDTO">
+		insert into lecture(t_id,l_code, l_curriculum, l_name, l_price) 
+		values (#{t_id}, #{l_code},#{l_curriculum},#{l_name},#{l_price})
+    </insert>
+    
+    <update id = "lectureGet2" parameterType="string">
+    	update lecture_apply set l_recognize = 1 where la_no = #{la_no} 
+    </update>
+    <update id = "lectureGet3" parameterType="string">
+    	update lecture_apply set l_recognize = 2 where la_no = #{la_no} 
+    </update>
  	
  	
   </mapper>
