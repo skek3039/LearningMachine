@@ -78,13 +78,7 @@ public class AdminService {
 		return adminDAO.lectureGet(dto);
 	}
 
-	public void admin_lectureGet1(String la_no) {
-		adminDAO.lectureGet1(la_no);
-	}
-
-	public void admin_lectureGet2(String la_no) {
-		adminDAO.lectureGet2(la_no);
-	}
-
-	
+	public void admin_lectureGet1(String la_no, String c1) {
+		adminDAO.lectureGet1(la_no,c1);
+	}	
 }

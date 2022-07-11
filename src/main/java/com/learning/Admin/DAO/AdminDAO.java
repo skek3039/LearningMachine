@@ -81,11 +81,13 @@ public class AdminDAO {
 		return sqlSession.insert("Admin.lectureGet",dto);
 	}
 
-	public void lectureGet1(String la_no) {
-		sqlSession.update("Admin.lectureGet2",la_no);				
-	}
-	public void lectureGet2(String la_no) {
-		sqlSession.update("Admin.lectureGet3",la_no);
+	public void lectureGet1(String la_no, String c1) {
+		if(c1.equals("1")) {
+			sqlSession.update("Admin.lectureGet2",la_no);							
+		}else {
+			System.out.println(la_no);
+			sqlSession.update("Admin.lectureGet3",la_no);							
+		}
 	}
 
 }

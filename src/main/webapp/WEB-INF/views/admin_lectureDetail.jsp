@@ -102,9 +102,10 @@ function search(){
 		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;강의신청</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px; margin-left: 310px;">
 			<div  id="student" >
-				<form action="./admin_lecture_get?check=1" method="get">
+				<form action="./admin_lecture_get" method="get">
 				<input type="hidden" name="t_id" value="${list[0].t_id}">
 				<input type="hidden" name="la_no" value="${list[0].la_no}">
+				<input type="hidden" name="check" value="1">
 				<input type="hidden" name="l_name" value="${list[0].l_name }">
 				<input type="hidden" name="l_curriculum" value="${list[0].l_curriculum }">
 				<table class="table table-bordered table-sm" style="width: 900px;">
@@ -126,7 +127,7 @@ function search(){
 				</table>
 					<button type="submit" style="float: left; margin-right : 10px;" class="btn btn-outline-dark">승인</button>
 				</form>
-					<button type="submit" onclick="location.href='./admin_lecture_get?check=2'" class="btn btn-outline-dark">승인거부</button>
+					<button type="submit" onclick="location.href='./admin_lecture_get?check=2&la_no=${list[0].la_no}'" class="btn btn-outline-dark">승인거부</button>
 			</div>
 		</div>
 

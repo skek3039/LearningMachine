@@ -82,10 +82,13 @@
     </insert>
     
     <update id = "lectureGet2" parameterType="string">
-    	update lecture_apply set l_recognize = 1 where la_no = #{la_no} 
+    	update lecture_apply set l_recognize = 1 
+    	where la_no = #{la_no} 
     </update>
+    
     <update id = "lectureGet3" parameterType="string">
-    	update lecture_apply set l_recognize = 2 where la_no = #{la_no} 
+    	update lecture_apply set l_recognize = 2 
+    	where la_no = #{la_no} 
     </update>
  	
  	
