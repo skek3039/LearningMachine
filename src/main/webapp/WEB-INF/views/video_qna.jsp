@@ -91,27 +91,27 @@
 		 <jsp:include page="./lecture_nav.jsp"/>
 		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;Q&A</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 40px;">
-			<div style="padding-top: 10px;">
+				<div style="padding-top: 10px;">
 			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
 						<th>번호</th>
-						<th>이름</th>
 						<th>제목</th>
 						<th>내용</th>
-						<th>강의이름</th>
+						<th>아이디</th>
+						<th>강의 이름</th>
 						<th>날짜</th>
 						<th>Q&A</th>
 					</tr>
 					
-					<c:forEach items="${qnaList}" var="q">
+					<c:forEach items="${video_qnaList}" var="v">
 					<tr>
-						<td>${q.lqa_no}</td>
-						<td>${q.u_id}</td>
-						<td>${q.lqa_title}</td>
-						<td>${q.lqa_content}</td>
-						<td>${q.l_name}</td>
-						<td>${q.lqa_date}</td>
-						<td><a href="./qna_reply">답변</a></td>
+						<td>${v.vq_no}</td>
+						<td>${v.vq_title}</td>
+						<td>${v.vq_content}</td>
+						<td>${v.u_id}</td>
+						<td>${v.l_name }</td>
+						<td>${v.vq_date}</td>
+						<td><a href="./video_qna_reply">답변</a></td>
 					</tr>
 					</c:forEach>
 			</table>

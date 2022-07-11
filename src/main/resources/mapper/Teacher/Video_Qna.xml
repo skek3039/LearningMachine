@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?> <!-- 맵퍼파일 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="video_qna">
+	<select id="t_video_qnaList" parameterType="String" resultType="LectureDTO">
+		SELECT * 
+		,(SELECT u_nickname FROM user WHERE u_id = lecture_video_qna.u_id) AS u_id 
+		FROM lecture_video_qna 
+		WHERE vq_confirm = 0
+	</select>
+
+  </mapper>
