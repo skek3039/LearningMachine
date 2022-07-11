@@ -46,7 +46,8 @@
  	</select>
  	
  	<select id="teacherSerch" parameterType="String" resultType="HashMap">
- 		select * from lecture_info_view where t_nickname LIKE '%' #{t_nickname } '%'	
+ 		select * from lecture_info_view where t_nickname LIKE '%' #{t_nickname } '%'
+ 		group by t_nickname	
  	</select>
  	
  	<select id="refundList" resultType="hashmap">

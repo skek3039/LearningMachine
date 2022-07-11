@@ -53,7 +53,6 @@ public class AdminController {
 			String t_nickname = null;
 			List<String> list = adminService.teachervideo(t_nickname);
 			List<String> list1 = adminService.teacherBanList();
-			
 			mv.addObject("list",list);
 			mv.addObject("ban",list1);
 			return mv;
@@ -113,11 +112,9 @@ public class AdminController {
 	public ModelAndView admin_teacherSearch(HttpServletRequest request, HttpSession session) {	
 		if((int)session.getAttribute("u_authority") ==7) {
 			String t_nickname = request.getParameter("t_nickname"); 
-			System.out.println(t_nickname);
 			List<userDTO> list = adminService.teacherSearch(t_nickname);	
 			
 			ModelAndView mv = new ModelAndView("admin_teacher");
-			System.out.println(list.toString());
 			mv.addObject("list",list);
 			return mv; 
 		}else {
