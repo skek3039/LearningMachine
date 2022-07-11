@@ -1,5 +1,6 @@
 package com.learning.Admin.Controller;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.learning.Admin.Service.AdminService;
@@ -217,6 +219,23 @@ public class AdminController {
 			return mv;
 		}
 	}
+	
+	//실제 환불처리가 될 메소드
+	@ResponseBody
+	@PostMapping(value = "/admin_student_refund")
+	public void  admin_student_refund(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		if((int)session.getAttribute("u_authority") == 7) {
+			PrintWriter pw = response.getWriter();
+			
+			int result = 0;
+			String p_no = request.getParameter("p_no");
+			String u_id = request.getParameter("u_id");
+			result = adminService.lecture_refund(p_no, u_id);
+			
+			pw.print(result);
+		}
+	}
+	
 	
 	@GetMapping(value = "/payment_list")
 	public ModelAndView payment_list (HttpServletRequest request, HttpSession session) {

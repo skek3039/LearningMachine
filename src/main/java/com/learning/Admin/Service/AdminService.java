@@ -71,5 +71,9 @@ public class AdminService {
 		return adminDAO.teacherBanList();
 	}
 
+	public int lecture_refund(String p_no, String u_id) {
+		return adminDAO.lecture_refund(p_no, u_id);
+	}
+
 	
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -77,6 +78,25 @@ function search(){
 	location.href = "./admin_studentSearch?u_name="+u_name;
 }
 
+function refund(u_id,p_no){
+	if(confirm("정말 환불처리하시겠습니까?")){
+		$.ajax({
+			url:"./admin_student_refund",
+			type:"post",
+			dataType:"html",
+			data:{"u_id" : u_id,
+				  "p_no" : p_no	
+			},
+			success:function(data){
+				alert("환불처리가 완료되었습니다.");
+				location.href="./admin_student_refund";
+			},error:function(request, status, error){
+				alert("문제발생"+error);
+			}
+		});
+	}
+}
+
 
 /* function search(){
  	var u_name= document.getElementById("u_name").value;
@@ -143,12 +163,13 @@ function search(){
 						<th>환불여부</th>											
 					</tr>
 					<c:forEach items="${list }" var="list">
+						<input type="hidden" value="${list.p_no }"/>
 					<tr>
 						<td>${list.u_id }</td>
 						<td>${list.r_date } / ${list.p_date }</td>						
 						<td>${list.l_code }</td>						
-						<td>${list.p_price }</td>						
-						<td><button class="btn btn-dark" id="search" onclick="location.href=''"> ${list.refund }</button></td>						
+						<td><fmt:formatNumber value="${list.p_price }" pattern="#,###"  />	</td>					
+						<td><button class="btn btn-dark" id="search" onclick="refund('${list.u_id }',${list.p_no })"> ${list.refund }</button></td>						
 					</tr>
 					</c:forEach>
 				</table>
