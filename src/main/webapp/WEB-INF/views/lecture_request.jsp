@@ -232,8 +232,13 @@
 							</tr>
 							<tr>
 								<td class="tg-llyw">카테고리</td>
-								<td class="tg-0pky"><input name="l_category" style="width: 790px;"
-									type="text"></td>
+								<td class="tg-0pky"><select name="l_category" style="width: 790px;">
+											<option value="">카테고리 선택</option>
+											<option value="java">java</option>
+											<option value="Spring">Spring</option>
+											<option value="백엔드">백엔드</option>
+									</select>
+									</td>
 							</tr>
 							<tr>
 								<td class="tg-llyw">커리큘럼</td>

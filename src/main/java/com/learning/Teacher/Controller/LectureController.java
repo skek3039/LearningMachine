@@ -86,7 +86,7 @@ public class LectureController {
 		if((int)session.getAttribute("u_authority") > 3) {
 			String l_name = request.getParameter("l_name"); 
 			List<LectureDTO> list = lectureService.letureNameSearch(l_name);	
-			ModelAndView mv = new ModelAndView("lecture_detail");				
+			ModelAndView mv = new ModelAndView("lecture_detail2");				
 			mv.addObject("list",list);
 			return mv; 
 		}else {

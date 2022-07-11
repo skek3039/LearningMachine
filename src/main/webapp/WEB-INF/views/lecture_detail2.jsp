@@ -120,7 +120,7 @@ function enterkey() {
 						<th>강의 가격</th>
 					</tr>
 					
-					<c:forEach items="${lectureList}" var="l">
+					<c:forEach items="${list}" var="l">
 					<tr>
 						<td>${l.t_id }</td>
 						<td>${l.l_name }</td>
