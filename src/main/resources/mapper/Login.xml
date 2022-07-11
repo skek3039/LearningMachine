@@ -6,4 +6,13 @@
   		select * from user where u_id=#{u_id} and u_pw = #{u_pw}
   	</select>
   
+  <insert id="join" parameterType="userDTO">
+		insert into  user (u_id, u_pw, u_email, u_name, u_nickname, u_gender, u_birth)
+		values (#{u_id},#{u_pw},#{u_email},#{u_name},#{u_nickname},#{u_gender},#{u_birth})
+  </insert>
+  
+  <select id="checkID" parameterType="String" resultType="integer">
+  	select count(*) as count FROM user where u_id=#{u_id}
+  </select>
+  
   </mapper>

@@ -15,4 +15,12 @@ public class LoginService {
 		return loginDAO.login(dto);
 	}
 
+	public int join(userDTO dto) {
+		return loginDAO.join(dto);
+	}
+
+	public int checkID(String u_id) {
+		return loginDAO.checkID(u_id);
+	}
+
 }

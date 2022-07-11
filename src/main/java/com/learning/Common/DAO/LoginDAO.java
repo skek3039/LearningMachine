@@ -13,4 +13,10 @@ public class LoginDAO {
 	public userDTO login(userDTO dto) {
 		return sqlSession.selectOne("Login.login", dto);
 	}
+	public int join(userDTO dto) {
+		return sqlSession.insert("Login.join", dto);
+	}
+	public int checkID(String u_id) {
+		return sqlSession.selectOne("Login.checkID", u_id);
+	}
 }
