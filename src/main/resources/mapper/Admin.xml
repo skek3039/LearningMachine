@@ -61,12 +61,16 @@
 
  	<select id="teachervideo" parameterType="String" resultType="HashMap">
  		select * from lecture_info_view 
- 		<if test = "t_id != null">
-  			where t_id = #{t_id} and t_del = 0
-  		</if>
-  		<if test = "t_id == null">
-  			where t_del = 0
-  		</if>
+
   	</select>
+  	
+  	<delete id="lecture_refund1" parameterType="String">
+  		delete from payment_refund_apply where p_no = #{p_no}
+  	</delete>
+  	
+  	<update id="lecture_refund" parameterType="String">
+ 		update payment_log set p_refund = 1 where p_no = #{p_no}
+ 	</update>
+ 	
  	
   </mapper>
