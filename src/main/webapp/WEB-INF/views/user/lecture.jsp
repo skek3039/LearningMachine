@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -110,6 +110,31 @@ ul.tabs li.current{
 .tab-content.current{
   display: flex;
 }
+#teacher{
+	font-weight: 300px;
+}
+#content{
+	width: 80%;
+	height: 100%;
+	border: 1px solid rgb(102, 202, 152);
+	border-radius: 10px;
+	display: inline-block;
+}
+.col-sm-6.col-md-4{
+	text-align: center;
+	margin-bottom: 10px;
+}
+#category{
+	
+	border: 1px solid rgb(201, 236, 219);
+	border-radius: 10px;
+	width: 20%;
+	background-color: rgb(201, 236, 219);
+	text-align: center;
+}
+.caption{
+	text-align: center;
+}
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -153,39 +178,79 @@ $(document).ready(function(){
 			</ul>
 		</div>
 		<div style="padding-top: 20px; text-align: center;">
-			<div class="row tab-content current" id = "tab-1">
+			<div class="row tab-content current" id="tab-1">
 				<c:forEach items="${PopularList }" var="i">
 					<div class="col-sm-6 col-md-4">
-						<div class="thumbnail">
-							<img src="./img/leaf.png" alt="" width="100px">
-							<div class="caption">
-								<h3><a href = "./LectureDetail?l_code=${i.l_code}">${i.l_name}</a></h3>
-								<p>${i.t_nickname}</p>
-								<p>${i.l_price}</p>
-								<p>${i.l_category }</p>
-								<p>
-									<a href="#" class="btn btn-primary" role="button">Button</a> <a
-										href="#" class="btn btn-default" role="button">Button</a>
-								</p>
+						<div id="content">
+							<div class="thumbnail">
+								<img src="./img/leaf.png" alt="" onclick="location.href = './LectureDetail?l_code=${i.l_code}';" width="150px">
+								<div class="caption">
+									<h3>
+										<a href="./LectureDetail?l_code=${i.l_code}">${i.l_name}</a>
+									</h3>
+									<p id ="teacher">${i.t_nickname}</p>
+									<strong style="color: red;">${i.l_price}원</strong><p><small>(${i.total_register}명 수강)</small></p>
+									<p id="category">${i.l_category }</p>
+									<c:choose>
+										<c:when test="${i.payment_whether eq 0 && sessionScope.u_id ne null}">
+											<p>
+												<a href="#" class="btn btn-default" role="button">이동하기</a>
+												<a href="#" class="btn btn-primary" role="button">찜하기</a>
+											</p>
+										</c:when>
+										<c:when test="${i.payment_whether eq 0 && sessionScope.u_id eq null}">
+											<p>
+												<a href="#" class="btn btn-default" role="button">이동하기</a>
+												<a href="#" class="btn btn-primary" role="button">찜하기(로그인)</a>
+											</p>
+										</c:when>
+										<c:otherwise>
+											<p>
+												<a href="#" class="btn btn-default" role="button">이동하기</a>
+												<a href="#" class="btn btn-primary" role="button">리뷰남기기</a>
+											</p>
+										</c:otherwise>
+									</c:choose>
+								</div>
 							</div>
 						</div>
 					</div>
 				</c:forEach>
 			</div>
-			<div class="row tab-content" id = "tab-2">
+			<div class="row tab-content" id="tab-2">
 				<c:forEach items="${RecentList }" var="i">
 					<div class="col-sm-6 col-md-4">
-						<div class="thumbnail">
-							<img src="./img/leaf.png" alt="" width="100px">
-							<div class="caption">
-								<h3><a href = "./LectureDetail?l_code=${i.l_code}">${i.l_name }</a></h3>
-								<p>${i.t_nickname }</p>
-								<p>${i.l_price}</p>
-								<p>${i.l_category }</p>
-								<p>
-									<a href="#" class="btn btn-primary" role="button">Button</a> <a
-										href="#" class="btn btn-default" role="button">Button</a>
-								</p>
+						<div id="content">
+							<div class="thumbnail">
+								<img src="./img/leaf.png" alt="" onclick="location.href = './LectureDetail?l_code=${i.l_code}';" width="150px">
+								<div class="caption">
+									<h3>
+										<a href="./LectureDetail?l_code=${i.l_code}">${i.l_name}</a>
+									</h3>
+									<p id ="teacher">${i.t_nickname}</p>
+									<strong style="color: red;">${i.l_price}원</strong><p><small>(${i.total_register}명 수강)</small></p>
+									<p id="category">${i.l_category }</p>
+									<c:choose>
+										<c:when test="${i.payment_whether eq 0 && sessionScope.u_id ne null}">
+											<p>
+												<a href="#" class="btn btn-default" role="button">이동하기</a>
+												<a href="#" class="btn btn-primary" role="button">찜하기</a>
+											</p>
+										</c:when>
+										<c:when test="${i.payment_whether eq 0 && sessionScope.u_id eq null}">
+											<p>
+												<a href="#" class="btn btn-default" role="button">이동하기</a>
+												<a href="#" class="btn btn-primary" role="button">찜하기(로그인)</a>
+											</p>
+										</c:when>
+										<c:otherwise>
+											<p>
+												<a href="#" class="btn btn-default" role="button">이동하기</a>
+												<a href="#" class="btn btn-primary" role="button">리뷰남기기</a>
+											</p>
+										</c:otherwise>
+									</c:choose>
+								</div>
 							</div>
 						</div>
 					</div>

@@ -14,6 +14,9 @@ public class LectureForm {
 	private String l_thumbnail;
 	private String l_date;
 	private String l_category;
+	private int b_del;
+	private String t_introduce;
+	private String t_spec;
 	
 	private String grade_avg;
 	private int total_register;
