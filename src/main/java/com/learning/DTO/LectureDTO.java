@@ -6,10 +6,10 @@ import lombok.Data;
 public class LectureDTO {
 
 private int t_confirm;
-private String t_id, t_introduce, t_spec, t_etc;  
+private String t_id, t_introduce, t_spec, t_etc, u_id;  
 
 private int l_price; 
-private String l_name, l_curriculum, l_thumnail, l_date, l_code, l_category, l_info, l_recognize;
+private String l_name, l_curriculum, l_thumbnail, l_date, l_code, l_category, l_info, l_recognize;
 
 private int v_no; 
 private String v_root, v_videotitle, v_introduce;

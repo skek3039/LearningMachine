@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -89,41 +89,30 @@
 		<jsp:include page="./header.jsp" />
 		<div style=" width: 100%; height: 705px;">
 		 <jsp:include page="./lecture_nav.jsp"/>
-		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;Q&A</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 50px;"><h3>Q&A</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 40px;">
-				<a href="./qna_reply">
-				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
+			<div style="padding-top: 10px;">
+			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
-						<td onMouseOver="this.style.backgroundColor='#D3D3D3'" onMouseOut="this.style.backgroundColor=''">
-						<div class="question-list__question e-detail">
-								<div class="question__info">
-									<div class="question__info-cover">
-										<div class="question__info--main">
-											<div class="question__title">
-												<h3 class="title__text">
-													<span>title</span>
-
-												</h3>
-											</div>
-											<p class="question__body">- content</p>
-
-										</div>
-										<div class="question__info-footer">
-											<div class="footer__cover">
-												<span class="footer__name">user_id</span> 
-												<span class="footer__dot"> ·</span> 
-												<span class="footer__info">date</span>
-												<span class="footer__dot"> ·</span> 
-												<span class="footer__lecture">lecture</span>
-											</div>
-										</div>
-									</div>
-
-								</div>
-							</div>
-						</td>
+						<th>번호</th>
+						<th>이름</th>
+						<th>제목</th>
+						<th>내용</th>
+						<th>날짜</th>
 					</tr>
-			</table></a>
+					
+					<c:forEach items="${qnaList}" var="q">
+					<tr>
+						<td>${q.lqa_no}</td>
+						<td>${q.u_id}</td>
+						<td>${q.lqa_title}</td>
+						<td>${q.lqa_content}</td>
+						<td>${q.lqa_date}</td>
+						<td><a href="./qna_reply">조회</a></td>
+					</tr>
+					</c:forEach>
+			</table>
+		</div>	
 		</div>
 
 </div>
