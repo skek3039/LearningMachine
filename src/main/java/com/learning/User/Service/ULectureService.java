@@ -18,7 +18,7 @@ public class ULectureService {
 
 	@Autowired
 	private UserDAO userDAO;
-	
+
 	public List<LectureForm> PopularLectureList(String u_id) {
 
 		List<LectureForm> LectureList = lectureDAO.LectureList();// 기본적으로 인기순으로 강의가져옴
@@ -46,12 +46,11 @@ public class ULectureService {
 	public List<LectureForm> RecentLectureList(String u_id) {
 
 		List<LectureForm> LectureList = lectureDAO.LectureList();
-		
-		//lectureListComparator 객체에서 override를 통해 LectureForm의 l_date로 정렬
-		//최신순서대로 정렬 됨
-		Collections.sort(LectureList, new LectureListComparator()); 
-		
-		
+
+		// lectureListComparator 객체에서 override를 통해 LectureForm의 l_date로 정렬
+		// 최신순서대로 정렬 됨
+		Collections.sort(LectureList, new LectureListComparator());
+
 		if (u_id == null) {
 
 			return LectureList;
@@ -69,8 +68,34 @@ public class ULectureService {
 				}
 			}
 
-			
 			return LectureList;
 		}
 	}
+
+	public LectureForm LectureDetail(String u_id, String l_code) {
+
+		LectureForm LectureForm = lectureDAO.LectureDetail(l_code);
+
+		List<URegiForm> regiList = null;
+
+		if (u_id == null) {
+
+			return LectureForm;
+		} else {
+
+			regiList = userDAO.RegiList(u_id);
+			if (regiList.size() != 0) {
+				for (URegiForm form : regiList) {
+
+					if (LectureForm.getL_code().equals(form.getL_code())) {
+						LectureForm.setPayment_whether(1);
+					}
+				}
+			}
+			
+			return LectureForm;
+		}
+
+	}
+
 }

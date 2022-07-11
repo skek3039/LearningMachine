@@ -3,10 +3,8 @@
         <!-- Navbar & Hero Start -->
         <div class="container-xxl position-relative p-0" style="background-color: #00B98E;">
             <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0"  style="background-color: #00B98E;">
-                <a href="/web" class="navbar-brand p-0">
-                    <h1 class="m-0">Learning Machine</h1>
+                    <h1 class="m-0"><a  class="m-0" style="color: white;" href="/web" class="navbar-brand p-0">Learning Machine </a></h1>
                     <!-- <img src="img/logo.png" alt="Logo"> -->
-                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars"></span>
                 </button>

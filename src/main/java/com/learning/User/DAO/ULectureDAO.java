@@ -18,4 +18,9 @@ public class ULectureDAO {
 		
 		return sqlSession.selectList(namespace + ".ULectureList");
 	}
+	
+	public LectureForm LectureDetail(String l_code) {
+		
+		return sqlSession.selectOne(namespace + ".ULectureDetail", l_code);
+	}
 }

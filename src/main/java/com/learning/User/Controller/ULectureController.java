@@ -32,9 +32,12 @@ public class ULectureController {
 	}
 
 	@GetMapping("/LectureDetail")
-	public String lectureDetail(@RequestParam(name = "b_no")int b_no) {
+	public String lectureDetail(@RequestParam(name = "l_code")String l_code, HttpServletRequest rq) {
 		
+		String u_id = (String) rq.getSession().getAttribute("u_id");
+
+		rq.setAttribute("LectureDetail", lectureService.LectureDetail(u_id, l_code));
 		
-		return "user/lecturedetail";
+		return "user/LectureDetail";
 	}
 }

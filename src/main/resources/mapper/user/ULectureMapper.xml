@@ -7,4 +7,10 @@
 		SELECT * FROM lecture_info_view ORDER BY total_register DESC
 	
 	</select>
+	
+	<select id = "ULectureDetail" parameterType="String" resultType = "com.learning.User.Form.LectureForm">
+	
+		SELECT * FROM lecture_info_view WHERE l_code = #{l_code}
+	
+	</select>
   </mapper>

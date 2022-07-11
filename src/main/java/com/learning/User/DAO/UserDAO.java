@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.learning.User.Form.LectureForm;
+import com.learning.User.Form.URegiForm;
 import com.learning.User.Form.UserAttendanceForm;
 
 @Repository
@@ -21,7 +22,14 @@ public class UserDAO {
 		
 		return sqlSession.selectList(namespace + ".RecentVideo", u_id);
 	}
-
+	
+	//내가 듣는 강의 목록
+	public List<URegiForm> RegiList(String u_id){
+		
+		return sqlSession.selectList(namespace + ".RegistrationList", u_id);
+	}
+	
+	//내가 듣는 강의와 정보들
 	public List<LectureForm> RegistedLecture(String u_id){
 		
 		return sqlSession.selectList(namespace + ".RegistedLecture", u_id);

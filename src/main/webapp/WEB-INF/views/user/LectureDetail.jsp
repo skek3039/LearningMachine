@@ -85,47 +85,7 @@ details>summary {
 	font-size: 17px;
 	padding: 15px 0;
 }
-ul.tabs{
-  margin: 0px;
-  padding: 0px;
-  list-style: none;
-}
-ul.tabs li{
-  background: none;
-  color: #222;
-  display: inline-block;
-  padding: 10px 25px;
-  cursor: pointer;
-}
-
-ul.tabs li.current{
-  background: #ededed;
-  color: #222;
-}
-
-.tab-content{
-  display: none;
-}
-
-.tab-content.current{
-  display: flex;
-}
 </style>
-<script type="text/javascript">
-$(document).ready(function(){
-	   
-	  $('ul.tabs li').click(function(){
-	    var tab_id = $(this).attr('data-tab');
-	 
-	    $('ul.tabs li').removeClass('current');
-	    $('.tab-content').removeClass('current');
-	 
-	    $(this).addClass('current');
-	    $("#"+tab_id).addClass('current');
-	  })
-	 
-	});
-</script>
 </head>
 
 <body>
@@ -146,50 +106,9 @@ $(document).ready(function(){
 			<h3>&nbsp;&nbsp;강의목록</h3>
 			<hr style="border: solid 1px;">
 		</div>
-		<div>
-			<ul class="tabs">
-				<li class="tab-link current" data-tab="tab-1">인기 강의</li>
-				<li class="tab-link" data-tab="tab-2">최신 강의</li>
-			</ul>
-		</div>
 		<div style="padding-top: 20px; text-align: center;">
 			<div class="row tab-content current" id = "tab-1">
-				<c:forEach items="${PopularList }" var="i">
-					<div class="col-sm-6 col-md-4">
-						<div class="thumbnail">
-							<img src="./img/leaf.png" alt="" width="100px">
-							<div class="caption">
-								<h3><a href = "./LectureDetail?l_code=${i.l_code}">${i.l_name}</a></h3>
-								<p>${i.t_nickname}</p>
-								<p>${i.l_price}</p>
-								<p>${i.l_category }</p>
-								<p>
-									<a href="#" class="btn btn-primary" role="button">Button</a> <a
-										href="#" class="btn btn-default" role="button">Button</a>
-								</p>
-							</div>
-						</div>
-					</div>
-				</c:forEach>
-			</div>
-			<div class="row tab-content" id = "tab-2">
-				<c:forEach items="${RecentList }" var="i">
-					<div class="col-sm-6 col-md-4">
-						<div class="thumbnail">
-							<img src="./img/leaf.png" alt="" width="100px">
-							<div class="caption">
-								<h3><a href = "./LectureDetail?l_code=${i.l_code}">${i.l_name }</a></h3>
-								<p>${i.t_nickname }</p>
-								<p>${i.l_price}</p>
-								<p>${i.l_category }</p>
-								<p>
-									<a href="#" class="btn btn-primary" role="button">Button</a> <a
-										href="#" class="btn btn-default" role="button">Button</a>
-								</p>
-							</div>
-						</div>
-					</div>
-				</c:forEach>
+				${LectureDetail }
 			</div>
 		</div>
 	</div>
