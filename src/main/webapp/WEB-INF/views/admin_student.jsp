@@ -79,6 +79,12 @@ function search(){
 	location.href = "./admin_studentSearch?u_name="+u_name;
 }
 
+function enterkey() {
+	if (window.event.keyCode == 13) {
+		search();
+	}
+	
+}
 
 /* function search(){
  	var u_name= document.getElementById("u_name").value;
@@ -132,7 +138,7 @@ function search(){
 		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;학생리스트</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px; margin-left: 310px;">
 				<div style="padding-top: 10px;">
-					 <input type="search" id="u_name" name="u_name" class="form-control" required="required" placeholder="학생이름을 입력해주세요." style="width: 250px; float: left;"> &nbsp; 
+					 <input type="search" id="u_name" name="u_name" class="form-control" required="required" placeholder="학생이름을 입력해주세요." style="width: 250px; float: left;" onkeyup="enterkey()"> &nbsp; 
 					 <button class="btn btn-danger" id="search" style="width: 100px" onclick="search()">search</button>
 				</div><br>
 			<div  id="student" >

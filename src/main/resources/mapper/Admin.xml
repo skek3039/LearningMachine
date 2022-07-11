@@ -51,7 +51,7 @@
  	</select>
  	
  	<select id="refundList" resultType="hashmap">
- 		select * from payment_refund_apply 
+ 		select * from user_paymentRefund_view
  	</select>
  	
 

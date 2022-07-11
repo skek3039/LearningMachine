@@ -202,6 +202,7 @@ public class AdminController {
 			return "/404";
 		}
 	}
+	
 	//환불신청내역 불러오기
 	@GetMapping(value = "/admin_student_refund")
 	public ModelAndView admin_student_refund(HttpSession session, HttpServletRequest request) {

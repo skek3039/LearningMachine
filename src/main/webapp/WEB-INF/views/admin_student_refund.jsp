@@ -136,15 +136,19 @@ function search(){
 			<div  id="student" >
 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
-						<th>이름</th>
-						<th>ID</th>
-						<th>Point</th>											
+						<th>학생ID</th>
+						<th style="text-align: center">결제일자 / 환불일자</th>
+						<th>강의코드</th>
+						<th>환불Point</th>											
+						<th>환불여부</th>											
 					</tr>
 					<c:forEach items="${list }" var="list">
 					<tr>
-						<td><a href="./admin_studentLecture?u_id=${list.u_id }">${list.u_name }</a></td>
 						<td>${list.u_id }</td>
-						<td>${list.u_paypoint }</td>						
+						<td>${list.r_date } / ${list.p_date }</td>						
+						<td>${list.l_code }</td>						
+						<td>${list.p_price }</td>						
+						<td><button class="btn btn-dark" id="search" onclick="location.href=''"> ${list.refund }</button></td>						
 					</tr>
 					</c:forEach>
 				</table>

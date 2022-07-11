@@ -49,6 +49,7 @@
 <!-- Template Stylesheet -->
 <link href="./resources/css/style.css" rel="stylesheet">
 <link href="./resources/css/admin.css" rel="stylesheet">
+<link href='./resources/css/main.css' rel='stylesheet' />
 
 <style type="text/css">
     <style>@font-face {
@@ -80,7 +81,6 @@
         padding: 15px 0;
     }
 </style>
-
 <script type="text/javascript">
 function search(){
 	var u_name= document.getElementById("u_name").value;
@@ -88,31 +88,40 @@ function search(){
 }
 
 
-/* function search(){
- 	var u_name= document.getElementById("u_name").value;
-		$.ajax({
-		url:"./admin_studentSearch",
-		type:"get",
-		dataType:"json",
-		data:{"u_name" : u_name},
-		success:function(data){
-			var list = data.list;
-			alert(list);
-		/*	var html =  "<table><tr><th>이름</th><th>아이디</th><th>포인트</th><th>신고횟수</th></tr>";
-			$.each(list, function(){
-				html += "<tr><td>" + list[index].u_name" + </td><td>" + list[index].u_id + "</td>";
-				html += "<tr><td>" + list[index].u_paypoint" + </td><td>" + list[index].u_banned + "</td></tr>";
-			});
-			html += "</table>";
-			$("#student").empty();
-			$("#student").append(html); 
-		},error:function(request, status, error){
-			alert("문제발생"+error);
-		}
-	}); 
-} */
- 
 
+
+document.addEventListener('DOMContentLoaded', function() {
+	var calendarEl = document.getElementById('calendar');
+	var calendar = new FullCalendar.Calendar(calendarEl, {
+		initialView : 'dayGridMonth', // 초기 로드 될때 보이는 캘린더 화면(기본 설정: 달)
+		headerToolbar : { // 헤더에 표시할 툴 바
+			start : 'prev next today',
+			center : 'title',
+			end : 'dayGridMonth,dayGridWeek,dayGridDay'
+		},
+		titleFormat : function(date) {
+			return date.date.year + '년 ' + (parseInt(date.date.month) + 1) + '월';
+		},
+		//initialDate: '2021-07-15', // 초기 날짜 설정 (설정하지 않으면 오늘 날짜가 보인다.)
+		selectable : false, // 달력 일자 드래그 설정가능
+		droppable : true,
+		editable : true,
+		nowIndicator: true, // 현재 시간 마크
+		locale: 'ko' // 한국어 설정
+	});
+	calendar.render();
+	
+
+	
+});
+
+$(document).ready(function() {
+	var calendar = new Calendar(calendarEl, {
+		  dateClick: function() {
+		    alert("a day has been clicked!");
+		  }
+	});
+});	
 
 </script>
 
@@ -138,11 +147,14 @@ function search(){
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
 		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;결제내역</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px; margin-left: 310px;">
-				<div style="padding-top: 10px;">
-				◀	<%= month %>월 결제내역   ▶
+		<div style="padding-top: 10px;padding-left: 20px; width: 900px; height: 100%">
+				
+				 <div id='calendar'>
+				 
+				 </div>
+				
 				</div><br>
-			<div  id="student" >
+		<%-- 	<div  id="student" >
 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
 						<th style="width: 80px;">내역일자</th>
@@ -158,7 +170,7 @@ function search(){
 					</tr>
 					</c:forEach>
 				</table>
-			</div>
+			</div> --%>
 		</div>
 
 </div>
@@ -180,7 +192,6 @@ function search(){
 				}
 			});
 		</script>
-	</div>
 
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -193,6 +204,15 @@ function search(){
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
 	<script src="./resources/js/admin_student.js"></script>
-</body>
+	
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css"/>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
+	
+	</body>
 
 </html>
