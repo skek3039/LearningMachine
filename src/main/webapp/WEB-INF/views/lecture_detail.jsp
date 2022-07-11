@@ -70,6 +70,18 @@
         padding: 15px 0;
     }
 </style>
+<script type="text/javascript">
+function search(){
+	var l_name= document.getElementById("l_name").value;
+	location.href = "./lecture_lectureName?l_name="+l_name;
+}
+function enterkey() {
+	if (window.event.keyCode == 13) {
+		search();
+	}
+	
+}
+</script>
 </head>
 
 <body>
@@ -89,15 +101,12 @@
 		<div style=" width: 100%; height: 705px;">
 			<jsp:include page="./lecture_nav.jsp"/>	
 			<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;내 강의관리</h3><hr style="border: solid 1px;"></div>
-		 			<div class="col-sm-offset-9" style=" text-align: center; padding-left: 890px">
-                          <form action="" method="get">
-                              <select name="search" id="">
-                                  <option value="year">년도</option>
-                              </select>
-                              <input type="text" name="searchkeyword" id="search">
-                              <input class="btn btn-sm btn-default" type="submit" value="검색">
-                          </form>
-                   	</div>
+		 			<div class="col-sm-offset-9" style=" text-align: center; padding-left: 840px">
+                         <div style="padding-top: 10px; padding-right: 30px;">
+							<input type="search" id="l_name" name="l_name" class="form-control" required="required" placeholder="강의이름을 입력해주세요." style="width: 250px; float: left; margin-left: 75px;" onkeyup="enterkey()"> 
+					 		<button class="btn btn-danger" id="search" style="width: 100px float: left; margin-right: 45px;"  onclick="search()">search</button>
+						</div><br>
+                	</div>
 		<div style="padding-top: 10px;">
 			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>

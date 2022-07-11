@@ -98,6 +98,7 @@
 					<tr>
 						<th>강사 이름</th>
 						<th>강의 이름</th>
+						<th>강의 정보</th>
 						<th>카테고리</th>
 						<th>커리큘럼</th>
 						<th>신청 날짜</th>
@@ -108,6 +109,7 @@
 					<tr>
 						<td>${l.t_id }</td>
 						<td>${l.l_name }</td>
+						<td>${l.l_info }</td>
 						<td>${l.l_category }</td>
 						<td>${l.l_curriculum }</td>
 						<td>${l.l_date }</td>

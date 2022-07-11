@@ -26,6 +26,10 @@ public class LectureService {
 		return lectureDAO.lecture_request(lecture_request);
 	}
 
+	public List<LectureDTO> letureNameSearch(String l_name) {
+		return lectureDAO.letureNameSearch(l_name);
+	}
+
 
 	
 }
