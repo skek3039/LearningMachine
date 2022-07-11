@@ -25,5 +25,9 @@ public class LectureDAO {
 		return sqlSession.insert("lecture.lecture_request", lecture_request);
 	}
 
+	public List<LectureDTO> letureNameSearch(String l_name) {
+		return sqlSession.selectList("lecture.letureNameSearch", l_name);
+	}
+
 
 }

@@ -1,5 +1,6 @@
 package com.learning.Teacher.Controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,8 @@ public class StudentController {
 	private StudentService studentService;
 	//수강생관리 첫페이지 (강의리스트 불러오기)
 	@RequestMapping(value = "/student")
-	public ModelAndView student(HttpServletRequest request, HttpSession session) {
+	public ModelAndView student(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
 		if((int)session.getAttribute("u_authority") > 3) {
 			ModelAndView mv = new ModelAndView("student");
 			String u_id = (String)session.getAttribute("u_id");
@@ -33,9 +35,11 @@ public class StudentController {
 		return mv;
 	}
 }
+	
 	//수강생 리스트 불러오는 페이지	
-	@GetMapping(value = "/student_list")
-	public ModelAndView student_list(HttpServletRequest request, HttpSession session) {
+	@RequestMapping(value = "/student_list")
+	public ModelAndView student_list(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
 		if((int)session.getAttribute("u_authority") > 3) {
 			ModelAndView mv = new ModelAndView("student_list");
 			String t_id = (String)session.getAttribute("u_id");
