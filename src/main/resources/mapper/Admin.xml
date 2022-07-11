@@ -9,8 +9,9 @@
   		select * from user where u_name LIKE '%' #{u_name } '%'	
   	</select>
   	<select id="studentLecture" parameterType="string" resultType="HashMap">
-  		select * from user_lecture_view where u_id = #{u_id} group by l_code
+  		select * from user_lecture_view where u_id = #{u_id} group by u_id
   	</select>
+  	
   	<select id="studentReport" parameterType="string" resultType="HashMap"> 
   		select * from user_teacher_reported_View 
   		<if test = "u_id != null">
