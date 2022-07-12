@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,11 +34,16 @@ public class AdminController {
 	private AdminService adminService;
 
 	@GetMapping(value = "/admin")
-	public String admin(HttpSession session) {
+	public ModelAndView admin(HttpSession session) {
 		if ((int) session.getAttribute("u_authority") == 7) {
-			return "admin";
+			ModelAndView mv = new ModelAndView("admin");
+			List<String> refund = adminService.studentReport(null,null);
+			System.out.println(refund.toString());
+			mv.addObject("refund",refund);
+			return mv;
 		} else {
-			return "redirect:/404";
+			ModelAndView mv = new ModelAndView("404");
+			return mv;
 		}
 	}
 	
