@@ -102,7 +102,7 @@ function enterkey() {
 		<jsp:include page="./header.jsp" />
 		<div style=" width: 100%; height: 705px;">
 				<jsp:include page="./lecture_nav.jsp"/>
-			<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;수강생조회</h3><hr style="border: solid 1px;"></div>
+			<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;수강생검색</h3><hr style="border: solid 1px;"></div>
 		 			<div class="col-sm-offset-9" style=" text-align: center; padding-left: 840px">
                           <form action="" method="get">
                               <!-- <select name="search" id="">
@@ -121,7 +121,7 @@ function enterkey() {
 						<th>수강생 조회</th>
 					</tr>
 					
-					<c:forEach items="${lectureList}" var="l">
+					<c:forEach items="${searchlist}" var="l">
 					<tr>
 						<td>${l.l_name }</td>
 						<td>${l.l_category }</td>

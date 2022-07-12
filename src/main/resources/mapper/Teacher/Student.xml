@@ -13,4 +13,11 @@
   		FROM user_lecture_view
   		WHERE t_id = #{t_id} 
   	</select>
+  	
+  	<select id="searchList" parameterType="String" resultType="LectureDTO">
+  		select * 
+  		from lecture 
+  		where l_name LIKE '%' #{l_name } '%'
+  	</select>
+  	
   </mapper>

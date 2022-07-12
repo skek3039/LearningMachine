@@ -22,5 +22,9 @@ public class StudentService {
 	 public List<String> studentList(String t_id){ 
 		 return studentDAO.studentList(t_id); 
 	}
+
+	public List<LectureDTO> lectureNameSearch(String l_name) {
+		return studentDAO.lectureNameSearch(l_name);
+	}
 	 
 }

@@ -18,9 +18,12 @@ public class StudentDAO {
 		return sqlSession.selectList("student.student_lectureList", u_id);
 	}
 	
-	
 	public List<String> studentList(String t_id) {
 		return sqlSession.selectList("student.studentList",t_id);
+	}
+
+	public List<LectureDTO> lectureNameSearch(String l_name) {
+		return sqlSession.selectList("student.searchList", l_name);
 	}
 	 
 }

@@ -54,6 +54,20 @@ public class StudentController {
 		}
 	}
 	
+	//검색
+		@GetMapping(value = "/student_studentName" , produces="text/plain;charset=utf-8")
+		public ModelAndView student_studentName(HttpServletRequest request, HttpSession session) {	
+			if((int)session.getAttribute("u_authority") > 3) {
+				String l_name = request.getParameter("l_name"); 
+				List<LectureDTO> searchlist = studentService.lectureNameSearch(l_name);	
+				ModelAndView mv = new ModelAndView("student2");				
+				mv.addObject("searchlist",searchlist);
+				return mv; 
+			}else {
+				ModelAndView mv = new ModelAndView("404");
+				return mv;
+			}
+		}
 	@GetMapping(value = "/student_ban")
 	public String student_ban() {
 		return "student_ban";

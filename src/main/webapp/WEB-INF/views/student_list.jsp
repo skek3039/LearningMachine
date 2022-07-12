@@ -88,18 +88,18 @@
 		<jsp:include page="./header.jsp" />
 		<div style=" width: 100%; height: 705px;">
 				<jsp:include page="./lecture_nav.jsp"/>
-			<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;수강생조회</h3><hr style="border: solid 1px;"></div>
+			<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;수강생조회</h3><hr style="border: solid 1px;"></div>
 		 			<div class="col-sm-offset-9" style=" text-align: center; padding-left: 890px"></div>
 		<div style="padding-top: 10px;">
 			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
-					<tr>
+					<tr>					
 						<th>이름</th>
 						<th>강의명</th>
 						<th>성별</th>
 					</tr>
 					<c:forEach items="${studentList}" var="s">
 					<tr>
-						<td>${s.u_name }</td>
+						<td>${s.u_name }</td>					
 						<td>${s.l_name }</td>
 						<td>${s.u_gender }</td>
 					</tr>

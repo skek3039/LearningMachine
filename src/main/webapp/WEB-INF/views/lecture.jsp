@@ -83,13 +83,14 @@
 				<span class="sr-only">Loading...</span>
 			</div>
 		</div>
+	
 		<!-- Spinner End -->
 
 
 		<jsp:include page="./header.jsp" />
 		<div style=" width: 100%; height: 705px;">
 		<jsp:include page="./lecture_nav.jsp"/>
-		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;강의신청</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;강의신청</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px; text-align: center;">
 				<div style="padding-top: 10px; padding-left: 1200px;">
 					<button type="button" class="btn btn-outline-dark" onclick="location.href='./lecture_request'">신청</button>
@@ -119,7 +120,7 @@
 					</c:forEach>
 			</table>
 		</div>
-
+</div>
 </div>
 		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
@@ -139,7 +140,7 @@
 				}
 			});
 		</script>
-	</div>
+	
 
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
