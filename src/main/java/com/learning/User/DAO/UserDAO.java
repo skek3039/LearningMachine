@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.learning.User.Form.LectureForm;
+import com.learning.User.Form.ULectureForm;
 import com.learning.User.Form.URegiForm;
 import com.learning.User.Form.UserAttendanceForm;
 
@@ -30,7 +30,7 @@ public class UserDAO {
 	}
 	
 	//내가 듣는 강의와 정보들
-	public List<LectureForm> RegistedLecture(String u_id){
+	public List<ULectureForm> RegistedLecture(String u_id){
 		
 		return sqlSession.selectList(namespace + ".RegistedLecture", u_id);
 	}

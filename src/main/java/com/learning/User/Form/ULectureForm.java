@@ -3,7 +3,7 @@ package com.learning.User.Form;
 import lombok.Data;
 
 @Data
-public class LectureForm {
+public class ULectureForm {
 
 	private String l_code;
 	private String t_id;

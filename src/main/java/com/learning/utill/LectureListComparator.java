@@ -2,12 +2,12 @@ package com.learning.utill;
 
 import java.util.Comparator;
 
-import com.learning.User.Form.LectureForm;
+import com.learning.User.Form.ULectureForm;
 
-public class LectureListComparator implements Comparator<LectureForm>{
+public class LectureListComparator implements Comparator<ULectureForm>{
 
 	@Override
-	public int compare(LectureForm o1, LectureForm o2) {
+	public int compare(ULectureForm o1, ULectureForm o2) {
 
 		String l_date1 = o1.getL_date();
 		String l_date2 = o2.getL_date();

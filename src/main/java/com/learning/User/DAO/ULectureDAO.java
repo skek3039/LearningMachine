@@ -10,32 +10,42 @@ import com.learning.User.Form.*;
 public class ULectureDAO {
 
 	private final String namespace = "ULectureMapper";
-	
+
 	@Autowired
 	private SqlSession sqlSession;
-	
-	public List<LectureForm> LectureList(){
-		
+
+	public List<ULectureForm> LectureList() {
+
 		return sqlSession.selectList(namespace + ".ULectureList");
 	}
-	
-	public LectureForm LectureDetail(String l_code) {
-		
+
+	public ULectureForm LectureDetail(String l_code) {
+
 		return sqlSession.selectOne(namespace + ".ULectureDetail", l_code);
 	}
-	
+
 	public List<VideoForm> LectureVideos(String l_code) {
-		
+
 		return sqlSession.selectList(namespace + ".ULectureVideos", l_code);
 	}
-	
-	public List<LectureQnaForm> LectureQna(String l_code){
-		
+
+	public List<ULectureQnaForm> LectureQna(String l_code) {
+
 		return sqlSession.selectList(namespace + ".ULectureQnas", l_code);
 	}
-	
-	public List<LectureViedoQnaForm> LectureVideoQna(String l_code){
-		
+
+	public List<ULectureQnaReplyForm> LectureQnaReply(String l_code) {
+
+		return sqlSession.selectList(namespace + ".ULectureQnaReplys", l_code);
+	}
+
+	public List<ULectureViedoQnaForm> LectureVideoQna(String l_code) {
+
 		return sqlSession.selectList(namespace + "ULectureVideoQnas", l_code);
+	}
+
+	public List<ULectureVideoQnaReplyForm> LectureVideoQnaReply(String l_code) {
+
+		return sqlSession.selectList(namespace + "ULectureVideoQnaReplys", l_code);
 	}
 }

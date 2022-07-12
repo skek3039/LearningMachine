@@ -21,8 +21,8 @@ public class ULectureController {
 		
 		String u_id = (String) rq.getSession().getAttribute("u_id");
 		
-		List<LectureForm> RecentList = lectureService.RecentLectureList(u_id);
-		List<LectureForm> PopularList = lectureService.PopularLectureList(u_id);
+		List<ULectureForm> RecentList = lectureService.RecentLectureList(u_id);
+		List<ULectureForm> PopularList = lectureService.PopularLectureList(u_id);
 		
 		rq.setAttribute("RecentList", RecentList);
 		rq.setAttribute("PopularList", PopularList);

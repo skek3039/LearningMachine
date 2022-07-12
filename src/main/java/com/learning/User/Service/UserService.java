@@ -31,22 +31,22 @@ public class UserService {
 		return list;
 	}
 	
-	public List<LectureForm> RegistedLecture(String u_id){
+	public List<ULectureForm> RegistedLecture(String u_id){
 		
-		List<LectureForm> ResistedLecture = userDAO.RegistedLecture(u_id);
+		List<ULectureForm> ResistedLecture = userDAO.RegistedLecture(u_id);
 		
-		List<LectureForm> lectureList = null;
-		List<LectureForm> userLecture = null;
+		List<ULectureForm> lectureList = null;
+		List<ULectureForm> userLecture = null;
 		if(ResistedLecture == null) {
 			
 			return null;
 		}else {
 			
 			lectureList = lectureDAO.LectureList();
-			userLecture = new ArrayList<LectureForm>();
+			userLecture = new ArrayList<ULectureForm>();
 			
-			for(LectureForm lectureform : lectureList) {
-				for(LectureForm regiform : ResistedLecture) {
+			for(ULectureForm lectureform : lectureList) {
+				for(ULectureForm regiform : ResistedLecture) {
 					
 					if(lectureform.getL_code().equals(regiform.getL_code())) {
 						

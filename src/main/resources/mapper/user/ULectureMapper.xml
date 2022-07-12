@@ -2,15 +2,61 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="ULectureMapper">
 	
-	<select id = "ULectureList" resultType = "com.learning.User.Form.LectureForm">
+	<select id = "ULectureList" resultType = "com.learning.User.Form.ULectureForm">
 	
 		SELECT * FROM lecture_info_view ORDER BY total_register DESC
 	
 	</select>
 	
-	<select id = "ULectureDetail" parameterType="String" resultType = "com.learning.User.Form.LectureForm">
+	<select id = "ULectureDetail" parameterType="String" resultType = "com.learning.User.Form.ULectureForm">
 	
 		SELECT * FROM lecture_info_view WHERE l_code = #{l_code}
 	
 	</select>
+	<select id="ULectureVideos" parameterType="String">
+	
+		SELECT * FROM lecture_video WHERE l_code = #{l_code}
+	
+	</select>
+	
+	<select id="ULectureQnas" parameterType="String" resultType="com.learning.User.Form.ULectureQnaForm">
+	
+		<!-- SELECT *
+			,(SELECT u_nickname FROM user WHERE user.u_id = lecture_qna.u_id) as 'u_nickname'
+			,(SELECT COUNT(0) FROM lecture_qna_reply where lecture_qna.lqa_no = lqa_no) as reply_whether
+			,(SELECT
+				lqa_no as reply_no
+				, t_id as t_id
+				,(SELECT u_nickname from user where u_id = lecture_qna_reply.t_id) as t_nickname
+				,lqar_title as lqar_title
+				,lqar_content as lqar_content
+				,lqar_date as lqar_date
+				FROM lecture_qna_reply 
+				where lqa_no = lecture_qna.lqa_no)	
+		FROM lecture_qna -->
+		SELECT *
+				,(SELECT u_nickname FROM user WHERE user.u_id = lecture_qna.u_id) as 'u_nickname'
+				,(SELECT COUNT(0) FROM lecture_qna_reply where lecture_qna.lqa_no = lqa_no) as reply_whether
+		FROM lecture_qna
+		WHERE l_code = #{l_code}
+	</select>
+	
+	<select id="ULectureQnaReplys" parameterType="String" resultType="com.learning.User.Form.ULectureQnaReplyForm">	
+		SELECT *
+				,(SELECT u_nickname FROM user WHERE user.u_id = lecture_qna_reply.t_id) as 'u_nickname'
+		FROM lecture_qna_reply
+		WHERE l_code = #{l_code}
+	</select>
+	
+	<select id="ULectureVideoQnas">
+		
+	</select>
+	
+	<select id="ULectureVideoQnaReplys">
+		
+	</select>
+	
+	<select id="UCheckAttendance"></select>
+	
+	<insert id="UVideoAttendance"></insert>
   </mapper>
