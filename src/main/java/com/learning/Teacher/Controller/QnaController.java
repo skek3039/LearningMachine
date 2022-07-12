@@ -22,9 +22,7 @@ public class QnaController {
 		@RequestMapping(value = "/qna")
 		public ModelAndView qna(HttpServletRequest request) {
 			ModelAndView mv = new ModelAndView("qna");
-
 			List<LectureDTO> qnaList = qnaService.qnalist();
-			System.out.println(qnaList.toString());
 			mv.addObject("qnaList", qnaList);
 			return mv;
 		}

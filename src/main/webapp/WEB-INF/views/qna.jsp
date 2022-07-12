@@ -92,7 +92,7 @@
 		<div style="padding-top: 50px;"><h3>Q&A</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 40px;">
 			<div style="padding-top: 10px;">
-			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
+			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto; text-align: center;">
 					<tr>
 						<th>번호</th>
 						<th>이름</th>
