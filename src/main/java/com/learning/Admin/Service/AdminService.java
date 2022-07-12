@@ -1,6 +1,7 @@
 package com.learning.Admin.Service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,8 +80,8 @@ public class AdminService {
 		return adminDAO.lecture_refund(p_no, u_id);
 	}
 
-	public int admin_lectureGet(ULectureDTO dto) {
-		return adminDAO.lectureGet(dto);
+	public int admin_lectureGet(Map<String, Object> map) {
+		return adminDAO.lectureGet(map);
 	}
 
 	public void admin_lectureGet1(String la_no, String c1) {
@@ -91,12 +92,16 @@ public class AdminService {
 		return adminDAO.teacherDetail(u_id);
 	}
 
-	public List<String> admin_teacherRequest(String u_id) {
-		return adminDAO.teacherRequest(u_id);
+	public List<String> admin_teacherRequest(String u_id, PageDTO page) {
+		return adminDAO.teacherRequest(u_id, page);
 	}
 	
 	public List<String> teacherRe(String u_id) {
 		return adminDAO.teacherRe(u_id);
+	}
+
+	public int teacherAccept(Map<String, Object> map) {
+		return adminDAO.teacherAccept(map);
 	}
 	
 }

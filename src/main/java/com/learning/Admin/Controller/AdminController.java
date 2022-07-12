@@ -3,7 +3,9 @@ package com.learning.Admin.Controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -99,8 +101,11 @@ public class AdminController {
 				dto.setL_price(Integer.parseInt(request.getParameter("l_price")));
 				dto.setT_id(request.getParameter("t_id"));
 				dto.setL_code(UUID.randomUUID().toString().replace("-", ""));
-
-				result = adminService.admin_lectureGet(dto);
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("dto", dto);
+				map.put("l_category", (String)request.getParameter("l_category"));
+				
+				result = adminService.admin_lectureGet(map);
 				adminService.admin_lectureGet1(request.getParameter("la_no"),c1);
 				if (result == 1) {
 					check = "redirect:/admin_lecture_request";
@@ -126,9 +131,40 @@ public class AdminController {
 	public ModelAndView admin_teacher_request(HttpServletRequest request, HttpSession session) {
 		if ((int) session.getAttribute("u_authority") == 7) {
 			ModelAndView mv = new ModelAndView("admin_teacher_request");
+			int check_total = 4;
 			String u_id = null;
-			List<String> list = adminService.admin_teacherRequest(u_id);
+			
+			int pageNo = 1;
+			if (request.getParameter("pageNo")!=null) {
+				pageNo = Integer.parseInt(request.getParameter("pageNo"));
+			}
+			// recordCountPageNo 한 페이지당 게시되는 게시물 수 yes
+			int listScale = 5;
+			// pageSize = 페이지 리스트에 게시되는 페이지 수 yes
+			int pageScale = 10;			
+			// totalRecordCount 전체 게시물 건수				
+			int totalCount = adminService.totalCount(check_total);
+			// 전자정부페이징 호출
+			PaginationInfo paginationInfo = new PaginationInfo();
+			// 값 대입
+			paginationInfo.setCurrentPageNo(pageNo);
+			paginationInfo.setRecordCountPerPage(listScale);
+			paginationInfo.setPageSize(pageScale);
+			paginationInfo.setTotalRecordCount(totalCount);
+			// 전자정부 계산하기
+			int startPage = paginationInfo.getFirstRecordIndex();
+			int lastpage = paginationInfo.getRecordCountPerPage();
+			
+			// 서버로 보내기
+			PageDTO page = new PageDTO();
+			page.setStartPage(startPage);
+			page.setLastPage(lastpage);
+			
+			List<String> list = adminService.admin_teacherRequest(u_id, page);
 			mv.addObject("list", list);
+			mv.addObject("paginationInfo", paginationInfo);
+			mv.addObject("pageNo", pageNo);
+
 			return mv;
 		} else {
 			ModelAndView mv = new ModelAndView("404");
@@ -153,7 +189,23 @@ public class AdminController {
 		}
 	}
 
-
+	//강사승인 및 승인거부 처리
+	@PostMapping(value= "admin_teacher_request")
+	public void admin_teacher_request(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		if ((int) session.getAttribute("u_authority") == 7) {
+		String u_id = request.getParameter("u_id");
+		List<String> t_apply = adminService.teacherRe(u_id);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("t_id", u_id);
+		map.put("t_apply", t_apply);
+		System.out.println(map.toString());
+		int result = adminService.teacherAccept(map);
+		PrintWriter pw = response.getWriter();
+		pw.print(result);
+		}
+	}
+	
+	
 	// 강사리스트 불러오기
 	@GetMapping(value = "/admin_teacher")
 	public ModelAndView admin_teacher(HttpServletRequest request, HttpSession session) throws ParseException {
@@ -298,7 +350,6 @@ public class AdminController {
 			String u_id = request.getParameter("u_id");
 			List<String> list = adminService.studentLecture(u_id);
 			List<String> report = adminService.studentReport(u_id,null);
-
 			mv.addObject("list", list);
 			mv.addObject("report", report);
 
@@ -328,6 +379,7 @@ public class AdminController {
 			int totalCount = adminService.totalCount(check_total);
 			// 전자정부페이징 호출
 			PaginationInfo paginationInfo = new PaginationInfo();
+		
 			// 값 대입
 			paginationInfo.setCurrentPageNo(pageNo);
 			paginationInfo.setRecordCountPerPage(listScale);
@@ -357,9 +409,9 @@ public class AdminController {
 	
 	//학생신고리스트보기
 	@PostMapping(value = "/admin_student_report")
-	public void admin_student_report(HttpServletRequest request, HttpSession session, HttpServletResponse response)
-			throws Exception {
+	public void admin_student_report(HttpServletRequest request, HttpSession session, HttpServletResponse response) throws Exception {
 		if ((int) session.getAttribute("u_authority") == 7) {
+			
 			int result = 0;
 			BannedDTO dto = new BannedDTO();
 			String u_id = request.getParameter("u_id");

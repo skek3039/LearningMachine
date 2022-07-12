@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?> <!-- 맵퍼파일 -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
   <mapper namespace="Admin">
 	<select id="totalCount" parameterType="String" resultType="integer">
 		select count(*) as count
-		from user 
+		from ${tname}
+		<if test = "tname == 'teacher_apply'">
+			where t_recognize = 0 
+		</if>
 	</select>
 	
 	<select id = "reportCount" resultType="integer">
@@ -24,8 +28,8 @@
   	
   	<select id="studentReport" parameterType="map" resultType="HashMap"> 
   		select * from user_teacher_reported_View 
-  		<if test = "u_id != null">
-  			where u_id = #{u_id} and u_del = 0 limit #{page.startPage},#{page.lastPage}
+  		<if test = "u_id != null and page != null">
+  			where u_id = #{u_id} and u_del = 0
   		</if>
   		<if test = "u_id == null">
   			where u_del = 0 limit #{page.startPage},#{page.lastPage}
@@ -87,9 +91,13 @@
  		update payment_log set p_refund = 1 where p_no = #{p_no}
  	</update>
  	
- 	<insert id="lectureGet" parameterType="com.learning.User.DTO.ULectureDTO">
+ 	<insert id="lectureCate" parameterType="map">
+ 		insert into lecture_category values(#{dto.l_code},#{l_category})
+ 	</insert>
+ 	
+ 	<insert id="lectureGet" parameterType="map">
 		insert into lecture(t_id,l_code, l_curriculum, l_name, l_price) 
-		values (#{t_id}, #{l_code},#{l_curriculum},#{l_name},#{l_price})
+		values (#{dto.t_id}, #{dto.l_code},#{dto.l_curriculum},#{dto.l_name},#{dto.l_price})
     </insert>
     
     <update id = "lectureGet2" parameterType="string">
@@ -108,16 +116,27 @@
     </select>
     
     
- 	<select id="teacherRequest" parameterType="String" resultType="hashmap">
- 		select * from teacher_apply_view where t_recognize = 0
+ 	<select id="teacherRequest" parameterType="map" resultType="hashmap">
+ 		select * from teacher_apply_view where t_recognize = 0 limit #{page.startPage}, #{page.lastPage} 
  		<if test = "u_id != null">
-  			and u_id = #{u_id}
+  			and u_id = #{u_id}  limit #{page.startPage}, #{page.lastPage}
   		</if>
   	</select>
   	
   	<select id="teacherRe" parameterType="String" resultType="hashmap">
   		select * from teacher_apply_view where u_id = #{u_id}
   	</select>
-    
+  	
+  	<insert id="teacherAccept" parameterType="hashmap">
+  		insert into teacher (t_id, t_introduce, t_spec, t_etc)
+  		values (#{t_apply[0].u_id}, #{t_apply[0].t_introduce}, #{t_apply[0].t_spec}, #{t_apply[0].t_etc})
+  	</insert>
+  	<update id="teacherAccept1" parameterType="hashmap">
+  		update user set u_authority = 4 where u_id = #{t_apply[0].u_id}
+  	</update>
+  	<update id="teacherAccept2" parameterType="map">
+  		update teacher_apply set t_recognize = 1 where t_id = #{t_apply[0].u_id}
+  	</update>
+  	
  	
   </mapper>

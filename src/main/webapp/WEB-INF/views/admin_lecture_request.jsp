@@ -123,7 +123,7 @@ function search(){
 					<tr>
 						<td>${list.t_id}</td>
 						<td><a href="./admin_lectureDetail?la_no=${list.la_no }"> ${list.l_name }</a></td>
-						<td>카테고리</td>
+						<td>${list.l_category}</td>
 						<td><c:choose>
 							<c:when test="${fn:length(list.l_curriculum ) > 10 }">
 							<c:out value="${fn:substring(list.l_curriculum , 0, 9)} ...">

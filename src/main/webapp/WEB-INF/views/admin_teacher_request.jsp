@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -81,7 +82,9 @@ function search(){
 	location.href = "./admin_studentSearch?u_name="+u_name;
 }
 
-
+function linkPage(pageNo){
+	location.href = "./admin_teacher_request?pageNo=" + pageNo;
+}
 </script>
 
 
@@ -111,7 +114,7 @@ function search(){
 					 <input type="search" id="u_name" name="u_name" class="form-control" required="required" placeholder="강사이름을 입력해주세요." style="width: 250px; float: left;"> &nbsp; 
 					 <button class="btn btn-danger" id="search" style="width: 100px" onclick="search()">search</button>
 				</div><br>
-			<div  id="teacher" >
+			<div  id="teacher">
 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
 						<th>강사이름</th>
@@ -142,6 +145,8 @@ function search(){
 					</c:forEach>
 				</table>
 			</div>
+			<br>
+				<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
 		</div>
 
 </div>

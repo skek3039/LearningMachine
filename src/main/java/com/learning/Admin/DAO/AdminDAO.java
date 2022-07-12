@@ -19,12 +19,21 @@ public class AdminDAO {
 	private SqlSession sqlSession;
 
 	public int totalCount(int check_total) {
-		if(check_total ==1) {
-			return sqlSession.selectOne("Admin.totalCount");			
-		}else if(check_total == 2) {
-			return sqlSession.selectOne("Admin.reportCount");
+		String tname= null;
+		switch (check_total) {
+		case 1: 
+			tname= "user";		
+			break;
+		case 2 : 
+			tname= "user_teacher_reported_View";
+		case 3 :
+			tname= "lecture_info_view";
+		case 4 :
+			tname= "teacher_apply";
+		default:
+			break;
 		}
-		return sqlSession.selectOne("Admin.totalCount");
+		return sqlSession.selectOne("Admin.totalCount",tname);		
 	}
 	
 	public List<userDTO> userList(PageDTO page) {
@@ -41,9 +50,14 @@ public class AdminDAO {
 
 	public List<String> studentReport(String u_id, PageDTO page) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("u_id", u_id);
-		map.put("page", page);
-		return sqlSession.selectList("Admin.studentReport",map);
+		if(page !=null) {
+			map.put("u_id", u_id);
+			map.put("page", page);
+			return sqlSession.selectList("Admin.studentReport",map);
+		}else {
+			map.put("u_id", u_id);
+			return sqlSession.selectList("Admin.studentReport",map);
+		}
 	}
 
 	public int report(BannedDTO dto) {
@@ -91,9 +105,9 @@ public class AdminDAO {
 		return sqlSession.update("Admin.lecture_refund", p_no);
 	}
 
-	public int lectureGet(ULectureDTO dto ) {
-		
-		return sqlSession.insert("Admin.lectureGet",dto);
+	public int lectureGet(Map<String, Object> map ) {
+		sqlSession.insert("Admin.lectureGet",map);
+		return sqlSession.insert("Admin.lectureCate",map);
 	}
 
 	public void lectureGet1(String la_no, String c1) {
@@ -104,17 +118,30 @@ public class AdminDAO {
 			sqlSession.update("Admin.lectureGet3",la_no);							
 		}
 	}
-
 	public List<String> teacherDetail(String u_id) {
 		return sqlSession.selectList("Admin.teacherDetail",u_id);
 	}
 
-	public List<String> teacherRequest(String u_id) {
-		return sqlSession.selectList("Admin.teacherRequest",u_id);
+	public List<String> teacherRequest(String u_id, PageDTO page) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(page !=null) {
+			map.put("u_id", u_id);
+			map.put("page", page);
+			return sqlSession.selectList("Admin.teacherRequest",map);
+		}else {
+			map.put("u_id", u_id);
+			return sqlSession.selectList("Admin.teacherRequest",map);
+		}
 	}
 
 	public List<String> teacherRe(String u_id) {
 		return sqlSession.selectList("Admin.teacherRe",u_id);
+	}
+
+	public int teacherAccept(Map<String, Object> map) {
+		sqlSession.update("Admin.teacherAccept1",map);
+		sqlSession.update("Admin.teacherAccept2",map);
+		return sqlSession.insert("Admin.teacherAccept",map);
 	}
 
 }

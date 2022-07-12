@@ -82,24 +82,21 @@ function search(){
 	
 }
 
-function accept(){
-
-	alert("ㅋㅋ");
-/*	if(confirm(u_name + "학생을 정말 정지하시겠습니까?")){
+function accept(u_id){
+	if(confirm("강사등록을 하시겠습니까?")){
 		$.ajax({
-			url:"./admin_student_report",
+			url:"./admin_teacher_request",
 			type:"post",
 			dataType:"html",
 			data : {"u_id" : u_id , 
-					"ur_reason" : ur_reason	
 			},
 			success : function(data){
-				location.href = "./admin_student_report";
+				location.href = "./admin_teacher_report";
 			},error:function(request, status, error){
 				alert("문제발생"+error);
 			}
 		});
-	} */
+	} 
 }
 
 
@@ -154,7 +151,7 @@ function accept(){
 						<td>${list[0].t_etc }</td>								
 					</tr>
 				</table>
-					<button type="submit" style="float: left; margin-right : 10px;" class="btn btn-outline-dark" onclick="accept();">승인</button>
+					<button type="submit" style="float: left; margin-right : 10px;" class="btn btn-outline-dark" onclick="accept('${list[0].u_id}');">승인</button>
 					<button type="submit" onclick="location.href='./admin_lecture_get?check=2&la_no=${list[0].la_no}'" class="btn btn-outline-dark">승인거부</button>
 			</div>
 		</div>

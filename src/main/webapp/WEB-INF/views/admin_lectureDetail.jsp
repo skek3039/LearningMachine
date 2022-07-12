@@ -103,26 +103,28 @@ function search(){
 		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;강의신청</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px; margin-left: 310px;">
 			<div  id="student" >
+				<small>신중하게 승인처리해주세요. </small>
+				
 				<form action="./admin_lecture_get" method="get">
-				<input type="hidden" name="t_id" value="${list[0].t_id}">
-				<input type="hidden" name="la_no" value="${list[0].la_no}">
-				<input type="hidden" name="check" value="1">
-				<input type="hidden" name="l_name" value="${list[0].l_name }">
-				<input type="hidden" name="l_curriculum" value="${list[0].l_curriculum }">
-				<table class="table table-bordered table-sm" style="width: 900px;">
+					<input type="hidden" name="t_id" value="${list[0].t_id}">
+					<input type="hidden" name="la_no" value="${list[0].la_no}">
+					<input type="hidden" name="check" value="1">
+					<input type="hidden" name="l_category" value="${list[0].l_category }"> 
+					<input type="hidden" name="l_name" value="${list[0].l_name }">
+					<input type="hidden" name="l_curriculum" value="${list[0].l_curriculum }">
+					<table class="table table-bordered table-sm" style="width: 900px;">
 					<tr>
 						<th>강사아이디 | ${list[0].t_id}</th>																
 						<th>강의이름 | ${list[0].l_name }</th>								
+						<th>카테고리 | ${list[0].l_category }</th>								
 					</tr>	
 					<tr>
-						<td colspan="2">
-							<textarea name="curri"style="width: 100%; height: 100px;" >
-							${list[0].l_curriculum }
-							</textarea>
+						<td colspan="3">
+							<label style="height: 150px;">${list[0].l_curriculum }</label>
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2">
+						<td colspan="3">
 							<label>강의가격</label>
 							<input type="text" id= "l_price" name="l_price" placeholder="강의가격을 입력해주세요." required="required">	 
 						</td>
