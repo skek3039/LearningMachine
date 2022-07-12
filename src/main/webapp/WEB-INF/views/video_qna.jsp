@@ -111,7 +111,7 @@
 						<td>${v.u_id}</td>
 						<td>${v.l_name }</td>
 						<td>${v.vq_date}</td>
-						<td><a href="./video_qna_reply">답변</a></td>
+						<td><a href="./video_qna_reply?vq_no=${v.vq_no}">답변</a></td>
 					</tr>
 					</c:forEach>
 			</table>

@@ -29,5 +29,9 @@ public class LectureDAO {
 		return sqlSession.selectList("lecture.t_letureNameSearch", l_name);
 	}
 
+	public int totalCount() {
+		return sqlSession.selectOne("lecture.totlaCount");
+	}
+
 
 }

@@ -15,9 +15,14 @@ public class Video_QnaService {
 	@Autowired
 	private Video_QnaDAO video_qnaDAO;
 
-	public List<LectureDTO> video_qnaList() {
-		return video_qnaDAO.video_qnaList();
+	public List<LectureDTO> video_qnaList(String vq_no) {
+		return video_qnaDAO.video_qnaList(vq_no);
 	}
+
+	public int video_qna(LectureDTO video_qna) {
+		return video_qnaDAO.video_qna(video_qna);
+	}
+
 
 	
 
