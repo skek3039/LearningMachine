@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.learning.DTO.LectureDTO;
+import com.learning.DTO.PageDTO;
 import com.learning.Teacher.DAO.LectureDAO;
 
 
@@ -28,6 +29,10 @@ public class LectureService {
 
 	public List<LectureDTO> letureNameSearch(String l_name) {
 		return lectureDAO.letureNameSearch(l_name);
+	}
+
+	public int totalCount() {
+		return lectureDAO.totalCount();
 	}
 
 
