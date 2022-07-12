@@ -14,19 +14,19 @@ public class LectureDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	public List<LectureDTO> lectureApplyList(String u_id) {
-		return sqlSession.selectList("lecture.lectureApplyList",u_id);
+		return sqlSession.selectList("lecture.t_lectureApplyList",u_id);
 	}
 	
 	public List<LectureDTO> lectureList(String u_id){
-		return sqlSession.selectList("lecture.lectureList",u_id);
+		return sqlSession.selectList("lecture.t_lectureList",u_id);
 	}
 
 	public int lecture_request(LectureDTO lecture_request) {
-		return sqlSession.insert("lecture.lecture_request", lecture_request);
+		return sqlSession.insert("lecture.t_lecture_request", lecture_request);
 	}
 
 	public List<LectureDTO> letureNameSearch(String l_name) {
-		return sqlSession.selectList("lecture.letureNameSearch", l_name);
+		return sqlSession.selectList("lecture.t_letureNameSearch", l_name);
 	}
 
 

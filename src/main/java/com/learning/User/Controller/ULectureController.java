@@ -16,7 +16,7 @@ public class ULectureController {
 	@Autowired
 	private ULectureService lectureService;
 	
-	@GetMapping("/LectureList")
+	@GetMapping(value = "/LectureList")
 	public String lectureList(HttpServletRequest rq) {
 		
 		String u_id = (String) rq.getSession().getAttribute("u_id");
@@ -31,7 +31,7 @@ public class ULectureController {
 		return "user/lecture";
 	}
 
-	@GetMapping("/LectureDetail")
+	@GetMapping(value = "/LectureDetail")
 	public String lectureDetail(@RequestParam(name = "l_code")String l_code, HttpServletRequest rq) {
 		
 		String u_id = (String) rq.getSession().getAttribute("u_id");

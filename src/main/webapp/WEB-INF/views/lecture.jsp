@@ -113,7 +113,8 @@
 						<td>${l.l_category }</td>
 						<td>${l.l_curriculum }</td>
 						<td>${l.l_date }</td>
-						<td>${l.l_recognize }</td>
+						<td><c:if test="${l.l_recognize eq 0}"> 미승인</c:if><c:if test="${l.l_recognize eq 2}"> 승인거부</c:if><c:if test="${l.l_recognize eq 1}"> 승인</c:if></td>
+						
 					</tr>
 					</c:forEach>
 			</table>

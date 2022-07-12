@@ -17,7 +17,7 @@
   	
   	<select id="RegistrationList" parameterType="String" resultType="com.learning.User.Form.URegiForm">
   	
-  		SELECT * FROM user_lecture_restration WHERE u_id = #{u_id}
+  		SELECT * FROM user_lecture_registration WHERE u_id = #{u_id}
   	
   	</select>
   </mapper>

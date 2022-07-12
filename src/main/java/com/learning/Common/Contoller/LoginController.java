@@ -52,6 +52,7 @@ public class LoginController {
 		return result;
 	}
 	
+	
 	@GetMapping(value = "/join")
 	public String join() {
 		return "join";

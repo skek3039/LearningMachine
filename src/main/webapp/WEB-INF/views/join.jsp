@@ -39,88 +39,6 @@
 }
 </style>
 
-<script type="text/javascript">
-
- let checkID = 0;
-function idCheck(){
-	let u_id = $("#u_id").val();
-	if(u_id.length < 5 ){
-		$("#checkResult").text("ID는 5글자 이상이어야합니다.");
-	} else {
-		$.ajax({
-			url : "./checkID",
-			type : "post",
-			dataType : "html",
-			data : {"u_id" : u_id},
-			success : function(data){
-				if (data == 0) {
-					$("#checkResult").css("color","yellow");
-					$("#checkResult").text("가입할 수 있는 ID 입니다.");
-					$("#checkResult").attr("disabled","false");
-				} else {
-					$("#checkResult").css("color","red");
-					$("#checkResult").text("이미 사용중인 ID 입니다.");
-					$("#checkResult").attr("disabled","true");
-				}
-			},
-			error : function () {
-				$("#checkResult").text("비정상입니다.");
-			}
-		});
-	}
-	$("#zz").on("submit", function() {
-
-		var u_id = $("#u_id").val();
-		//var reg_id = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-		if (u_id == "" || !reg_id.test(u_id)) {
-			alert("아이디를 입력해주세요.");
-			$("#u_id").focus();
-			return false;
-		}
-		
-		if(id.length < 1){
-			alert("1글자 이상으로 만들어주세요.");
-			$("#u_id").focus();
-			return false;
-		}
-		var pw = $("#u_pw").val();
-		if(pw == "" || pw.length < 1){
-			alert("암호는 1글자 이상으로 만들어주세요.");
-			$("#u_pw").focus();
-			return false;
-		}
-		
-		var u_pw1 = $("#u_pw1").val();
-		if(u_pw1 == "" || u_pw1.length < 1){
-			alert("암호는 1글자 이상으로 만들어주세요.");
-			$("#u_pw1").focus();
-			return false;	
-		}
-		if(u_pw1 != u_pw1){
-			alert("암호가 일치하지 않습니다.\n다시입력하세요.");	
-			$("#u_pw").val("");
-			$("#u_pw1").val("");
-			$("#u_pw").focus();
-			return false;
-		}
-
-		var u_name = $("#u_name").val();
-		if (u_name == "") {
-			alert("이름을 입력해주세요.");
-			$("#u_name").focus();
-			return false;
-		}
-		var u_email = $("#u_email").val();
-		var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-		if (u_email == "" || !reg_email.test(u_email)) {
-			alert("u_email을 입력해주세요.");
-			$("#u_email").focus();
-			return false;
-		}
-	});
-});
-} 
-</script>
 
 </head>
 
@@ -151,15 +69,18 @@ function idCheck(){
 			<form action="./join" method="post">
               <div class="form-outline form-white mb-4" >
                 <input type="text" id="u_id" name="u_id" class="form-control form-control-md" placeholder="ID를 입력해주세요." onchange="idCheck()"/>
-                <p id="checkResult">중복확인
+                <p id="checkResult">
               </div>
 
               <div class="form-outline form-white mb-4">
+              	<label class="form-label mt-4" for="inputInvalid"></label>
                 <input type="password" id="u_pw" name="u_pw" class="form-control form-control-md" required="required" placeholder="PW를 입력해주세요."/>
               </div>
               
               <div class="form-outline form-white mb-4">
+              <label class="form-label mt-4" for="inputInvalid"></label>
                 <input type="password" id="u_pw1" name="u_pw1" class="form-control form-control-md" required="required" placeholder="PW를 재입력 해주세요."/>
+              	<font id="pw_feedback" size="2"></font>
               </div>
               
               <div class="form-outline form-white mb-4">
@@ -176,7 +97,7 @@ function idCheck(){
               
               <div class="form-outline form-white mb-4" >
 				<input type="radio" id="u_gender" name="u_gender" value="남성" checked="checked">남               
-				<input type="radio" id="u_gender" name="u_gender" value="남성" checked="checked">여               
+				<input type="radio" id="u_gender" name="u_gender" value="여성" checked="checked">여               
               </div>
               
               <div class="form-outline form-white mb-4">
@@ -205,6 +126,140 @@ function idCheck(){
       </div>
     </div>
   </div>
+  
+  <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./resources/lib/wow/wow.min.js"></script>
+    <script src="./resources/lib/easing/easing.min.js"></script>
+    <script src="./resources/lib/waypoints/waypoints.min.js"></script>
+    <script src="./resources/lib/owlcarousel/owl.carousel.min.js"></script>
+  
+  <script type="text/javascript">
+  
+ let checkID = 0;
+function idCheck(){
+	let u_id = $("#u_id").val();
+	if(u_id.length < 3 ){
+		$("#checkResult").text("ID는 3글자 이상이어야합니다.");
+	} else {
+		$.ajax({
+			url : "./checkID",
+			type : "post",
+			dataType : "html",
+			data : {"u_id" : u_id},
+			success : function(data){
+				if (data == 0) {
+					$("#checkResult").css("color","yellow");
+					$("#checkResult").text("가입할 수 있는 ID 입니다.");
+					$("#checkResult").attr("disabled","false");
+				} else {
+					$("#checkResult").css("color","red");
+					$("#checkResult").text("이미 사용중인 ID 입니다.");
+					$("#checkResult").attr("disabled","true");
+				}
+			},
+			error : function () {
+				$("#checkResult").text("비정상입니다.");
+				$("#joinBtn").attr("disabled", true);
+			}
+		});
+	}
+}
+	$("#asdf").on("submit", function() {
+		var u_id = $("#u_id").val();
+		if (u_id == "") {
+			alert("아이디를 입력해주세요.");
+			$("#u_id").focus();
+			return false;
+		}
+		
+		
+		/* $('#u_pw').keyup(function () {
+			let pass1 = doucument.getElementById('u_pw').value;
+			let pass2 = doucument.getElementById('u_pw1').value;
+			
+			if (pass1 != || pass2 != "") {
+				if (pass1 == pass2) {
+					$('#pw_feedback').html('비밀번호가 일치 합니다.');
+					$('#pw_feedback').attr('color','#2fb380');
+					$('#u_pw1').addclass("is-valid");
+					$('#u_pw1').removeclass("is-invalid");
+				} else {
+					$('#pw_feedback').html('비밀번호가 일치하지 않습니다.');
+					$('#pw_feedback').attr('color','#dc3545');
+					$('#u_pw1').addclass("is-valid");
+					$('#u_pw1').removeclass("is-invalid");
+				} */
+				
+		
+		
+		/*  let u_pw = $("#u_pw").val();
+		 let u_pw1 = $("#u_pw1").val();
+		 
+		 if (u_pw != "" || u_pw1 != "") {
+			 if(u_pw == u_pw1){
+				 $("#checkPw").html('일치');
+				 $("#checkPw").attr('color','green');
+			 } else {
+				 $("#checkPw").html('일치');
+				 $("#checkPw").attr('color','red');
+			 }
+			
+		} */
+		var u_pw = $("#u_pw").val();
+		var reg_u_pw = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+		if(u_pw == "" || u_pw1.length < 1){
+			alert("암호는 1글자 이상으로 만들어주세요.");
+			$("#u_pw").focus();
+			return false;
+		} 
+		
+		var u_pw1 = $("#u_pw1").val();
+		var reg_u_pw1 = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+		if(u_pw == "" || u_pw1.length < 1){
+			alert("암호는 1글자 이상으로 만들어주세요.");
+			$("#u_pw1").focus();
+			return false;	
+		} 
+
+		var u_name = $("#u_name").val();
+		if (u_name == "") {
+			alert("이름을 입력해주세요.");
+			$("#u_name").focus();
+			return false;
+		}
+		var u_email = $("#u_email").val();
+		var reg_u_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+		if (u_email == "" || !reg_email.test(u_email)) {
+			alert("u_email을 입력해주세요.");
+			$("#u_email").focus();
+			return false;
+		}
+	});
+
+</script>
+
+<script type="text/javascript">
+
+ $('#u_pw').keyup(function () {
+let pass1 = doucument.getElementById('u_pw').value;
+let pass2 = doucument.getElementById('u_pw1').value;
+
+if (pass1 != || pass2 != "") {
+	if (pass1 == pass2) {
+		$('#pw_feedback').html('비밀번호가 일치 합니다.');
+		$('#pw_feedback').attr('color','#2fb380');
+		$('#u_pw1').addclass("is-valid");
+		$('#u_pw1').removeclass("is-invalid");
+	} else {
+		$('#pw_feedback').html('비밀번호가 일치하지 않습니다.');
+		$('#pw_feedback').attr('color','#dc3545');
+		$('#u_pw1').addclass("is-valid");
+		$('#u_pw1').removeclass("is-invalid");
+	} 
+
+</script>
 </section>
 
 		<jsp:include page="./footer.jsp"/>
@@ -213,16 +268,11 @@ function idCheck(){
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="./resources/lib/wow/wow.min.js"></script>
-    <script src="./resources/lib/easing/easing.min.js"></script>
-    <script src="./resources/lib/waypoints/waypoints.min.js"></script>
-    <script src="./resources/lib/owlcarousel/owl.carousel.min.js"></script>
+    
 
     <!-- Template Javascript -->
     <script src="./resources/js/main.js"></script>
 </body>
+
 
 </html>
