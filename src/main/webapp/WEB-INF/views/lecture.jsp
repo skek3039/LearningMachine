@@ -116,12 +116,48 @@ function linkPage(pageNo){
 					
 					<c:forEach items="${lectureApplyList}" var="l">
 					<tr>
-						<td>${l.t_id }</td>
-						<td>${l.l_name }</td>
-						<td>${l.l_info }</td>
+						<td><a href="./lecture_Lookup?la_no=${l.la_no }">${l.la_no }</a></td>
+						<td>
+							<c:choose>
+							<c:when test="${fn:length(l.l_name ) > 10 }">
+							<c:out value="${fn:substring(l.l_name , 0, 9)} ...">
+							</c:out></c:when>
+							<c:otherwise>
+							<c:out value="${l.l_name  }">
+							</c:out></c:otherwise>
+							</c:choose>
+						</td>
+						<td>
+							<c:choose>
+							<c:when test="${fn:length(l.l_info ) > 10 }">
+							<c:out value="${fn:substring(l.l_info , 0, 9)} ...">
+							</c:out></c:when>
+							<c:otherwise>
+							<c:out value="${l.l_info  }">
+							</c:out></c:otherwise>
+							</c:choose>
+						</td>
 						<td>${l.l_category }</td>
-						<td>${l.l_curriculum }</td>
-						<td>${l.l_date }</td>
+						<td>
+							<c:choose>
+							<c:when test="${fn:length(l.l_curriculum ) > 10 }">
+							<c:out value="${fn:substring(l.l_curriculum , 0, 9)} ...">
+							</c:out></c:when>
+							<c:otherwise>
+							<c:out value="${l.l_curriculum  }">
+							</c:out></c:otherwise>
+							</c:choose>
+						</td>
+						<td>
+							<c:choose>
+							<c:when test="${fn:length(l.l_date ) > 11 }">
+							<c:out value="${fn:substring(l.l_date , 0, 10)} ...">
+							</c:out></c:when>
+							<c:otherwise>
+							<c:out value="${l.l_date  }">
+							</c:out></c:otherwise>
+							</c:choose>
+						</td>
 						<td><c:if test="${l.l_recognize eq 0}"> 미승인</c:if><c:if test="${l.l_recognize eq 2}"> 승인거부</c:if><c:if test="${l.l_recognize eq 1}"> 승인</c:if></td>
 						
 					</tr>

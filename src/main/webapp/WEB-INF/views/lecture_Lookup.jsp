@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,8 +40,50 @@
 <link href="./resources/css/style.css" rel="stylesheet">
 <link href="./resources/css/admin.css" rel="stylesheet">
 
+</head>
 <style type="text/css">
-    <style>@font-face {
+.tg {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.tg td {
+	border-color: black;
+	border-style: solid;
+	border-width: 1px;
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	overflow: hidden;
+	padding: 10px 5px;
+	word-break: normal;
+}
+
+.tg th {
+	border-color: black;
+	border-style: solid;
+	border-width: 1px;
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	overflow: hidden;
+	padding: 10px 5px;
+	word-break: normal;
+}
+
+.tg .tg-llyw {
+	background-color: #c0c0c0;
+	border-color: inherit;
+	text-align: left;
+	vertical-align: top
+}
+
+.tg .tg-0pky {
+	border-color: inherit;
+	text-align: left;
+	vertical-align: top;
+	
+}
+<style>@font-face {
         font-family: 'LeferiPoint-WhiteObliqueA';
         src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
         font-weight: normal;
@@ -70,10 +111,10 @@
         font-size: 17px;
         padding: 15px 0;
     }
+    .box.on{
+    color:#999;
+    }
 </style>
-
-</head>
-
 <body>
 	<div class="container-xxl bg-white p-0">
 		<!-- Spinner Start -->
@@ -88,56 +129,45 @@
 
 
 		<jsp:include page="./header.jsp" />
-		<div style=" width: 100%; height: 705px;">
-		 <jsp:include page="./lecture_nav.jsp"/>
-		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;Q&A</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 40px;">
-				<div style="padding-top: 10px;">
-			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>내용</th>
-						<th>아이디</th>
-						<th>강의 이름</th>
-						<th>날짜</th>
-						<th>Q&A</th>
-					</tr>
-					
-					<c:forEach items="${video_qnaList}" var="v">
-					<tr>
-						<td>${v.vq_no}</td>
-						<td>
-							<c:choose>
-							<c:when test="${fn:length(v.vq_title ) > 10 }">
-							<c:out value="${fn:substring(v.vq_title , 0, 9)} ...">
-							</c:out></c:when>
-							<c:otherwise>
-							<c:out value="${v.vq_title  }">
-							</c:out></c:otherwise>
-							</c:choose>
-						</td>
-						<td>
-							<c:choose>
-							<c:when test="${fn:length(v.vq_content ) > 10 }">
-							<c:out value="${fn:substring(v.vq_content, 0, 9)} ...">
-							</c:out></c:when>
-							<c:otherwise>
-							<c:out value="${v.vq_content }">
-							</c:out></c:otherwise>
-							</c:choose>
-						</td>
-						<td>${v.u_id}</td>
-						<td>${v.l_name }</td>
-						<td>${v.vq_date}</td>
-						<td><a href="./video_qna_reply?vq_no=${v.vq_no}">답변</a></td>
-					</tr>
-					</c:forEach>
-			</table>
-		</div>	
-		</div>
+		<div style="width: 100%; height: 705px;">
+			<jsp:include page="./lecture_nav.jsp" />
+			<div style="padding-top: 110px;">
+				<h3>&nbsp;&nbsp;강의 상세보기</h3>
+				<hr style="border: solid 1px;">
+			</div>
+			<div style="padding-top: 10px; text-align: center;">
+			</div>
 
-</div>
+			<br>
+			<div style="text-align: center">
+				<div id="requestform" style="padding-top: 10px; padding-left: 340px">
+					<table class="tg" style="table-layout: fixed; width: 900px">
+						<colgroup>
+							<col style="width: 100px">
+							<col style="width: 800px">
+						</colgroup>
+						<tbody>
+							<tr>
+								<td class="tg-llyw">강의 이름</td>
+								<td class="tg-0pky">${dto.l_name }</td>
+							</tr>
+							<tr>
+								<td class="tg-llyw">강의 정보</td>
+								<td class="tg-0pky">${dto.l_info }</td>
+							</tr>
+							<tr>
+								<td class="tg-llyw">카테고리</td>
+								<td class="tg-0pky">${dto.l_category }</td>
+							</tr>
+							<tr>
+								<td class="tg-llyw">커리큘럼</td>
+								<td class="tg-0pky">${dto.l_curriculum }</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
 
@@ -169,6 +199,20 @@
 
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
+	
+	<script type="text/javascript">
+	$(".box button").attr("disabled", true);
+    $("#chk").on('click',function(){
+        var chk = $('input:checkbox[id="chk"]').is(":checked");
+        if(chk==true){
+            $(".box button").removeAttr('disabled');
+            $(".box").removeClass("on");
+        }else{
+            $(".box button").attr("disabled", true);
+            $(".box").addClass("on");
+        }
+    });
+	</script>
 </body>
 
 </html>

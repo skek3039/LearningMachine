@@ -14,7 +14,7 @@ private String l_name, l_curriculum, l_thumbnail, l_date, l_code, l_category, l_
 private int v_no; 
 private String v_root, v_videotitle, v_introduce;
 
-private int lr_grade;
+private int lr_grade, la_no;
 private String lr_title, lr_content;
 
 private int lqa_no; 

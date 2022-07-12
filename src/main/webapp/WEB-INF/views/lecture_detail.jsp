@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -109,7 +110,7 @@ function linkPage(pageNo){
 		<jsp:include page="./header.jsp" />
 		<div style=" width: 100%; height: 705px;">
 			<jsp:include page="./lecture_nav.jsp"/>	
-			<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;내 강의관리</h3><hr style="border: solid 1px;"></div>
+			<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;내 강의관리</h3><hr style="border: solid 1px;"></div>
 		 			<div class="col-sm-offset-9" style=" text-align: center; padding-left: 840px">
                          <div style="padding-top: 10px; padding-right: 30px;">
 							<input type="search" id="l_name" name="l_name" class="form-control" required="required" placeholder="강의이름을 입력해주세요." style="width: 250px; float: left; margin-left: 75px;" onkeyup="enterkey()"> 
@@ -130,9 +131,27 @@ function linkPage(pageNo){
 					<c:forEach items="${lectureList}" var="l">
 					<tr>
 						<td>${l.t_id }</td>
-						<td>${l.l_name }</td>
+						<td>
+							<c:choose>
+							<c:when test="${fn:length(l.l_name ) > 10 }">
+							<c:out value="${fn:substring(l.l_name , 0, 9)} ...">
+							</c:out></c:when>
+							<c:otherwise>
+							<c:out value="${l.l_name  }">
+							</c:out></c:otherwise>
+							</c:choose>
+						</td>
 						<td>${l.l_category }</td>
-						<td>${l.l_curriculum }</td>
+						<td>
+							<c:choose>
+							<c:when test="${fn:length(l.l_curriculum ) > 10 }">
+							<c:out value="${fn:substring(l.l_curriculum , 0, 9)} ...">
+							</c:out></c:when>
+							<c:otherwise>
+							<c:out value="${l.l_curriculum  }">
+							</c:out></c:otherwise>
+							</c:choose>
+						</td>
 						<td>${l.l_date }</td>
 						<td><fmt:formatNumber value="${l.l_price }" pattern="#,###"  /></td>
 					</tr>

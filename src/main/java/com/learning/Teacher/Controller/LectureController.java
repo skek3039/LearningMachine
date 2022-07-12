@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Controller;import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -123,6 +123,26 @@ public class LectureController {
 			return mv;
 		}
 	}
+	
+	//강의 상세보기
+	@RequestMapping(value= "/lecture_Lookup")
+	public String lecture_Lookup(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
+		int la_no = Integer.parseInt(request.getParameter("la_no"));
+		if ((int) session.getAttribute("u_authority") > 3) {
+			
+			LectureDTO lecture_lookup = new LectureDTO();
+			lecture_lookup.setLa_no(la_no);
+			
+			request.setAttribute("dto", lectureService.lecture_lookup(lecture_lookup));
+			return "lecture_Lookup";
+		} else {
+			return "redirect:/404";
+
+		}
+	}
+	
+	
 	// 강의 신청 제출
 	@RequestMapping(value = "/lecture_request")
 	public ModelAndView lecure_request(HttpServletRequest request, HttpSession session) {

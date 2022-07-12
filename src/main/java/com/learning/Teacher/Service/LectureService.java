@@ -44,6 +44,14 @@ public class LectureService {
 		return lectureDAO.lectureCate();
 	}
 
+	public LectureDTO lecture_lookup(LectureDTO lecture_lookup) {
+		return lectureDAO.lecture_lookup(lecture_lookup);
+	}
+
+
+
+
+
 
 	
 }

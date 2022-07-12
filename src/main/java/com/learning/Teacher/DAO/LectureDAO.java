@@ -42,6 +42,12 @@ public class LectureDAO {
 		return sqlSession.selectList("lecture.cate");
 	}
 
+	public LectureDTO lecture_lookup(LectureDTO lecture_lookup) {
+		return sqlSession.selectOne("lecture.lecture_Lookup", lecture_lookup);
+	}
+
+
+
 
 
 }
