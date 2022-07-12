@@ -97,7 +97,7 @@
 				<div style="position: relative;">
 				<jsp:include page="./admin_nav.jsp" />
 				</div>
-				<div style="padding-top: 30px;">
+				<div style="padding-top:  110px;">
 					<h3>&nbsp;&nbsp;관리자님 안녕하세요.</h3>
 					<hr style="border: solid 1px;">
 				</div>

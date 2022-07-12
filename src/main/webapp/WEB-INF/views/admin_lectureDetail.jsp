@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -99,7 +100,7 @@ function search(){
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
-		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;강의신청</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;강의신청</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px; margin-left: 310px;">
 			<div  id="student" >
 				<form action="./admin_lecture_get" method="get">
@@ -115,7 +116,9 @@ function search(){
 					</tr>	
 					<tr>
 						<td colspan="2">
-							<textarea name="curri"style="width: 100%; height: 100px;" >${list[0].l_curriculum }</textarea>
+							<textarea name="curri"style="width: 100%; height: 100px;" >
+							${list[0].l_curriculum }
+							</textarea>
 						</td>
 					</tr>
 					<tr>

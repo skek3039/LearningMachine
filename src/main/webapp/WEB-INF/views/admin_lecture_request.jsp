@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -123,7 +124,16 @@ function search(){
 						<td>${list.t_id}</td>
 						<td><a href="./admin_lectureDetail?la_no=${list.la_no }"> ${list.l_name }</a></td>
 						<td>카테고리</td>
-						<td>${list.l_info }</td>						
+						<td><c:choose>
+							<c:when test="${fn:length(list.l_curriculum ) > 10 }">
+							<c:out value="${fn:substring(list.l_curriculum , 0, 9)}"><img alt="" src="./resources/img/more.png">
+							</c:out></c:when>
+							<c:otherwise>
+							<c:out value="${list.l_curriculum  }">
+							</c:out></c:otherwise>
+							</c:choose>
+						</td>						
+						
 						<td>${list.l_date }</td>						
 					</tr>
 					</c:forEach>

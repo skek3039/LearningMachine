@@ -132,7 +132,7 @@ function backup(u_id){
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
-		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;학생강의리스트</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;학생강의리스트</h3><hr style="border: solid 1px;"></div>
 		<div style=" margin-left: 310px;">
 		<div  id="student" >
 			<c:if test="${list[0].u_del ne 0 }">

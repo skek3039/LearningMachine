@@ -108,7 +108,7 @@ function enterkey() {
 		<div style="padding-top: 5px;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
-		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;강사리스트</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top:  110px;"><h3>&nbsp;&nbsp;강사관리</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px; margin-left: 310px;">
 				<div style="padding-top: 10px; width: 100%; height: px;">
 					 <input type="search" id="t_nickname" name="t_nickname" class="form-control" required="required" placeholder="강사이름을 입력하세요." style="width: 250px; float: left;" onkeyup="enterkey()"> &nbsp; 
@@ -117,7 +117,7 @@ function enterkey() {
 			<div  id="student" >
 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
-						<th>이름</th>
+						<th>강사이름</th>
 						<th>ID</th>
 						<th>총 수강학생수</th>											
 						<th>총 강의수</th>											

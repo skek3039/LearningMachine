@@ -135,7 +135,7 @@ function enterkey() {
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
-		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;학생리스트</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;학생리스트</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px; margin-left: 310px;">
 				<div style="padding-top: 10px;">
 					 <input type="search" id="u_name" name="u_name" class="form-control" required="required" placeholder="학생이름을 입력해주세요." style="width: 250px; float: left;" onkeyup="enterkey()"> &nbsp; 

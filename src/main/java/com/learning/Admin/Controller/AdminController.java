@@ -36,7 +36,19 @@ public class AdminController {
 			return "redirect:/404";
 		}
 	}
-
+	
+	
+	
+	@GetMapping(value = "/admin_lecture_management")
+	public ModelAndView admin_lecture_management(HttpSession session, HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("admin_lecture_management");
+		
+		return mv;
+	}
+	
+	
+	
+	//강의신청내역 상세보기
 	@GetMapping(value = "/admin_lectureDetail")
 	public ModelAndView admin_lectureDetail(HttpSession session, HttpServletRequest request) {
 		if ((int) session.getAttribute("u_authority") == 7) {
@@ -69,7 +81,7 @@ public class AdminController {
 	}
 
 	
-	  
+	//강의신청내역 (승인/승인거부) 처리
 	@GetMapping(value = "/admin_lecture_get")
 	public String admin_lecture_get(HttpServletRequest request, HttpSession session, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
@@ -104,22 +116,6 @@ public class AdminController {
 			}
 		
 		return check;
-	}
-	 
-	@GetMapping(value = "/admin_teacher_video")
-	public ModelAndView admin_teacher_video(HttpServletRequest request, HttpSession session) {
-		if ((int) session.getAttribute("u_authority") == 7) {
-			ModelAndView mv = new ModelAndView("admin_teacher_video");
-			String t_nickname = null;
-			List<String> list = adminService.teachervideo(t_nickname);
-			List<String> list1 = adminService.teacherBanList();
-			mv.addObject("list", list);
-			mv.addObject("ban", list1);
-			return mv;
-		} else {
-			ModelAndView mv = new ModelAndView("404");
-			return mv;
-		}
 	}
 
 	// 강사리스트 불러오기
@@ -222,7 +218,8 @@ public class AdminController {
 			return mv;
 		}
 	}
-
+	
+	//학생신고리스트보기
 	@PostMapping(value = "/admin_student_report")
 	public void admin_student_report(HttpServletRequest request, HttpSession session, HttpServletResponse response)
 			throws Exception {

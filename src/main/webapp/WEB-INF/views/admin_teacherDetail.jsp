@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,54 +74,41 @@
 
 <script type="text/javascript">
 function search(){
-	var t_nickname= document.getElementById("t_nickname").value;
-	location.href = "./admin_teacherSearch?t_nickname="+t_nickname;
+	var u_name= document.getElementById("u_name").value;
+	location.href = "./admin_studentSearch?u_name="+u_name;
 	
 }
 
-function report(u_id,u_name){
-	if(confirm(t_nickname + "강사를 정말 정지하시겠습니까?")){
-		$.ajax({
-			url:"./admin_teacher_report",
-			type:"post",
-			dataType:"html",
-			data : {"t_nickname" : t_nickname},
-			success : function(data){
-				alert("ㅋ");
-			},error:function(request, status, error){
-				alert("문제발생"+error);
-			}
-		});
+function backup(u_id){
+	if(confirm("정지된회원을 복구하시겠습니까?")){
+		location.href="./admin_student_back?u_id="+u_id;
 	}
+	
 }
 
-
 /* function search(){
- 	var u_name= document.getElementById("u_name").value;
-		$.ajax({
-		url:"./admin_studentSearch",
-		type:"get",
-		dataType:"json",
-		data:{"u_name" : u_name},
-		success:function(data){
-			var list = data.list;
-			alert(list);
-		/*	var html =  "<table><tr><th>이름</th><th>아이디</th><th>포인트</th><th>신고횟수</th></tr>";
-			$.each(list, function(){
-				html += "<tr><td>" + list[index].u_name" + </td><td>" + list[index].u_id + "</td>";
-				html += "<tr><td>" + list[index].u_paypoint" + </td><td>" + list[index].u_banned + "</td></tr>";
-			});
-			html += "</table>";
-			$("#student").empty();
-			$("#student").append(html); 
-		},error:function(request, status, error){
-			alert("문제발생"+error);
-		}
-	}); 
-} */
- 
-
-
+	 var u_name= document.getElementById("u_name").value;
+	 $.ajax({
+	 url:"./admin_studentSearch",
+	 type:"get",
+	 dataType:"json",
+	 data:{"u_name" : u_name},
+	 success:function(data){
+	 var list = data.list;
+	 alert(list);
+	 /*	var html =  "<table><tr><th>이름</th><th>아이디</th><th>포인트</th><th>신고횟수</th></tr>";
+	 $.each(list, function(){
+	 html += "<tr><td>" + list[index].u_name" + </td><td>" + list[index].u_id + "</td>";
+	 html += "<tr><td>" + list[index].u_paypoint" + </td><td>" + list[index].u_banned + "</td></tr>";
+	 });
+	 html += "</table>";
+	 $("#student").empty();
+	 $("#student").append(html); 
+	 },error:function(request, status, error){
+	 alert("문제발생"+error);
+	 }
+	 }); 
+	 } */
 </script>
 
 
@@ -144,47 +132,68 @@ function report(u_id,u_name){
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
-		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;강사신고리스트</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px; margin-left: 310px;">
-				<div style="padding-top: 10px;">
-					 <input type="search" id="t_nickname" name="t_nickname" class="form-control" required="required" placeholder="강사이름을 입력해주세요." style="width: 250px; float: left;"> &nbsp; 
-					 <button class="btn btn-danger" id="search" style="width: 100px" onclick="search()">search</button>
-				</div><br>
-			<div  id="student" style="width: 500px;">
-				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
-					<tr>
-						<th>이름</th>
-						<th>ID</th>
-						<th>Point</th>		
-						<th>신고강사</th>								
+		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;학생강의리스트</h3><hr style="border: solid 1px;"></div>
+		<div style=" margin-left: 310px;">
+		<div  id="student" >
+			<c:if test="${list[0].u_del ne 0 }">
+				<h4>정지된 회원입니다. <small>${list[0].reason }</small> </h4>
+			</c:if>
+			이름 : ${list[0].u_name } <br>
+			아이디 : ${list[0].u_id } <br>
+			포인트 : <fmt:formatNumber value="${list[0].u_paypoint }" pattern="#,###"  /><br>	
+			신고횟수 : ${list[0].count } 
+			<c:if test="${list[0].u_del ne 0 }">
+				<img src="./img/banned.png" height="20px" width="20px" onclick="location.href='./admin_report?u_id=${list[0].u_id}'" style="cursor:pointer;"> 
+				<img src="./img/backup.png" alt="복구" height="20px" width="20px" onclick="backup('${list[0].u_id}')" style="cursor:pointer;"> 
+			</c:if>
+			<br>
+ 					<h5>강의내역</h5>
+ 				<table class="table table-bordered table-sm">
+					<tr>					
+						<th>강의이름</th>		
+						<th>수강일자</th>													
 					</tr>
-					<c:forEach items="${list }" var="i">
+					<c:forEach items="${list }" var="list">
 					<tr>
-						<td><a href="./admin_report?u_id=${i.t_id }"> ${i.t_nickname }</a> </td>
-						<td>${i.t_id }</td> 
-						<td>${i.t_nickname}</td>						
+						<td>${list.l_name }</td>
+						<td>${list.lr_date }</td>															
 					</tr>
+					</c:forEach>
+				</table>
+				<br>
+				<div id="main_bottom1">
+					<h5>신고내역</h5>
+				<table class="table table-bordered table-sm">
+					<tr>
+						<th>신고사유</th>
+						<th>신고강사</th>
+						<th>신고일자</th>
+					</tr>
+					<c:forEach items="${report }" var="r">
+					<tr>
+						<td>${r.ur_reason }</td>
+						<td>${r.t_name }</td>
+						<td>${r.u_date }</td>
+					</tr>		
 					</c:forEach>				
 				</table>
-			</div>
-			<div id="student1" style="width: 500px;">
-				<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;강사정지리스트</h3><hr style="border: solid 1px;"></div>
+				</div>	
+				<div id="main_bottom2">
+					<h5>결재내역</h5>
 				<table class="table table-bordered table-sm">
-				<tr>
-					<th>관리자ID</th>
-					<th>ID</th>
-					<th>정지사유</th>														
-				</tr>
-				<c:forEach items="${ban }" var="b">
-				<tr>
-					<%-- <td>${b.admin_id }</td> --%>
-					<td>${b.t_id }</td>
-					<%-- <td>${b.bu_reason }</td> --%>					
-				</tr>
-				</c:forEach>
+					<tr>
+						<th>결제내역</th>
+						<th>결제일자</th>
+						<th>결제수단</th>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>						
 				</table>
+				</div>
 			</div>
-			
 		</div>
 
 </div>
