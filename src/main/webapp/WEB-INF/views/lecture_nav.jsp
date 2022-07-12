@@ -20,5 +20,10 @@
    	 						<a href="./qna">Q&A 리스트</a> <br>
    	 						<a href="./video_qna">VQ&A 리스트</a> <br>
    	 					</details>
+   	 				<details>
+   	 					<summary>답변완료</summary>
+   	 						<a href="./qna">Q&A 리스트</a> <br>
+   	 						<a href="./video_qna">VQ&A 리스트</a> <br>
+   	 					</details>	
 				</div>
 			</div>
