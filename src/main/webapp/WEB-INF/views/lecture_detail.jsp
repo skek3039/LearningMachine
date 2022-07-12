@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -84,6 +85,12 @@ function enterkey() {
 	
 }
 </script>
+<script type="text/javascript">
+function linkPage(pageNo){
+	location.href = "./lecture_detail?pageNo=" + pageNo;
+	}
+
+</script>
 </head>
 
 <body>
@@ -132,6 +139,7 @@ function enterkey() {
 					</c:forEach>
 			</table>
 		</div>
+		<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
 	</div>
 		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />

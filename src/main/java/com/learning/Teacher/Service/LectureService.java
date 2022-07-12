@@ -1,5 +1,6 @@
 package com.learning.Teacher.Service;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,12 +15,12 @@ public class LectureService {
 
 	@Autowired
 	private LectureDAO lectureDAO;
-	public List<LectureDTO> lectureApplyList(String u_id) {
-		return lectureDAO.lectureApplyList(u_id);
+	public List<LectureDTO> lectureApplyList(Map<String, Object> map) {
+		return lectureDAO.lectureApplyList(map);
 	}
 	
-	public List<LectureDTO> lectureList(String u_id){
-		return lectureDAO.lectureList(u_id);
+	public List<LectureDTO> lectureList(Map<String, Object> map){
+		return lectureDAO.lectureList(map);
 	}
 	
 
@@ -33,6 +34,14 @@ public class LectureService {
 
 	public int totalCount() {
 		return lectureDAO.totalCount();
+	}
+
+	public int totalCount1() {
+		return lectureDAO.totalCount1();
+	}
+
+	public List<String> lectureCate() {
+		return lectureDAO.lectureCate();
 	}
 
 

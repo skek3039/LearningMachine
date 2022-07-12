@@ -1,7 +1,9 @@
 package com.learning.Teacher.Controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -33,7 +35,7 @@ public class LectureController {
 		if ((int) session.getAttribute("u_authority") > 3) {
 			ModelAndView mv = new ModelAndView("lecture");
 			String u_id = (String) session.getAttribute("u_id");
-/*			int pageNo = 1;
+			int pageNo = 1;
 			if (request.getParameter("pageNo")!=null) {
 				pageNo = Integer.parseInt(request.getParameter("pageNo"));
 			}
@@ -60,10 +62,13 @@ public class LectureController {
 			page.setStartPage(startPage);
 			page.setLastPage(lastpage);
 			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("u_id", u_id);
+			map.put("page", page);
 
-*/
-			List<LectureDTO> lectureApplyList = lectureService.lectureApplyList(u_id);
+			List<LectureDTO> lectureApplyList = lectureService.lectureApplyList(map);
 			mv.addObject("lectureApplyList", lectureApplyList);
+			mv.addObject("paginationInfo", paginationInfo);
 			return mv;
 		} else {
 			ModelAndView mv = new ModelAndView("404");
@@ -78,8 +83,40 @@ public class LectureController {
 		if ((int) session.getAttribute("u_authority") > 3) {
 			ModelAndView mv = new ModelAndView("lecture_detail");
 			String u_id = (String) session.getAttribute("u_id");
-			List<LectureDTO> lectureList = lectureService.lectureList(u_id);
+			int pageNo = 1;
+			if (request.getParameter("pageNo")!=null) {
+				pageNo = Integer.parseInt(request.getParameter("pageNo"));
+			}
+			// recordCountPageNo 한 페이지당 게시되는 게시물 수 yes
+			int listScale = 10;
+			// pageSize = 페이지 리스트에 게시되는 페이지 수 yes
+			int pageScale = 10;			
+			// totalRecordCount 전체 게시물 건수				
+			int totalCount = lectureService.totalCount1();
+			
+			// 전자정부페이징 호출
+			PaginationInfo paginationInfo = new PaginationInfo();
+			// 값 대입
+			paginationInfo.setCurrentPageNo(pageNo);
+			paginationInfo.setRecordCountPerPage(listScale);
+			paginationInfo.setPageSize(pageScale);
+			paginationInfo.setTotalRecordCount(totalCount);
+			// 전자정부 계산하기
+			int startPage = paginationInfo.getFirstRecordIndex();
+			int lastpage = paginationInfo.getRecordCountPerPage();
+
+			// 서버로 보내기
+			PageDTO page = new PageDTO();
+			page.setStartPage(startPage);
+			page.setLastPage(lastpage);
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("u_id", u_id);
+			map.put("page", page);
+			
+			List<LectureDTO> lectureList = lectureService.lectureList(map);
 			mv.addObject("lectureList", lectureList);
+			mv.addObject("paginationInfo", paginationInfo);
 			return mv;
 		} else {
 			ModelAndView mv = new ModelAndView("404");
@@ -88,9 +125,18 @@ public class LectureController {
 	}
 	// 강의 신청 제출
 	@RequestMapping(value = "/lecture_request")
-	public String lecure_request(HttpServletRequest request) {
-		
-		return "lecture_request";
+	public ModelAndView lecure_request(HttpServletRequest request, HttpSession session) {
+		if ((int) session.getAttribute("u_authority") > 3) {
+			ModelAndView mv = new ModelAndView("lecture_request");
+			
+			List<String> cate = lectureService.lectureCate();
+			System.out.println(cate.toString());
+			mv.addObject("cate",cate);
+			return mv;
+		} else {
+			ModelAndView mv = new ModelAndView("404");
+			return mv;
+		}
 	}
 	// 강의 신청 제출
 	@RequestMapping(value = "/lecture_request.do")

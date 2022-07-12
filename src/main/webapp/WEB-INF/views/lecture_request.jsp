@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -227,16 +227,16 @@
 							</tr>
 							<tr>
 								<td class="tg-llyw">강의 정보</td>
-								<td class="tg-0pky"><input name="l_info" style="width: 790px;"
-									type="text"></td>
+								<td class="tg-0pky"><input name="l_info" style="width: 790px;"type="text"></td>
 							</tr>
 							<tr>
 								<td class="tg-llyw">카테고리</td>
-								<td class="tg-0pky"><select name="l_category" style="width: 790px;">
+								<td class="tg-0pky">
+								<select name="l_category" style="width: 790px;">
 											<option value="">카테고리 선택</option>
-											<option value="java">java</option>
-											<option value="Spring">Spring</option>
-											<option value="백엔드">백엔드</option>
+											<c:forEach items="${cate }" var="cate">											
+											<option value="${cate.l_category }">${cate.l_category }</option>
+											</c:forEach>
 									</select>
 									</td>
 							</tr>
