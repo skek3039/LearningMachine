@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,13 +69,39 @@
         font-size: 17px;
         padding: 15px 0;
     }
+    
+    #teacher th{
+    	width: 150px;
+    }
 </style>
 
 <script type="text/javascript">
 function search(){
 	var u_name= document.getElementById("u_name").value;
 	location.href = "./admin_studentSearch?u_name="+u_name;
+	
 }
+
+function accept(){
+
+	alert("ㅋㅋ");
+/*	if(confirm(u_name + "학생을 정말 정지하시겠습니까?")){
+		$.ajax({
+			url:"./admin_student_report",
+			type:"post",
+			dataType:"html",
+			data : {"u_id" : u_id , 
+					"ur_reason" : ur_reason	
+			},
+			success : function(data){
+				location.href = "./admin_student_report";
+			},error:function(request, status, error){
+				alert("문제발생"+error);
+			}
+		});
+	} */
+}
+
 
 
 </script>
@@ -104,46 +127,39 @@ function search(){
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
-		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;강의신청내역</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;강사신청정보</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px; margin-left: 310px;">
-				<div style="padding-top: 10px;">
-					 <input type="search" id="u_name" name="u_name" class="form-control" required="required" placeholder="학생이름을 입력해주세요." style="width: 250px; float: left;"> &nbsp; 
-					 <button class="btn btn-danger" id="search" style="width: 100px" onclick="search()">search</button>
-				</div><br>
-			<div  id="student" >
-				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
+
+			<div  id="teacher" >
+				이름 : ${list[0].u_name } <br>
+				아이디 : ${list[0].u_id } <br>
+				닉네임 : ${list[0].u_nickname }<br>
+				성별 : <c:if test="${list[0].u_gender eq '여' }"><input type="radio" name="check" value="여" checked="checked">여 <input type="radio" name="check" value="남" >남</c:if>
+				
+				<table class="table table-bordered table-sm" style="width: 900px;">
 					<tr>
-						<th>강사이름</th>
-						<th>강의이름</th>
-						<th>카테고리</th>											
-						<th>커리큘럼</th>											
-						<th>신청일자</th>											
+						<th>강사소개</th>								
+						<td>${list[0].t_introduce }</td>								
 					</tr>
-					<c:forEach items="${list }" var="list">
 					<tr>
-						<td>${list.t_id}</td>
-						<td><a href="./admin_lectureDetail?la_no=${list.la_no }"> ${list.l_name }</a></td>
-						<td>카테고리</td>
-						<td><c:choose>
-							<c:when test="${fn:length(list.l_curriculum ) > 10 }">
-							<c:out value="${fn:substring(list.l_curriculum , 0, 9)} ...">
-							</c:out></c:when>
-							<c:otherwise>
-							<c:out value="${list.l_curriculum  }">
-							</c:out></c:otherwise>
-							</c:choose>
-						</td>						
-						
-						<td>${list.l_date }</td>						
+						<th colspan="2">강사이력</th>									
+					</tr>		
+					<tr>
+						<td colspan="2" height="150px;">
+						<label>${list[0].t_spec}</label>
+						</td>
 					</tr>
-					</c:forEach>
+					<tr>
+						<th>특이사항</th>								
+						<td>${list[0].t_etc }</td>								
+					</tr>
 				</table>
+					<button type="submit" style="float: left; margin-right : 10px;" class="btn btn-outline-dark" onclick="accept();">승인</button>
+					<button type="submit" onclick="location.href='./admin_lecture_get?check=2&la_no=${list[0].la_no}'" class="btn btn-outline-dark">승인거부</button>
 			</div>
 		</div>
 
 </div>
-
-
 		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
 

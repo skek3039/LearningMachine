@@ -72,6 +72,7 @@
         font-size: 17px;
         padding: 15px 0;
     }
+      
 </style>
 
 <script type="text/javascript">
@@ -104,37 +105,39 @@ function search(){
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
-		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;강의신청내역</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;강사신청내역</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px; margin-left: 310px;">
 				<div style="padding-top: 10px;">
-					 <input type="search" id="u_name" name="u_name" class="form-control" required="required" placeholder="학생이름을 입력해주세요." style="width: 250px; float: left;"> &nbsp; 
+					 <input type="search" id="u_name" name="u_name" class="form-control" required="required" placeholder="강사이름을 입력해주세요." style="width: 250px; float: left;"> &nbsp; 
 					 <button class="btn btn-danger" id="search" style="width: 100px" onclick="search()">search</button>
 				</div><br>
-			<div  id="student" >
+			<div  id="teacher" >
 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
 						<th>강사이름</th>
-						<th>강의이름</th>
-						<th>카테고리</th>											
-						<th>커리큘럼</th>											
-						<th>신청일자</th>											
+						<th>강사ID</th>
+						<th>강사이력</th>											
+						<th>강사소개</th>											
+						<th>신청일자</th>	
+						<th>승인여부</th>										
 					</tr>
 					<c:forEach items="${list }" var="list">
 					<tr>
-						<td>${list.t_id}</td>
-						<td><a href="./admin_lectureDetail?la_no=${list.la_no }"> ${list.l_name }</a></td>
-						<td>카테고리</td>
+						<td>${list.u_name}</td>
+						<td><a href="./admin_teacher_re?u_id=${list.u_id }"> ${list.u_id }</a></td>
+						<td>${list.t_spec }</td>
 						<td><c:choose>
-							<c:when test="${fn:length(list.l_curriculum ) > 10 }">
-							<c:out value="${fn:substring(list.l_curriculum , 0, 9)} ...">
+							<c:when test="${fn:length(list.t_introduce) > 10 }">
+							<c:out value="${fn:substring(list.t_introduce , 0, 9)}"><img alt="" src="./resources/img/more.png">
 							</c:out></c:when>
 							<c:otherwise>
-							<c:out value="${list.l_curriculum  }">
+							<c:out value="${list.t_introduce  }">
 							</c:out></c:otherwise>
 							</c:choose>
-						</td>						
+						</td>	
+						<td>${list.u_date }</td>						
+						<td><button class="btn btn-dark" > <span>${list.t_recognize }</span> </button></td>					
 						
-						<td>${list.l_date }</td>						
 					</tr>
 					</c:forEach>
 				</table>

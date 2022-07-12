@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -97,31 +98,9 @@ function report(u_id,u_name){
 }
 
 
-/* function search(){
- 	var u_name= document.getElementById("u_name").value;
-		$.ajax({
-		url:"./admin_studentSearch",
-		type:"get",
-		dataType:"json",
-		data:{"u_name" : u_name},
-		success:function(data){
-			var list = data.list;
-			alert(list);
-		/*	var html =  "<table><tr><th>이름</th><th>아이디</th><th>포인트</th><th>신고횟수</th></tr>";
-			$.each(list, function(){
-				html += "<tr><td>" + list[index].u_name" + </td><td>" + list[index].u_id + "</td>";
-				html += "<tr><td>" + list[index].u_paypoint" + </td><td>" + list[index].u_banned + "</td></tr>";
-			});
-			html += "</table>";
-			$("#student").empty();
-			$("#student").append(html); 
-		},error:function(request, status, error){
-			alert("문제발생"+error);
-		}
-	}); 
-} */
- 
-
+function linkPage(pageNo){
+	location.href = "./admin_student_report?pageNo=" + pageNo;
+}
 
 </script>
 
@@ -152,7 +131,7 @@ function report(u_id,u_name){
 					 <input type="search" id="u_name" name="u_name" class="form-control" required="required" placeholder="학생이름을 입력해주세요." style="width: 250px; float: left;"> &nbsp; 
 					 <button class="btn btn-danger" id="search" style="width: 100px" onclick="search()">search</button>
 				</div><br>
-			<div  id="student" style="width: 500px;">
+			<div  id="student" style=" height: 200px;">
 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
 						<th>이름</th>
@@ -169,7 +148,10 @@ function report(u_id,u_name){
 					</tr>
 					</c:forEach>				
 				</table>
+			<hr>	
+			<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
 			</div>
+
 			<div id="student1" style="width: 500px;">
 				<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;학생정지리스트</h3><hr style="border: solid 1px;"></div>
 				<table class="table table-bordered table-sm">
@@ -187,7 +169,6 @@ function report(u_id,u_name){
 				</c:forEach>
 				</table>
 			</div>
-			
 		</div>
 
 </div>

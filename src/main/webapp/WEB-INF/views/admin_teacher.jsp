@@ -124,7 +124,7 @@ function enterkey() {
 					</tr>
 					<c:forEach items="${list }" var="list">
 					<tr>
-						<td><a href="./admin_studentLecture?u_id=${list.t_id }">${list.t_nickname }</a></td>
+						<td><a href="./admin_teacherDetail?t_id=${list.t_id }">${list.t_nickname }</a></td>
 						<td>${list.t_id }</td>
 						<td>${list.COUNT }</td>						
 						<td>${list.t_idcount }</td>						

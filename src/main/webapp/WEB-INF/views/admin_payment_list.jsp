@@ -146,7 +146,7 @@ $(document).ready(function() {
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
-		<div style="padding-top:  110px;"><h3>&nbsp;&nbsp;결제내역</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;결제내역</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px;padding-left: 20px; width: 900px; height: 100%">
 				
 				 <div id='calendar'>

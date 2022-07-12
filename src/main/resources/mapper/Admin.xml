@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?> <!-- 맵퍼파일 -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="Admin">
+	<select id="totalCount" parameterType="String" resultType="integer">
+		select count(*) as count
+		from user 
+	</select>
+	
+	<select id = "reportCount" resultType="integer">
+		select count(*) as count from user_reported
+	</select>
 
-  	<select id="userList" resultType="userDTO">
+  	<select id="userList" parameterType="PageDTO" resultType="userDTO">
   		select * from user where u_authority IN (1,2,3)
+  		LIMIT #{startPage}, #{lastPage}
   	</select>
+  	
   	<select id="userSearch" parameterType="string" resultType="userDTO">
   		select * from user where u_name LIKE '%' #{u_name } '%'	
   	</select>
@@ -12,13 +22,13 @@
   		select * from user_lecture_view where u_id = #{u_id} group by u_id
   	</select>
   	
-  	<select id="studentReport" parameterType="string" resultType="HashMap"> 
+  	<select id="studentReport" parameterType="map" resultType="HashMap"> 
   		select * from user_teacher_reported_View 
   		<if test = "u_id != null">
-  			where u_id = #{u_id} and u_del = 0
+  			where u_id = #{u_id} and u_del = 0 limit #{page.startPage},#{page.lastPage}
   		</if>
   		<if test = "u_id == null">
-  			where u_del = 0
+  			where u_del = 0 limit #{page.startPage},#{page.lastPage}
   		</if>
   	</select>
   	
@@ -91,6 +101,23 @@
     	update lecture_apply set l_recognize = 2 
     	where la_no = #{la_no} 
     </update>
- 	
+    
+ 	<select id="teacherDetail" parameterType="String" resultType="Hashmap">
+		SELECT *, (SELECT COUNT(*) FROM user_teacher_view WHERE t_id = #{u_id}) AS total
+		FROM user_teacher_view WHERE t_id = #{u_id}
+    </select>
+    
+    
+ 	<select id="teacherRequest" parameterType="String" resultType="hashmap">
+ 		select * from teacher_apply_view where t_recognize = 0
+ 		<if test = "u_id != null">
+  			and u_id = #{u_id}
+  		</if>
+  	</select>
+  	
+  	<select id="teacherRe" parameterType="String" resultType="hashmap">
+  		select * from teacher_apply_view where u_id = #{u_id}
+  	</select>
+    
  	
   </mapper>

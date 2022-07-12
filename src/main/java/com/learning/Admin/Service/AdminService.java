@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.learning.Admin.DAO.AdminDAO;
 import com.learning.DTO.BannedDTO;
-import com.learning.DTO.TeacherDTO;
+import com.learning.DTO.PageDTO;
 import com.learning.DTO.userDTO;
 import com.learning.User.DTO.ULectureDTO;
 
@@ -16,8 +16,13 @@ public class AdminService {
 	@Autowired
 	private AdminDAO adminDAO;
 
-	public List<userDTO> userList() {
-		return adminDAO.userList();
+	
+	public int totalCount(int check_total) {
+		return adminDAO.totalCount(check_total);
+	}
+	
+	public List<userDTO> userList(PageDTO page) {
+		return adminDAO.userList(page);
 	}
 
 	public List<userDTO> userSearch(String u_name) {
@@ -28,8 +33,8 @@ public class AdminService {
 		return adminDAO.studentLecture(u_id);
 	}
 
-	public List<String> studentReport(String u_id) {
-		return adminDAO.studentReport(u_id);
+	public List<String> studentReport(String u_id, PageDTO page) {
+		return adminDAO.studentReport(u_id,page);
 	}
 
 	public int report(BannedDTO dto) {
@@ -80,5 +85,18 @@ public class AdminService {
 
 	public void admin_lectureGet1(String la_no, String c1) {
 		adminDAO.lectureGet1(la_no,c1);
-	}	
+	}
+
+	public List<String> teacherDetail(String u_id) {
+		return adminDAO.teacherDetail(u_id);
+	}
+
+	public List<String> admin_teacherRequest(String u_id) {
+		return adminDAO.teacherRequest(u_id);
+	}
+	
+	public List<String> teacherRe(String u_id) {
+		return adminDAO.teacherRe(u_id);
+	}
+	
 }

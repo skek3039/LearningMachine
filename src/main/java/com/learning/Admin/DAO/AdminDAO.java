@@ -1,12 +1,15 @@
 package com.learning.Admin.DAO;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.learning.DTO.BannedDTO;
+import com.learning.DTO.PageDTO;
 import com.learning.DTO.userDTO;
 import com.learning.User.DTO.ULectureDTO;
 
@@ -14,9 +17,18 @@ import com.learning.User.DTO.ULectureDTO;
 public class AdminDAO {
 	@Autowired
 	private SqlSession sqlSession;
+
+	public int totalCount(int check_total) {
+		if(check_total ==1) {
+			return sqlSession.selectOne("Admin.totalCount");			
+		}else if(check_total == 2) {
+			return sqlSession.selectOne("Admin.reportCount");
+		}
+		return sqlSession.selectOne("Admin.totalCount");
+	}
 	
-	public List<userDTO> userList() {
-		return sqlSession.selectList("Admin.userList");
+	public List<userDTO> userList(PageDTO page) {
+		return sqlSession.selectList("Admin.userList" , page);
 	}
 
 	public List<userDTO> userSearch(String u_name) {
@@ -27,8 +39,11 @@ public class AdminDAO {
 		return sqlSession.selectList("Admin.studentLecture", u_id);
 	}
 
-	public List<String> studentReport(String u_id) {
-		return sqlSession.selectList("Admin.studentReport",u_id);
+	public List<String> studentReport(String u_id, PageDTO page) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("u_id", u_id);
+		map.put("page", page);
+		return sqlSession.selectList("Admin.studentReport",map);
 	}
 
 	public int report(BannedDTO dto) {
@@ -88,6 +103,18 @@ public class AdminDAO {
 			System.out.println(la_no);
 			sqlSession.update("Admin.lectureGet3",la_no);							
 		}
+	}
+
+	public List<String> teacherDetail(String u_id) {
+		return sqlSession.selectList("Admin.teacherDetail",u_id);
+	}
+
+	public List<String> teacherRequest(String u_id) {
+		return sqlSession.selectList("Admin.teacherRequest",u_id);
+	}
+
+	public List<String> teacherRe(String u_id) {
+		return sqlSession.selectList("Admin.teacherRe",u_id);
 	}
 
 }
