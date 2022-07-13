@@ -113,7 +113,7 @@ function linkPage(pageNo){
 						<th>Q&A</th>
 					</tr>
 					
-					<c:forEach items="${video_qnaList}" var="v">
+					<c:forEach items="${video_answer}" var="v">
 					<tr>
 						<td>${v.vq_no}</td>
 						<td>
@@ -142,7 +142,7 @@ function linkPage(pageNo){
                         <fmt:parseDate value="${v.vq_date}" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
                         <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
                     	${time }</td>
-						<td><a href="./video_qna_reply?vq_no=${v.vq_no}">답변</a></td>
+						<td><a href="./video_qna_detail?vq_no=${v.vq_no}">답변 완료</a></td>
 					</tr>
 					</c:forEach>
 			</table>

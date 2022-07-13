@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,13 +73,6 @@
     }
 </style>
 
-<script type="text/javascript">
-function linkPage(pageNo){
-	location.href = "./lecture?pageNo=" + pageNo;
-	}
-
-</script>
-
 </head>
 
 <body>
@@ -99,59 +91,59 @@ function linkPage(pageNo){
 		<jsp:include page="./header.jsp" />
 		<div style=" width: 100%; height: 705px;">
 		 <jsp:include page="./lecture_nav.jsp"/>
-		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;Q&A</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 40px;">
-				<div style="padding-top: 10px;">
-			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
+		<div style="padding-top: 110px;"></div>
+		<div style="padding-top: 10px; padding-left: 400px">
+				<table>
+					<c:forEach items="${qna_answer_detail}" var="q">
 					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>내용</th>
-						<th>아이디</th>
-						<th>강의 이름</th>
-						<th>날짜</th>
-						<th>Q&A</th>
+					<th><img style="width: 50px; height: 50px;" id="up" alt="" src="./img/q.png" title="질문"></th>
+						<td style="padding-top: 10px; word-break:break-all; width: 750px"><h5>${q.vq_title }</h5></td>
 					</tr>
-					
-					<c:forEach items="${video_qnaList}" var="v">
 					<tr>
-						<td>${v.vq_no}</td>
-						<td>
-							<c:choose>
-							<c:when test="${fn:length(v.vq_title ) > 10 }">
-							<c:out value="${fn:substring(v.vq_title , 0, 9)} ...">
-							</c:out></c:when>
-							<c:otherwise>
-							<c:out value="${v.vq_title  }">
-							</c:out></c:otherwise>
-							</c:choose>
-						</td>
-						<td>
-							<c:choose>
-							<c:when test="${fn:length(v.vq_content ) > 10 }">
-							<c:out value="${fn:substring(v.vq_content, 0, 9)} ...">
-							</c:out></c:when>
-							<c:otherwise>
-							<c:out value="${v.vq_content }">
-							</c:out></c:otherwise>
-							</c:choose>
-						</td>
-						<td>${v.u_id}</td>
-						<td>${v.l_name }</td>
-						<td>
-                        <fmt:parseDate value="${v.vq_date}" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
-                        <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
-                    	${time }</td>
-						<td><a href="./video_qna_reply?vq_no=${v.vq_no}">답변</a></td>
+						<td><h6>${q.u_id }</h6></td><td><h6>
+											<fmt:parseDate value="${q.vqr_date }" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
+                                            <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
+                    						${time }
+					</h6></td>
+					</tr></c:forEach></table><br>
+					<table>
+					<c:forEach items="${qna_answer_detail}" var="q">
+					<tr>
+						<td style="word-break:break-all; width: 820px">${q.vq_content }</td>
 					</tr>
 					</c:forEach>
-			</table>
-		</div>	
+					</table>
+					<div style="padding-top: 150px;">
+					<hr style="width: 820px; height: 2px;">
+					</div>
+					<br>
+					<table>
+					<c:forEach items="${qna_answer_detail}" var="q">
+					<tr>
+						<th><img style="width: 50px; height: 50px;" id="up" alt="" src="./img/a.png" title="답변"></th>
+						<td style="padding-top: 10px; word-break:break-all; width: 750px"><h5>${q.vqr_title }</h5></td>
+					</tr>
+					<tr>
+						<td><h6>${q.t_id }</h6></td><td><h6>
+                                            <fmt:parseDate value="${q.vqr_date }" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
+                                            <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
+                    						${time }
+                                           
+					</h6></td>
+					</tr></c:forEach></table><br>
+					<table>
+					<c:forEach items="${qna_answer_detail}" var="q">
+					<tr>
+						<td style="word-break:break-all; width: 820px">${q.vqr_content }</td>
+					</tr>
+					</c:forEach>
+					</table>
+					
+				
+				
 		</div>
-		<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
 
 </div>
-		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
 
 
@@ -183,5 +175,9 @@ function linkPage(pageNo){
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
 </body>
-
+<script>
+$(document).ready(function() {$("#summernote").summernote({height : 200});});
+</script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 </html>

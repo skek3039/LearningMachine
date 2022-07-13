@@ -20,6 +20,37 @@
 		</if>
 	</select>
 	
+	<select id="video_answer" parameterType="map" resultType="LectureDTO">
+		SELECT *
+		,(SELECT u_nickname FROM user WHERE u_id = q.u_id) AS u_nickname
+		,(SELECT l_name FROM lecture l WHERE l.l_code = q.l_code) AS l_name
+		FROM lecture_video_qna q
+		WHERE vq_confirm = 1
+		ORDER BY vq_date DESC
+		limit #{page.startPage} , #{page.lastPage}
+		<if test="vq_no != null">and vq_no= #{vq_no}
+		</if>
+	</select>
+	
+	<select id="t_video_qnaDetail" parameterType="String" resultType="LectureDTO">
+		SELECT *
+		,(SELECT u_nickname FROM user WHERE u_id = q.u_id) AS u_nickname
+		,(SELECT l_name FROM lecture l WHERE l.l_code = q.l_code) AS l_name
+		FROM lecture_video_qna q
+		WHERE vq_confirm = 0
+		<if test="vq_no != null">and vq_no= #{vq_no}
+		</if>
+	</select>
+	
+	<select id="qna_answer_detail" parameterType="String" resultType="LectureDTO">
+		SELECT *
+		,(SELECT u_nickname FROM user WHERE u_id = q.u_id) AS u_nickname
+		,(SELECT l_name FROM lecture l WHERE l.l_code = q.l_code) AS l_name
+		FROM lecture_video_qna q INNER JOIN lecture_video_qna_reply
+		WHERE vq_confirm = 1
+	</select>
+	
+	
 	<insert id="t_video_qna" parameterType="LectureDTO">
 		INSERT INTO lecture_video_qna_reply (vq_no,t_id, vqr_title, vqr_content)
 		VALUES (#{vq_no},#{t_id}, #{vqr_title}, #{vqr_content})
