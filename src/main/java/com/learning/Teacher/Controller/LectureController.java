@@ -124,7 +124,7 @@ public class LectureController {
 		}
 	}
 	
-	//강의 상세보기
+	//신청 강의 상세보기
 	@RequestMapping(value= "/lecture_Lookup")
 	public String lecture_Lookup(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
 		request.setCharacterEncoding("UTF-8");
@@ -142,6 +142,22 @@ public class LectureController {
 		}
 	}
 	
+	//승인된 강의 상세보기
+		@RequestMapping(value= "/lecture_Lookup2")
+		public String lecture_Lookup2(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+			request.setCharacterEncoding("UTF-8");
+			if ((int) session.getAttribute("u_authority") > 3) {
+				
+				LectureDTO lecture_lookup = new LectureDTO();
+				lecture_lookup.setL_code(request.getParameter("l_code"));
+				
+				request.setAttribute("dto", lectureService.lecture_lookup2(lecture_lookup));
+				return "lecture_Lookup2";
+			} else {
+				return "redirect:/404";
+
+			}
+		}
 	
 	// 강의 신청 제출
 	@RequestMapping(value = "/lecture_request")

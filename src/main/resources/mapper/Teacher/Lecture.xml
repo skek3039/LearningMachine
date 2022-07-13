@@ -3,12 +3,12 @@
  
   <mapper namespace="lecture">
   
-  	<select id="totlaCount" resultType="integer">
+  	<select id="totalCount" resultType="integer">
   		select COUNT(*) AS count
   		from lecture_apply
   	</select>
 	
-	<select id="totlaCount1" resultType="integer">
+	<select id="totalCount1" resultType="integer">
   		select COUNT(*) AS count
   		from lecture_info_view
   	</select>
@@ -28,6 +28,18 @@
 		WHERE t_id = #{u_id}
 		ORDER BY l_date DESC
 		limit #{page.startPage} , #{page.lastPage}
+  	</select>
+  	
+  	<select id="lecture_Lookup" parameterType ="LectureDTO" resultType="LectureDTO">
+  		SELECT *
+  		FROM lecture_apply
+  		WHERE la_no = #{la_no}
+  	</select>
+  	
+  	<select id="lecture_Lookup2" parameterType ="LectureDTO" resultType="LectureDTO">
+  		SELECT *
+  		FROM lecture_info_view
+  		WHERE l_code = #{l_code}
   	</select>
 
 

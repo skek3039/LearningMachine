@@ -31,11 +31,11 @@ public class LectureDAO {
 	}
 
 	public int totalCount() {
-		return sqlSession.selectOne("lecture.totlaCount");
+		return sqlSession.selectOne("lecture.totalCount");
 	}
 
 	public int totalCount1() {
-		return sqlSession.selectOne("lecture.totlaCount1");
+		return sqlSession.selectOne("lecture.totalCount1");
 	}
 
 	public List<String> lectureCate() {
@@ -44,6 +44,10 @@ public class LectureDAO {
 
 	public LectureDTO lecture_lookup(LectureDTO lecture_lookup) {
 		return sqlSession.selectOne("lecture.lecture_Lookup", lecture_lookup);
+	}
+
+	public Object lecture_lookup2(LectureDTO lecture_lookup) {
+		return sqlSession.selectOne("lecture.lecture_Lookup2", lecture_lookup);
 	}
 
 
