@@ -111,7 +111,7 @@ function search(){
 		<div style="padding-top: 110px;"> <h1 class="h3 mb-2 text-gray-800">결제내역</h1><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px;padding-left: 120px; height: 100%">
 		      <!-- DataTable -->
-                    <div class="card shadow mb-4"style="width: 800px; height: 800px; ">
+                    <div class="card shadow mb-4"style="width: 800px; height: 500px; ">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary"> <%=sf.format(nowTime) %>금일 매출</h6>
                         </div>
@@ -129,8 +129,11 @@ function search(){
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="4" style="text-align: right">총 액</th>
-                                       
+                                            <th colspan="4" style="text-align: right">총 환불금액</th>                                       
+                                            <th style="color: red"><fmt:formatNumber value="${list[0].refundtotal }" pattern="#,###"  /></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="4" style="text-align: right">총매출액</th>
                                             <th><fmt:formatNumber value="${list[0].sumtotal }" pattern="#,###"  /></th>
                                           </tr>
                                     </tfoot>

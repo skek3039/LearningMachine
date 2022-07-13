@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.learning.Admin.Service.AdminService;
+import com.learning.Admin.Service.PaymentService;
 import com.learning.DTO.BannedDTO;
 import com.learning.DTO.PageDTO;
 import com.learning.DTO.userDTO;
@@ -31,6 +32,9 @@ import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 public class AdminController {
 	@Autowired
 	private AdminService adminService;
+	
+	@Autowired
+	private PaymentService paymentService;
 
 	@GetMapping(value = "/admin")
 	public ModelAndView admin(HttpSession session) {
@@ -39,9 +43,12 @@ public class AdminController {
 			List<String> report = adminService.studentReport(null,null);
 			List<String> refund = adminService.refundList();
 			List<String> lecture = adminService.admin_lectureRequest(null);
+			List<String> payment = paymentService.paymentList(null);
 			mv.addObject("report",report);
 			mv.addObject("refund",refund);
 			mv.addObject("lecture",lecture);
+			mv.addObject("payment", payment);
+			
 			return mv;
 		} else {
 			ModelAndView mv = new ModelAndView("404");
@@ -356,10 +363,12 @@ public class AdminController {
 			String u_id = request.getParameter("u_id");
 			List<String> list = adminService.studentLecture(u_id);
 			List<String> report = adminService.studentReport(u_id,null);
-			
+			List<String> payment = paymentService.paymentList(u_id);
+		
+			mv.addObject("payment",payment);
 			mv.addObject("list", list);
 			mv.addObject("report", report);
-
+			System.out.println(payment + "," + report);
 			return mv;
 		} else {
 			ModelAndView mv = new ModelAndView("404");
@@ -443,7 +452,6 @@ public class AdminController {
 			String u_id = request.getParameter("u_id");
 			
 			List<String> list = adminService.studentReport(u_id,null);
-			System.out.println(list.toString());
 			mv.addObject("list", list);
 			return mv;
 		} else {

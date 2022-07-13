@@ -11,7 +11,7 @@ public class PaymentDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public List<String> paymentList() {
-		return  sqlSession.selectList("Payment.paymentList");
+	public List<String> paymentList(String u_id) {
+		return  sqlSession.selectList("Payment.paymentList",u_id);
 	}
 }

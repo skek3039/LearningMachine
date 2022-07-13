@@ -3,6 +3,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	Date nowTime = new Date();
 	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
@@ -98,18 +99,108 @@
 				<div style="position: relative;">
 				<jsp:include page="./admin_nav.jsp" />
 				</div>
-				<div style="padding-top:  110px;">
-					<h3>&nbsp;&nbsp;관리자님 안녕하세요.</h3>
-					<hr style="border: solid 1px;">
+			<div style="padding-top: 110px;">
+				<h3>&nbsp;&nbsp;관리자님 안녕하세요.</h3>
+				<hr style="border: solid 1px;">
+			</div>
+			<div style="height: 100px">
+				<div class="row no-gutters align-items-center">
+					<div class="col-auto">
+						<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+						현재시간 <%= sf.format(nowTime) %> 입니다.
+						</div>
+					</div>
 				</div>
-				<div style="height: 100px">
-				현재 날짜와 시간은 <%= sf.format(nowTime) %> 입니다.
 				<br>
-				
-				
-				</div>
-				
-				 <div class="row g-4">
+
+
+			</div>
+
+			<div class="row g-4">
+				 <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                월 매출액</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">&#8361; 40,000</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+				  <!-- Earnings (Annual) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">금일 매출액</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">&#8361; <fmt:formatNumber value="${payment[0].sumtotal }" pattern="#,###"  /></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                          <!-- Pending Requests Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                읽지않은 메시지</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">총 ? 건</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tasks Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">환불률                                            </div>
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="progress progress-sm mr-2">
+                                                        <div class="progress-bar bg-info" role="progressbar"
+                                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                            aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        
+                    </div>
+                 <div class="row">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="service-item rounded h-100">
                             <div class="d-flex justify-content-between">
@@ -151,13 +242,12 @@
                                  <div style="text-align: center"><h3>총 ${fn:length(lecture) } 건</h3></div>
                             </div>
                         </div>
-                    </div>				
+                    </div>			 	
+		   		</div>
 			</div>
-		<%-- <jsp:include page="./team.jsp"/> --%>
-		</div>
 		<jsp:include page="./footer.jsp" />
-		</div>
-
+ </div>       
+                        
 		<!-- Back to Top -->
 		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
 			class="bi bi-arrow-up"></i></a>

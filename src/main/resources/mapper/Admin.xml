@@ -23,7 +23,7 @@
   		select * from user where u_name LIKE '%' #{u_name } '%'	
   	</select>
   	<select id="studentLecture" parameterType="string" resultType="HashMap">
-  		select * from user_lecture_view where u_id = #{u_id} group by u_id
+  		select * from allUser_Lecture_view where u_id = #{u_id} group by u_id
   	</select>
   	
   	<select id="studentReport" parameterType="map" resultType="HashMap"> 

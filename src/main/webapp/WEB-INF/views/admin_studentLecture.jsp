@@ -85,30 +85,6 @@ function backup(u_id){
 	}
 	
 }
-
-/* function search(){
-	 var u_name= document.getElementById("u_name").value;
-	 $.ajax({
-	 url:"./admin_studentSearch",
-	 type:"get",
-	 dataType:"json",
-	 data:{"u_name" : u_name},
-	 success:function(data){
-	 var list = data.list;
-	 alert(list);
-	 /*	var html =  "<table><tr><th>이름</th><th>아이디</th><th>포인트</th><th>신고횟수</th></tr>";
-	 $.each(list, function(){
-	 html += "<tr><td>" + list[index].u_name" + </td><td>" + list[index].u_id + "</td>";
-	 html += "<tr><td>" + list[index].u_paypoint" + </td><td>" + list[index].u_banned + "</td></tr>";
-	 });
-	 html += "</table>";
-	 $("#student").empty();
-	 $("#student").append(html); 
-	 },error:function(request, status, error){
-	 alert("문제발생"+error);
-	 }
-	 }); 
-	 } */
 </script>
 
 
@@ -133,11 +109,13 @@ function backup(u_id){
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
 		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;학생상세정보</h3><hr style="border: solid 1px;"></div>
-		<div style=" margin-left: 310px;">
+		<div style=" margin-left: 310px; width: 900px;">
 		<div  id="student" >
 			<c:if test="${list[0].u_del ne 0 }">
 				<h4>정지된 회원입니다. <small>${list[0].reason }</small> </h4>
 			</c:if>
+			<br>
+			
 			이름 : ${list[0].u_name } <br>
 			아이디 : ${list[0].u_id } <br>
 			포인트 : <fmt:formatNumber value="${list[0].u_paypoint }" pattern="#,###"  /><br>	
@@ -146,19 +124,26 @@ function backup(u_id){
 				<img src="./img/banned.png" height="20px" width="20px" onclick="location.href='./admin_report?u_id=${list[0].u_id}'" style="cursor:pointer;"> 
 				<img src="./img/backup.png" alt="복구" height="20px" width="20px" onclick="backup('${list[0].u_id}')" style="cursor:pointer;"> 
 			</c:if>
-			<br>
+			<br><br>
  					<h5>강의내역</h5>
  				<table class="table table-bordered table-sm">
 					<tr>					
 						<th>강의이름</th>		
 						<th>수강일자</th>													
 					</tr>
+				<c:if test="${list[0].l_name ne null }">
 					<c:forEach items="${list }" var="list">
 					<tr>
 						<td>${list.l_name }</td>
-						<td>${list.lr_date }</td>															
+						<td><fmt:parseDate value="${list.lr_date}" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
+                            <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
+                    		${time }</td>															
 					</tr>
 					</c:forEach>
+				</c:if>
+				<c:if test="${list[0].l_name eq null }">
+				<tr><td colspan="2" >수강하는 강의가 없습니다.</td></tr>
+				</c:if>
 				</table>
 				<br>
 				<div id="main_bottom1">
@@ -169,28 +154,40 @@ function backup(u_id){
 						<th>신고강사</th>
 						<th>신고일자</th>
 					</tr>
+				<c:if test="${report[0].size ne null }">
 					<c:forEach items="${report }" var="r">
 					<tr>
 						<td>${r.ur_reason }</td>
 						<td>${r.t_name }</td>
 						<td>${r.u_date }</td>
 					</tr>		
-					</c:forEach>				
+					</c:forEach>	
+				</c:if>	
+				<c:if test="${report[0].size eq null }">
+				<tr><td colspan="3" >신고내역이없습니다.</td></tr>
+				</c:if>		
 				</table>
-				</div>	
+				</div>		
 				<div id="main_bottom2">
-					<h5>결재내역</h5>
+					<h5>결제내역</h5>
 				<table class="table table-bordered table-sm">
 					<tr>
-						<th>결제내역</th>
+						<th>결제강의명</th>
+						<th>결제금액</th>
 						<th>결제일자</th>
-						<th>결제수단</th>
 					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>						
+					<c:if test="${payment[0].size ne null }">
+					<c:forEach items="${payment }" var="p">
+	 				<tr>
+						<td>${p.l_name }</td>
+						<td>${p.p_price }</td>
+						<td>${p.p_date }</td>
+					</tr>
+					</c:forEach>
+					</c:if>		
+				<c:if test="${payment[0].size eq null }">
+				<tr><td colspan="3" >결제내역이없습니다.</td></tr>
+				</c:if>					
 				</table>
 				</div>
 			</div>
