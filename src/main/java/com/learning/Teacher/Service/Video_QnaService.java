@@ -28,6 +28,19 @@ public class Video_QnaService {
 		return video_qnaDAO.totalCount();
 	}
 
+	public List<LectureDTO> video_qnaDetail(String vq_no) {
+		return video_qnaDAO.video_qnaDetail(vq_no);
+	}
+
+	public List<LectureDTO> video_answer(Map<String, Object> map) {
+		return video_qnaDAO.video_answer(map);
+	}
+
+	public List<LectureDTO> qna_answer_detail(String vq_no) {
+		return video_qnaDAO.qna_answer_detail(vq_no);
+	}
+
+
 
 	
 

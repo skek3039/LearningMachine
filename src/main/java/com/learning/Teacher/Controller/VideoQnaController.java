@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -71,23 +72,21 @@ public class VideoQnaController {
 		}
 	}
 	//비디오 Q&A 답글 페이지
-	@RequestMapping(value = "/video_qna_reply")
-	public ModelAndView qna_reply(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
-		request.setCharacterEncoding("UTF-8");
-		if ((int) session.getAttribute("u_authority") > 3) {
-			ModelAndView mv = new ModelAndView("video_qna_reply");
-			String vq_no = request.getParameter("vq_no");
-			System.out.println(vq_no);
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("vq_no", vq_no);
-			List<LectureDTO> video_qnaList = video_qnaService.video_qnaList(map);
-			mv.addObject("video_qnaList", video_qnaList);
-			return mv;
-		} else {
-			ModelAndView mv = new ModelAndView("404");
-			return mv;
+		@RequestMapping(value = "/video_qna_reply")
+		public ModelAndView qna_reply(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+			request.setCharacterEncoding("UTF-8");
+			if ((int) session.getAttribute("u_authority") > 3) {
+				ModelAndView mv = new ModelAndView("video_qna_reply");
+				String vq_no = request.getParameter("vq_no");
+				System.out.println(vq_no);
+				List<LectureDTO> video_qnaDetail = video_qnaService.video_qnaDetail(vq_no);
+				mv.addObject("video_qnaDetail", video_qnaDetail);
+				return mv;
+			} else {
+				ModelAndView mv = new ModelAndView("404");
+				return mv;
+			}
 		}
-	}
 
 	//글쓰기
 	@RequestMapping(value = "/video_qna_reply.do")
@@ -114,6 +113,74 @@ public class VideoQnaController {
 
 		}
 	}
+	
+	//비디오 완료 Q&A 답글 완료 페이지
+	@RequestMapping(value = "/video_qna_detail")
+	public ModelAndView video_qna_detail(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
+		if ((int) session.getAttribute("u_authority") > 3) {
+			ModelAndView mv = new ModelAndView("video_qna_detail");
+			String vq_no = request.getParameter("vq_no");
+			System.out.println(vq_no);
+			List<LectureDTO> qna_answer_detail = video_qnaService.qna_answer_detail(vq_no);
+			mv.addObject("qna_answer_detail", qna_answer_detail);
+			return mv;
+		} else {
+			ModelAndView mv = new ModelAndView("404");
+			return mv;
+		}
+	}
+	
+	//비디오 완료 Q&A리스트
+	@RequestMapping(value = "/video_qna_answer")
+	public ModelAndView video_answer(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
+		if ((int) session.getAttribute("u_authority") > 3) {
+			ModelAndView mv = new ModelAndView("video_qna_answer");
+			String vq_no=null;
+			int pageNo = 1;
+			if (request.getParameter("pageNo")!=null) {
+				pageNo = Integer.parseInt(request.getParameter("pageNo"));
+			}
+			// recordCountPageNo 한 페이지당 게시되는 게시물 수 yes
+			int listScale = 10;
+			// pageSize = 페이지 리스트에 게시되는 페이지 수 yes
+			int pageScale = 10;			
+			// totalRecordCount 전체 게시물 건수				
+			int totalCount = video_qnaService.totalCount();
+			
+			// 전자정부페이징 호출
+			PaginationInfo paginationInfo = new PaginationInfo();
+			// 값 대입
+			paginationInfo.setCurrentPageNo(pageNo);
+			paginationInfo.setRecordCountPerPage(listScale);
+			paginationInfo.setPageSize(pageScale);
+			paginationInfo.setTotalRecordCount(totalCount);
+			// 전자정부 계산하기
+			int startPage = paginationInfo.getFirstRecordIndex();
+			int lastpage = paginationInfo.getRecordCountPerPage();
+
+			// 서버로 보내기
+			PageDTO page = new PageDTO();
+			page.setStartPage(startPage);
+			page.setLastPage(lastpage);
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("vq_no", vq_no);
+			map.put("page", page);
+			List<LectureDTO> video_answer = video_qnaService.video_answer(map);
+			mv.addObject("video_answer", video_answer);
+			mv.addObject("paginationInfo", paginationInfo);
+			return mv;
+		} else {
+			ModelAndView mv = new ModelAndView("404");
+			return mv;
+		}
+	}	
+	
+	
+	
+	
 	
 
 }

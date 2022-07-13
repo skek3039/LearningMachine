@@ -28,4 +28,17 @@ public class Video_QnaDAO {
 		return sqlSession.selectOne("video_qna.totalCount");
 	}
 
+	public List<LectureDTO> video_qnaDetail(String vq_no) {
+		return sqlSession.selectList("video_qna.t_video_qnaDetail", vq_no);
+	}
+
+	public List<LectureDTO> video_answer(Map<String, Object> map) {
+		return sqlSession.selectList("video_qna.video_answer", map);
+	}
+
+	public List<LectureDTO> qna_answer_detail(String vq_no) {
+		return sqlSession.selectList("video_qna.qna_answer_detail", vq_no);
+	}
+
+
 }
