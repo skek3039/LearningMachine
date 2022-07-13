@@ -51,7 +51,7 @@ public class PaymentController {
 	public ModelAndView payment_list(HttpServletRequest request, HttpSession session) {
 		if ((int) session.getAttribute("u_authority") == 7) {
 			ModelAndView mv = new ModelAndView("admin_payment_list");
-			List<String> list = paymentService.paymentList();
+			List<String> list = paymentService.paymentList(null);
 			mv.addObject("list",list);
 			return mv;
 		} else {

@@ -12,7 +12,7 @@ public class PaymentService {
 	@Autowired
 	private PaymentDAO paymentDAO;
 
-	public List<String> paymentList() {
-		return paymentDAO.paymentList();
+	public List<String> paymentList(String u_id) {
+		return paymentDAO.paymentList(u_id);
 	}
 }
