@@ -48,6 +48,10 @@ public class LectureService {
 		return lectureDAO.lecture_lookup(lecture_lookup);
 	}
 
+	public Object lecture_lookup2(LectureDTO lecture_lookup) {
+		return lectureDAO.lecture_lookup2(lecture_lookup);
+	}
+
 
 
 
