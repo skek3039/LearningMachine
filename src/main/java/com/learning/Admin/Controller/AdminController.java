@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,11 +34,16 @@ public class AdminController {
 	private AdminService adminService;
 
 	@GetMapping(value = "/admin")
-	public String admin(HttpSession session) {
+	public ModelAndView admin(HttpSession session) {
 		if ((int) session.getAttribute("u_authority") == 7) {
-			return "admin";
+			ModelAndView mv = new ModelAndView("admin");
+			List<String> refund = adminService.studentReport(null,null);
+			System.out.println(refund.toString());
+			mv.addObject("refund",refund);
+			return mv;
 		} else {
-			return "redirect:/404";
+			ModelAndView mv = new ModelAndView("404");
+			return mv;
 		}
 	}
 	
@@ -139,7 +145,7 @@ public class AdminController {
 				pageNo = Integer.parseInt(request.getParameter("pageNo"));
 			}
 			// recordCountPageNo 한 페이지당 게시되는 게시물 수 yes
-			int listScale = 5;
+			int listScale = 10;
 			// pageSize = 페이지 리스트에 게시되는 페이지 수 yes
 			int pageScale = 10;			
 			// totalRecordCount 전체 게시물 건수				
@@ -159,8 +165,9 @@ public class AdminController {
 			PageDTO page = new PageDTO();
 			page.setStartPage(startPage);
 			page.setLastPage(lastpage);
-			
+			System.out.println(u_id + "," + page.toString());
 			List<String> list = adminService.admin_teacherRequest(u_id, page);
+			System.out.println(list.toString());
 			mv.addObject("list", list);
 			mv.addObject("paginationInfo", paginationInfo);
 			mv.addObject("pageNo", pageNo);
@@ -198,7 +205,6 @@ public class AdminController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("t_id", u_id);
 		map.put("t_apply", t_apply);
-		System.out.println(map.toString());
 		int result = adminService.teacherAccept(map);
 		PrintWriter pw = response.getWriter();
 		pw.print(result);

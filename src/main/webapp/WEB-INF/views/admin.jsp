@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	Date nowTime = new Date();
 	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
-	
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -113,15 +113,15 @@
                         <div class="service-item rounded h-100">
                             <div class="d-flex justify-content-between">
                                 <a class="service-btn" href="">
-                                    <i class="fa fa-link fa-2x"></i>
+                                    <i class="fa fa-link fa-2x">dddd</i>
                                 </a>
                             </div>
                             <div class="p-5">
                                 <h5 class="mb-3">신고리스트</h5>
-                                <span>강의 1</span>
-                                <span>강의 1</span>
-                                <span>강의 1</span>
-                                <span>강의 1</span>
+                                <c:forEach items="${refund }" end="3" var = "r">
+                                <div>${r.u_id }</div>
+								</c:forEach>
+								<div>...</div>
                             </div>
                         </div>
                     </div>

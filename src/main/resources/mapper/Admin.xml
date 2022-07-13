@@ -31,7 +31,10 @@
   		<if test = "u_id != null and page != null">
   			where u_id = #{u_id} and u_del = 0
   		</if>
-  		<if test = "u_id == null">
+  		<if test = "u_id == null and page == null">
+  			where u_del = 0 
+  		</if>
+  		<if test = "u_id == null and page != null">
   			where u_del = 0 limit #{page.startPage},#{page.lastPage}
   		</if>
   	</select>
