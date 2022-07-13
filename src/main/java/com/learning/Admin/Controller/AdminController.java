@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,9 +36,12 @@ public class AdminController {
 	public ModelAndView admin(HttpSession session) {
 		if ((int) session.getAttribute("u_authority") == 7) {
 			ModelAndView mv = new ModelAndView("admin");
-			List<String> refund = adminService.studentReport(null,null);
-			System.out.println(refund.toString());
+			List<String> report = adminService.studentReport(null,null);
+			List<String> refund = adminService.refundList();
+			List<String> lecture = adminService.admin_lectureRequest(null);
+			mv.addObject("report",report);
 			mv.addObject("refund",refund);
+			mv.addObject("lecture",lecture);
 			return mv;
 		} else {
 			ModelAndView mv = new ModelAndView("404");
@@ -165,9 +167,7 @@ public class AdminController {
 			PageDTO page = new PageDTO();
 			page.setStartPage(startPage);
 			page.setLastPage(lastpage);
-			System.out.println(u_id + "," + page.toString());
 			List<String> list = adminService.admin_teacherRequest(u_id, page);
-			System.out.println(list.toString());
 			mv.addObject("list", list);
 			mv.addObject("paginationInfo", paginationInfo);
 			mv.addObject("pageNo", pageNo);

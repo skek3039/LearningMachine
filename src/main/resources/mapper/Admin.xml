@@ -56,7 +56,7 @@
  	</delete>
  	
  	<select id="teacherList" resultType="HashMap">
- 		SELECT *,SUM(total_register)AS COUNT, COUNT(t_id) AS t_idcount from lecture_info_view GROUP BY t_id
+ 		SELECT *,SUM(total_register)AS COUNT, COUNT(l_name) AS t_idcount from AllTeacher_Lecture_view GROUP BY t_id
  	</select>
  	
  	<select id="studentBanList" resultType="HashMap">

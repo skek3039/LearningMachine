@@ -2,6 +2,7 @@
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
 	Date nowTime = new Date();
 	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
@@ -112,50 +113,50 @@
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="service-item rounded h-100">
                             <div class="d-flex justify-content-between">
-                                <a class="service-btn" href="">
-                                    <i class="fa fa-link fa-2x">dddd</i>
+                                <a class="service-btn" href="./admin_student_report">
+                                    <i class="fa fa-link fa-2x"></i>
                                 </a>
+                                 	<div class="card-header bg-primary"> <h5 class="mb-3"></h5></div>
                             </div>
-                            <div class="p-5">
-                                <h5 class="mb-3">신고리스트</h5>
-                                <c:forEach items="${refund }" end="3" var = "r">
-                                <div>${r.u_id }</div>
-								</c:forEach>
-								<div>...</div>
+                            <div class="card-body">
+								<div style="text-align: center">처리해야할 학생신고</div><br>
+                                 <div style="text-align: center"><h3>총 ${fn:length(report) } 건</h3></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="service-item rounded h-100">
                             <div class="d-flex justify-content-between">
-                                <a class="service-btn" href="">
+                                <a class="service-btn" href="./admin_student_refund">
                                     <i class="fa fa-link fa-2x"></i>
                                 </a>
+                                	<div class="card-header bg-primary"> <h5 class="mb-3"></h5></div>
                             </div>
-                            <div class="p-5">
-                                <h5 class="mb-3">강의카테고리1</h5>
-                                <span>강의 1</span>
+                             <div class="card-body">
+								<div style="text-align: center">처리해야할 환불신청내역</div><br>
+                                 <div style="text-align: center"><h3>총 ${fn:length(refund) } 건</h3></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="service-item rounded h-100">
                             <div class="d-flex justify-content-between">
-                                <a class="service-btn" href="">
+                                <a class="service-btn" href="./admin_student_refund">
                                     <i class="fa fa-link fa-2x"></i>
                                 </a>
+                                	<div class="card-header bg-primary"> <h5 class="mb-3"></h5></div>
                             </div>
-                            <div class="p-5">
-                                <h5 class="mb-3">강의카테고리1</h5>
-                                <span>강의 1</span>
+                             <div class="card-body">
+								<div style="text-align: center">처리해야할 강의신청내역</div><br>
+                                 <div style="text-align: center"><h3>총 ${fn:length(lecture) } 건</h3></div>
                             </div>
                         </div>
-                    </div>					
+                    </div>				
 			</div>
-		</div>
 		<%-- <jsp:include page="./team.jsp"/> --%>
 		</div>
 		<jsp:include page="./footer.jsp" />
+		</div>
 
 		<!-- Back to Top -->
 		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
