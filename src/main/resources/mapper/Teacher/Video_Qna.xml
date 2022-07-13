@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?> <!-- 맵퍼파일 -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="video_qna">
-	<select id="t_video_qnaList" parameterType="String" resultType="LectureDTO">
+  
+  	<select id="totalCount" resultType="integer">
+  		select COUNT(*) AS count
+  		from lecture_video_qna
+  	</select>
+  
+  
+	<select id="t_video_qnaList" parameterType="map" resultType="LectureDTO">
 		SELECT *
 		,(SELECT u_nickname FROM user WHERE u_id = q.u_id) AS u_nickname
 		,(SELECT l_name FROM lecture l WHERE l.l_code = q.l_code) AS l_name
 		FROM lecture_video_qna q
 		WHERE vq_confirm = 0
+		ORDER BY vq_date DESC
+		limit #{page.startPage} , #{page.lastPage}
 		<if test="vq_no != null">and vq_no= #{vq_no}
 		</if>
 	</select>

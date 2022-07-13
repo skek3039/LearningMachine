@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,6 +73,13 @@
     }
 </style>
 
+<script type="text/javascript">
+function linkPage(pageNo){
+	location.href = "./lecture?pageNo=" + pageNo;
+	}
+
+</script>
+
 </head>
 
 <body>
@@ -136,6 +144,7 @@
 			</table>
 		</div>	
 		</div>
+		<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
 
 </div>
 		<%-- <jsp:include page="./team.jsp"/> --%>
