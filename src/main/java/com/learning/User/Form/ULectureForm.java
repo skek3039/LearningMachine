@@ -9,7 +9,7 @@ public class ULectureForm {
 	private String t_id;
 	private String t_nickname;
 	private String l_name;
-	private int l_price;
+	private String l_price;
 	private String l_curriculum;
 	private String l_thumbnail;
 	private String l_date;

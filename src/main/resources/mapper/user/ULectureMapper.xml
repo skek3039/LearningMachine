@@ -13,7 +13,7 @@
 		SELECT * FROM lecture_info_view WHERE l_code = #{l_code}
 	
 	</select>
-	<select id="ULectureVideos" parameterType="String">
+	<select id="ULectureVideos" parameterType="String" resultType="com.learning.User.Form.VideoForm">
 	
 		SELECT * FROM lecture_video WHERE l_code = #{l_code}
 	
@@ -41,11 +41,11 @@
 		WHERE l_code = #{l_code}
 	</select>
 	
-	<select id="ULectureQnaReplys" parameterType="String" resultType="com.learning.User.Form.ULectureQnaReplyForm">	
+	<select id="ULectureQnaReplys" parameterType="int" resultType="com.learning.User.Form.ULectureQnaReplyForm">	
 		SELECT *
 				,(SELECT u_nickname FROM user WHERE user.u_id = lecture_qna_reply.t_id) as 'u_nickname'
 		FROM lecture_qna_reply
-		WHERE l_code = #{l_code}
+		WHERE lqa_no = #{lqa_no}
 	</select>
 	
 	<select id="ULectureVideoQnas">
@@ -59,4 +59,8 @@
 	<select id="UCheckAttendance"></select>
 	
 	<insert id="UVideoAttendance"></insert>
+	
+	<select id="UVideoLectureCheck" parameterType="Integer" resultType="String">
+		SELECT l_code FROM lecture_video WHERE v_no = #{v_no}
+	</select>
   </mapper>

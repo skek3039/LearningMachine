@@ -29,7 +29,7 @@ public class UserDAO {
 		return sqlSession.selectList(namespace + ".RegistrationList", u_id);
 	}
 	
-	//내가 듣는 강의와 정보들
+	//내가 듣는 강의와 정보 리스트들
 	public List<ULectureForm> RegistedLecture(String u_id){
 		
 		return sqlSession.selectList(namespace + ".RegistedLecture", u_id);

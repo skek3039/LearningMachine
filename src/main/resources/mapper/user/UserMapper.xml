@@ -6,7 +6,6 @@
   		SELECT * FROM user_lecture_video_attendance_info_view
   		where
   			u_id = #{u_id}
-  		ORDER BY va_date desc
   	</select>
   
   	<select id="RegistedLecture" parameterType = "String" resultType = "com.learning.User.Form.ULectureForm">
@@ -20,4 +19,6 @@
   		SELECT * FROM user_lecture_registration WHERE u_id = #{u_id}
   	
   	</select>
+  	
+  	<select id="UCheckRegistration"></select>
   </mapper>

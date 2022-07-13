@@ -97,39 +97,64 @@ public class ULectureService {
 		}
 
 	}
+	
 
 	public List<ULectureQnaForm> LuectureQnas(String u_id, String l_code) {
 
 		List<ULectureQnaForm> qnaList = lectureDAO.LectureQna(l_code);
-		List<ULectureQnaReplyForm> replyList = lectureDAO.LectureQnaReply(l_code);
+		ULectureQnaReplyForm reply = null;
 
-		if (u_id != null) {
-			for (ULectureQnaForm qna : qnaList) {
+		for (ULectureQnaForm qna : qnaList) {
 
-				if (replyList == null)
-					break;
-				for (ULectureQnaReplyForm reply : replyList) {
+			reply = lectureDAO.LectureQnaReply(qna.getLqa_no());
 
-					if (qna.getLqa_no() == reply.getLqa_no()) {
+			if (reply != null && qna.getLqa_no() == reply.getLqa_no()) {
 
-						qna.setT_id(reply.getT_id());
-						qna.setT_name(reply.getT_name());
-						qna.setLqr_title(reply.getLqr_title());
-						qna.setLqr_content(reply.getLqr_content());
-						qna.setLqr_date(reply.getLqr_date());
-					}
-				}
-
-				if (qna.getU_id().equals(u_id))
-					qna.setMy_qna(1);
-
+				qna.setT_id(reply.getT_id());
+				qna.setT_name(reply.getT_name());
+				qna.setLqr_title(reply.getLqr_title());
+				qna.setLqr_content(reply.getLqr_content());
+				qna.setLqr_date(reply.getLqr_date());
 			}
-			
-			return qnaList;
-		} else {
 
-			return qnaList;
+			if (u_id != null && qna.getU_id().equals(u_id))
+				qna.setMy_qna(1);
+
 		}
+
+		return qnaList;
+
+	}
+	
+	public Map<Integer, VideoForm> LectureVideos(String l_code){
+		
+		List<VideoForm> vList = lectureDAO.LectureVideos(l_code);
+		Map<Integer, VideoForm> vMap = new HashMap<Integer, VideoForm>();
+		for (int i = 1; i <= vList.size(); i++) {
+			
+			vMap.put(i, vList.get(i - 1));
+		}
+		
+		return vMap;
 	}
 
+	public String CheckLectureRegister(int v_no) {
+		
+		return lectureDAO.VideoLectureCheck(v_no);
+	}
+	
+	public int RegisterVideo(String l_code, String u_id) {
+		
+		int regi = 0;
+		
+		for(URegiForm form : userDAO.RegiList(u_id)) {
+			
+			if(form.getL_code().equals(u_id)) {
+				regi = 1;
+				break;
+			}
+		}
+		
+		return regi;
+	}
 }

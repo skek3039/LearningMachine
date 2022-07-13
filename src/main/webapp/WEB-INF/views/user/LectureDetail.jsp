@@ -6,7 +6,7 @@
 
 <head>
 <meta charset="utf-8">
-<title>Learning Machine:강사 페이지</title>
+<title>러닝머신 :: ${LectureDetail.l_name}</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
@@ -100,15 +100,78 @@ details>summary {
 		</div>
 		<!-- Spinner End -->
 
-
 		<jsp:include page="./header.jsp" />
 		<div style="padding-top: 110px;">
-			<h3>&nbsp;&nbsp;강의목록</h3>
+			<h3>&nbsp;&nbsp;${LectureDetail.l_name}</h3>
 			<hr style="border: solid 1px;">
 		</div>
 		<div style="padding-top: 20px; text-align: center;">
-			<div class="row tab-content current" id = "tab-1">
-				${LectureDetail }
+		</div>
+		<div class="container">
+			<div class="row g-5 align-items-center">
+				<div class="col-lg-6 wow zoomIn" data-wow-delay="0.1s">
+					<img class="img-fluid" src="img/about.png">
+				</div>
+				<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+					<!-- <a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="">Read More</a> -->
+					<div class="d-inline-block border rounded-pill text-primary px-4 mb-3">${LectureDetail.l_category}</div>
+					<h2 class="mb-4">${LectureDetail.l_name}</h2>
+					<p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor eirmod</p>
+					<div class="row g-3 mb-4">
+						<div class="col-12 d-flex">
+							<div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
+								<i class="fa fa-chart-line text-white"></i>
+							</div>
+							<div class="ms-4">
+								<h6>Financial Analaysis</h6>
+								<span>Tempor erat elitr rebum at clita. Diam dolor ipsum amet eos erat ipsum lorem et sit sed stet lorem sit clita duo</span>
+							</div>
+						</div>
+						<div class="col-12 d-flex">
+							<div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
+								<i class="fa fa-money-bill-wave text-white"></i>
+							</div>
+							<div class="ms-4">
+								<h4><strong style="color: red; vertical-align: middle;">${LectureDetail.l_price}</Strong>원</h6>
+							</div>
+						</div>
+					</div>
+					<a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href=""> 결재하기	</a>
+				</div>
+			</div>
+		</div>
+		<!-- Call to Action-->
+		<div class="card text-white bg-secondary my-5 py-4 text-center">
+			<div class="card-body"><p class="text-white m-0">This call to action card is a great place to showcase some important information or display a clever tagline!</p></div>
+		</div>
+		<!-- Content Row-->
+		<div class="row gx-4 gx-lg-5">
+			<div class="col-md-4 mb-5">
+				<div class="card h-100">
+					<div class="card-body">
+						<h2 class="card-title">Card One</h2>
+						<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+					</div>
+					<div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>
+				</div>
+			</div>
+			<div class="col-md-4 mb-5">
+				<div class="card h-100">
+					<div class="card-body">
+						<h2 class="card-title">리뷰</h2>
+						<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod tenetur ex natus at dolorem enim! Nesciunt pariatur voluptatem sunt quam eaque, vel, non in id dolore voluptates quos eligendi labore.</p>
+					</div>
+					<div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>
+				</div>
+			</div>
+			<div class="col-md-4 mb-5">
+				<div class="card h-100">
+					<div class="card-body">
+						<h2 class="card-title">Card Three</h2>
+						<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+					</div>
+					<div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>
+				</div>
 			</div>
 		</div>
 	</div>
