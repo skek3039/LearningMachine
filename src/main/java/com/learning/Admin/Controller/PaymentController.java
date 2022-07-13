@@ -53,7 +53,6 @@ public class PaymentController {
 			ModelAndView mv = new ModelAndView("admin_payment_list");
 			List<String> list = paymentService.paymentList();
 			mv.addObject("list",list);
-			System.out.println(list.toString());
 			return mv;
 		} else {
 			ModelAndView mv = new ModelAndView("404");

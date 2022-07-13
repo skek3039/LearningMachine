@@ -12,6 +12,6 @@ public class PaymentDAO {
 	private SqlSession sqlSession;
 
 	public List<String> paymentList() {
-		return sqlSession.selectList("Payment.paymentList");
+		return  sqlSession.selectList("Payment.paymentList");
 	}
 }

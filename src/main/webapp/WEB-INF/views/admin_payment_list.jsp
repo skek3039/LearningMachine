@@ -5,7 +5,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%
 	Date nowTime = new Date();
-	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 aaaa");
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -140,7 +140,11 @@ function search(){
                                             <td>${pay.u_name }(${pay.u_id })</td>
                                             <td>${pay.t_nickname }</td>
                                             <td>${pay.l_name }</td>
-                                            <td><fmt:formatDate value="${pay.p_date }" pattern="yyyy-MM-DD HH:ss"/></td>
+                                            <td>
+                                            <fmt:parseDate value="${pay.p_date}" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
+                                            <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
+                    						${time }</td>
+                                           
                                             <td><fmt:formatNumber value="${pay.p_price }" pattern="#,###"  /></td>
                                         </tr>
                                     </c:forEach>           

@@ -3,7 +3,8 @@
   <mapper namespace="Payment">
 
   	<select id="paymentList"  resultType="hashmap">
-  		select *,(select sum(p_price) from payment_lecture_view where p_refund = 0 )as sumtotal from payment_lecture_view2
+  		select *,(select sum(p_price) from payment_lecture_view where p_refund = 0 )as sumtotal 
+  		from payment_lecture_view2
   	</select>
   
   </mapper>
