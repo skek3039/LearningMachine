@@ -27,15 +27,17 @@
   	</select>
   	
   	<select id="studentReport" parameterType="map" resultType="HashMap"> 
-  		select * from user_teacher_reported_View 
-  		<if test = "u_id != null and page != null">
+  		select * from user_teacher_reported_View
+  		<!--특정학생--> 
+  		<if test = "u_id != null and page == null">
   			where u_id = #{u_id} and u_del = 0
   		</if>
   		<if test = "u_id == null and page == null">
   			where u_del = 0 
   		</if>
+  		<!--전체리스트조회-->
   		<if test = "u_id == null and page != null">
-  			where u_del = 0 limit #{page.startPage},#{page.lastPage}
+  			where u_del = 0  group by u_id limit #{page.startPage},#{page.lastPage}
   		</if>
   	</select>
   	

@@ -356,6 +356,7 @@ public class AdminController {
 			String u_id = request.getParameter("u_id");
 			List<String> list = adminService.studentLecture(u_id);
 			List<String> report = adminService.studentReport(u_id,null);
+			
 			mv.addObject("list", list);
 			mv.addObject("report", report);
 
@@ -442,6 +443,7 @@ public class AdminController {
 			String u_id = request.getParameter("u_id");
 			
 			List<String> list = adminService.studentReport(u_id,null);
+			System.out.println(list.toString());
 			mv.addObject("list", list);
 			return mv;
 		} else {
@@ -463,50 +465,5 @@ public class AdminController {
 		}
 	}
 
-	// 환불신청내역 불러오기
-	@GetMapping(value = "/admin_student_refund")
-	public ModelAndView admin_student_refund(HttpSession session, HttpServletRequest request) {
-		if ((int) session.getAttribute("u_authority") == 7) {
-			ModelAndView mv = new ModelAndView("admin_student_refund");
-			List<String> list = adminService.refundList();
-			mv.addObject("list", list);
-
-			return mv;
-		} else {
-			ModelAndView mv = new ModelAndView("404");
-			return mv;
-		}
-	}
-
-	// 실제 환불처리가 될 메소드
-	@ResponseBody
-	@PostMapping(value = "/admin_student_refund")
-	public void admin_student_refund(HttpSession session, HttpServletRequest request, HttpServletResponse response)
-			throws IOException {
-		if ((int) session.getAttribute("u_authority") == 7) {
-			PrintWriter pw = response.getWriter();
-
-			int result = 0;
-			String p_no = request.getParameter("p_no");
-			String u_id = request.getParameter("u_id");
-			result = adminService.lecture_refund(p_no, u_id);
-
-			pw.print(result);
-		}
-	}
-
-	@GetMapping(value = "/payment_list")
-	public ModelAndView payment_list(HttpServletRequest request, HttpSession session) {
-		if ((int) session.getAttribute("u_authority") == 7) {
-			ModelAndView mv = new ModelAndView("admin_payment_list");
-			// List<String> list = adminService.paymentList();
-			// mv.addObject("list",list);
-
-			return mv;
-		} else {
-			ModelAndView mv = new ModelAndView("404");
-			return mv;
-		}
-	}
 
 }

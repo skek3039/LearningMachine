@@ -1,5 +1,15 @@
+<%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%
+	Date nowTime = new Date();
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
+	Calendar date = Calendar.getInstance();
+	
+	int month = date.get(Calendar.MONTH) +1 ; 
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,6 +49,7 @@
 <!-- Template Stylesheet -->
 <link href="./resources/css/style.css" rel="stylesheet">
 <link href="./resources/css/admin.css" rel="stylesheet">
+<link href='./resources/css/main.css' rel='stylesheet' />
 
 <style type="text/css">
     <style>@font-face {
@@ -70,33 +81,47 @@
         padding: 15px 0;
     }
 </style>
-
 <script type="text/javascript">
 function search(){
 	var u_name= document.getElementById("u_name").value;
 	location.href = "./admin_studentSearch?u_name="+u_name;
+}
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+	var calendarEl = document.getElementById('calendar');
+	var calendar = new FullCalendar.Calendar(calendarEl, {
+		initialView : 'dayGridMonth', // 초기 로드 될때 보이는 캘린더 화면(기본 설정: 달)
+		headerToolbar : { // 헤더에 표시할 툴 바
+			start : 'prev next today',
+			center : 'title',
+			end : 'dayGridMonth,dayGridWeek,dayGridDay'
+		},
+		titleFormat : function(date) {
+			return date.date.year + '년 ' + (parseInt(date.date.month) + 1) + '월';
+		},
+		//initialDate: '2021-07-15', // 초기 날짜 설정 (설정하지 않으면 오늘 날짜가 보인다.)
+		selectable : false, // 달력 일자 드래그 설정가능
+		droppable : true,
+		editable : true,
+		nowIndicator: true, // 현재 시간 마크
+		locale: 'ko' // 한국어 설정
+	});
+	calendar.render();
 	
-}
 
-function report(u_id,u_name){
-	let ur_reason = document.all["reason"].value;
-	if(confirm(u_name + "학생을 정말 정지하시겠습니까?")){
-		$.ajax({
-			url:"./admin_student_report",
-			type:"post",
-			dataType:"html",
-			data : {"u_id" : u_id , 
-					"ur_reason" : ur_reason	
-			},
-			success : function(data){
-				location.href = "./admin_student_report";
-			},error:function(request, status, error){
-				alert("문제발생"+error);
-			}
-		});
-	}
-}
+	
+});
 
+$(document).ready(function() {
+	var calendar = new Calendar(calendarEl, {
+		  dateClick: function() {
+		    alert("a day has been clicked!");
+		  }
+	});
+});	
 
 </script>
 
@@ -121,35 +146,31 @@ function report(u_id,u_name){
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
-		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;학생정지처리</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px; margin-left: 310px;">
-
-			<div  id="student" >
-				이름 : ${list[0].u_name }<br>
-				아이디 : ${list[0].u_id }<br>
-				신고횟수 : ${list[0].count }<br>
-				<br>
-				<table class="table table-bordered table-sm" style="width: 900px;">
+		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;결제내역</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 10px;padding-left: 20px; width: 900px; height: 100%">
+				
+				 <div id='calendar'>
+				 
+				 </div>
+				
+				</div><br>
+		<%-- 	<div  id="student" >
+				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
-						<th>신고강사</th>								
-						<th>신고사유</th>								
+						<th style="width: 80px;">내역일자</th>
+						<th>회원ID(이름)</th>
+						<th>금액</th>											
+						<th>매출내역</th>											
 					</tr>
 					<c:forEach items="${list }" var="list">
 					<tr>
-						<td>${list.t_name}</td>					
-						<td>${list.ur_reason}</td>					
-					</tr>		
-					</c:forEach>		
-					<tr>
-						<td colspan="2">
-							<textarea name="reason" placeholder="정지사유를 적어주세요." required="required" style="width: 100%; height: 100px;" ></textarea>
-						</td>
+						<td><a href="./admin_studentLecture?u_id=${list.u_id }">${list.u_name }</a></td>
+						<td>${list.u_id }</td>
+						<td>${list.u_paypoint }</td>						
 					</tr>
+					</c:forEach>
 				</table>
-				<div style="padding-top: 10px;">
-					<button type="submit" onclick="report('${list[0].u_id}','${list[0].u_name }')" class="btn btn-outline-dark">정지처리</button>
-				</div>
-			</div>
+			</div> --%>
 		</div>
 
 </div>
@@ -171,7 +192,6 @@ function report(u_id,u_name){
 				}
 			});
 		</script>
-	</div>
 
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -184,6 +204,15 @@ function report(u_id,u_name){
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
 	<script src="./resources/js/admin_student.js"></script>
-</body>
+	
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css"/>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
+	
+	</body>
 
 </html>
