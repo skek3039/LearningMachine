@@ -16,4 +16,10 @@ public class QnaService {
 		return qnaDAO.qnaList();
 	}
 
+	public int qnalistCount() {
+		return qnaDAO.qnalistCount();
+	}
+
+
+
 }
