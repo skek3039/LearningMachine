@@ -17,6 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet"> 
 
+
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -30,6 +31,8 @@
 
     <!-- Template Stylesheet -->
     <link href="./resources/css/style.css" rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
 <style type="text/css">
 #main {
    margin: 0 auto;
@@ -37,7 +40,6 @@
    width: 900px;
 }
 </style>
-
 </head>
 
 <body>
@@ -49,54 +51,43 @@
             </div>
         </div>
         <!-- Spinner End -->
-
-
 	<jsp:include page="./header.jsp"/>
-	
 	<section class="vh-100 gradient-custom">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-12 col-md-8 col-lg-6 col-xl-5" >
-        <div class="card bg-dark text-white" style="border-radius: 1rem; background-color: #00B98E;">
-          <div class="card-body p-5 text-center">
+	<div class="container py-5 h-100">
+	
+	       <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block bg-password-image"></div>
+                            <div class="col-lg-6" style="margin:0 auto;">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-2">Forgot Your Password?</h1>
+                                        <p class="mb-4">회원가입당시 입력했던, 이름과 Email을 입력해주세요! </p>
+                                    </div>
+                                    <form class="user">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-user" id="u_name" aria-describedby="emailHelp" required="required"  placeholder="Enter your name...">
+                                            <input type="email" class="form-control form-control-user" id="u_email" aria-describedby="emailHelp" required="required" placeholder="Enter Email Address...">
+                                        </div>
+                                        <a href="login.html" class="btn btn-primary btn-user btn-block">
+                                            Reset Password
+                                        </a>
+                                    </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="./join">Create an Account!</a>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="small" href="./login">Already have an account? Login!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+	</div>
+	</section>
 
-            <div class="mb-md-5 mt-md-4 pb-5">
-
-              <h2 class="fw-bold mb-2 text-uppercase" style="color: white;">Login</h2>
-              <p class="text-white-50 mb-5">Please enter your login and password!</p>
-			<form action="./login" method="post">
-              <div class="form-outline form-white mb-4">
-                <input type="text" id="id" name="id" class="form-control form-control-md" required="required" placeholder="ID를 입력해주세요."/>
-              </div>
-
-              <div class="form-outline form-white mb-4">
-                <input type="password" id="pw" name="pw" class="form-control form-control-md" required="required" placeholder="PW를 입력해주세요."/>
-              </div>
-
-              <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="./forgetPW">Forgot password?</a></p>
-
-              <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
-			</form>	
-              <div class="d-flex justify-content-center text-center mt-4 pt-1">
-                <a href="#!" class="text-white"><i class="fa-duotone fa-n"></i></a>
-                <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
-              </div>
-
-            </div>
-
-            <div>
-              <p class="mb-0">Don't have an account? <a href="#!" class="text-white-50 fw-bold">Sign Up</a>
-              </p>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-  
 		<jsp:include page="./footer.jsp"/>
+
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
@@ -112,6 +103,7 @@
 
     <!-- Template Javascript -->
     <script src="./resources/js/main.js"></script>
+  <script src="js/sb-admin-2.min.js"></script>
 </body>
 
 </html>

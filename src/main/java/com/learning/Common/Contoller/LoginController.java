@@ -42,6 +42,14 @@ public class LoginController {
 		return "redirect:/";
 	}
 	
+	
+	@GetMapping(value = "/forgetPW")
+	public String forgetPW(HttpSession session ) {
+		
+		return "forgetPW";
+	}
+	
+	
 	@PostMapping(value = "/checkID")
 	@ResponseBody
 	public String checkID(HttpServletRequest request) throws IOException {

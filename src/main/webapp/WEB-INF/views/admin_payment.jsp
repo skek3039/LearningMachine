@@ -1,15 +1,9 @@
-<%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.Date" %>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%
-	Date nowTime = new Date();
-	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
-	Calendar date = Calendar.getInstance();
-	
-	int month = date.get(Calendar.MONTH) +1 ; 
-%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,7 +43,7 @@
 <!-- Template Stylesheet -->
 <link href="./resources/css/style.css" rel="stylesheet">
 <link href="./resources/css/admin.css" rel="stylesheet">
-<link href='./resources/css/main.css' rel='stylesheet' />
+<link href="./resources/css/payment.css" rel="stylesheet">
 
 <style type="text/css">
     <style>@font-face {
@@ -81,47 +75,23 @@
         padding: 15px 0;
     }
 </style>
+
 <script type="text/javascript">
 function search(){
 	var u_name= document.getElementById("u_name").value;
 	location.href = "./admin_studentSearch?u_name="+u_name;
 }
 
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-	var calendarEl = document.getElementById('calendar');
-	var calendar = new FullCalendar.Calendar(calendarEl, {
-		initialView : 'dayGridMonth', // 초기 로드 될때 보이는 캘린더 화면(기본 설정: 달)
-		headerToolbar : { // 헤더에 표시할 툴 바
-			start : 'prev next today',
-			center : 'title',
-			end : 'dayGridMonth,dayGridWeek,dayGridDay'
-		},
-		titleFormat : function(date) {
-			return date.date.year + '년 ' + (parseInt(date.date.month) + 1) + '월';
-		},
-		//initialDate: '2021-07-15', // 초기 날짜 설정 (설정하지 않으면 오늘 날짜가 보인다.)
-		selectable : false, // 달력 일자 드래그 설정가능
-		droppable : true,
-		editable : true,
-		nowIndicator: true, // 현재 시간 마크
-		locale: 'ko' // 한국어 설정
-	});
-	calendar.render();
+function enterkey() {
+	if (window.event.keyCode == 13) {
+		search();
+	}
 	
+}
+function linkPage(pageNo){
+	location.href = "./admin_student?pageNo=" + pageNo;
+}
 
-	
-});
-
-$(document).ready(function() {
-	var calendar = new Calendar(calendarEl, {
-		  dateClick: function() {
-		    alert("a day has been clicked!");
-		  }
-	});
-});	
 
 </script>
 
@@ -142,45 +112,32 @@ $(document).ready(function() {
 
 
 		<jsp:include page="./header.jsp" />
-		<div style="width: 100%; height: 800px; ">
+		<div id = "payment_body">
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
-		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;결제내역</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px;padding-left: 20px; width: 900px; height: 100%">
-				
-				 <div id='calendar'>
-				 
-				 </div>
-				
-				</div><br>
-		<%-- 	<div  id="student" >
-				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
-					<tr>
-						<th style="width: 80px;">내역일자</th>
-						<th>회원ID(이름)</th>
-						<th>금액</th>											
-						<th>매출내역</th>											
-					</tr>
-					<c:forEach items="${list }" var="list">
-					<tr>
-						<td><a href="./admin_studentLecture?u_id=${list.u_id }">${list.u_name }</a></td>
-						<td>${list.u_id }</td>
-						<td>${list.u_paypoint }</td>						
-					</tr>
-					</c:forEach>
-				</table>
-			</div> --%>
-		</div>
+			<div style="padding-top: 110px;">
+				<h3>&nbsp;&nbsp;매출조회</h3>
+				<hr style="border: solid 1px;">
+			</div>
+			<div style="padding-top: 10px; margin-left: 310px;">
+				<div id="payment">
+					<div id="today">
+						
+					</div>
+				</div>
+				<hr>
+		<%-- 					<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
+ --%>
+			</div> 
 
-</div>
+		</div>
 		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
 
 
 		<!-- Back to Top -->
-		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
-			class="bi bi-arrow-up"></i></a>
+		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 		<script type="text/javascript">
 			$('body > ul > li').click(function() {
 				if ($(this).hasClass('active')) {
@@ -192,6 +149,7 @@ $(document).ready(function() {
 				}
 			});
 		</script>
+	</div>
 
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -204,15 +162,7 @@ $(document).ready(function() {
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
 	<script src="./resources/js/admin_student.js"></script>
-	
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css"/>
-
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
-	
-	</body>
+	<script src="./resources/js/payment.js"></script>
+</body>
 
 </html>
