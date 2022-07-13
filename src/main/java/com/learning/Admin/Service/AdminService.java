@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.learning.Admin.DAO.AdminDAO;
+import com.learning.Admin.DAO.PaymentDAO;
 import com.learning.DTO.BannedDTO;
 import com.learning.DTO.PageDTO;
 import com.learning.DTO.userDTO;
@@ -16,7 +17,9 @@ import com.learning.User.DTO.ULectureDTO;
 public class AdminService {
 	@Autowired
 	private AdminDAO adminDAO;
-
+	
+	@Autowired
+	private PaymentDAO paymentDAO;
 	
 	public int totalCount(int check_total) {
 		return adminDAO.totalCount(check_total);
@@ -103,5 +106,4 @@ public class AdminService {
 	public int teacherAccept(Map<String, Object> map) {
 		return adminDAO.teacherAccept(map);
 	}
-	
 }

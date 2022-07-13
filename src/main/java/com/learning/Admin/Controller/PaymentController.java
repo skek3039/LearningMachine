@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.learning.Admin.Service.AdminService;
+import com.learning.Admin.Service.PaymentService;
 
 @Controller
 public class PaymentController {
@@ -23,6 +24,8 @@ public class PaymentController {
 	@Autowired
 	private AdminService adminService;
 	
+	@Autowired
+	private PaymentService paymentService;
 	
 	
 	//매출관리페이지
@@ -48,9 +51,9 @@ public class PaymentController {
 	public ModelAndView payment_list(HttpServletRequest request, HttpSession session) {
 		if ((int) session.getAttribute("u_authority") == 7) {
 			ModelAndView mv = new ModelAndView("admin_payment_list");
-			// List<String> list = adminService.paymentList();
-			// mv.addObject("list",list);
-
+			List<String> list = paymentService.paymentList();
+			mv.addObject("list",list);
+			System.out.println(list.toString());
 			return mv;
 		} else {
 			ModelAndView mv = new ModelAndView("404");

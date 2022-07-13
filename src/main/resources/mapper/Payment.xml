@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?> <!-- 맵퍼파일 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="Payment">
+
+  	<select id="paymentList"  resultType="hashmap">
+  		select *,(select sum(p_price) from payment_lecture_view where p_refund = 0 )as sumtotal from payment_lecture_view2
+  	</select>
+  
+  </mapper>
