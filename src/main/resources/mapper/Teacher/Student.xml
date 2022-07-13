@@ -2,10 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="student">
   
-  	<select id="student_lectureList" resultType="LectureDTO">
+  	<select id="totalCount" resultType="integer">
+  		select COUNT(*) AS count
+  		from lecture
+  	</select>
+  
+  	<select id="student_lectureList" parameterType="map" resultType="LectureDTO">
   		SELECT *
   		FROM lecture
   		WHERE t_id = #{u_id} 	
+  		ORDER BY l_date DESC
+  		limit #{page.startPage} , #{page.lastPage}
   	</select>
   	
   	<select id="studentList" parameterType="String" resultType="HashMap">

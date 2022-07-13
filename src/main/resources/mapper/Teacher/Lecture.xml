@@ -29,12 +29,6 @@
 		ORDER BY l_date DESC
 		limit #{page.startPage} , #{page.lastPage}
   	</select>
-  	
-  	<select id="lecture_Lookup" parameterType ="LectureDTO" resultType="LectureDTO">
-  		SELECT *
-  		FROM lecture_apply
-  		WHERE la_no = #{la_no}
-  	</select>
 
 
 	<insert id="t_lecture_request" parameterType="LectureDTO">
