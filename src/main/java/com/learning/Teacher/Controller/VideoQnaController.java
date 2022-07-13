@@ -121,7 +121,6 @@ public class VideoQnaController {
 		if ((int) session.getAttribute("u_authority") > 3) {
 			ModelAndView mv = new ModelAndView("video_qna_detail");
 			String vq_no = request.getParameter("vq_no");
-			System.out.println(vq_no);
 			List<LectureDTO> qna_answer_detail = video_qnaService.qna_answer_detail(vq_no);
 			mv.addObject("qna_answer_detail", qna_answer_detail);
 			return mv;
@@ -177,8 +176,46 @@ public class VideoQnaController {
 			return mv;
 		}
 	}	
-	
-	
+		//글 수정
+		@RequestMapping(value = "/v_qna_update")
+		public ModelAndView v_qna_update(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+			request.setCharacterEncoding("UTF-8");
+			if ((int) session.getAttribute("u_authority") > 3) {
+				ModelAndView mv = new ModelAndView("v_qna_update");
+				String vq_no = request.getParameter("vq_no");
+				List<LectureDTO> v_qna_update = video_qnaService.v_qna_update(vq_no);
+				mv.addObject("v_qna_update", v_qna_update);
+				return mv;
+			} else {
+				ModelAndView mv = new ModelAndView("404");
+				return mv;
+			}
+		}
+		//수정 글 쓰기
+		@RequestMapping(value = "/v_qna_update.do")
+		public String update(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+			request.setCharacterEncoding("UTF-8");
+			if ((int) session.getAttribute("u_authority") > 3) {
+				String u_id = (String) session.getAttribute("u_id");
+
+				LectureDTO v_qna_write = new LectureDTO();
+				v_qna_write.setT_id(u_id);
+				v_qna_write.setVqr_title(request.getParameter("title"));
+				v_qna_write.setVqr_content(request.getParameter("content"));
+				v_qna_write.setVq_no(Integer.parseInt(request.getParameter("vq_no")));
+				int result = video_qnaService.v_qna_write(v_qna_write);
+				System.out.println(result);
+				if(result ==1) {	
+					return "redirect:/video_qna";//상세페이지로 변경해야됨
+				}else {
+					return "redirect:/404";
+					
+				}
+			} else {
+				return "redirect:/404";
+
+			}
+		}
 	
 	
 	

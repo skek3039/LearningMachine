@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -8,7 +7,7 @@
 
 <head>
 <meta charset="utf-8">
-<title>Learning Machine:강사 페이지</title>
+<title>Learning Machine</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
@@ -74,13 +73,6 @@
     }
 </style>
 
-<script type="text/javascript">
-function linkPage(pageNo){
-	location.href = "./lecture?pageNo=" + pageNo;
-	}
-
-</script>
-
 </head>
 
 <body>
@@ -98,60 +90,19 @@ function linkPage(pageNo){
 
 		<jsp:include page="./header.jsp" />
 		<div style=" width: 100%; height: 705px;">
-		<jsp:include page="./lecture_nav.jsp"/>
-		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;강의신청</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px; text-align: center;">
-				<div style="padding-top: 10px; padding-left: 1200px;">
-					<button type="button" class="btn btn-outline-dark" onclick="location.href='./lecture_request'">신청</button>
-				</div><br>
-				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
-					<tr>
-						<th>신청 번호</th>
-						<th>강의 이름</th>
-						<th>강의 정보</th>
-						<th>카테고리</th>
-						<th>신청 날짜</th>
-						<th>승인 여부</th>
-					</tr>
-					
-					<c:forEach items="${lectureApplyList}" var="l">
-					<tr>
-						<td><a href="./lecture_Lookup?la_no=${l.la_no }">${l.la_no }</a></td>
-						<td>
-							<c:choose>
-							<c:when test="${fn:length(l.l_name ) > 10 }">
-							<c:out value="${fn:substring(l.l_name , 0, 9)} ...">
-							</c:out></c:when>
-							<c:otherwise>
-							<c:out value="${l.l_name  }">
-							</c:out></c:otherwise>
-							</c:choose>
-						</td>
-						<td>
-							<c:choose>
-							<c:when test="${fn:length(l.l_info ) > 10 }">
-							<c:out value="${fn:substring(l.l_info , 0, 9)} ...">
-							</c:out></c:when>
-							<c:otherwise>
-							<c:out value="${l.l_info  }">
-							</c:out></c:otherwise>
-							</c:choose>
-						</td>
-						<td>${l.l_category }</td>
-						<td>
-                        <fmt:parseDate value="${l.l_date}" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
-                        <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
-                    	${time }</td>
-						<td><c:if test="${l.l_recognize eq 0}"> 미승인</c:if><c:if test="${l.l_recognize eq 2}"> 승인거부</c:if><c:if test="${l.l_recognize eq 1}"> 승인</c:if></td>
-						
-					</tr>
-					</c:forEach>
-			</table>
+		 <jsp:include page="./lecture_nav.jsp"/>
+		<div style="padding-top: 110px;"></div>
+		<div style="padding-top: 100px; padding-left: 400px">
+				<div id="writeform" style="padding-right: 100px;">
+				<form action="./v_qna_update.do?vq_no=${v_qna_update[0].vq_no }" method="post">
+					<input style="width: 820px;" type="text" name="title" required="required" placeholder="제목을 입력해주세요.">
+					<textarea name="content" id="summernote" required="required"></textarea>
+					<button type="submit" style="float:right;">답변등록</button>
+				</form>
+			</div>
 		</div>
-	 	<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>	
 
 </div>
-		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
 
 
@@ -183,5 +134,20 @@ function linkPage(pageNo){
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
 </body>
-
+<script>
+$(document).ready(function() {
+	   //여기 아래 부분
+	   $('#summernote').summernote({
+	        height: 400,        
+	        minHeight: null,        
+	        maxHeight: null,       
+	        focus: true,             
+	        lang: "ko-KR",          
+	        placeholder: '내용을 입력해주세요.' 
+	          
+	   });
+	});
+</script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 </html>

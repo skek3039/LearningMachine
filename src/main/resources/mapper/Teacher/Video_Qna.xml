@@ -60,5 +60,16 @@
 		update lecture_video_qna set vq_confirm = 1 
     	where vq_no = #{vq_no} 
 	</update>
+	
+	<select id="v_qna_update" parameterType="String" resultType="LectureDTO">
+		SELECT *
+		FROM lecture_video_qna_reply
+		WHERE vq_no = #{vq_no}
+	</select>
+	
+	<update id="v_qna_write" parameterType="LectureDTO">
+		UPDATE lecture_video_qna_reply SET vqr_title=#{vqr_title}, vqr_content=#{vqr_content}
+		WHERE vq_no=#{vq_no} 
+	</update>
 
   </mapper>

@@ -100,7 +100,8 @@
 						<td style="padding-top: 10px; word-break:break-all; width: 750px"><h5>${q.vq_title }</h5></td>
 					</tr>
 					<tr>
-						<td><h6>${q.u_id }</h6></td><td><h6>
+						<td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/id.png" title="id">
+						${q.u_id }</h6></td><td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/date.png" title="날짜">
 											<fmt:parseDate value="${q.vqr_date }" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
                                             <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
                     						${time }
@@ -114,7 +115,7 @@
 					</c:forEach>
 					</table>
 					<div style="padding-top: 150px;">
-					<hr style="width: 820px; height: 2px;">
+					<hr style="width: 850px; height: 2px;">
 					</div>
 					<br>
 					<table>
@@ -124,12 +125,15 @@
 						<td style="padding-top: 10px; word-break:break-all; width: 750px"><h5>${q.vqr_title }</h5></td>
 					</tr>
 					<tr>
-						<td><h6>${q.t_id }</h6></td><td><h6>
+						<td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/id.png" title="id">
+						${q.t_id }</h6></td><td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/date.png" title="date">
                                             <fmt:parseDate value="${q.vqr_date }" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
                                             <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
-                    						${time }
-                                           
+                    						${time }&nbsp;
+                    	<img onclick="location.href='./v_qna_update?vq_no=${q.vq_no}'" style="width: 20px; height: 20px;" id="update" alt="" src="./img/update.png" title="id">
+						<img onclick="location.href='./video_qna_reply?vq_no=${q.vq_no}'" style="width: 20px; height: 20px;" id="delete" alt="" src="./img/delete.png" title="id"> 					
 					</h6></td>
+					
 					</tr></c:forEach></table><br>
 					<table>
 					<c:forEach items="${qna_answer_detail}" var="q">

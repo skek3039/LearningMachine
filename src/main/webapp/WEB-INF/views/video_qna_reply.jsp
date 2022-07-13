@@ -100,7 +100,8 @@
 						<td style="padding-top: 10px; word-break:break-all; width: 750px"><h5>${v.vq_title }</h5></td>
 					</tr>
 					<tr>
-						<td><h6>${v.u_id }</h6></td><td><h6>
+						<td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/id.png" title="id">
+						${v.u_id }</h6></td><td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/date.png" title="date">
 											<fmt:parseDate value="${v.vq_date }" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
                                             <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
                     						${time }
@@ -119,8 +120,8 @@
 					<br>
 				<div id="writeform" style="padding-right: 100px;">
 				<form action="./video_qna_reply.do?vq_no=${video_qnaDetail[0].vq_no }" method="post">
-					<input style="width: 820px;" type="text" name="title" required="required">
-					<textarea name="content" id="summernote" required="required" ></textarea>
+					<input style="width: 820px;" type="text" name="title" required="required" placeholder="제목을 입력해주세요.">
+					<textarea name="content" id="summernote" required="required"></textarea>
 					<button type="submit" style="float:right;">답변등록</button>
 				</form>
 			</div>
@@ -159,7 +160,18 @@
 	<script src="./resources/js/main.js"></script>
 </body>
 <script>
-$(document).ready(function() {$("#summernote").summernote({height : 200});});
+$(document).ready(function() {
+	   //여기 아래 부분
+	   $('#summernote').summernote({
+	        height: 200,        
+	        minHeight: null,        
+	        maxHeight: null,       
+	        focus: true,             
+	        lang: "ko-KR",          
+	        placeholder: '내용을 입력해주세요.' 
+	          
+	   });
+	});
 </script>
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
