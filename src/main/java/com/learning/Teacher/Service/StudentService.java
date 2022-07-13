@@ -20,8 +20,8 @@ public class StudentService {
 	}
 	
 	
-	 public List<String> studentList(String t_id){ 
-		 return studentDAO.studentList(t_id); 
+	 public List<String> studentList(Map<String, Object> map){ 
+		 return studentDAO.studentList(map); 
 	}
 
 	public List<LectureDTO> lectureNameSearch(String l_name) {
@@ -31,6 +31,10 @@ public class StudentService {
 
 	public int totalCount() {
 		return studentDAO.totalCount();
+	}
+
+	public int stulistCount() {
+		return studentDAO.stulistCount();
 	}
 	 
 }

@@ -15,10 +15,17 @@
   		limit #{page.startPage} , #{page.lastPage}
   	</select>
   	
-  	<select id="studentList" parameterType="String" resultType="HashMap">
+  	<select id="studentList" parameterType="map" resultType="Hashmap">
   		SELECT *
   		FROM user_lecture_view
-  		WHERE t_id = #{t_id} 
+  		WHERE t_id = #{t_id} and l_code = #{l_code}
+  		limit #{page.startPage} , #{page.lastPage}
+  	</select>
+  	
+  	<select id="stulistCount" resultType="integer">
+  		select COUNT(*) AS count
+  		FROM user_lecture_view
+  		WHERE t_id = #{t_id} and l_code = #{l_code}
   	</select>
   	
   	<select id="searchList" parameterType="String" resultType="LectureDTO">

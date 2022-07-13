@@ -14,13 +14,13 @@ public class StudentDAO {
 
 	@Autowired
 	private SqlSession sqlSession;
-
+	
 	public List<LectureDTO> lectureList(Map<String, Object> map) {
 		return sqlSession.selectList("student.student_lectureList", map);
 	}
 	
-	public List<String> studentList(String t_id) {
-		return sqlSession.selectList("student.studentList",t_id);
+	public List<String> studentList(Map<String, Object> map) {
+		return sqlSession.selectList("student.studentList",map);
 	}
 
 	public List<LectureDTO> lectureNameSearch(String l_name) {
@@ -29,6 +29,10 @@ public class StudentDAO {
 
 	public int totalCount() {
 		return sqlSession.selectOne("student.totalCount");
+	}
+
+	public int stulistCount() {
+		return sqlSession.selectOne("student.stulistCount");
 	}
 	 
 }

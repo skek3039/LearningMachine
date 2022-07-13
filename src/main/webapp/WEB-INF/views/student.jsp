@@ -134,7 +134,7 @@ function linkPage(pageNo){
 						<td>${l.l_name }</td>
 						<td>${l.l_category }</td>
 						<td>${l.l_curriculum }</td>
-						<td><a href="./student_list">조회</a></td>
+						<td><a href="./student_list?l_code=${l.l_code }">조회</a></td>
 					</tr>
 					</c:forEach>
 			</table>

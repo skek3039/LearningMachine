@@ -80,9 +80,42 @@ public class StudentController {
 		if((int)session.getAttribute("u_authority") > 3) {
 			ModelAndView mv = new ModelAndView("student_list");
 			String t_id = (String)session.getAttribute("u_id");
-			List<String> studentList = studentService.studentList(t_id);
-			System.out.println(studentList.toString());
+			String l_code = request.getParameter("l_code");
+			int pageNo = 1;
+			if (request.getParameter("pageNo")!=null) {
+				pageNo = Integer.parseInt(request.getParameter("pageNo"));
+			}
+			// recordCountPageNo 한 페이지당 게시되는 게시물 수 yes
+						int listScale = 10;
+						// pageSize = 페이지 리스트에 게시되는 페이지 수 yes
+						int pageScale = 10;			
+						// totalRecordCount 전체 게시물 건수				
+						int totalCount = studentService.stulistCount();
+						
+						// 전자정부페이징 호출
+						PaginationInfo paginationInfo = new PaginationInfo();
+						// 값 대입
+						paginationInfo.setCurrentPageNo(pageNo);
+						paginationInfo.setRecordCountPerPage(listScale);
+						paginationInfo.setPageSize(pageScale);
+						paginationInfo.setTotalRecordCount(totalCount);
+						// 전자정부 계산하기
+						int startPage = paginationInfo.getFirstRecordIndex();
+						int lastpage = paginationInfo.getRecordCountPerPage();
+
+						// 서버로 보내기
+						PageDTO page = new PageDTO();
+						page.setStartPage(startPage);
+						page.setLastPage(lastpage);
+						
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("l_code", l_code);
+			map.put("t_id", t_id);
+			map.put("page", page);
+			List<String> studentList = studentService.studentList(map);
+			
 			mv.addObject("studentList", studentList);
+			mv.addObject("paginationInfo", paginationInfo);
 		
 			return mv;
 		}else {
@@ -90,6 +123,8 @@ public class StudentController {
 			return mv;
 		}
 	}
+	
+	//수강생 
 	
 	//검색
 		@GetMapping(value = "/student_studentName" , produces="text/plain;charset=utf-8")

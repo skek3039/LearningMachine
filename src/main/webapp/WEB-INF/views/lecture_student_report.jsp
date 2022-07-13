@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,12 +73,38 @@
         padding: 15px 0;
     }
 </style>
+
 <script type="text/javascript">
-function linkPage(pageNo){
-	location.href = "./student_list?pageNo=" + pageNo;
+function search(){
+	var u_name= document.getElementById("u_name").value;
+	location.href = "./admin_studentSearch?u_name="+u_name;
+	
+}
+
+/* function report(u_id,u_name){
+	if(confirm(u_name + "학생을 정말 정지하시겠습니까?")){
+		$.ajax({
+			url:"./admin_student_report",
+			type:"post",
+			dataType:"html",
+			data : {"u_id" : u_id},
+			success : function(data){
+				alert("ㅋ");
+			},error:function(request, status, error){
+				alert("문제발생"+error);
+			}
+		});
 	}
+} */
+
+
+function linkPage(pageNo){
+	location.href = "./lecture_student_report?pageNo=" + pageNo;
+}
 
 </script>
+
+
 </head>
 
 <body>
@@ -95,37 +121,57 @@ function linkPage(pageNo){
 
 
 		<jsp:include page="./header.jsp" />
-		<div style=" width: 100%; height: 705px;">
-				<jsp:include page="./lecture_nav.jsp"/>
-			<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;수강생조회</h3><hr style="border: solid 1px;"></div>
-		 			<div class="col-sm-offset-9" style=" text-align: center; padding-left: 890px"></div>
-		<div style="padding-top: 10px; height: 500px;">
-			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
-					<tr>					
-						<th>강의명</th>
-						<th>이름</th>
-						<th>성별</th>
-						<th>포인트</th>
-						<th>진도율</th>			
-						<th>신고</th>			
-					</tr>
-					
-					<c:forEach items="${studentList}" var="s">
+		<div style="width: 100%; height: 800px; ">
+		<div style="position: relative;">
+		<jsp:include page="./admin_nav.jsp"/>
+		 </div>
+		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;신고사유</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 10px; margin-left: 310px;">
+				<div style="padding-top: 10px;">
+					 <input type="search" id="u_name" name="u_name" class="form-control" required="required" placeholder="학생이름을 입력해주세요." style="width: 250px; float: left;"> &nbsp; 
+					 <button class="btn btn-danger" id="search" style="width: 100px" onclick="search()">search</button>
+				</div><br>
+			<div  id="student" style=" height: 200px;">
+				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
-						<td>${s.u_name }</td>					
-						<td>${s.l_name }</td>
-						<td>${s.u_gender }</td>
-						<td>${s.u_paypoint }</td>
-						<td>${s.attendance_rate }</td>
-						<td><a href = "./lecture_student_report">신고하기</a></td>
-						<!-- <button type="button" onclick="locaion.href='lecture_student_report.jsp'">신고</button> -->
+						<th>이름</th>
+						<th>ID</th>
+						<th>Point</th>		
+						<th>신고강사</th>								
 					</tr>
-					</c:forEach>
-			</table>
+					<c:forEach items="${list }" var="i">
+					<tr>
+						<td><a href="###"> ${i.u_name }</a> </td>
+						<td>${i.u_id }</td> 
+						<td><fmt:formatNumber value="${i.u_paypoint }" pattern="#,###"  /></td>						
+						<td>${i.t_name}</td>						
+					</tr>
+					</c:forEach>				
+				</table>
+			<hr>	
+			<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
+			</div>
+
+			<%-- <div id="student1" style="width: 500px;">
+				<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;학생정지리스트</h3><hr style="border: solid 1px;"></div>
+				<table class="table table-bordered table-sm">
+				<tr>
+					<th>관리자ID</th>
+					<th>ID</th>
+					<th>정지사유</th>														
+				</tr>
+				<c:forEach items="${ban }" var="b">
+				<tr>
+					<td>${b.admin_id }</td>
+					<td>${b.u_id }</td>
+					<td>${b.bu_reason }</td>					
+				</tr>
+				</c:forEach>
+				</table>
+			</div> --%>
 		</div>
-		<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
-	
-	</div>
+
+</div>
 		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
 
@@ -148,8 +194,7 @@ function linkPage(pageNo){
 
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="./resources/lib/wow/wow.min.js"></script>
 	<script src="./resources/lib/easing/easing.min.js"></script>
 	<script src="./resources/lib/waypoints/waypoints.min.js"></script>
@@ -157,6 +202,7 @@ function linkPage(pageNo){
 
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
+	<script src="./resources/js/admin_student.js"></script>
 </body>
 
 </html>
