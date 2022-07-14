@@ -158,6 +158,23 @@ public class LectureController {
 
 			}
 		}
+		//승인거부 상세보기
+		@RequestMapping(value= "/lecture_Lookup3")
+		public String lecture_Lookup3(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+			request.setCharacterEncoding("UTF-8");
+			int la_no = Integer.parseInt(request.getParameter("la_no"));
+			if ((int) session.getAttribute("u_authority") > 3) {
+				
+				LectureDTO lecture_lookup = new LectureDTO();
+				lecture_lookup.setLa_no(la_no);
+				
+				request.setAttribute("dto", lectureService.lecture_lookup(lecture_lookup));
+				return "lecture_Lookup3";
+			} else {
+				return "redirect:/404";
+
+			}
+		}	
 	
 	// 강의 신청 제출
 	@RequestMapping(value = "/lecture_request")
@@ -204,6 +221,53 @@ public class LectureController {
 			mv.addObject("list",list);
 			return mv; 
 		}else {
+			ModelAndView mv = new ModelAndView("404");
+			return mv;
+		}
+	}
+	// 승인거부 리스트 페이지
+	@RequestMapping(value = "/lecture_refusal")
+	public ModelAndView lecture_refusal(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
+		if ((int) session.getAttribute("u_authority") > 3) {
+			ModelAndView mv = new ModelAndView("lecture_refusal");
+			String u_id = (String) session.getAttribute("u_id");
+			int pageNo = 1;
+			if (request.getParameter("pageNo")!=null) {
+				pageNo = Integer.parseInt(request.getParameter("pageNo"));
+			}
+			// recordCountPageNo 한 페이지당 게시되는 게시물 수 yes
+			int listScale = 10;
+			// pageSize = 페이지 리스트에 게시되는 페이지 수 yes
+			int pageScale = 10;			
+			// totalRecordCount 전체 게시물 건수				
+			int totalCount = lectureService.totalCount2();
+			
+			// 전자정부페이징 호출
+			PaginationInfo paginationInfo = new PaginationInfo();
+			// 값 대입
+			paginationInfo.setCurrentPageNo(pageNo);
+			paginationInfo.setRecordCountPerPage(listScale);
+			paginationInfo.setPageSize(pageScale);
+			paginationInfo.setTotalRecordCount(totalCount);
+			// 전자정부 계산하기
+			int startPage = paginationInfo.getFirstRecordIndex();
+			int lastpage = paginationInfo.getRecordCountPerPage();
+
+			// 서버로 보내기
+			PageDTO page = new PageDTO();
+			page.setStartPage(startPage);
+			page.setLastPage(lastpage);
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("u_id", u_id);
+			map.put("page", page);
+
+			List<LectureDTO> lecture_refusal = lectureService.lecture_refusal(map);
+			mv.addObject("lecture_refusal", lecture_refusal);
+			mv.addObject("paginationInfo", paginationInfo);
+			return mv;
+		} else {
 			ModelAndView mv = new ModelAndView("404");
 			return mv;
 		}

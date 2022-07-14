@@ -127,7 +127,6 @@
                                             <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
                     						${time }&nbsp;
                     	<img onclick="location.href='./v_qna_update?vq_no=${dto.vq_no}'" style="width: 20px; height: 20px;" id="update" alt="" src="./img/update.png" title="id">
-						<img onclick="location.href='./video_qna_reply?vq_no=${dto.vq_no}'" style="width: 20px; height: 20px;" id="delete" alt="" src="./img/delete.png" title="id"> 					
 					</h6></td>
 					
 					</tr></table><br>

@@ -50,6 +50,14 @@ public class LectureDAO {
 		return sqlSession.selectOne("lecture.lecture_Lookup2", lecture_lookup);
 	}
 
+	public int totalCount2() {
+		return sqlSession.selectOne("lecture.totalCount2");
+	}
+
+	public List<LectureDTO> lecture_refusal(Map<String, Object> map) {
+		return sqlSession.selectList("lecture.lecture_refusal", map);
+	}
+
 
 
 

@@ -9,6 +9,7 @@
     					<summary>강의관리</summary>
     						<a href="./lecture">강의신청</a> <br>
     						<a href="./lecture_detail">내 강의관리</a> <br>
+    						<a href="./lecture_refusal">승인거부</a> <br>
 					</details>
 					<details>
     					<summary>수강생관리</summary>
