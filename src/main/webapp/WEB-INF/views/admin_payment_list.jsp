@@ -124,13 +124,12 @@ $(document).ready(function() {
 
  function preNext(year,month,checkPN){
 	var checkPN = checkPN;
-	var year = year; 
-	var month = month;
+	var year = Number(year); 
+	var month = Number(month);
 	var confirm = Number(<%= month.format(nowTime)%>);
 	
 	alert(confirm + "," + month);
-/* 	if(month<confirm){ */
-	 	if(checkPN == "1"){
+	if(checkPN == "1"){
 			if(month >0){
 				year = year;
 				month =Number(month) - 1;
@@ -138,7 +137,7 @@ $(document).ready(function() {
 				year = Number(year)-1;
 				month = 12;
 			}
-		}else{
+	}else{
 			if(month < 13){
 				year = year;
 				month =	Number(month) + 1;
@@ -147,13 +146,10 @@ $(document).ready(function() {
 				month = 1;
 			}
 		}  
-	 	/*	}
-	
-	 if(month>confirm){
+	/* else if(month>confirm){
 		alert("당월보다 큰 숫자는 클릭할 수 없습니다.");
 		history.back();
-	} */
-	
+	} 	 */
  	location.href="./payment_list?month="+month+"&year="+year;
 }
 </script>
@@ -207,6 +203,7 @@ $(document).ready(function() {
                                         <tr>
                                             <th colspan="4" style="text-align: right">총 환불금액</th>                                       
                                             <th style="color: red"><fmt:formatNumber value="${list[0].refundtotal }" pattern="#,###"  /></th>
+                                       
                                         </tr>
                                         <tr>
                                             <th colspan="4" style="text-align: right">총매출액</th>
