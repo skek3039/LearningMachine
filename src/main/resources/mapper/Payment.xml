@@ -7,7 +7,8 @@
   		(select sum(p_price2) from payment_lecture_view2 where p_refund = 1) as refundtotal
   		from payment_lecture_view2
   		WHERE DATE(p_date) >= DATE_FORMAT(NOW(), '%Y-%m-01')
-		AND <![CDATA[ DATE(p_date) <=
+		AND 
+		<![CDATA[ DATE(p_date) <=
 		 LAST_DAY(NOW())  ]]>		
 		<if test = "u_id != null">
   			and u_id = #{u_id}
