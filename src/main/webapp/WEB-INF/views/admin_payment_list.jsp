@@ -97,9 +97,28 @@ function search(){
 
 
 $(document).ready(function() {
-	let month = <%=month.format(nowTime)%>;
-	$("label[for='month']").text("<%=month.format(nowTime)%>");
-});
+
+	var checkMonth = <%=request.getParameter("checkMonth") %>;	
+	var pre = null;
+	var next = null;
+	var resultM = null;
+	if(checkMonth != null){
+		if(checkMonth == "1"){			
+			pre = <%=request.getParameter("month") %>;
+			pre = pre-1;
+			$("label[for='month']").text(pre);	
+			resultM = pre;
+		}else if(checkMonth == "2"){
+			next = <%=request.getParameter("month") %>;
+			next = next + 1;
+			$("label[for='month']").text(next);	
+			resultM = next;
+		}	
+	}else{
+		$("label[for='month']").text(<%=month.format(nowTime)%>);
+		resultM = <%=month.format(nowTime)%>;
+	}  
+}); 
 
 <%-- function month(check){
 	alert(check);
@@ -160,7 +179,8 @@ $(document).ready(function() {
 		      <!-- DataTable -->
                     <div class="card shadow mb-4"style="width: 800px; height: 500px; ">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary"><a href="./payment_list?year=<%=year.format(nowTime)%>&month=<%=month.format(nowTime)%>&checkMonth=1">◀</a>
+                            <h6 class="m-0 font-weight-bold text-primary">
+                            <a href="./payment_list?year=<%=year.format(nowTime)%>&month=<%=month.format(nowTime) %>&checkMonth=1">◀</a>
                             <%=year.format(nowTime) %>년 <label for="month" ></label>월 매출 ▶</h6>
                         </div>
                         <div class="card-body">
