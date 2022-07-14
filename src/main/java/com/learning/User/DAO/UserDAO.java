@@ -34,4 +34,16 @@ public class UserDAO {
 		
 		return sqlSession.selectList(namespace + ".RegistedLecture", u_id);
 	}
+	
+	public int RecentLectureVideo(UserAttendanceForm form) {
+		
+		if(sqlSession.selectOne(namespace + ".RecentLectureVideo", form) == null) {
+			return 0;
+		}else {
+			
+			return sqlSession.selectOne(namespace + ".RecentLectureVideo", form);
+		}
+	}
+	
+	
 }

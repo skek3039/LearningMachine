@@ -115,8 +115,8 @@ details>summary {
 				<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
 					<!-- <a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="">Read More</a> -->
 					<div class="d-inline-block border rounded-pill text-primary px-4 mb-3">${LectureDetail.l_category}</div>
-					<h2 class="mb-4">${LectureDetail.l_name}</h2>
-					<p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor eirmod</p>
+					<h2>${LectureDetail.t_nickname}</h2><h3 class="mb-4">선생님 소개</h3>
+					<p class="mb-4">${LectureDetail.t_spec}</p>
 					<div class="row g-3 mb-4">
 						<div class="col-12 d-flex">
 							<div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
@@ -136,7 +136,25 @@ details>summary {
 							</div>
 						</div>
 					</div>
-					<a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href=""> 결재하기	</a>
+					<c:choose>
+						<c:when test="${sessionScope.u_id eq null}">
+							결재하기 찜하기(로그인)
+						</c:when>
+						<c:otherwise>
+							<c:choose>
+								<c:when test="${LectureDetail.payment_whether eq 1}">
+									<a href="./LetureVideo?v_no=${LectureVideos[1].v_no}"
+							class="btn btn-outline-light rounded-pill border-2 py-3 px-5 animated slideInRight">처음부터 듣기</a>
+									<c:if test="${RecentVideo > 0}">
+										<a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="./LectureVideo?v_no=${RecentVideo}">이어듣기</a>
+									</c:if>
+								</c:when>
+								<c:otherwise>
+									결재하기 찜하기
+								</c:otherwise>
+							</c:choose>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 		</div>

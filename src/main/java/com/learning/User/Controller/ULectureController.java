@@ -7,12 +7,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.learning.User.Service.ULectureService;
+import com.learning.User.Service.UserService;
+
 import java.util.*;
 import com.learning.User.Form.*;
 
 @Controller
 public class ULectureController {
 
+	@Autowired
+	private UserService userService;
+	
 	@Autowired
 	private ULectureService lectureService;
 
@@ -38,7 +43,8 @@ public class ULectureController {
 		rq.setAttribute("LectureDetail", lectureService.LectureDetail(u_id, l_code));
 		rq.setAttribute("LectureQnas", lectureService.LuectureQnas(u_id, l_code));
 		rq.setAttribute("LectureVideos", lectureService.LectureVideos(l_code));
-
+		rq.setAttribute("RecentVideo", userService.RecentLectureVideo(u_id, l_code)); //해당 강의 최근 동영상(v_no)
+		
 		return "user/LectureDetail";
 	}
 
@@ -48,8 +54,10 @@ public class ULectureController {
 		String u_id = (String) rq.getSession().getAttribute("u_id");
 		String l_code = lectureService.CheckLectureRegister(v_no);
 		//n번째 동영상(미리보기 3개를 위해 key값이 1부터 올라가는 값을 파라미터로 받음)
-		int order = Integer.parseInt(rq.getParameter("order"));
+		int order = (rq.getParameter("order") != null)?Integer.parseInt(rq.getParameter("order")):0;
 		Map<Integer, VideoForm> Videos = null;
+		VideoForm form = null;
+		
 		if (l_code == null) {
 
 			return "redirect:/404";
@@ -58,8 +66,21 @@ public class ULectureController {
 
 			Videos = lectureService.LectureVideos(l_code);
 			try {
-				
-				rq.setAttribute("Video", Videos.get(order));
+				if(order > 0) {
+					
+					rq.setAttribute("Video", Videos.get(order));
+				}else {
+					
+					for(int i = 0; i < Videos.size(); i++) {
+						
+						form = Videos.get(i);
+						if(form.getV_no() == userService.RecentLectureVideo(u_id, l_code)) {
+							
+							rq.setAttribute("Video", form);
+							break;
+						}
+					}
+				}
 			}catch(Exception e){
 				
 				return "redirect:/404";

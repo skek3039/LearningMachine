@@ -7,6 +7,17 @@
   		where
   			u_id = #{u_id}
   	</select>
+  	
+  	<select id="RecentLectureVideo" parameterType="com.learning.User.Form.UserAttendanceForm" resultType="Integer">
+  	
+  		SELECT v_no FROM lecture_video_attendance 
+  		WHERE 
+  		va_date = 
+  			(SELECT  MAX(va_date) 
+  			FROM lecture_video_attendance 
+  			WHERE u_id = #{u_id} AND l_code = #{l_code})
+  	
+  	</select>
   
   	<select id="RegistedLecture" parameterType = "String" resultType = "com.learning.User.Form.ULectureForm">
   		

@@ -60,4 +60,17 @@ public class UserService {
 		}
 		
 	}
+	
+	public int RecentLectureVideo(String u_id, String l_code) {
+		
+		UserAttendanceForm form = new UserAttendanceForm();
+		form.setU_id(u_id);
+		form.setL_code(l_code);
+		
+		if(userDAO.RecentLectureVideo(form)>0) {
+			return userDAO.RecentLectureVideo(form);
+		}else {
+			return 0;
+		}
+	}
 }
