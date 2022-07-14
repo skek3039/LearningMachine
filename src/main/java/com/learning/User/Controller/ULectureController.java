@@ -1,4 +1,4 @@
-package com.learning.User.Controller;
+	package com.learning.User.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -47,15 +47,39 @@ public class ULectureController {
 
 		String u_id = (String) rq.getSession().getAttribute("u_id");
 		String l_code = lectureService.CheckLectureRegister(v_no);
-
+		//n번째 동영상(미리보기 3개를 위해 key값이 1부터 올라가는 값을 파라미터로 받음)
+		int order = Integer.parseInt(rq.getParameter("order"));
+		Map<Integer, VideoForm> Videos = null;
 		if (l_code == null) {
 
 			return "redirect:/404";
 
 		} else if (u_id != null && lectureService.RegisterVideo(l_code, u_id) == 1) {
 
+			Videos = lectureService.LectureVideos(l_code);
+			try {
+				
+				rq.setAttribute("Video", Videos.get(order));
+			}catch(Exception e){
+				
+				return "redirect:/404";
+			}
 		} else {
 
+			Videos = lectureService.LectureVideos(l_code);
+			
+			if(order > 3) {
+				
+				return "redirect:/Pay?l_code=" + l_code;
+			}else {
+				try {
+					
+					rq.setAttribute("Video", Videos.get(order));
+				}catch(Exception e){
+					
+					return "redirect:/404";
+				}
+			}
 		}
 
 		return "user/video";

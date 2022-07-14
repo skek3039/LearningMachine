@@ -41,7 +41,7 @@ public class ULectureDAO {
 
 	public String VideoLectureCheck(int v_no) {
 		
-		return sqlSession.selectOne(namespace + ".UVideoLnameCheck", v_no);
+		return sqlSession.selectOne(namespace + ".UVideoLectureCheck", v_no);
 	}
 	
 	public List<ULectureQnaForm> LectureQna(String l_code) {
