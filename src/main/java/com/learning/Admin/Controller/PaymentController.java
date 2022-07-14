@@ -60,50 +60,44 @@ public class PaymentController {
 	
 	//전체결제내역리스트 보기
 	@GetMapping(value = "/payment_list")
-	public ModelAndView payment_list(HttpServletRequest request, HttpSession session,HttpServletResponse response) throws IOException {
+	public @ResponseBody ModelAndView payment_list(HttpServletRequest request, HttpSession session,HttpServletResponse response) throws IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		if ((int) session.getAttribute("u_authority") == 7) {
 			ModelAndView mv = new ModelAndView("admin_payment_list");
-			String checkMonth = request.getParameter("checkMonth");
+			
 			String month = request.getParameter("month");
 			String year = request.getParameter("year");
-
 			if (month == null) {
 				year = now.format(formatter);
 				month = now.format(formatter1);
-			} else {
+			} 
 
-				if (checkMonth.equals("1")) {
-					int strmon = util.str2int(request.getParameter("month")) - 1;
-					month = strmon + "";
-				} else {
-					int strmon = util.str2int(request.getParameter("month")) + 1;
-					month = strmon + "";
-				}
-
-			}
-			System.out.println(month);
-			System.out.println(year + "," + month);
+			System.out.println("년은"+year + ", 월은" + month);
 			
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("month",month);
 			map.put("year",year);
 			
-			List<String> list = paymentService.paymentList(map);
 			
-			System.out.println(list.size()); 
-			/*
-			 * PrintWriter pw = response.getWriter(); pw.print(list);
-			 */	
-			mv.addObject("list",list); 
+			List<String> list = paymentService.paymentList(map);
+			System.out.println(list.size());
+			if(list.size() != 0) {
+				System.out.println("여기냐");
+				mv.addObject("list",list); 				
+			}else {
+				System.out.println("여기야?");
+				mv.addObject("month",month);
+				mv.addObject("year",year);
+			}
 			return mv;
 		} else {
 			ModelAndView mv = new ModelAndView("404");
 			return mv;
 		}
 	}
+	
 	
 	// 환불신청내역 불러오기
 	@GetMapping(value = "/admin_student_refund")

@@ -1,12 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%
 	Date nowTime = new Date();
 	SimpleDateFormat year = new SimpleDateFormat("yyyy");
-	SimpleDateFormat month = new SimpleDateFormat("MM");
+	SimpleDateFormat month = new SimpleDateFormat("M");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,7 +96,7 @@ function search(){
 	location.href = "./admin_studentSearch?u_name="+u_name;
 }
 
-
+<%-- 
 $(document).ready(function() {
 
 	var checkMonth = <%=request.getParameter("checkMonth") %>;	
@@ -118,39 +119,43 @@ $(document).ready(function() {
 		$("label[for='month']").text(<%=month.format(nowTime)%>);
 		resultM = <%=month.format(nowTime)%>;
 	}  
-}); 
 
-<%-- function month(check){
-	alert(check);
-	if(check == 1){
-		var month = (<%=month.format(nowTime) %>)-1;
-		var year = (<%=year.format(nowTime) %>);
-		
-		if(month < 1){
-			var year = (<%=year.format(nowTime) %>)-1;
-		}
-	}else{
-		var month = (<%=month.format(nowTime)%>)+1;		
-		var year = (<%=year.format(nowTime) %>);
-		if(month > 12){
-			var year = (<%=year.format(nowTime) %>)+1;
-		}
-	}
-	$.ajax({
-		url : "./payment_list",
-		type: "get",
-		dataType : "html",
-		data : {"month" : month ,
-				"year" : year	
-		},
-		success : function(data){
-			alert(data);
-		},error : function(){
-			alert("싱퍀");		
-		}
-	});
+});  --%>
+
+ function preNext(year,month,checkPN){
+	var checkPN = checkPN;
+	var year = year; 
+	var month = month;
+	var confirm = Number(<%= month.format(nowTime)%>);
+	
+	alert(confirm + "," + month);
+/* 	if(month<confirm){ */
+	 	if(checkPN == "1"){
+			if(month >0){
+				year = year;
+				month =Number(month) - 1;
+			}else{
+				year = Number(year)-1;
+				month = 12;
+			}
+		}else{
+			if(month < 13){
+				year = year;
+				month =	Number(month) + 1;
+			}else{
+				year = Number(year)+1;
+				month = 1;
+			}
+		}  
+	 	/*	}
+	
+	 if(month>confirm){
+		alert("당월보다 큰 숫자는 클릭할 수 없습니다.");
+		history.back();
+	} */
+	
+ 	location.href="./payment_list?month="+month+"&year="+year;
 }
- --%>
 </script>
 
 
@@ -174,17 +179,20 @@ $(document).ready(function() {
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
-		<div style="padding-top: 110px;"> <h1 class="h3 mb-2 text-gray-800">결제내역</h1><hr style="border: solid 1px;"></div>
+		<div id="pay" style="padding-top: 110px;"> <h1 class="h3 mb-2 text-gray-800">결제내역</h1><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px;padding-left: 120px; height: 100%">
 		      <!-- DataTable -->
+                             <fmt:parseDate value="${list[0].p_date}" var="time1" pattern="yyyy-MM-dd HH:mm:ss.S" />                                                                    
+                            <fmt:formatDate value="${time1 }" var="year" pattern="yyyy"/>
+                            <fmt:formatDate value="${time1 }" var="month" pattern="MM"/>
                     <div class="card shadow mb-4"style="width: 800px; height: 500px; ">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">
-                            <a href="./payment_list?year=<%=year.format(nowTime)%>&month=<%=month.format(nowTime) %>&checkMonth=1">◀</a>
-                            <%=year.format(nowTime) %>년 <label for="month" ></label>월 매출 ▶</h6>
+                            <a href="javascript:preNext('${year }','${month }',1);">◀</a>
+                            ${year } 년  ${month } 월   <a href="javascript:preNext('${year }','${month }',2);">▶</a></h6>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive" >
+                            <div class="table-responsive" >    
                                 <table class="table table-bordered" id="dataTable"  cellspacing="0">
                                     <thead>
                                         <tr>
@@ -206,6 +214,7 @@ $(document).ready(function() {
                                           </tr>
                                     </tfoot>
                                     <tbody> 
+                                    <c:if test="${list.size() ne 0 }">
                                     <c:forEach items="${list }" var="pay">
                                         <tr>
                                             <td>${pay.u_name }(${pay.u_id })</td>
@@ -218,9 +227,11 @@ $(document).ready(function() {
                                            
                                             <td><fmt:formatNumber value="${pay.p_price }" pattern="#,###"  /></td>
                                         </tr>
-                                    </c:forEach>           
+                                    </c:forEach>  
+                                     </c:if>         
 									 </tbody>
                                 </table>
+                               
                             </div>
                         </div>
                     </div>
