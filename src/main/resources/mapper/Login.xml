@@ -15,4 +15,13 @@
   	select count(*) as count FROM user where u_id=#{u_id}
   </select>
   
+  <update id="resetPw" parameterType="userDTO" >
+  	 update user set u_pw=#{u_pw} where u_id=#{u_id} AND u_email=#{u_email}
+  </update>
+  
+  <select id="Check" parameterType="userDTO" resultType="userDTO">
+  	select * FROM user where u_id=#{u_id} AND u_email=#{u_email}
+  </select>
+  
+  
   </mapper>

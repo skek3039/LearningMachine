@@ -1,5 +1,7 @@
 package com.learning.Common.Service;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,5 +24,14 @@ public class LoginService {
 	public int checkID(String u_id) {
 		return loginDAO.checkID(u_id);
 	}
+
+	public userDTO forgotPW(userDTO user) {
+		return loginDAO.forgotPW(user);
+	}
+
+	public int resetPw(userDTO user) {
+		return loginDAO.resetPw(user);
+	}
+
 
 }

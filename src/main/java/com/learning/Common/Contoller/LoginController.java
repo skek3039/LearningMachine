@@ -1,8 +1,8 @@
 package com.learning.Common.Contoller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,8 +11,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.learning.Common.Service.LoginService;
 import com.learning.DTO.userDTO;
@@ -21,39 +23,48 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 	
+	//비밀번호 재설정 화면
+	@RequestMapping(value = "/resetPw", method = RequestMethod.GET )
+	public String resetPw() {
+		return "resetPw";
+	}
 	
-	
-	@PostMapping(value = "/login")
-	public String login(HttpServletRequest request) {
-		userDTO dto = new userDTO();
-		dto.setU_id(request.getParameter("id"));
-		dto.setU_pw(request.getParameter("pw"));
-		
-		dto = loginService.login(dto);
-		if(dto != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("u_id",dto.getU_id());
-			session.setAttribute("u_authority", dto.getU_authority());
-			if(dto.getU_authority() > 6) {
-				return "redirect:/admin";				
-			}else if(dto.getU_authority() > 3) {				
-				System.out.println("강사");
-				return "redirect:/lecture";								
-			}
+	//비밀번호 
+	@PostMapping(value = "/resetPw")
+	public String resetPw(@ModelAttribute userDTO user, HttpServletRequest request) {
+		int Reset = loginService.resetPw(user);
+		if (Reset == 1) {
+			request.setAttribute("error", "<script>alert('비밀번호 변경 완료<br>로그인 화면으로 이동합니다.'); window.location.href = document.referrer; "
+					+ "</script>");
+			return "login";
+		}else {
+			return "404";
 		}
-		return "redirect:/";
 	}
 	
+	//비밀번호 찾기
+	@RequestMapping(value = "/forgotPW", method = RequestMethod.GET )
+	public String findPwGET(){
+		return "forgotPW";
+	}
 	
-	@GetMapping(value = "/forgetPW")
-	public String forgetPW(HttpSession session ) {
+	//아이디, 이메일 확인
+	@RequestMapping(value = "/forgotPW", method = RequestMethod.POST )
+	public String findPwPost(@ModelAttribute userDTO user, HttpServletRequest request) throws IOException {
+		user = loginService.forgotPW(user);
 		
-		return "forgetPW";
-	}
-	
+		if (user.getU_authority() != 0 ) {	
+			request.setAttribute("user", user);
+			return "resetPw";
+			
+		} else {
+			request.setAttribute("error", "<script>alert('정보가 일치 하지 않습니다.'); window.location.href = document.referrer; "
+					+ "</script>");
+			return "forgotPW";
+		}
+}
 	
 	@PostMapping(value = "/checkID")
-	@ResponseBody
 	public String checkID(HttpServletRequest request) throws IOException {
 		String result = "1";
 		int count = loginService.checkID(request.getParameter("u_id"));
@@ -87,7 +98,6 @@ public class LoginController {
 		
 		int result = loginService.join(dto);
 		
-		System.out.println(result);
 		return "redirect:/join";
 	}
 	
