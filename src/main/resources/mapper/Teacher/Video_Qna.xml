@@ -32,7 +32,7 @@
 		</if>
 	</select>
 	
-	<select id="t_video_qnaDetail" parameterType="String" resultType="LectureDTO">
+	<select id="t_video_qnaDetail" parameterType="LectureDTO" resultType="LectureDTO">
 		SELECT *
 		,(SELECT u_nickname FROM user WHERE u_id = q.u_id) AS u_nickname
 		,(SELECT l_name FROM lecture l WHERE l.l_code = q.l_code) AS l_name
@@ -42,12 +42,10 @@
 		</if>
 	</select>
 	
-	<select id="qna_answer_detail" parameterType="String" resultType="LectureDTO">
-		SELECT *
-		,(SELECT u_nickname FROM user WHERE u_id = q.u_id) AS u_nickname
-		,(SELECT l_name FROM lecture l WHERE l.l_code = q.l_code) AS l_name
-		FROM lecture_video_qna q INNER JOIN lecture_video_qna_reply
-		WHERE vq_confirm = 1
+	<select id="qna_answer_detail" parameterType="LectureDTO" resultType="LectureDTO">
+		select *
+		from video_qna_view
+		where vq_no=#{vq_no}
 	</select>
 	
 	

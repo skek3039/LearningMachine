@@ -94,53 +94,47 @@
 		<div style="padding-top: 110px;"></div>
 		<div style="padding-top: 10px; padding-left: 400px">
 				<table>
-					<c:forEach items="${qna_answer_detail}" var="q">
 					<tr>
 					<th><img style="width: 50px; height: 50px;" id="up" alt="" src="./img/q.png" title="질문"></th>
-						<td style="padding-top: 10px; word-break:break-all; width: 750px"><h5>${q.vq_title }</h5></td>
+						<td style="padding-top: 10px; word-break:break-all; width: 750px"><h5>${dto.vq_title }</h5></td>
 					</tr>
 					<tr>
 						<td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/id.png" title="id">
-						${q.u_id }</h6></td><td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/date.png" title="날짜">
-											<fmt:parseDate value="${q.vqr_date }" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
+						${dto.u_id }</h6></td><td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/date.png" title="날짜">
+											<fmt:parseDate value="${dto.vqr_date }" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
                                             <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
                     						${time }
 					</h6></td>
-					</tr></c:forEach></table><br>
+					</tr></table><br>
 					<table>
-					<c:forEach items="${qna_answer_detail}" var="q">
 					<tr>
-						<td style="word-break:break-all; width: 820px">${q.vq_content }</td>
+						<td style="word-break:break-all; width: 820px">${dto.vq_content }</td>
 					</tr>
-					</c:forEach>
 					</table>
 					<div style="padding-top: 150px;">
 					<hr style="width: 850px; height: 2px;">
 					</div>
 					<br>
 					<table>
-					<c:forEach items="${qna_answer_detail}" var="q">
 					<tr>
 						<th><img style="width: 50px; height: 50px;" id="up" alt="" src="./img/a.png" title="답변"></th>
-						<td style="padding-top: 10px; word-break:break-all; width: 750px"><h5>${q.vqr_title }</h5></td>
+						<td style="padding-top: 10px; word-break:break-all; width: 750px"><h5>${dto.vqr_title }</h5></td>
 					</tr>
 					<tr>
 						<td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/id.png" title="id">
-						${q.t_id }</h6></td><td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/date.png" title="date">
-                                            <fmt:parseDate value="${q.vqr_date }" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
+						${dto.t_id }</h6></td><td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/date.png" title="date">
+                                            <fmt:parseDate value="${dto.vqr_date }" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
                                             <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
                     						${time }&nbsp;
-                    	<img onclick="location.href='./v_qna_update?vq_no=${q.vq_no}'" style="width: 20px; height: 20px;" id="update" alt="" src="./img/update.png" title="id">
-						<img onclick="location.href='./video_qna_reply?vq_no=${q.vq_no}'" style="width: 20px; height: 20px;" id="delete" alt="" src="./img/delete.png" title="id"> 					
+                    	<img onclick="location.href='./v_qna_update?vq_no=${dto.vq_no}'" style="width: 20px; height: 20px;" id="update" alt="" src="./img/update.png" title="id">
+						<img onclick="location.href='./video_qna_reply?vq_no=${dto.vq_no}'" style="width: 20px; height: 20px;" id="delete" alt="" src="./img/delete.png" title="id"> 					
 					</h6></td>
 					
-					</tr></c:forEach></table><br>
+					</tr></table><br>
 					<table>
-					<c:forEach items="${qna_answer_detail}" var="q">
 					<tr>
-						<td style="word-break:break-all; width: 820px">${q.vqr_content }</td>
+						<td style="word-break:break-all; width: 820px">${dto.vqr_content }</td>
 					</tr>
-					</c:forEach>
 					</table>
 					
 				

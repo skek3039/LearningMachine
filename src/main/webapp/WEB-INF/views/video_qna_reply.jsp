@@ -94,32 +94,29 @@
 		<div style="padding-top: 110px;"></div>
 		<div style="padding-top: 10px; padding-left: 400px">
 				<table>
-					<c:forEach items="${video_qnaDetail}" var="v">
 					<tr>
 					<th><img style="width: 50px; height: 50px;" id="up" alt="" src="./img/q.png" title="질문"></th>
-						<td style="padding-top: 10px; word-break:break-all; width: 750px"><h5>${v.vq_title }</h5></td>
+						<td style="padding-top: 10px; word-break:break-all; width: 750px"><h5>${dto.vq_title }</h5></td>
 					</tr>
 					<tr>
 						<td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/id.png" title="id">
-						${v.u_id }</h6></td><td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/date.png" title="date">
-											<fmt:parseDate value="${v.vq_date }" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
+						${dto.u_id }</h6></td><td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/date.png" title="date">
+											<fmt:parseDate value="${dto.vq_date }" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
                                             <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
                     						${time }
 					</h6></td>
-					</tr></c:forEach></table><br>
+					</tr></table><br>
 					<table>
-					<c:forEach items="${video_qnaDetail}" var="v">
 					<tr>
-						<td style="word-break:break-all; width: 820px">${v.vq_content }</td>
+						<td style="word-break:break-all; width: 820px">${dto.vq_content }</td>
 					</tr>
-					</c:forEach>
 					</table>
 					<div style="padding-top: 150px;">
 					<hr style="width: 820px; height: 2px;">
 					</div>
 					<br>
 				<div id="writeform" style="padding-right: 100px;">
-				<form action="./video_qna_reply.do?vq_no=${video_qnaDetail[0].vq_no }" method="post">
+				<form action="./video_qna_reply.do?vq_no=${dto.vq_no }" method="post">
 					<input style="width: 820px;" type="text" name="title" required="required" placeholder="제목을 입력해주세요.">
 					<textarea name="content" id="summernote" required="required"></textarea>
 					<button type="submit" style="float:right;">답변등록</button>

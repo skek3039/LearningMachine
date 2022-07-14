@@ -28,16 +28,16 @@ public class Video_QnaService {
 		return video_qnaDAO.totalCount();
 	}
 
-	public List<LectureDTO> video_qnaDetail(String vq_no) {
-		return video_qnaDAO.video_qnaDetail(vq_no);
+	public LectureDTO video_qnaDetail(LectureDTO video_qnaDetail) {
+		return video_qnaDAO.video_qnaDetail(video_qnaDetail);
 	}
 
 	public List<LectureDTO> video_answer(Map<String, Object> map) {
 		return video_qnaDAO.video_answer(map);
 	}
 
-	public List<LectureDTO> qna_answer_detail(String vq_no) {
-		return video_qnaDAO.qna_answer_detail(vq_no);
+	public LectureDTO qna_answer_detail(LectureDTO qna_answer_detail) {
+		return video_qnaDAO.qna_answer_detail(qna_answer_detail);
 	}
 
 	public List<LectureDTO> v_qna_update(String vq_no) {
