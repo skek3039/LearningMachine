@@ -13,13 +13,17 @@
   		from lecture_info_view
   	</select>
   	
+  	<select id="totalCount2" resultType="integer">
+  		select COUNT(*) AS count
+  		from lecture_apply
+  	</select>
 
 	<select id="t_lectureApplyList" parameterType="map" resultType="LectureDTO">
   		SELECT *
 		FROM lecture_apply
-		WHERE t_id = #{u_id}
+		WHERE t_id = #{u_id} AND l_recognize != 2
 		ORDER BY l_date DESC
-		limit #{page.startPage} , #{page.lastPage}
+		limit #{page.startPage} , #{page.lastPage} 
   	</select>	
 
 	<select id="t_lectureList" parameterType="map" resultType="LectureDTO">
@@ -57,4 +61,12 @@
   	<select id="cate" resultType="hashmap">
   		select * from lecture_category
   	</select>
+  	
+  	<select id="lecture_refusal" parameterType="map" resultType="LectureDTO">
+  		SELECT *
+		FROM lecture_apply
+		WHERE t_id = #{u_id} AND l_recognize = 2
+		ORDER BY l_date DESC
+		limit #{page.startPage} , #{page.lastPage} 
+  	</select>	
   </mapper>
