@@ -5,7 +5,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%
 	Date nowTime = new Date();
-	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일");
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -113,7 +113,7 @@ function search(){
 		      <!-- DataTable -->
                     <div class="card shadow mb-4"style="width: 800px; height: 500px; ">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary"> <%=sf.format(nowTime) %>금일 매출</h6>
+                            <h6 class="m-0 font-weight-bold text-primary"> <%=sf.format(nowTime) %> 매출</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive" >

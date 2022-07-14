@@ -2,7 +2,11 @@ package com.learning.Admin.Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +32,11 @@ public class PaymentController {
 	private PaymentService paymentService;
 	
 	
+	public  LocalDate now = LocalDate.now();
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+	String month = now.format(formatter);
+	
+	
 	//매출관리페이지
 	@GetMapping(value = "/payment")
 	public ModelAndView payment(HttpSession session, HttpServletRequest request) {
@@ -46,12 +55,15 @@ public class PaymentController {
 	
 	
 	
-	//결제내역
+	//전체결제내역리스트 보기
 	@GetMapping(value = "/payment_list")
 	public ModelAndView payment_list(HttpServletRequest request, HttpSession session) {
 		if ((int) session.getAttribute("u_authority") == 7) {
 			ModelAndView mv = new ModelAndView("admin_payment_list");
+			Map<String, Object> map = new HashMap<String, Object>();
+			//map.put("month");
 			List<String> list = paymentService.paymentList(null);
+			System.out.println(month);
 			mv.addObject("list",list);
 			return mv;
 		} else {
