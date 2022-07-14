@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.learning.Admin.Service.AdminService;
 import com.learning.Admin.Service.PaymentService;
+import com.learning.utill.Util;
 
 @Controller
 public class PaymentController {
@@ -31,10 +32,12 @@ public class PaymentController {
 	@Autowired
 	private PaymentService paymentService;
 	
+	@Autowired
+	private Util util;
 	
-	public  LocalDate now = LocalDate.now();
-	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
-	String month = now.format(formatter);
+	private LocalDate now = LocalDate.now();               
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy");
+	DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("MM");
 	
 	
 	//매출관리페이지
@@ -57,14 +60,44 @@ public class PaymentController {
 	
 	//전체결제내역리스트 보기
 	@GetMapping(value = "/payment_list")
-	public ModelAndView payment_list(HttpServletRequest request, HttpSession session) {
+	public ModelAndView payment_list(HttpServletRequest request, HttpSession session,HttpServletResponse response) throws IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		if ((int) session.getAttribute("u_authority") == 7) {
 			ModelAndView mv = new ModelAndView("admin_payment_list");
-			Map<String, Object> map = new HashMap<String, Object>();
-			//map.put("month");
-			List<String> list = paymentService.paymentList(null);
+			String checkMonth = request.getParameter("checkMonth");
+			String month = request.getParameter("month");
+			String year = request.getParameter("year");
+
+			if (month == null) {
+				year = now.format(formatter);
+				month = now.format(formatter1);
+			} else {
+
+				if (checkMonth.equals("1")) {
+					int strmon = util.str2int(request.getParameter("month")) - 1;
+					month = strmon + "";
+				} else {
+					int strmon = util.str2int(request.getParameter("month")) + 1;
+					month = strmon + "";
+				}
+
+			}
 			System.out.println(month);
-			mv.addObject("list",list);
+			System.out.println(year + "," + month);
+			
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("month",month);
+			map.put("year",year);
+			
+			List<String> list = paymentService.paymentList(map);
+			
+			System.out.println(list.size()); 
+			/*
+			 * PrintWriter pw = response.getWriter(); pw.print(list);
+			 */	
+			mv.addObject("list",list); 
 			return mv;
 		} else {
 			ModelAndView mv = new ModelAndView("404");

@@ -5,7 +5,8 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%
 	Date nowTime = new Date();
-	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월");
+	SimpleDateFormat year = new SimpleDateFormat("yyyy");
+	SimpleDateFormat month = new SimpleDateFormat("MM");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,6 +50,15 @@
 <link href="/resources/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="./resources/lib/wow/wow.min.js"></script>
+<script src="./resources/lib/easing/easing.min.js"></script>
+<script src="./resources/lib/waypoints/waypoints.min.js"></script>
+<script src="./resources/lib/owlcarousel/owl.carousel.min.js"></script>
+
+
 <style type="text/css">
     <style>@font-face {
         font-family: 'LeferiPoint-WhiteObliqueA';
@@ -85,6 +95,43 @@ function search(){
 	location.href = "./admin_studentSearch?u_name="+u_name;
 }
 
+
+$(document).ready(function() {
+	let month = <%=month.format(nowTime)%>;
+	$("label[for='month']").text("<%=month.format(nowTime)%>");
+});
+
+<%-- function month(check){
+	alert(check);
+	if(check == 1){
+		var month = (<%=month.format(nowTime) %>)-1;
+		var year = (<%=year.format(nowTime) %>);
+		
+		if(month < 1){
+			var year = (<%=year.format(nowTime) %>)-1;
+		}
+	}else{
+		var month = (<%=month.format(nowTime)%>)+1;		
+		var year = (<%=year.format(nowTime) %>);
+		if(month > 12){
+			var year = (<%=year.format(nowTime) %>)+1;
+		}
+	}
+	$.ajax({
+		url : "./payment_list",
+		type: "get",
+		dataType : "html",
+		data : {"month" : month ,
+				"year" : year	
+		},
+		success : function(data){
+			alert(data);
+		},error : function(){
+			alert("싱퍀");		
+		}
+	});
+}
+ --%>
 </script>
 
 
@@ -113,7 +160,8 @@ function search(){
 		      <!-- DataTable -->
                     <div class="card shadow mb-4"style="width: 800px; height: 500px; ">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary"> <%=sf.format(nowTime) %> 매출</h6>
+                            <h6 class="m-0 font-weight-bold text-primary"><a href="./payment_list?year=<%=year.format(nowTime)%>&month=<%=month.format(nowTime)%>&checkMonth=1">◀</a>
+                            <%=year.format(nowTime) %>년 <label for="month" ></label>월 매출 ▶</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive" >
@@ -177,14 +225,6 @@ function search(){
 				}
 			});
 		</script>
-
-	<!-- JavaScript Libraries -->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="./resources/lib/wow/wow.min.js"></script>
-	<script src="./resources/lib/easing/easing.min.js"></script>
-	<script src="./resources/lib/waypoints/waypoints.min.js"></script>
-	<script src="./resources/lib/owlcarousel/owl.carousel.min.js"></script>
 
   	<!-- Page level plugins -->
     <script src="./resources/js/jquery.dataTables.min.js"></script>

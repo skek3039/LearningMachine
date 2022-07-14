@@ -2,10 +2,8 @@ package com.learning.Common.Contoller;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +20,32 @@ import com.learning.DTO.userDTO;
 public class LoginController {
 	@Autowired
 	private LoginService loginService;
+	
+	
+	//로그인처리.
+	@PostMapping(value = "/login")
+	   public String login(HttpServletRequest request) {
+	      userDTO dto = new userDTO();
+	      dto.setU_id(request.getParameter("id"));
+	      dto.setU_pw(request.getParameter("pw"));
+	      
+	      dto = loginService.login(dto);
+	      if(dto != null) {
+	         HttpSession session = request.getSession();
+	         session.setAttribute("u_id",dto.getU_id());
+	         session.setAttribute("u_authority", dto.getU_authority());
+	         if(dto.getU_authority() > 6) {
+	            return "redirect:/admin";            
+	         }else if(dto.getU_authority() > 3) {            
+	            System.out.println("강사");
+	            return "redirect:/lecture";                        
+	         }
+	      }
+	      return "redirect:/";
+	   }
+	   
+	
+	
 	
 	//비밀번호 재설정 화면
 	@RequestMapping(value = "/resetPw", method = RequestMethod.GET )

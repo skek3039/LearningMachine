@@ -2,16 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="Payment">
 
-  	<select id="paymentList" parameterType="String" resultType="map">
-  		select *,(select sum(p_price2) from payment_lecture_view2) as sumtotal ,
+  	<select id="paymentList" parameterType="map" resultType="map">
+  		select *,
+  		(select sum(p_price2) from payment_lecture_view2) as sumtotal ,
   		(select sum(p_price2) from payment_lecture_view2 where p_refund = 1) as refundtotal
   		from payment_lecture_view2
-  		WHERE DATE(p_date) >= DATE_FORMAT(NOW(), '%Y-%m-01')
+  		WHERE 
+  		DATE(p_date) >= DATE_FORMAT(NOW(), '${year}-${month}-01')
 		AND 
-		<![CDATA[ DATE(p_date) <=
-		 LAST_DAY(NOW())  ]]>		
+		<![CDATA[ 
+		DATE(p_date) <= LAST_DAY( '${year}-${month}-31')  
+		]]>	
+
 		<if test = "u_id != null">
-  			and u_id = #{u_id}
+  			and u_id = ${u_id}
   		</if>
   	</select>
   
