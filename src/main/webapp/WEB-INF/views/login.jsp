@@ -85,7 +85,8 @@
             </div>
 
             <div>
-              <p class="mb-0">Don't have an account? <a href="./join" class="text-white-50 fw-bold">Sign Up</a>
+              <p class="mb-0">Don't have an account? <a href="./join" class="text-white-50 fw-bold">User_Sign Up</a>
+              <p class="mb-0">Don't have an account? <a href="./join2" class="text-white-50 fw-bold">Lecture_Sign Up</a>
               </p>
             </div>
 

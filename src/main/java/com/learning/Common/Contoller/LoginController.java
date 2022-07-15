@@ -24,6 +24,7 @@ public class LoginController {
 	private LoginService loginService;
 	
 	
+	
 	//로그인처리.
 	@PostMapping(value = "/login")
 	   public String login(HttpServletRequest request) {
@@ -62,7 +63,7 @@ public class LoginController {
 		response.setContentType("text/html; charset=utf-8"); 
 		int Reset = loginService.resetPw(user);
 		if (Reset == 1) {
-			response.getWriter().println("<script>alert('비밀번호 변경 성공 로그인 창으로 이동 합니다.'); window.location.href = './login'; "+ "</script>");
+			response.getWriter().println("<script>alert('비밀번호 변경 성공\\n로그인 창으로 이동 합니다.'); window.location.href = './login'; "+ "</script>");
 		}else {
 			response.getWriter().println("<script>alert('비밀번호 변경 실패'); window.location.href = './resetPw'; </script>");
 		}
@@ -109,7 +110,6 @@ public class LoginController {
 	@PostMapping(value = "/join")
 	public String join(HttpServletRequest request) throws UnsupportedEncodingException {
 		
-		request.getCharacterEncoding();
 		request.setCharacterEncoding("UTF-8");
 		
 		userDTO dto = new userDTO();
@@ -128,7 +128,28 @@ public class LoginController {
 		return "redirect:/join";
 	}
 	
+	@GetMapping(value = "join2")
+	public String join2() {
+		return "join2";
+	}
 	
+	@PostMapping(value = "join2")
+	public String join2(HttpServletRequest request) throws UnsupportedEncodingException {
+		
+		request.setCharacterEncoding("UTF-8");
+		
+		userDTO dto = new userDTO();
+		
+		dto.setU_id(request.getParameter("u_id"));
+		dto.setU_pw(request.getParameter("u_pw"));
+		dto.setU_pw(request.getParameter("u_pw1"));
+		dto.setU_email(request.getParameter("u_email"));
+		dto.setU_name(request.getParameter("u_name"));
+		dto.setU_nickname(request.getParameter("u_nickname"));
+		dto.setU_birth(request.getParameter("u_birth"));
+		
+		return "redirect:/ligon";
+	}
 	
 	@GetMapping(value = "/login")
 	public String login() {
