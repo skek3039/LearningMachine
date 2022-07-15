@@ -60,6 +60,18 @@ public class LectureService {
 		return lectureDAO.lecture_refusal(map);
 	}
 
+	public int lecture_update_write(LectureDTO lecture_update_write) {
+		return lectureDAO.lecture_update_write(lecture_update_write);
+	}
+
+	public Object lecture_update(LectureDTO lecture_update) {
+		return lectureDAO.lecture_update(lecture_update);
+	}
+
+
+
+
+
 
 
 

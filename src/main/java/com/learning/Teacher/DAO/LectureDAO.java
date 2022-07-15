@@ -58,6 +58,17 @@ public class LectureDAO {
 		return sqlSession.selectList("lecture.lecture_refusal", map);
 	}
 
+	public int lecture_update_write(LectureDTO lecture_update_write) {
+		sqlSession.update("lecture.lecture_update_recognize",lecture_update_write);
+		return sqlSession.update("lecture.lecture_update_write", lecture_update_write);
+	}
+
+	public Object lecture_update(LectureDTO lecture_update) {
+		return sqlSession.selectOne("lecture.lecture_update", lecture_update);
+	}
+
+
+
 
 
 

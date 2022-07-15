@@ -69,4 +69,22 @@
 		ORDER BY l_date DESC
 		limit #{page.startPage} , #{page.lastPage} 
   	</select>	
+  	
+  	<update id="lecture_update_write" parameterType="LectureDTO">
+		UPDATE lecture_apply 
+		SET l_name=#{l_name}, l_category=#{l_category}, l_info=#{l_info}, l_curriculum=#{l_curriculum}
+		WHERE la_no = #{la_no}
+	</update>
+	
+	<update id="lecture_update_recognize">
+		update lecture_apply set l_recognize = 0
+		WHERE la_no = #{la_no}
+	</update>
+  	
+  	<select id="lecture_update" parameterType ="LectureDTO" resultType="LectureDTO">
+  		SELECT *
+  		FROM lecture_apply
+  		WHERE la_no = #{la_no}
+  	</select>	
+	
   </mapper>

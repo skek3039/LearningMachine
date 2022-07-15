@@ -131,20 +131,10 @@
 		<jsp:include page="./header.jsp" />
 		<div style="width: 100%; height: 705px;">
 			<jsp:include page="./lecture_nav.jsp" />
-			<div style="padding-top: 110px;">
-				<h3>&nbsp;&nbsp;강의 상세보기</h3>
-				<hr style="border: solid 1px;">
-			</div>
-			<div style="padding-top: 10px; text-align: center;">
-			</div>
-
 			<br>
 			<div style="text-align: center">
-				<div id="requestform" style="padding-top: 10px; padding-left: 340px">
-				<div style="padding-left: 770px; padding-bottom: 5px;">
-				<img onclick="location.href='./lecture_update?la_no=${dto.la_no}'" style="width: 25px; height: 25px;" id="update" alt="" src="./img/update.png" title="id">
-				<img onclick="location.href='./v_qna_update?vq_no=${dto.vq_no}'" style="width: 25px; height: 25px;" id="update" alt="" src="./img/delete.png" title="id">
-				</div>
+				<div id="updateform" style="padding-top: 150px; padding-left: 340px">
+					<form action="./lecture_update.do" method="post">
 					<table class="tg" style="table-layout: fixed; width: 900px">
 						<colgroup>
 							<col style="width: 100px">
@@ -153,22 +143,36 @@
 						<tbody>
 							<tr>
 								<td class="tg-llyw">강의 이름</td>
-								<td class="tg-0pky">${dto.l_name }</td>
+								<td class="tg-0pky"><input name="l_name" style="width: 790px;"
+									type="text" placeholder="${dto.l_name }"></td>
 							</tr>
 							<tr>
 								<td class="tg-llyw">강의 정보</td>
-								<td class="tg-0pky">${dto.l_info }</td>
+								<td class="tg-0pky"><input name="l_info" style="width: 790px;"
+								type="text" placeholder="${dto.l_info }"></td>
 							</tr>
 							<tr>
 								<td class="tg-llyw">카테고리</td>
-								<td class="tg-0pky">${dto.l_category }</td>
+								<td class="tg-0pky">
+								<select name="l_category" style="width: 790px;">
+											<option value="">카테고리 선택</option>
+											<c:forEach items="${cate }" var="cate">											
+											<option value="${cate.l_category }">${cate.l_category }</option>
+											</c:forEach>
+									</select>
+									</td>
 							</tr>
 							<tr>
 								<td class="tg-llyw">커리큘럼</td>
-								<td class="tg-0pky">${dto.l_curriculum }</td>
+								<td class="tg-0pky"><input name="l_curriculum" style="width: 790px;"
+									type="text" placeholder="${dto.l_curriculum }"></td>
 							</tr>
 						</tbody>
 					</table>
+					<div class="box on" style="padding-top: 10px; padding-left: 765px;">
+					<input type="hidden" name="la_no" value="${la_no }">
+						<button type="submit" class="btn btn-outline-dark">저장</button>
+					</div></form>
 				</div>
 			</div>
 		</div>
@@ -204,19 +208,6 @@
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
 	
-	<script type="text/javascript">
-	$(".box button").attr("disabled", true);
-    $("#chk").on('click',function(){
-        var chk = $('input:checkbox[id="chk"]').is(":checked");
-        if(chk==true){
-            $(".box button").removeAttr('disabled');
-            $(".box").removeClass("on");
-        }else{
-            $(".box button").attr("disabled", true);
-            $(".box").addClass("on");
-        }
-    });
-	</script>
 </body>
 
 </html>

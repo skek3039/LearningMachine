@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.print.DocFlavor.READER;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +13,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -183,7 +185,6 @@ public class LectureController {
 			ModelAndView mv = new ModelAndView("lecture_request");
 			
 			List<String> cate = lectureService.lectureCate();
-			System.out.println(cate.toString());
 			mv.addObject("cate",cate);
 			return mv;
 		} else {
@@ -270,6 +271,46 @@ public class LectureController {
 		} else {
 			ModelAndView mv = new ModelAndView("404");
 			return mv;
+		}
+	}
+	
+	//글 수정
+	@RequestMapping(value = "/lecture_update")
+	public ModelAndView lecture_update(HttpServletRequest request, HttpSession session) {
+		int la_no = Integer.parseInt(request.getParameter("la_no"));
+		if ((int) session.getAttribute("u_authority") > 3) {
+			ModelAndView mv = new ModelAndView("lecture_update");
+			List<String> cate = lectureService.lectureCate();
+			LectureDTO lecture_update = new LectureDTO();
+			lecture_update.setLa_no(la_no);
+			mv.addObject("cate",cate);
+			request.setAttribute("dto", lectureService.lecture_update(lecture_update));
+			
+			return mv;
+		} else {
+			ModelAndView mv = new ModelAndView("404");
+			return mv;
+		}
+	}
+	//수정 글 쓰기
+	@RequestMapping(value = "/lecture_update.do")
+	public String lecture_update_write(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
+		if ((int) session.getAttribute("u_authority") > 3) {
+			System.out.println(request.getParameter("la_no"));
+			String u_id = (String) session.getAttribute("u_id");
+			LectureDTO lecture_update_write = new LectureDTO();
+			lecture_update_write.setT_id(u_id);
+			lecture_update_write.setL_name(request.getParameter("l_name"));
+			lecture_update_write.setL_info(request.getParameter("l_info"));
+			lecture_update_write.setL_category(request.getParameter("l_category"));
+			lecture_update_write.setL_curriculum(request.getParameter("l_curriculum"));
+			lecture_update_write.setLa_no(Integer.parseInt(request.getParameter("la_no")));
+			lectureService.lecture_update_write(lecture_update_write);
+			return "redirect:/lecture_refusal";
+		} else {
+			return "redirect:/404";
+
 		}
 	}
 }
