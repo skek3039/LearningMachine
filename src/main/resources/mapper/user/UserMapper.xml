@@ -45,7 +45,7 @@
 	
 	<update id="UpdateVideoAttendance" parameterType="com.learning.User.Form.UserAttendanceForm">
 	
-		UPDATE lecture_video_attendance SET va_attendance = 1 WHERE v_no = #{v_no} AND u_id = #{u_id} AND l_code = #{l_code}
+		UPDATE lecture_video_attendance SET va_attendance = 1, va_date = CURRENT_TIMESTAMP() WHERE v_no = #{v_no} AND u_id = #{u_id} AND l_code = #{l_code}
 	
 	</update>
   </mapper>

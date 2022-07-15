@@ -65,9 +65,9 @@ public class ULectureController {
 		} else if (u_id != null && lectureService.RegisterVideo(l_code, u_id) == 1) {
 
 			Videos = lectureService.LectureVideos(l_code);
+			UserAttendanceForm UAForm = new UserAttendanceForm();
 			try {
 				if(order > 0) {
-					UserAttendanceForm UAForm = new UserAttendanceForm();
 					UAForm.setV_no(v_no);
 					UAForm.setU_id(u_id);
 					UAForm.setL_code(l_code);
@@ -80,7 +80,10 @@ public class ULectureController {
 						
 						form = Videos.get(i + 1);
 						if(form.getV_no() == v_no) {
-							
+							UAForm.setV_no(v_no);
+							UAForm.setU_id(u_id);
+							UAForm.setL_code(l_code);
+							userService.LectureVideoAttendance(UAForm);
 							rq.setAttribute("Video", form);
 							break;
 						}
