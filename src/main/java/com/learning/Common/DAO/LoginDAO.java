@@ -28,5 +28,8 @@ public class LoginDAO {
 	}
 	public int resetPw(userDTO user) {
 		return sqlSession.update("Login.resetPw", user);
-	} 
+	}
+	public int checkEmail(String u_email) {
+		return sqlSession.selectOne("Login.checkEmail", u_email);
+	}
 }

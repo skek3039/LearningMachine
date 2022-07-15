@@ -70,16 +70,18 @@
             <div
                class="row d-flex justify-content-center align-items-center h-100">
                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+               <div style="padding-top: 120px;">
+               </div>
                   <div class="card bg-dark text-white"
                      style="border-radius: 1rem; background-color: #00B98E;">
                      <div class="card-body p-5 text-center">
-
+	
                         <div class="mb-md-5 mt-md-4 pb-5">
 
-                           <h2 class="fw-bold mb-2 text-uppercase" style="color: white;">강사<br>회원가입</h2>
+                           <h2 class="fw-bold mb-2 text-uppercase" style="color: white;">회원가입</h2>
                            <p class="text-white-50 mb-5">Please enter your login and
                               password!</p>
-                           <form action="./join" method="post" id="join">
+                           <form action="./join2" method="post" id="join2">
                               <div class="form-outline form-white mb-4">
                                  <input type="text" id="u_id" name="u_id"
                                     class="form-control form-control-md"
@@ -104,13 +106,16 @@
                                  <input type="email" id="u_email" name="u_email"
                                     class="form-control form-control-md" required="required"
                                     placeholder="EMAIL를 입력 해주세요." 
-                                    pattern="^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$"/>
+                                    pattern="^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$"
+                                    onchange="checkEmail()"/>
+                                    <p id="checkResult1">
                               </div>
 
                               <div class="form-outline form-white mb-4">
                                  <input type="text" id="u_name" name="u_name"
                                     class="form-control form-control-md" required="required"
                                     placeholder="이름을 입력해주세요." />
+                                    <p id="checkResult">
                               </div>
 
                               <div class="form-outline form-white mb-4">
@@ -125,13 +130,13 @@
                                     placeholder="생일을 입력해주세요." />
                               </div>
 
-							  <div class="form-outline form-white mb-4">
+                                <div class="form-outline form-white mb-4">
                                  <input type="radio" id="u_gender" name="u_gender" value="강사"
-                                    checked="checked">강사 
-                              </div>
-
+                                    checked="checked">강사
+						     	</div>
+						     	
                               <button class="btn btn-outline-light btn-lg px-5"
-                                 type="submit">Join</button>
+                                 type="submit" id="joinBtn">Join</button>
                            </form>
                            <div
                               class="d-flex justify-content-center text-center mt-4 pt-1">
@@ -139,9 +144,7 @@
                               <a href="#!" class="text-white"><i
                                  class="fab fa-google fa-lg"></i></a>
                            </div>
-
-                        </div>
-
+				</div>
 
                      </div>
                   </div>
@@ -161,7 +164,6 @@
          <script type="text/javascript">
          
            
-          var checkID = 0;
           
          function idCheck(){
             var u_id = $("#u_id").val();
@@ -177,11 +179,11 @@
                      if (data == 0) {
                         $("#checkResult").css("color","yellow");
                         $("#checkResult").text("가입할 수 있는 ID 입니다.");
-                        $("#checkResult").attr("disabled","false");
+                        $("#joinBtn").attr("disabled",false);
                      } else {
                         $("#checkResult").css("color","red");
                         $("#checkResult").text("이미 사용중인 ID 입니다.");
-                        $("#checkResult").attr("disabled","true");
+                        $("#joinBtn").attr("disabled",true);
                      }
                   },
                   error : function () {
@@ -214,16 +216,16 @@
             } 
             var u_pw = $("#u_pw").val();
             var reg_u_pw = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-            if(u_pw == "" || u_pw1.length < 1){
-               alert("암호는 1글자 이상으로 만들어주세요.");
+            if(u_pw == "" || u_pw1.length < 3){
+               alert("암호는 3글자 이상으로 만들어주세요.");
                $("#u_pw").focus();
                return false;
             } 
             
             var u_pw1 = $("#u_pw1").val();
             var reg_u_pw1 = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-            if(u_pw == "" || u_pw1.length < 1){
-               alert("암호는 1글자 이상으로 만들어주세요.");
+            if(u_pw == "" || u_pw1.length < 3){
+               alert("암호는 3글자 이상으로 만들어주세요.");
                $("#u_pw1").focus();
                return false;   
             } 
@@ -240,8 +242,34 @@
                alert("u_email을 입력해주세요.");
                $("#u_email").focus();
                return false;
+               
             }
       })
+      
+      function checkEmail(){
+            var u_email = $("#u_email").val();
+            $.ajax({
+               url : "./checkEmail",
+               type : "post",
+               dataType : "html",
+               data : {"u_email" : u_email},
+               success : function(data){
+                  if (data == 0) {
+                     $("#checkResult1").css("color","yellow");
+                     $("#checkResult1").text("가입할 수 있는 Email 입니다.");
+                     $("#joinBtn").attr("disabled",false);
+                  } else {
+                     $("#checkResult1").css("color","red");
+                     $("#checkResult1").text("이미 사용중인 Email 입니다.");
+                     $("#joinBtn").attr("disabled",true);
+                  }
+               },
+               error : function () {
+                  $("#checkResult1").text("비정상입니다.");
+                  $("#joinBtn").attr("disabled", true);
+               }
+            });
+         }
       </script>
          
          

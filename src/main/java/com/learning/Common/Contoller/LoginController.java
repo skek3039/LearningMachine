@@ -3,6 +3,7 @@ package com.learning.Common.Contoller;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.learning.Common.Service.LoginService;
+import com.learning.DTO.LectureDTO;
 import com.learning.DTO.userDTO;
 @Controller
 public class LoginController {
@@ -47,8 +49,6 @@ public class LoginController {
 	      return "redirect:/";
 	   }
 	   
-	
-	
 	
 	//비밀번호 재설정 화면
 	@RequestMapping(value = "/resetPw", method = RequestMethod.GET )
@@ -101,6 +101,23 @@ public class LoginController {
 		return result;
 	}
 	
+	@ResponseBody
+	@PostMapping(value = "/checkEmail")
+	public String checkEmail(HttpServletRequest request) throws IOException {
+	String result ="1";
+	int count = loginService.checkEmail(request.getParameter("u_email"));
+	result = String.valueOf(count);
+	
+	return result;
+
+	}
+	
+	@GetMapping(value = "/join2")
+	public String join2() {
+		return "join2";
+	}
+	
+	
 	
 	@GetMapping(value = "/join")
 	public String join() {
@@ -126,29 +143,6 @@ public class LoginController {
 		int result = loginService.join(dto);
 		
 		return "redirect:/join";
-	}
-	
-	@GetMapping(value = "join2")
-	public String join2() {
-		return "join2";
-	}
-	
-	@PostMapping(value = "join2")
-	public String join2(HttpServletRequest request) throws UnsupportedEncodingException {
-		
-		request.setCharacterEncoding("UTF-8");
-		
-		userDTO dto = new userDTO();
-		
-		dto.setU_id(request.getParameter("u_id"));
-		dto.setU_pw(request.getParameter("u_pw"));
-		dto.setU_pw(request.getParameter("u_pw1"));
-		dto.setU_email(request.getParameter("u_email"));
-		dto.setU_name(request.getParameter("u_name"));
-		dto.setU_nickname(request.getParameter("u_nickname"));
-		dto.setU_birth(request.getParameter("u_birth"));
-		
-		return "redirect:/ligon";
 	}
 	
 	@GetMapping(value = "/login")

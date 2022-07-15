@@ -31,5 +31,11 @@ public class LoginService {
 		return loginDAO.resetPw(user);
 	}
 
+	public int checkEmail(String u_email) {
+		return loginDAO.checkEmail(u_email);
+	}
+
+
+
 
 }

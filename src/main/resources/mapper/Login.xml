@@ -20,7 +20,11 @@
   </update>
   
   <select id="Check" parameterType="userDTO" resultType="integer">
-  	select count(*) FROM user where u_id=#{u_id} AND u_email=#{u_email}
+  	select count(*) FROM user where u_id=#{u_id} AND u_email=#{u_email} 
+  </select>
+  
+  <select id="checkEmail" parameterType="string" resultType="integer">
+  	select count(*) FROM user where u_email=#{u_email}
   </select>
   
   
