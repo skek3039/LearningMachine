@@ -35,4 +35,7 @@ public class LoginDAO {
 	public int checkNickname(String u_nickname) {
 		return sqlSession.selectOne("Login.checkNickname", u_nickname);
 	}
+	public int join2(userDTO dto) {
+		return sqlSession.insert("Login.join2", dto);
+	}
 }

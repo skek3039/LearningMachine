@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.learning.Common.Service.LoginService;
 import com.learning.DTO.LectureDTO;
+import com.learning.DTO.TeacherDTO;
 import com.learning.DTO.userDTO;
 @Controller
 public class LoginController {
@@ -126,6 +127,30 @@ public class LoginController {
 	@GetMapping(value = "/join2")
 	public String join2() {
 		return "join2";
+	}
+	
+	@PostMapping(value = "/join2")
+	public String join2(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+		
+		request.setCharacterEncoding("UTF-8");
+		
+		TeacherDTO dto1 = new TeacherDTO();
+		userDTO dto = new userDTO();
+		
+		dto1.setT_id(request.getParameter("t_id"));
+		dto.setU_pw(request.getParameter("u_pw"));
+		dto.setU_pw(request.getParameter("u_pw1"));
+		dto.setU_email(request.getParameter("u_email"));
+		dto.setU_name(request.getParameter("u_name"));
+		dto.setU_nickname(request.getParameter("u_nickname"));
+		dto.setU_birth(request.getParameter("u_birth"));
+	
+		System.out.println(dto1);
+		System.out.println(dto);
+		
+		int result = loginService.join2(dto);
+		
+		return "redirect:/join2";
 	}
 	
 	//유저 회원가입

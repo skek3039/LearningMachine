@@ -39,6 +39,10 @@ public class LoginService {
 		return loginDAO.checkNickname(u_nickname);
 	}
 
+	public int join2(userDTO dto) {
+		return loginDAO.join2(dto);
+	}
+
 
 
 

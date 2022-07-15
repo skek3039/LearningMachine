@@ -31,5 +31,9 @@
   	select count(*) FROM user where u_nickName=#{u_nickName}
   </select>
   
+  <insert id="join2" parameterType="userDTO">
+  		insert into user (t_id, u_pw, u_email, u_name, u_nickname, u_gender, u_birth)
+  		value (#{t_id},#{u_pw},#{u_email},#{u_name},#{u_nickname},#{u_gender},#{u_birth}))
+  </insert>
   
   </mapper>
