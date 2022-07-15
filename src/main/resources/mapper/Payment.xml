@@ -42,5 +42,4 @@
   			where u_id = #{u_id}
   		</if>
   	</select>
-  
   </mapper>

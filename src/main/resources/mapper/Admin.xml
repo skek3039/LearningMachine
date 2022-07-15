@@ -14,9 +14,8 @@
 		select count(*) as count from user_reported
 	</select>
 
-  	<select id="userList" parameterType="PageDTO" resultType="userDTO">
+  	<select id="userList" resultType="userDTO">
   		select * from user where u_authority IN (1,2,3)
-  		LIMIT #{startPage}, #{lastPage}
   	</select>
   	
   	<select id="userSearch" parameterType="string" resultType="userDTO">
@@ -142,6 +141,5 @@
   	<update id="teacherAccept2" parameterType="map">
   		update teacher_apply set t_recognize = 1 where t_id = #{t_apply[0].u_id}
   	</update>
-  	
  	
   </mapper>

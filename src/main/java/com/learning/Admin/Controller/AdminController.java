@@ -301,37 +301,8 @@ public class AdminController {
 	public ModelAndView admin_student(HttpSession session, HttpServletRequest request) {
 		if ((int) session.getAttribute("u_authority") == 7) {
 			ModelAndView mv = new ModelAndView("admin_student");
-			int check_total = 1;
-			int pageNo = 1;
-			if (request.getParameter("pageNo")!=null) {
-				pageNo = Integer.parseInt(request.getParameter("pageNo"));
-			}
-			// recordCountPageNo 한 페이지당 게시되는 게시물 수 yes
-			int listScale = 10;
-			// pageSize = 페이지 리스트에 게시되는 페이지 수 yes
-			int pageScale = 10;			
-			// totalRecordCount 전체 게시물 건수				
-			int totalCount = adminService.totalCount(check_total);
-			// 전자정부페이징 호출
-			PaginationInfo paginationInfo = new PaginationInfo();
-			// 값 대입
-			paginationInfo.setCurrentPageNo(pageNo);
-			paginationInfo.setRecordCountPerPage(listScale);
-			paginationInfo.setPageSize(pageScale);
-			paginationInfo.setTotalRecordCount(totalCount);
-			// 전자정부 계산하기
-			int startPage = paginationInfo.getFirstRecordIndex();
-			int lastpage = paginationInfo.getRecordCountPerPage();
-			
-			// 서버로 보내기
-			PageDTO page = new PageDTO();
-			page.setStartPage(startPage);
-			page.setLastPage(lastpage);
-			
-			List<userDTO> list = adminService.userList(page);
+			List<userDTO> list = adminService.userList();
 			mv.addObject("list", list);
-			mv.addObject("paginationInfo", paginationInfo);
-			mv.addObject("pageNo", pageNo);
 			return mv;
 		} else {
 			ModelAndView mv = new ModelAndView("404");
