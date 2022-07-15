@@ -1,11 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%
 	Date nowTime = new Date();
-	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월");
+	SimpleDateFormat year = new SimpleDateFormat("yyyy");
+	SimpleDateFormat month = new SimpleDateFormat("M");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,6 +51,15 @@
 <link href="/resources/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="./resources/lib/wow/wow.min.js"></script>
+<script src="./resources/lib/easing/easing.min.js"></script>
+<script src="./resources/lib/waypoints/waypoints.min.js"></script>
+<script src="./resources/lib/owlcarousel/owl.carousel.min.js"></script>
+
+
 <style type="text/css">
     <style>@font-face {
         font-family: 'LeferiPoint-WhiteObliqueA';
@@ -85,6 +96,62 @@ function search(){
 	location.href = "./admin_studentSearch?u_name="+u_name;
 }
 
+<%-- 
+$(document).ready(function() {
+
+	var checkMonth = <%=request.getParameter("checkMonth") %>;	
+	var pre = null;
+	var next = null;
+	var resultM = null;
+	if(checkMonth != null){
+		if(checkMonth == "1"){			
+			pre = <%=request.getParameter("month") %>;
+			pre = pre-1;
+			$("label[for='month']").text(pre);	
+			resultM = pre;
+		}else if(checkMonth == "2"){
+			next = <%=request.getParameter("month") %>;
+			next = next + 1;
+			$("label[for='month']").text(next);	
+			resultM = next;
+		}	
+	}else{
+		$("label[for='month']").text(<%=month.format(nowTime)%>);
+		resultM = <%=month.format(nowTime)%>;
+	}  
+
+});  --%>
+
+ function preNext(year,month,checkPN){
+	var checkPN = checkPN;
+	var year = Number(year); 
+	var month = Number(month);
+	var confirm = Number(<%= month.format(nowTime)%>);
+	
+	alert(confirm + "," + month);
+	if(checkPN == "1"){
+			if(month >0){
+				year = year;
+				month =Number(month) - 1;
+			}else{
+				year = Number(year)-1;
+				month = 12;
+			}
+	}else{
+			if(month < 13){
+				year = year;
+				month =	Number(month) + 1;
+			}else{
+				year = Number(year)+1;
+				month = 1;
+			}
+		}  
+	/* else if(month>confirm){
+		alert("당월보다 큰 숫자는 클릭할 수 없습니다.");
+		history.back();
+	} 	 */
+ 	location.href="./payment_list?month="+month+"&year="+year;
+}
 </script>
 
 
@@ -108,15 +175,20 @@ function search(){
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
-		<div style="padding-top: 110px;"> <h1 class="h3 mb-2 text-gray-800">결제내역</h1><hr style="border: solid 1px;"></div>
+		<div id="pay" style="padding-top: 110px;"> <h1 class="h3 mb-2 text-gray-800">결제내역</h1><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px;padding-left: 120px; height: 100%">
 		      <!-- DataTable -->
+                             <fmt:parseDate value="${list[0].p_date}" var="time1" pattern="yyyy-MM-dd HH:mm:ss.S" />                                                                    
+                            <fmt:formatDate value="${time1 }" var="year" pattern="yyyy"/>
+                            <fmt:formatDate value="${time1 }" var="month" pattern="MM"/>
                     <div class="card shadow mb-4"style="width: 800px; height: 500px; ">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary"> <%=sf.format(nowTime) %> 매출</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">
+                            <a href="javascript:preNext('${year }','${month }',1);">◀</a>
+                            ${year } 년  ${month } 월   <a href="javascript:preNext('${year }','${month }',2);">▶</a></h6>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive" >
+                            <div class="table-responsive" >    
                                 <table class="table table-bordered" id="dataTable"  cellspacing="0">
                                     <thead>
                                         <tr>
@@ -131,6 +203,7 @@ function search(){
                                         <tr>
                                             <th colspan="4" style="text-align: right">총 환불금액</th>                                       
                                             <th style="color: red"><fmt:formatNumber value="${list[0].refundtotal }" pattern="#,###"  /></th>
+                                       
                                         </tr>
                                         <tr>
                                             <th colspan="4" style="text-align: right">총매출액</th>
@@ -138,6 +211,7 @@ function search(){
                                           </tr>
                                     </tfoot>
                                     <tbody> 
+                                    <c:if test="${list.size() ne 0 }">
                                     <c:forEach items="${list }" var="pay">
                                         <tr>
                                             <td>${pay.u_name }(${pay.u_id })</td>
@@ -150,9 +224,11 @@ function search(){
                                            
                                             <td><fmt:formatNumber value="${pay.p_price }" pattern="#,###"  /></td>
                                         </tr>
-                                    </c:forEach>           
+                                    </c:forEach>  
+                                     </c:if>         
 									 </tbody>
                                 </table>
+                               
                             </div>
                         </div>
                     </div>
@@ -177,14 +253,6 @@ function search(){
 				}
 			});
 		</script>
-
-	<!-- JavaScript Libraries -->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="./resources/lib/wow/wow.min.js"></script>
-	<script src="./resources/lib/easing/easing.min.js"></script>
-	<script src="./resources/lib/waypoints/waypoints.min.js"></script>
-	<script src="./resources/lib/owlcarousel/owl.carousel.min.js"></script>
 
   	<!-- Page level plugins -->
     <script src="./resources/js/jquery.dataTables.min.js"></script>

@@ -52,6 +52,14 @@ public class LectureService {
 		return lectureDAO.lecture_lookup2(lecture_lookup);
 	}
 
+	public int totalCount2() {
+		return lectureDAO.totalCount2();
+	}
+
+	public List<LectureDTO> lecture_refusal(Map<String, Object> map) {
+		return lectureDAO.lecture_refusal(map);
+	}
+
 
 
 

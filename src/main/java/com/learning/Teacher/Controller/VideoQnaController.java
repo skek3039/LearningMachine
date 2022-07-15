@@ -207,7 +207,7 @@ public class VideoQnaController {
 				int result = video_qnaService.v_qna_write(v_qna_write);
 				System.out.println(result);
 				if(result ==1) {	
-					return "redirect:/video_qna";//상세페이지로 변경해야됨
+					return "redirect:/video_qna_answer";
 				}else {
 					return "redirect:/404";
 					

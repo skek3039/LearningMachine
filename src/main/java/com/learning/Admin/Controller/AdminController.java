@@ -363,12 +363,14 @@ public class AdminController {
 			String u_id = request.getParameter("u_id");
 			List<String> list = adminService.studentLecture(u_id);
 			List<String> report = adminService.studentReport(u_id,null);
-			List<String> payment = paymentService.paymentList(u_id);
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("u_id", u_id);
+			List<String> payment = paymentService.paymentList(map);
 		
 			mv.addObject("payment",payment);
 			mv.addObject("list", list);
 			mv.addObject("report", report);
-			System.out.println(payment + "," + report);
 			return mv;
 		} else {
 			ModelAndView mv = new ModelAndView("404");

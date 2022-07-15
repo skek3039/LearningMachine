@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 <meta charset="utf-8">
-<title>Learning Machine</title>
+<title>Learning Machine:강사 페이지</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
@@ -73,25 +73,14 @@
         padding: 15px 0;
     }
 </style>
-<script type="text/javascript">
-function search(){
-	var l_name= document.getElementById("l_name").value;
-	location.href = "./lecture_lectureName?l_name="+l_name;
-}
 
-function enterkey() {
-	if (window.event.keyCode == 13) {
-		search();
-	}
-	
-}
-</script>
 <script type="text/javascript">
 function linkPage(pageNo){
-	location.href = "./lecture_detail?pageNo=" + pageNo;
+	location.href = "./lecture_refusal?pageNo=" + pageNo;
 	}
 
 </script>
+
 </head>
 
 <body>
@@ -109,40 +98,56 @@ function linkPage(pageNo){
 
 		<jsp:include page="./header.jsp" />
 		<div style=" width: 100%; height: 705px;">
-			<jsp:include page="./lecture_nav.jsp"/>	
-			<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;내 강의관리</h3><hr style="border: solid 1px;"></div>
-		 			<div class="col-sm-offset-9" style=" text-align: center; padding-left: 840px">
-                         <div style="padding-top: 10px; padding-right: 30px;">
-							<input type="search" id="l_name" name="l_name" class="form-control" required="required" placeholder="강의이름을 입력해주세요." style="width: 250px; float: left; margin-left: 75px;" onkeyup="enterkey()"> 
-					 		<button class="btn btn-danger" id="search" style="width: 100px float: left; margin-right: 45px;"  onclick="search()">search</button>
-						</div><br>
-                	</div>
-		<div style="padding-top: 10px;">
-			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
+		<jsp:include page="./lecture_nav.jsp"/>
+		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;승인거부</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 10px; text-align: center;"><br><br><br>
+				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
+						<th>신청 번호</th>
 						<th>강의 이름</th>
+						<th>강의 정보</th>
 						<th>카테고리</th>
-						<th>날짜</th>
-						<th>강의 가격</th>
+						<th>신청 날짜</th>
+						<th>승인 여부</th>
 					</tr>
 					
-					<c:forEach items="${lectureList}" var="l">
+					<c:forEach items="${lecture_refusal}" var="l">
 					<tr>
+						<td><a href="./lecture_Lookup3?la_no=${l.la_no }">${l.la_no }</a></td>
 						<td>
-							<a href="./lecture_Lookup2?l_code=${l.l_code }">${l.l_name }</a>
+							<c:choose>
+							<c:when test="${fn:length(l.l_name ) > 10 }">
+							<c:out value="${fn:substring(l.l_name , 0, 9)} ...">
+							</c:out></c:when>
+							<c:otherwise>
+							<c:out value="${l.l_name  }">
+							</c:out></c:otherwise>
+							</c:choose>
+						</td>
+						<td>
+							<c:choose>
+							<c:when test="${fn:length(l.l_info ) > 10 }">
+							<c:out value="${fn:substring(l.l_info , 0, 9)} ...">
+							</c:out></c:when>
+							<c:otherwise>
+							<c:out value="${l.l_info  }">
+							</c:out></c:otherwise>
+							</c:choose>
 						</td>
 						<td>${l.l_category }</td>
 						<td>
                         <fmt:parseDate value="${l.l_date}" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
                         <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
                     	${time }</td>
-						<td><fmt:formatNumber value="${l.l_price }" pattern="#,###"  /></td>
+						<td><c:if test="${l.l_recognize eq 2}"> 승인거부</c:if>
+						
 					</tr>
 					</c:forEach>
 			</table>
 		</div>
-		<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
-	</div>
+	 	<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>	
+
+</div>
 		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
 
