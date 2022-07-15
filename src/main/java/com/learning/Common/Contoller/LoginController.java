@@ -112,18 +112,28 @@ public class LoginController {
 
 	}
 	
+	@ResponseBody
+	@PostMapping(value = "/checkNickname")
+	public String checkNickname(HttpServletRequest request) throws IOException {
+	String result ="1";
+	int count = loginService.checkNickname(request.getParameter("u_nickname"));
+	result = String.valueOf(count);
+	
+	return result;
+
+	}
+	
 	@GetMapping(value = "/join2")
 	public String join2() {
 		return "join2";
 	}
 	
-	
-	
+	//유저 회원가입
 	@GetMapping(value = "/join")
 	public String join() {
 		return "join";
 	}
-	
+	//유저 회원가입
 	@PostMapping(value = "/join")
 	public String join(HttpServletRequest request) throws UnsupportedEncodingException {
 		

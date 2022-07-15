@@ -262,17 +262,17 @@
                data : {"u_nickname" : u_nickname},
                success : function(data){
                   if (data == 0) {
-                     $("#checkResult1").css("color","yellow");
-                     $("#checkResult1").text("쓸수 있는 닉네임 입니다.");
+                     $("#checkResult2").css("color","yellow");
+                     $("#checkResult2").text("쓸수 있는 닉네임 입니다.");
                      $("#joinBtn").attr("disabled",false);
                   } else {
-                     $("#checkResult1").css("color","red");
-                     $("#checkResult1").text("쓸수 없는 닉네임 입니다.");
+                     $("#checkResult2").css("color","red");
+                     $("#checkResult2").text("쓸수 없는 닉네임 입니다.");
                      $("#joinBtn").attr("disabled",true);
                   }
                },
                error : function () {
-                  $("#checkResult1").text("비정상입니다.");
+                  $("#checkResult2").text("비정상입니다.");
                   $("#joinBtn").attr("disabled", true);
                }
             });

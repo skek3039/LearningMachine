@@ -27,5 +27,9 @@
   	select count(*) FROM user where u_email=#{u_email}
   </select>
   
+  <select id="checkNickname" parameterType="string" resultType="integer">
+  	select count(*) FROM user where u_nickName=#{u_nickName}
+  </select>
+  
   
   </mapper>
