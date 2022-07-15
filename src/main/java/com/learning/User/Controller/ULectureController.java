@@ -67,14 +67,19 @@ public class ULectureController {
 			Videos = lectureService.LectureVideos(l_code);
 			try {
 				if(order > 0) {
-					
+					UserAttendanceForm UAForm = new UserAttendanceForm();
+					UAForm.setV_no(v_no);
+					UAForm.setU_id(u_id);
+					UAForm.setL_code(l_code);
+					userService.LectureVideoAttendance(UAForm);
+					rq.setAttribute("LectureVideos", lectureService.LectureVideos(l_code));
 					rq.setAttribute("Video", Videos.get(order));
 				}else {
 					
 					for(int i = 0; i < Videos.size(); i++) {
 						
-						form = Videos.get(i);
-						if(form.getV_no() == userService.RecentLectureVideo(u_id, l_code)) {
+						form = Videos.get(i + 1);
+						if(form.getV_no() == v_no) {
 							
 							rq.setAttribute("Video", form);
 							break;
@@ -85,6 +90,7 @@ public class ULectureController {
 				
 				return "redirect:/404";
 			}
+			return "user/video";
 		} else {
 
 			Videos = lectureService.LectureVideos(l_code);
@@ -95,14 +101,14 @@ public class ULectureController {
 			}else {
 				try {
 					
+					rq.setAttribute("LectureVideos", lectureService.LectureVideos(l_code));
 					rq.setAttribute("Video", Videos.get(order));
 				}catch(Exception e){
 					
 					return "redirect:/404";
 				}
 			}
+			return "user/video";
 		}
-
-		return "user/video";
 	}
 }

@@ -143,8 +143,8 @@ details>summary {
 						<c:otherwise>
 							<c:choose>
 								<c:when test="${LectureDetail.payment_whether eq 1}">
-									<a href="./LetureVideo?v_no=${LectureVideos[1].v_no}"
-							class="btn btn-outline-light rounded-pill border-2 py-3 px-5 animated slideInRight">처음부터 듣기</a>
+									<a href="./LetureVideo?v_no=${LectureVideos['1'].v_no}"
+							class="btn btn-outline-light rounded-pill border-2 py-3 px-5 animated slideInRight"  style="color: gray;">처음부터 듣기</a>
 									<c:if test="${RecentVideo > 0}">
 										<a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="./LectureVideo?v_no=${RecentVideo}">이어듣기</a>
 									</c:if>

@@ -56,9 +56,17 @@
 		
 	</select>
 	
-	<select id="UCheckAttendance"></select>
+	<select id="UCheckAttendance" parameterType="com.learning.User.Form.UserAttendanceForm" resultType="integer">
 	
-	<insert id="UVideoAttendance"></insert>
+		SELECT COUNT(0) FROM lecture_video_attendance WHERE v_no = #{v_no}, u_id = #{u_id}, l_code = #{l_code}
+	
+	</select>
+	
+	<insert id="UVideoAttendance" parameterType="com.learning.User.Form.UserAttendanceForm">
+	
+		INSERT INTO lecture_video_attendance(v_no,u_id,l_code) VALUES (#{v_no}, u_id = #{u_id}, l_code = #{l_code})
+	
+	</insert>
 	
 	<select id="UVideoLectureCheck" parameterType="Integer" resultType="String">
 		SELECT l_code FROM lecture_video WHERE v_no = #{v_no}

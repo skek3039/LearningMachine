@@ -31,5 +31,21 @@
   	
   	</select>
   	
-  	<select id="UCheckRegistration"></select>
+  	<select id="UCheckAttendance" parameterType="com.learning.User.Form.UserAttendanceForm" resultType="String">
+	
+		SELECT va_attendance FROM lecture_video_attendance WHERE v_no = #{v_no} AND u_id = #{u_id} AND l_code = #{l_code}
+	
+	</select>
+	
+	<insert id="UInsertVideoAttendance" parameterType="com.learning.User.Form.UserAttendanceForm">
+	
+		INSERT INTO lecture_video_attendance(v_no,u_id,l_code) VALUES (#{v_no}, #{u_id}, #{l_code})
+	
+	</insert>
+	
+	<update id="UpdateVideoAttendance" parameterType="com.learning.User.Form.UserAttendanceForm">
+	
+		UPDATE lecture_video_attendance SET va_attendance = 1 WHERE v_no = #{v_no} AND u_id = #{u_id} AND l_code = #{l_code}
+	
+	</update>
   </mapper>

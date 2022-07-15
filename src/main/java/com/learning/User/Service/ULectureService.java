@@ -149,7 +149,7 @@ public class ULectureService {
 		
 		for(URegiForm form : userDAO.RegiList(u_id)) {
 			
-			if(form.getL_code().equals(u_id)) {
+			if(form.getL_code().equals(l_code)) {
 				regi = 1;
 				break;
 			}
