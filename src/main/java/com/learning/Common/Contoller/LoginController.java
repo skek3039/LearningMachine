@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.learning.Common.Service.LoginService;
 import com.learning.DTO.userDTO;
@@ -55,14 +57,14 @@ public class LoginController {
 	
 	//비밀번호 
 	@PostMapping(value = "/resetPw")
-	public String resetPw(@ModelAttribute userDTO user, HttpServletRequest request) {
+	public void resetPw(@ModelAttribute userDTO user, HttpServletResponse response) throws Exception{
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=utf-8"); 
 		int Reset = loginService.resetPw(user);
 		if (Reset == 1) {
-			request.setAttribute("error", "<script>alert('비밀번호 변경 완료<br>로그인 화면으로 이동합니다.'); window.location.href = document.referrer; "
-					+ "</script>");
-			return "login";
+			response.getWriter().println("<script>alert('비밀번호 변경 성공 로그인 창으로 이동 합니다.'); window.location.href = './login'; "+ "</script>");
 		}else {
-			return "404";
+			response.getWriter().println("<script>alert('비밀번호 변경 실패'); window.location.href = './resetPw'; </script>");
 		}
 	}
 	
@@ -73,11 +75,11 @@ public class LoginController {
 	}
 	
 	//아이디, 이메일 확인
-	@RequestMapping(value = "/forgotPW", method = RequestMethod.POST )
-	public String findPwPost(@ModelAttribute userDTO user, HttpServletRequest request) throws IOException {
-		user = loginService.forgotPW(user);
-		
-		if (user.getU_authority() != 0 ) {	
+	@PostMapping(value = "/forgotPW" )
+	public String forgotPW(@ModelAttribute userDTO user, HttpServletRequest request) throws IOException {
+		int result = loginService.forgotPW(user);
+		if (result == 1 ) {	
+			
 			request.setAttribute("user", user);
 			return "resetPw";
 			
@@ -86,8 +88,9 @@ public class LoginController {
 					+ "</script>");
 			return "forgotPW";
 		}
-}
+	}
 	
+	@ResponseBody
 	@PostMapping(value = "/checkID")
 	public String checkID(HttpServletRequest request) throws IOException {
 		String result = "1";

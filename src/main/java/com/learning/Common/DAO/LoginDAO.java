@@ -23,7 +23,7 @@ public class LoginDAO {
 	public ModelAndView ModelAndView(String email) {
 		return sqlSession.selectOne("Login.ModelAndView", email);
 	}
-	public userDTO forgotPW(userDTO user) {
+	public int forgotPW(userDTO user) {
 		return sqlSession.selectOne("Login.Check", user);
 	}
 	public int resetPw(userDTO user) {

@@ -66,7 +66,7 @@
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-2">Forgot Your Password?</h1>
-                                        <p class="mb-4">회원가입당시 입력했던, 아이디와 Email을 입력해주세요! </p>
+                                        <p class="mb-4">비밀번호를 재설정 해주세요 </p>
                                     </div>
                                     <form class="user" action="./forgotPW" method="post">
                                         <div class="form-group">
