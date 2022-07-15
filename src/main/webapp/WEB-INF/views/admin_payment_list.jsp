@@ -96,39 +96,12 @@ function search(){
 	location.href = "./admin_studentSearch?u_name="+u_name;
 }
 
-<%-- 
-$(document).ready(function() {
-
-	var checkMonth = <%=request.getParameter("checkMonth") %>;	
-	var pre = null;
-	var next = null;
-	var resultM = null;
-	if(checkMonth != null){
-		if(checkMonth == "1"){			
-			pre = <%=request.getParameter("month") %>;
-			pre = pre-1;
-			$("label[for='month']").text(pre);	
-			resultM = pre;
-		}else if(checkMonth == "2"){
-			next = <%=request.getParameter("month") %>;
-			next = next + 1;
-			$("label[for='month']").text(next);	
-			resultM = next;
-		}	
-	}else{
-		$("label[for='month']").text(<%=month.format(nowTime)%>);
-		resultM = <%=month.format(nowTime)%>;
-	}  
-
-});  --%>
-
  function preNext(year,month,checkPN){
 	var checkPN = checkPN;
 	var year = Number(year); 
 	var month = Number(month);
 	var confirm = Number(<%= month.format(nowTime)%>);
 	
-	alert(confirm + "," + month);
 	if(checkPN == "1"){
 			if(month >0){
 				year = year;
@@ -171,7 +144,7 @@ $(document).ready(function() {
 
 
 		<jsp:include page="./header.jsp" />
-		<div style="width: 100%; height: 800px; ">
+		<div style="width: 100%; ">
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
@@ -181,7 +154,7 @@ $(document).ready(function() {
                              <fmt:parseDate value="${list[0].p_date}" var="time1" pattern="yyyy-MM-dd HH:mm:ss.S" />                                                                    
                             <fmt:formatDate value="${time1 }" var="year" pattern="yyyy"/>
                             <fmt:formatDate value="${time1 }" var="month" pattern="MM"/>
-                    <div class="card shadow mb-4"style="width: 800px; height: 500px; ">
+                    <div class="card shadow mb-4"style=" width: 800px; height: 800px;; ">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">
                             <a href="javascript:preNext('${year }','${month }',1);">◀</a>
@@ -222,7 +195,7 @@ $(document).ready(function() {
                                             <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
                     						${time }</td>
                                            
-                                            <td><fmt:formatNumber value="${pay.p_price }" pattern="#,###"  /></td>
+                                            <td><fmt:formatNumber value="${pay.p_price2 }" pattern="#,###"  /></td>
                                         </tr>
                                     </c:forEach>  
                                      </c:if>         
@@ -234,9 +207,8 @@ $(document).ready(function() {
                     </div>
                 </div>
 		</div>
-		<%-- <jsp:include page="./team.jsp"/> --%>
-		<jsp:include page="./footer.jsp" />
 
+		<jsp:include page="./footer.jsp" />
 </div>
 
 		<!-- Back to Top -->

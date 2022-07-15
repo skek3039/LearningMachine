@@ -11,7 +11,6 @@ import com.learning.Admin.DAO.PaymentDAO;
 import com.learning.DTO.BannedDTO;
 import com.learning.DTO.PageDTO;
 import com.learning.DTO.userDTO;
-import com.learning.User.DTO.ULectureDTO;
 
 @Service
 public class AdminService {
@@ -25,8 +24,8 @@ public class AdminService {
 		return adminDAO.totalCount(check_total);
 	}
 	
-	public List<userDTO> userList(PageDTO page) {
-		return adminDAO.userList(page);
+	public List<userDTO> userList() {
+		return adminDAO.userList();
 	}
 
 	public List<userDTO> userSearch(String u_name) {

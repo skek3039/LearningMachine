@@ -11,6 +11,7 @@
 		<typeAlias type="com.learning.DTO.PageDTO" alias="PageDTO"/>		
 		<typeAlias type="com.learning.DTO.BannedDTO" alias="bannedDTO"/>		
 		<typeAlias type="com.learning.DTO.TeacherDTO" alias="teacherDTO"/>		
+		<typeAlias type="com.learning.DTO.PaymentDTO" alias="paymentDTO"/>		
 	</typeAliases>  
   
   </configuration>
