@@ -32,4 +32,7 @@ public class LoginDAO {
 	public int checkEmail(String u_email) {
 		return sqlSession.selectOne("Login.checkEmail", u_email);
 	}
+	public int checkNickname(String u_nickname) {
+		return sqlSession.selectOne("Login.checkNickname", u_nickname);
+	}
 }

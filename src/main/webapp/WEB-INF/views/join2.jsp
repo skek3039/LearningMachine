@@ -121,7 +121,8 @@
                               <div class="form-outline form-white mb-4">
                                  <input type="text" id="u_nickname" name="u_nickname"
                                     class="form-control form-control-md" required="required"
-                                    placeholder="닉네임을 입력해주세요." />
+                                    placeholder="닉네임을 입력해주세요."  onchange="checkNickname()"/>
+                                    <p id="checkResult2" >
                               </div>
 
                               <div class="form-outline form-white mb-4">
@@ -245,6 +246,31 @@
                
             }
       })
+      
+      function checkNickname(){
+            var u_nickname = $("#u_nickname").val();
+            $.ajax({
+               url : "./checkNickname",
+               type : "post",
+               dataType : "html",
+               data : {"u_nickname" : u_nickname},
+               success : function(data){
+                  if (data == 0) {
+                     $("#checkResult2").css("color","yellow");
+                     $("#checkResult2").text("쓸수 있는 닉네임 입니다.");
+                     $("#joinBtn").attr("disabled",false);
+                  } else {
+                     $("#checkResult2").css("color","red");
+                     $("#checkResult2").text("쓸수 없는 닉네임 입니다.");
+                     $("#joinBtn").attr("disabled",true);
+                  }
+               },
+               error : function () {
+                  $("#checkResult2").text("비정상입니다.");
+                  $("#joinBtn").attr("disabled", true);
+               }
+            });
+         }
       
       function checkEmail(){
             var u_email = $("#u_email").val();

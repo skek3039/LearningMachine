@@ -35,6 +35,10 @@ public class LoginService {
 		return loginDAO.checkEmail(u_email);
 	}
 
+	public int checkNickname(String u_nickname) {
+		return loginDAO.checkNickname(u_nickname);
+	}
+
 
 
 
