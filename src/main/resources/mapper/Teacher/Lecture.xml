@@ -86,5 +86,10 @@
   		FROM lecture_apply
   		WHERE la_no = #{la_no}
   	</select>	
+  	
+  	<delete id="lecture_delete" parameterType="LectureDTO">
+  		DELETE FROM lecture_apply
+  		WHERE la_no=#{la_no}
+  	</delete>
 	
   </mapper>
