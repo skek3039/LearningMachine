@@ -3,7 +3,8 @@
 
 /target/
 **/target
-
+/webapp/META-INF/
+**/webapp/META-INF/
 ### Eclipse ###
 .metadata
 bin/

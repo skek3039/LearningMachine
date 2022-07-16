@@ -15,41 +15,40 @@ public class UserService {
 
 	@Autowired
 	private UserDAO userDAO;
-	
+
 	@Autowired
 	private ULectureDAO lectureDAO;
-	
-	public List<UserAttendanceForm> RecentVideo(String u_id) throws ParseException{
-		
+
+	public List<UserAttendanceForm> RecentVideo(String u_id) throws ParseException {
+
 		List<UserAttendanceForm> list = userDAO.RecentVideo(u_id);
-		
-		for(UserAttendanceForm form : list) {
-			
-			
+
+		for (UserAttendanceForm form : list) {
+
 			form.setVa_date(Util.YMD(form.getVa_date()));
 		}
 		return list;
 	}
-	
-	public List<ULectureForm> RegistedLecture(String u_id){
-		
+
+	public List<ULectureForm> RegistedLecture(String u_id) {
+
 		List<ULectureForm> ResistedLecture = userDAO.RegistedLecture(u_id);
-		
+
 		List<ULectureForm> lectureList = null;
 		List<ULectureForm> userLecture = null;
-		if(ResistedLecture == null) {
-			
+		if (ResistedLecture == null) {
+
 			return null;
-		}else {
-			
+		} else {
+
 			lectureList = lectureDAO.LectureList();
 			userLecture = new ArrayList<ULectureForm>();
-			
-			for(ULectureForm lectureform : lectureList) {
-				for(ULectureForm regiform : ResistedLecture) {
-					
-					if(lectureform.getL_code().equals(regiform.getL_code())) {
-						
+
+			for (ULectureForm lectureform : lectureList) {
+				for (ULectureForm regiform : ResistedLecture) {
+
+					if (lectureform.getL_code().equals(regiform.getL_code())) {
+
 						lectureform.setAttendance_rate(regiform.getAttendance_rate());
 						userLecture.add(lectureform);
 					}
@@ -58,19 +57,28 @@ public class UserService {
 
 			return userLecture;
 		}
-		
+
 	}
-	
+
 	public int RecentLectureVideo(String u_id, String l_code) {
-		
+
 		UserAttendanceForm form = new UserAttendanceForm();
 		form.setU_id(u_id);
 		form.setL_code(l_code);
-		
-		if(userDAO.RecentLectureVideo(form)>0) {
-			return userDAO.RecentLectureVideo(form);
-		}else {
-			return 0;
+
+		return userDAO.RecentLectureVideo(form);
+
+	}
+	
+	public void LectureVideoAttendance(UserAttendanceForm form) {
+		String result = userDAO.CheckAttendance(form);
+
+		if(result == null) {
+			
+			userDAO.UserAttendanceInsert(form);
+		}else if(result.equals("0")) {
+			
+			userDAO.UpdateVideoAttendance(form);
 		}
 	}
 }
