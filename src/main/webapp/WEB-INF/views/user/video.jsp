@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,9 +45,75 @@
 
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
+
+	<style>
+		body {
+			margin: 0;
+			/*body의 바깥 여백을 없앰으로서 내비게이션 바가 페이지에 바짝 붙게 함*/
+		}
+
+		.nav-container {
+			display: flex;
+			flex-direction: row;
+			width: 100%;
+			margin: 0;
+			/*쓸 데 없는 공백 제거*/
+			padding: 0;
+			/*쓸 데 없는 공백 제거*/
+			background-color: rgb(114, 231, 110);
+			list-style-type: none;
+			/*목록 기호 제거*/
+		}
+
+		.nav-item {
+			padding: 15px;
+			cursor: pointer;
+			/*마우스 커서를 pointer 모양으로 함*/
+		}
+
+		.nav-item a {
+			/*nav-item 클래스 아래의 a 요소를 선택함*/
+			text-align: center;
+			text-decoration: none;
+			/*밑줄 없앰*/
+			color: black;
+		}
+
+		#v_videotitle{
+			vertical-align: middle;
+			text-align: center;
+			color: white;
+		}
+
+		#video{
+			position: relative;
+   			height: 0;
+    		padding-bottom: 56.25%
+		}
+		
+		iframe{
+			position: absolute;
+  			top: 0;
+   			left: 0;
+   			width: 100%;
+  		  	height: 100%;
+		}
+	</style>
 </head>
 
 <body>
+	<nav>
+		<ul class="nav-container">
+			<li class="nav-item"> <a href="javascript:history.back()">뒤로가기</a> </li>
+			<li class="nav-item" id="v_videotitle">${Video.v_videotitle}</li>
+		</ul>
+	</nav>
+	<div id="video">
+		<iframe src="https://www.youtube.com/embed/${Video.v_root}" title="YouTube video player" frameborder="0"
+			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+			allowfullscreen></iframe>
+	</div>
+	${Video}
 </body>
 
 </html>
