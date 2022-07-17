@@ -67,8 +67,6 @@
 
 		.nav-item {
 			padding: 15px;
-			cursor: pointer;
-			/*마우스 커서를 pointer 모양으로 함*/
 		}
 
 		.nav-item a {
@@ -102,7 +100,7 @@
 </head>
 
 <body>
-	<nav>
+	<nav style="text-align: center;">
 		<ul class="nav-container">
 			<li class="nav-item"> <a href="javascript:history.back()">뒤로가기</a> </li>
 			<li class="nav-item" id="v_videotitle">${Video.v_videotitle}</li>
