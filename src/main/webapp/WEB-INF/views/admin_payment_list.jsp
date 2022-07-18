@@ -149,12 +149,12 @@ function search(){
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
 		<div id="pay" style="padding-top: 110px;"> <h1 class="h3 mb-2 text-gray-800">결제내역</h1><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px;padding-left: 120px; height: 100%">
+		<div style="padding-top: 10px;padding-left: 120px; height: 100%;  margin: 0 auto; ">
 		      <!-- DataTable -->
-                             <fmt:parseDate value="${list[0].p_date}" var="time1" pattern="yyyy-MM-dd HH:mm:ss.S" />                                                                    
+                            <fmt:parseDate value="${list[0].p_date}" var="time1" pattern="yyyy-MM-dd HH:mm:ss.S" />                                                                    
                             <fmt:formatDate value="${time1 }" var="year" pattern="yyyy"/>
                             <fmt:formatDate value="${time1 }" var="month" pattern="MM"/>
-                    <div class="card shadow mb-4"style=" width: 800px; height: 800px;; ">
+                    <div class="card shadow mb-4"style=" width: 800px; height: 800px;margin: 0 auto; ">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">
                             <a href="javascript:preNext('${year }','${month }',1);">◀</a>

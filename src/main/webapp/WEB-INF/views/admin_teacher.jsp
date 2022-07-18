@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,6 +40,18 @@
 <!-- Template Stylesheet -->
 <link href="./resources/css/style.css" rel="stylesheet">
 <link href="./resources/css/admin.css" rel="stylesheet">
+<link href='./resources/css/main.css' rel='stylesheet' />
+<link href="/resources/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="./resources/lib/wow/wow.min.js"></script>
+<script src="./resources/lib/easing/easing.min.js"></script>
+<script src="./resources/lib/waypoints/waypoints.min.js"></script>
+<script src="./resources/lib/owlcarousel/owl.carousel.min.js"></script>
+
 
 <style type="text/css">
     <style>@font-face {
@@ -104,40 +117,55 @@ function enterkey() {
 
 
 		<jsp:include page="./header.jsp" />
-		<div style=" width: 100%; height: 800px; ">
-		<div style="padding-top: 5px;">
+		<div style=" width: 100%;">
+		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
 		<div style="padding-top:  110px;"><h3>&nbsp;&nbsp;강사관리</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px; margin-left: 310px;">
-				<div style="padding-top: 10px; width: 100%; height: px;">
-					 <input type="search" id="t_nickname" name="t_nickname" class="form-control" required="required" placeholder="강사이름을 입력하세요." style="width: 250px; float: left;" onkeyup="enterkey()"> &nbsp; 
-					 <button class="btn btn-danger" id="search" style="width: 100px; "onclick="search()">search</button>
-				</div><br>
-			<div  id="student" >
-				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
-					<tr>
-						<th>강사이름</th>
-						<th>ID</th>
-						<th>총 수강학생수</th>											
-						<th>총 강의수</th>											
-					</tr>
-					<c:forEach items="${list }" var="list">
-					<tr>
-						<td><a href="./admin_teacherDetail?t_id=${list.t_id }">${list.nick }</a></td>
-						<td>${list.t_id }</td>
-						<td><c:if test="${list.COUNT eq null }"> 0</c:if>
-							<c:if test="${list.COUNT ne null }">${list.COUNT }</c:if></td>						
-						<td>${list.t_idcount }</td>						
-					</tr>
-					</c:forEach>
-				</table>
+		<div style="padding-top: 10px;padding-left: 120px; height: 100%">
+			 <div class="card shadow mb-4"style=" width: 800px; height: 100%; margin: 0 auto; ">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">
+                          전체 리스트</h6>
+                        </div>
+                        <div class="card-body">
+						<div class="table-responsive">
+							<table class="table table-bordered" id="dataTable">
+								<thead>
+									<tr>
+										<th>강사명</th>
+										<th>강사ID</th>
+										<th>총 수강학생수</th>
+										<th>총 강의수</th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th colspan="2" style="text-align: right">전체강사수</th>
+										<th><fmt:formatNumber value="50" pattern="#,###" /></th>
+									</tr>
+								</tfoot>
+								<tbody>
+									<c:forEach items="${list }" var="list">
+										<tr>
+											<td><a href="./admin_teacherDetail?t_id=${list.t_id }">${list.nick }</a></td>
+											<td>${list.t_id }</td>
+											<td><c:if test="${list.COUNT eq null }"> 0</c:if> <c:if
+													test="${list.COUNT ne null }">${list.COUNT }</c:if></td>
+											<td>${list.t_idcount }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+
+						</div>
+					</div>
+                    </div>
 			</div>
-			</div>
-</div>		
 		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
 
+</div>		
 
 		<!-- Back to Top -->
 		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
