@@ -81,6 +81,18 @@ public class LectureDAO {
 		return sqlSession.update("lecture.lecture_update_write2", lecture_update_write2);
 	}
 
+	public List<LectureDTO> video_List(String l_code) {
+		return sqlSession.selectList("lecture.video_List", l_code);
+	}
+
+	public Object video_upload(LectureDTO video_upload) {
+		return sqlSession.selectOne("lecture.video_upload", video_upload);
+	}
+
+	public int video_upload_update(LectureDTO video_upload_update) {
+		return sqlSession.insert("lecture.video_upload_update", video_upload_update);
+	}
+
 
 
 

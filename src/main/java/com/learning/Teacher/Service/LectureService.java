@@ -81,6 +81,20 @@ public class LectureService {
 		
 	}
 
+	public List<LectureDTO> video_List(String l_code) {
+		return lectureDAO.video_List(l_code);
+	}
+
+	public Object video_upload(LectureDTO video_upload) {
+		return lectureDAO.video_upload(video_upload);
+	}
+
+	public int video_upload_update(LectureDTO video_upload_update) {
+		return lectureDAO.video_upload_update(video_upload_update);
+		
+	}
+
+
 
 
 

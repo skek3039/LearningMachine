@@ -131,12 +131,12 @@
 
 
 		<jsp:include page="./header.jsp" />
-		<div style="width: 100%;">
+		<div style="width: 100%; height: 945px;">
 			<jsp:include page="./lecture_nav.jsp" />
 			<br>
 			<div style="text-align: center">
-				<div id="updateform" style="padding-top: 150px; padding-left: 340px; height: 920px;">
-					<form action="./lecture_update.do" method="post">
+				<div id="updateform" style="padding-top: 150px; padding-left: 340px">
+					<form action="./video_upload_update.do" method="post">
 					<table class="tg" style="table-layout: fixed; width: 900px">
 						<colgroup>
 							<col style="width: 100px">
@@ -144,34 +144,24 @@
 						</colgroup>
 						<tbody>
 							<tr>
-								<td class="tg-llyw">강의 이름</td>
-								<td class="tg-0pky"><input name="l_name" style="width: 790px;"
-									type="text" placeholder="${dto.l_name }"></td>
+								<td class="tg-llyw">비디오 제목</td>
+								<td class="tg-0pky"><input name="v_videotitle" style="width: 790px;"
+									type="text" placeholder="${dto.v_videotitle }"></td>
 							</tr>
 							<tr>
-								<td class="tg-llyw">강의 정보</td>
-								<td class="tg-0pky"><input name="l_info" style="width: 790px;"
-								type="text" placeholder="${dto.l_info }"></td>
+								<td class="tg-llyw">비디오 소개</td>
+								<td class="tg-0pky"><input name="v_introduce" style="width: 790px;"
+								type="text" placeholder="${dto.v_introduce }"></td>
 							</tr>
 							<tr>
-								<td class="tg-llyw">카테고리</td>
-								<td class="tg-0pky">
-								<select name="l_category" style="width: 790px;">
-											<option value="">카테고리 선택</option>
-											<c:forEach items="${cate }" var="cate">											
-											<option value="${cate.l_category }">${cate.l_category }</option>
-											</c:forEach>
-									</select>
-									</td>
-							</tr>
-							<tr>
-								<td class="tg-llyw">커리큘럼</td>
-								<td class="tg-0pky"><textarea name="l_curriculum" id="summernote" required="required"></textarea></td>
+								<td class="tg-llyw">파일 경로</td>
+								<td class="tg-0pky"><input name="v_root" style="width: 790px;"
+								type="text" placeholder="${dto.v_root }"></td>
 							</tr>
 						</tbody>
 					</table>
 					<div class="box on" style="padding-top: 10px; padding-left: 765px;">
-					<input type="hidden" name="la_no" value="${dto.la_no }">
+					<input type="hidden" name="l_code" value="${l_code }">
 						<button type="submit" class="btn btn-outline-dark">저장</button>
 					</div></form>
 				</div>
@@ -210,20 +200,4 @@
 	<script src="./resources/js/main.js"></script>
 	
 </body>
-		<script>
-			$(document).ready(function() {
-				   //여기 아래 부분
-				   $('#summernote').summernote({
-				        height: 200,        
-				        minHeight: null,        
-				        maxHeight: null,       
-				        focus: true,             
-				        lang: "ko-KR",          
-				        placeholder: "${dto.l_curriculum}"
-				          
-				   });
-				});
-		</script>
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 </html>

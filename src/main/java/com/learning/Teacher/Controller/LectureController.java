@@ -148,8 +148,12 @@ public class LectureController {
 				
 				LectureDTO lecture_lookup = new LectureDTO();
 				lecture_lookup.setL_code(request.getParameter("l_code"));
-				
 				request.setAttribute("dto", lectureService.lecture_lookup2(lecture_lookup));
+				
+				String l_code = request.getParameter("l_code");
+				List<LectureDTO> video_List = lectureService.video_List(l_code);
+				request.setAttribute("video_List", video_List);
+				
 				return "lecture_Lookup2";
 			} else {
 				return "redirect:/404";
@@ -362,6 +366,54 @@ public class LectureController {
 				lectureService.lecture_update_write2(lecture_update_write2);
 				
 				return "redirect:/lecture_detail";
+			} else {
+				return "redirect:/404";
+
+			}
+		}
+		
+		//업로드한 비디오 상세보기
+		@RequestMapping(value= "/video_upload")
+		public String video_upload(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+			request.setCharacterEncoding("UTF-8");
+			int v_no = Integer.parseInt(request.getParameter("v_no"));
+			if ((int) session.getAttribute("u_authority") > 3) {
+				
+				LectureDTO video_upload = new LectureDTO();
+				video_upload.setV_no(v_no);
+				
+				request.setAttribute("dto", lectureService.video_upload(video_upload));
+				return "video_upload";
+			} else {
+				return "redirect:/404";
+
+			}
+		}
+		
+		//비디오 올리기
+		@RequestMapping(value = "/video_upload_update")
+		public ModelAndView video_upload_update(HttpServletRequest request, HttpSession session) {
+			if ((int) session.getAttribute("u_authority") > 3) {
+				ModelAndView mv = new ModelAndView("video_upload_update");
+				mv.addObject("l_code", request.getParameter("l_code"));
+				return mv;
+			} else {
+				ModelAndView mv = new ModelAndView("404");
+				return mv;
+			}
+		}
+		//비디오 올리기
+		@RequestMapping(value = "/video_upload_update.do")
+		public String video_upload_update1(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+			request.setCharacterEncoding("UTF-8");
+			if ((int) session.getAttribute("u_authority") > 3) {
+				LectureDTO video_upload_update = new LectureDTO();
+				video_upload_update.setL_code(request.getParameter("l_code"));
+				video_upload_update.setV_root(request.getParameter("v_root"));
+				video_upload_update.setV_videotitle(request.getParameter("v_videotitle"));
+				video_upload_update.setV_introduce(request.getParameter("v_introduce"));
+				lectureService.video_upload_update(video_upload_update);
+				return "redirect:/lecture_Lookup2?l_code="+ video_upload_update.getL_code();
 			} else {
 				return "redirect:/404";
 
