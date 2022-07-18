@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,6 +41,7 @@
 <!-- Template Stylesheet -->
 <link href="./resources/css/style.css" rel="stylesheet">
 <link href="./resources/css/admin.css" rel="stylesheet">
+
 
 </head>
 <style type="text/css">
@@ -129,10 +132,9 @@
 
 
 		<jsp:include page="./header.jsp" />
-		<div style="width: 100%; height: 705px;">
+		<div style="width: 100%;">
 			<jsp:include page="./lecture_nav.jsp" />
-			<div style="padding-top: 50px;">
-				<h3>&nbsp;&nbsp;강의신청</h3>
+			<div style="padding-top: 90px;">
 				<hr style="border: solid 1px;">
 			</div>
 			<div style="padding-top: 10px; text-align: center;">
@@ -212,7 +214,7 @@
 			<br>
 			<div style="text-align: center">
 				<h5>&nbsp;&nbsp;■강의계획</h5>
-				<div id="requestform" style="padding-top: 10px; padding-left: 340px">
+				<div id="requestform" style="padding-top: 10px; padding-left: 340px; height: 500px;">
 					<form action="./lecture_request.do" method="post">
 					<table class="tg" style="table-layout: fixed; width: 900px">
 						<colgroup>
@@ -242,8 +244,7 @@
 							</tr>
 							<tr>
 								<td class="tg-llyw">커리큘럼</td>
-								<td class="tg-0pky"><input name="l_curriculum" style="width: 790px;"
-									type="text"></td>
+								<td class="tg-0pky"><textarea name="l_curriculum" id="summernote" required="required"></textarea></td>
 							</tr>
 						</tbody>
 					</table>
@@ -298,6 +299,23 @@
         }
     });
 	</script>
-</body>
 
+</body>
+		
+		<script>
+			$(document).ready(function() {
+				   //여기 아래 부분
+				   $('#summernote').summernote({
+				        height: 200,        
+				        minHeight: null,        
+				        maxHeight: null,       
+				        focus: true,             
+				        lang: "ko-KR",          
+				        placeholder: '내용을 입력해주세요.' 
+				          
+				   });
+				});
+		</script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 </html>

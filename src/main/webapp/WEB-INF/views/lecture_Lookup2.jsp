@@ -129,7 +129,7 @@
 
 
 		<jsp:include page="./header.jsp" />
-		<div style="width: 100%; height: 705px;">
+		<div style="width: 100%;">
 			<jsp:include page="./lecture_nav.jsp" />
 			<div style="padding-top: 110px;">
 				<h3>&nbsp;&nbsp;강의 상세보기</h3>
@@ -140,7 +140,7 @@
 
 			<br>
 			<div style="text-align: center">
-				<div id="requestform" style="padding-top: 10px; padding-left: 340px">
+				<div id="requestform" style="padding-top: 10px; padding-left: 340px; height: 735px;">
 				<div style="padding-left: 770px; padding-bottom: 5px;">
 				<img onclick="location.href='./lecture_update2?l_code=${dto.l_code}'" style="width: 25px; height: 25px;" id="update" alt="" src="./img/update.png" title="id">
 				</div>

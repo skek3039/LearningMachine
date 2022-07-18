@@ -96,22 +96,28 @@
 		<div style="padding-top: 10px; padding-left: 400px">
 				<table>
 					<tr>
-						<th><svg width="26px" height="26px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill="#00C471" fill-rule="evenodd" clip-rule="evenodd" d="M 11.742188 12.886719 C 10.707031 13.679688 9.40625 14.152344 8 14.152344 C 4.601562 14.152344 1.847656 11.398438 1.847656 8 C 1.847656 4.601562 4.601562 1.847656 8 1.847656 C 11.398438 1.847656 14.152344 4.601562 14.152344 8 C 14.152344 9.324219 13.734375 10.550781 13.023438 11.554688 L 11.101562 9.632812 C 10.742188 9.273438 10.15625 9.273438 9.796875 9.632812 C 9.433594 9.992188 9.433594 10.578125 9.796875 10.9375 Z M 13.054688 14.199219 C 11.679688 15.324219 9.917969 16 8 16 C 3.582031 16 0 12.417969 0 8 C 0 3.582031 3.582031 0 8 0 C 12.417969 0 16 3.582031 16 8 C 16 9.835938 15.382812 11.527344 14.34375 12.875 L 15.511719 14.042969 C 15.871094 14.402344 15.871094 14.988281 15.511719 15.347656 C 15.148438 15.707031 14.566406 15.707031 14.203125 15.347656 Z M 13.054688 14.199219"></path></svg>
-						<td style="padding-top: 10px; word-break:break-all; width: 750px"><h5>제목</h5></td>
+					<th><img style="width: 50px; height: 50px;" id="up" alt="" src="./img/q.png" title="질문"></th>
+						<td style="padding-top: 10px; word-break:break-all; width: 750px"><h5>${dto.lqa_title }</h5></td>
 					</tr>
 					<tr>
-						<td><h6>작성자.</h6></td><td><h6>작성일</h6></td>
+						<td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/id.png" title="id">
+						${dto.u_id }</h6></td><td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/date.png" title="date">
+											<fmt:parseDate value="${dto.lqa_date }" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
+                                            <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
+                    						${time }
+					</h6></td>
 					</tr></table><br>
 					<table>
 					<tr>
-						<td style="word-break:break-all; width: 820px">내용</td>
+						<td style="word-break:break-all; width: 820px">${dto.lqa_content }</td>
 					</tr>
-						
-					
 					</table>
+					<div style="padding-top: 150px;">
 					<hr style="width: 820px; height: 2px;"><br>
+					</div>
+					<br>
 				<div id="writeform" style="padding-right: 100px;">
-				<form action="./write" method="post" onsubmit="return check();" enctype="multipart/form-data">
+				<form action="./qna_reply.do?lqa_no=${dto.lqa_no }" method="post">
 					<input style="width: 820px;" type="text" name="title" required="required">
 					<textarea name="content" id="summernote" required="required" ></textarea>
 					<input type="hidden" name="b_cate" value="">
@@ -153,7 +159,18 @@
 	<script src="./resources/js/main.js"></script>
 </body>
 <script>
-$(document).ready(function() {$("#summernote").summernote({height : 200});});
+$(document).ready(function() {
+	   //여기 아래 부분
+	   $('#summernote').summernote({
+	        height: 200,        
+	        minHeight: null,        
+	        maxHeight: null,       
+	        focus: true,             
+	        lang: "ko-KR",          
+	        placeholder: '내용을 입력해주세요.' 
+	          
+	   });
+	});
 </script>
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>

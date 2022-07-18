@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -129,11 +131,11 @@
 
 
 		<jsp:include page="./header.jsp" />
-		<div style="width: 100%; height: 705px;">
+		<div style="width: 100%;">
 			<jsp:include page="./lecture_nav.jsp" />
 			<br>
 			<div style="text-align: center">
-				<div id="updateform" style="padding-top: 150px; padding-left: 340px">
+				<div id="updateform" style="padding-top: 150px; padding-left: 340px; height: 920px;">
 					<form action="./lecture_update.do" method="post">
 					<table class="tg" style="table-layout: fixed; width: 900px">
 						<colgroup>
@@ -164,8 +166,7 @@
 							</tr>
 							<tr>
 								<td class="tg-llyw">커리큘럼</td>
-								<td class="tg-0pky"><input name="l_curriculum" style="width: 790px;"
-									type="text" placeholder="${dto.l_curriculum }"></td>
+								<td class="tg-0pky"><textarea name="l_curriculum" id="summernote" required="required"></textarea></td>
 							</tr>
 						</tbody>
 					</table>
@@ -209,5 +210,20 @@
 	<script src="./resources/js/main.js"></script>
 	
 </body>
-
+		<script>
+			$(document).ready(function() {
+				   //여기 아래 부분
+				   $('#summernote').summernote({
+				        height: 200,        
+				        minHeight: null,        
+				        maxHeight: null,       
+				        focus: true,             
+				        lang: "ko-KR",          
+				        placeholder: '내용을 입력해주세요.' 
+				          
+				   });
+				});
+		</script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 </html>
