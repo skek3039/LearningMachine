@@ -66,9 +66,9 @@
       <jsp:include page="./header.jsp" />
 
       <section class="vh-100 gradient-custom">
-         <div class="container py-5 h-100">
-            <div
-               class="row d-flex justify-content-center align-items-center h-100">
+         <div class="container py-5 h-100" >
+            <div class="row d-flex justify-content-center align-items-center h-100">
+            
                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                 <div style="padding-top: 120px;">
                </div>
@@ -139,6 +139,8 @@
                               <button class="btn btn-outline-light btn-lg px-5"
                                  type="submit" id="joinBtn">Join</button>
                            </form>
+                           
+                           
                            <div
                               class="d-flex justify-content-center text-center mt-4 pt-1">
                               <a href="#!" class="text-white"><i class="fa-duotone fa-n"></i></a>
@@ -152,7 +154,7 @@
                </div>
             </div>
          </div>
-
+		</div>
          <!-- JavaScript Libraries -->
          <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
          <script

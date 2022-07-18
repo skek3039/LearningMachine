@@ -3,7 +3,6 @@ package com.learning.Common.Contoller;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.learning.Common.Service.LoginService;
-import com.learning.DTO.LectureDTO;
 import com.learning.DTO.TeacherDTO;
 import com.learning.DTO.userDTO;
 @Controller
@@ -91,7 +89,7 @@ public class LoginController {
 			return "forgotPW";
 		}
 	}
-	
+	// 아이디 체크
 	@ResponseBody
 	@PostMapping(value = "/checkID")
 	public String checkID(HttpServletRequest request) throws IOException {
@@ -101,7 +99,7 @@ public class LoginController {
 		
 		return result;
 	}
-	
+	//이메일 체크
 	@ResponseBody
 	@PostMapping(value = "/checkEmail")
 	public String checkEmail(HttpServletRequest request) throws IOException {
@@ -112,7 +110,7 @@ public class LoginController {
 	return result;
 
 	}
-	
+	//닉네임 체크
 	@ResponseBody
 	@PostMapping(value = "/checkNickname")
 	public String checkNickname(HttpServletRequest request) throws IOException {
@@ -123,33 +121,40 @@ public class LoginController {
 	return result;
 
 	}
-	
+	// 강사회원가입
 	@GetMapping(value = "/join2")
 	public String join2() {
 		return "join2";
 	}
 	
+	// 강사회원가입 후 관리자 승인 
 	@PostMapping(value = "/join2")
-	public String join2(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+	public String join2(HttpServletRequest request, HttpSession session, HttpServletResponse response) throws IOException {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		TeacherDTO dto1 = new TeacherDTO();
 		userDTO dto = new userDTO();
-		
-		dto1.setT_id(request.getParameter("t_id"));
+		dto.setU_id(request.getParameter("u_id"));
 		dto.setU_pw(request.getParameter("u_pw"));
-		dto.setU_pw(request.getParameter("u_pw1"));
 		dto.setU_email(request.getParameter("u_email"));
 		dto.setU_name(request.getParameter("u_name"));
+		dto.setU_gender(request.getParameter("u_gender"));
 		dto.setU_nickname(request.getParameter("u_nickname"));
 		dto.setU_birth(request.getParameter("u_birth"));
-	
-		System.out.println(dto1);
-		System.out.println(dto);
+
+		TeacherDTO dto1 = new TeacherDTO();
+		dto1.setT_id(request.getParameter("u_id"));
+		dto1.setT_introduce(request.getParameter("t_introduce"));
+		dto1.setT_spec(request.getParameter("t_spec"));
+		dto1.setT_etc(request.getParameter("t_etc"));
 		
+
 		int result = loginService.join2(dto);
+		int result1 = loginService.join3(dto1);
 		
+		if(result == 1 && result1 == 1) {
+			response.getWriter().println("<script>alert('강사회원가입성공 \\n로그인 창으로 이동 합니다.'); window.location.href = './login'; "+ "</script>");
+		}
 		return "redirect:/join2";
 	}
 	

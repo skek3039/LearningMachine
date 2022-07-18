@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.learning.DTO.TeacherDTO;
 import com.learning.DTO.userDTO;
 
 @Repository
@@ -37,5 +38,8 @@ public class LoginDAO {
 	}
 	public int join2(userDTO dto) {
 		return sqlSession.insert("Login.join2", dto);
+	}
+	public int join3(TeacherDTO dto1) {
+		return sqlSession.insert("Login.join3", dto1);
 	}
 }

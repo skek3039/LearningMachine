@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.learning.Common.DAO.LoginDAO;
+import com.learning.DTO.TeacherDTO;
 import com.learning.DTO.userDTO;
 
 @Service
@@ -43,7 +44,7 @@ public class LoginService {
 		return loginDAO.join2(dto);
 	}
 
-
-
-
+	public int join3(TeacherDTO dto1) {
+		return loginDAO.join3(dto1);
+	}
 }
