@@ -72,6 +72,17 @@ public class LectureService {
 		return lectureDAO.lecture_delete(lecture_delete);
 	}
 
+	public Object lecture_update2(LectureDTO lecture_update2) {
+		return lectureDAO.lecture_update2(lecture_update2);
+	}
+
+	public int lecture_update_write2(LectureDTO lecture_update_write2) {
+		return lectureDAO.lecture_update_write2(lecture_update_write2);
+		
+	}
+
+
+
 
 
 

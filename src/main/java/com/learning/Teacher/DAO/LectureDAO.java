@@ -71,6 +71,17 @@ public class LectureDAO {
 		return sqlSession.delete("lecture.lecture_delete", lecture_delete);
 	}
 
+	public Object lecture_update2(LectureDTO lecture_update2) {
+		return sqlSession.selectOne("lecture.lecture_update2", lecture_update2);
+	}
+
+	public int lecture_update_write2(LectureDTO lecture_update_write2) {
+		sqlSession.update("lecture.lecture_update_renewal",lecture_update_write2);
+		sqlSession.update("lecture.lecture_update_write3", lecture_update_write2);
+		return sqlSession.update("lecture.lecture_update_write2", lecture_update_write2);
+	}
+
+
 
 
 

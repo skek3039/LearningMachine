@@ -42,7 +42,8 @@
   	
   	<select id="lecture_Lookup2" parameterType ="LectureDTO" resultType="LectureDTO">
   		SELECT *
-  		FROM lecture_info_view
+  		,(select l_category from lecture_category c where c.l_code = l.l_code) AS l_category
+  		FROM lecture l
   		WHERE l_code = #{l_code}
   	</select>
 
@@ -91,5 +92,28 @@
   		DELETE FROM lecture_apply
   		WHERE la_no=#{la_no}
   	</delete>
+  	
+  	<select id="lecture_update2" parameterType ="LectureDTO" resultType="LectureDTO">
+  		SELECT *
+  		,(select l_category from lecture_category c where c.l_code = l.l_code) AS l_category
+  		FROM lecture l
+  		WHERE l_code = #{l_code}
+  	</select>	
+  	
+  	<update id="lecture_update_write2" parameterType="LectureDTO">
+		UPDATE lecture
+		SET l_name=#{l_name}, l_info=#{l_info}, l_curriculum=#{l_curriculum}
+		WHERE l_code = #{l_code}
+	</update>
 	
+	<update id="lecture_update_write3" parameterType="LectureDTO">
+		UPDATE lecture_category
+		SET l_category=#{l_category}
+		WHERE l_code = #{l_code}
+	</update>
+	
+	<update id="lecture_update_renewal">
+		update lecture set l_renewal = 0
+		WHERE l_code = #{l_code}
+	</update>
   </mapper>

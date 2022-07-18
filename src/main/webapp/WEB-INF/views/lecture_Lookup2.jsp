@@ -141,6 +141,9 @@
 			<br>
 			<div style="text-align: center">
 				<div id="requestform" style="padding-top: 10px; padding-left: 340px">
+				<div style="padding-left: 770px; padding-bottom: 5px;">
+				<img onclick="location.href='./lecture_update2?l_code=${dto.l_code}'" style="width: 25px; height: 25px;" id="update" alt="" src="./img/update.png" title="id">
+				</div>
 					<table class="tg" style="table-layout: fixed; width: 900px">
 						<colgroup>
 							<col style="width: 100px">
@@ -150,6 +153,10 @@
 							<tr>
 								<td class="tg-llyw">강의 이름</td>
 								<td class="tg-0pky">${dto.l_name }</td>
+							</tr>
+							<tr>
+								<td class="tg-llyw">강의 정보</td>
+								<td class="tg-0pky">${dto.l_info }</td>
 							</tr>
 							<tr>
 								<td class="tg-llyw">카테고리</td>

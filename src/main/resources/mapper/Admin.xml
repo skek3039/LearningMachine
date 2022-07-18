@@ -100,8 +100,8 @@
  	</insert>
  	
  	<insert id="lectureGet" parameterType="map">
-		insert into lecture(t_id,l_code, l_curriculum, l_name, l_price) 
-		values (#{dto.t_id}, #{dto.l_code},#{dto.l_curriculum},#{dto.l_name},#{dto.l_price})
+		insert into lecture(t_id,l_code, l_curriculum, l_name, l_price, l_info) 
+		values (#{dto.t_id}, #{dto.l_code},#{dto.l_curriculum},#{dto.l_name},#{dto.l_price},#{dto.l_info})
     </insert>
     
     <update id = "lectureGet2" parameterType="string">

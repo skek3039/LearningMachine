@@ -115,6 +115,7 @@ public class AdminController {
 				dto.setL_name(request.getParameter("l_name"));
 				dto.setL_price(Integer.parseInt(request.getParameter("l_price")));
 				dto.setT_id(request.getParameter("t_id"));
+				dto.setL_info(request.getParameter("l_info"));
 				dto.setL_code(UUID.randomUUID().toString().replace("-", ""));
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("dto", dto);
