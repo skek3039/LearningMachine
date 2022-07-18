@@ -124,13 +124,13 @@
   		WHERE l.l_code = #{l_code} AND v.l_code = #{l_code}
 	</select>
 	
-  	<select id="video_upload" parameterType ="LectureDTO" resultType="LectureDTO">
+  	<select id="video_upload_detail" parameterType ="LectureDTO" resultType="LectureDTO">
   		SELECT *
   		FROM lecture_video
   		WHERE v_no = #{v_no}
   	</select>
   	
-	<insert id="video_upload_update" parameterType="LectureDTO">
+	<insert id="video_upload" parameterType="LectureDTO">
 		INSERT INTO lecture_video (l_code, v_videotitle, v_introduce, v_root)
 		VALUES (#{l_code}, #{v_videotitle}, #{v_introduce}, #{v_root})
 	</insert> 

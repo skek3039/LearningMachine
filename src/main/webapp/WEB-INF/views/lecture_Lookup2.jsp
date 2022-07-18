@@ -174,7 +174,7 @@
 					</table>
 							<div style="padding-top: 10px; padding-right: 150px; height: 770px;">
 				<div style="padding-top: 10px; padding-left: 865px;">
-					<img onclick="location.href='./video_upload_update?l_code=${dto.l_code }'" style="width: 30px; height: 30px;" id="update" alt="" src="./img/video.png" title="id"></img>
+					<img onclick="location.href='./video_upload?l_code=${dto.l_code }'" style="width: 30px; height: 30px;" id="update" alt="" src="./img/video.png" title="id"></img>
 				</div>
 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
@@ -186,7 +186,7 @@
 					</tr>
 					<c:forEach items="${video_List}" var="v">
 					<tr>
-						<td><a href="./video_upload?v_no=${v.v_no }">${v.v_no }</a></td>
+						<td><a href="./video_upload_detail?v_no=${v.v_no }">${v.v_no }</a></td>
 						<td>${v.v_videotitle }</td>
 						<td>${v.v_introduce }</td>
 						<td>${v.l_code }</td>

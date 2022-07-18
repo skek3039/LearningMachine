@@ -85,12 +85,12 @@ public class LectureDAO {
 		return sqlSession.selectList("lecture.video_List", l_code);
 	}
 
-	public Object video_upload(LectureDTO video_upload) {
-		return sqlSession.selectOne("lecture.video_upload", video_upload);
+	public Object video_upload_detail(LectureDTO video_upload_detail) {
+		return sqlSession.selectOne("lecture.video_upload_detail", video_upload_detail);
 	}
 
-	public int video_upload_update(LectureDTO video_upload_update) {
-		return sqlSession.insert("lecture.video_upload_update", video_upload_update);
+	public int video_upload(LectureDTO video_upload) {
+		return sqlSession.insert("lecture.video_upload", video_upload);
 	}
 
 
