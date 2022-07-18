@@ -313,4 +313,23 @@ public class LectureController {
 
 		}
 	}
+	
+	@RequestMapping(value = "/lecture_delete")
+	public String lecture_delete(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
+		int la_no = Integer.parseInt(request.getParameter("la_no"));
+		if ((int) session.getAttribute("u_authority") > 3) {
+			String u_id = (String) session.getAttribute("u_id");
+			LectureDTO lecture_delete = new LectureDTO();
+			lecture_delete.setLa_no(la_no);
+			lecture_delete.setT_id(u_id);
+			
+			lectureService.lecture_delete(lecture_delete);
+			
+			return "redirect:/lecture_refusal";
+		} else {
+			return "redirect:/404";
+
+		}
+	}
 }

@@ -143,7 +143,7 @@
 				<div id="requestform" style="padding-top: 10px; padding-left: 340px">
 				<div style="padding-left: 770px; padding-bottom: 5px;">
 				<img onclick="location.href='./lecture_update?la_no=${dto.la_no}'" style="width: 25px; height: 25px;" id="update" alt="" src="./img/update.png" title="id">
-				<img onclick="location.href='./v_qna_update?vq_no=${dto.vq_no}'" style="width: 25px; height: 25px;" id="update" alt="" src="./img/delete.png" title="id">
+				<img onclick="location.href='./lecture_delete?la_no=${dto.la_no}'" style="width: 25px; height: 25px;" id="delete" alt="" src="./img/delete.png" title="id">
 				</div>
 					<table class="tg" style="table-layout: fixed; width: 900px">
 						<colgroup>
@@ -189,6 +189,7 @@
 					$(this).addClass('active');
 				}
 			});
+			
 		</script>
 	</div>
 
