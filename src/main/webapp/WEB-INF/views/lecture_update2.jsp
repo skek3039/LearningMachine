@@ -134,7 +134,7 @@
 			<br>
 			<div style="text-align: center">
 				<div id="updateform" style="padding-top: 150px; padding-left: 340px">
-					<form action="./lecture_update.do" method="post">
+					<form action="./lecture_update2.do" method="post">
 					<table class="tg" style="table-layout: fixed; width: 900px">
 						<colgroup>
 							<col style="width: 100px">
@@ -170,7 +170,7 @@
 						</tbody>
 					</table>
 					<div class="box on" style="padding-top: 10px; padding-left: 765px;">
-					<input type="hidden" name="la_no" value="${dto.la_no }">
+					<input type="hidden" name="l_code" value="${dto.l_code }">
 						<button type="submit" class="btn btn-outline-dark">저장</button>
 					</div></form>
 				</div>

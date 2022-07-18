@@ -112,6 +112,7 @@ function search(){
 					<input type="hidden" name="l_category" value="${list[0].l_category }"> 
 					<input type="hidden" name="l_name" value="${list[0].l_name }">
 					<input type="hidden" name="l_curriculum" value="${list[0].l_curriculum }">
+					<input type="hidden" name="l_info" value="${list[0].l_info }">
 					<table class="table table-bordered table-sm" style="width: 900px;">
 					<tr>
 						<th>강사아이디 | ${list[0].t_id}</th>																
@@ -121,6 +122,11 @@ function search(){
 					<tr>
 						<td colspan="3">
 							<label style="height: 150px;">${list[0].l_curriculum }</label>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<label style="height: 150px;">${list[0].l_info }</label>
 						</td>
 					</tr>
 					<tr>

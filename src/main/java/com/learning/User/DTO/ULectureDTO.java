@@ -13,4 +13,5 @@ public class ULectureDTO {
 	private String l_thumbnail;
 	private String l_date;
 	private int l_del;
+	private String l_info, l_renewal;
 }
