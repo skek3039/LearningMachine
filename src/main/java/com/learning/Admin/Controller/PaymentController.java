@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,24 +41,58 @@ public class PaymentController {
 	
 	
 	
-	@ResponseBody
-	@RequestMapping(value = "/paymentChart", method=RequestMethod.POST )
-	public List<String> paymentChart() {
-	//	List<String> list = paymentService.paymentChart();
-				
-        return null;
-	}
-	
-	
-	
 	//매출관리페이지
 	@GetMapping(value = "/payment")
-	   public ModelAndView payment(HttpSession session, HttpServletRequest request) {
+	   public ModelAndView payment(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 	      if ((int) session.getAttribute("u_authority") == 7) {
+	    	
 	         ModelAndView mv = new ModelAndView("admin_payment");
-	         List<String> list = paymentService.payment();
-	         System.out.println(list);
+	        
+	         //세로막대 그래프 나타내는 메소드
+	         int year = 0;
+	         if(request.getParameter("checkPN")!=null) {
+	        	 year = Integer.parseInt(request.getParameter("year"));
+	        	 if(Integer.parseInt(request.getParameter("checkPN"))==1) {
+	        		 year = year-1;
+	        	 }else if(Integer.parseInt(request.getParameter("checkPN"))==2){
+	        		 year = year+1;	        		 
+	        	 }	        	 
+	         }else {
+	        		year = Integer.parseInt(now.format(formatter));
+	         }
+	        String year1 = null;
+	         List<Map<String, Object>> list = paymentService.payment(year);
+	         int cnt = 0;
+	         for(int i=0; i<list.size(); i++) {
+	        	 if(list.get(i).get("year") !=null) {
+	        		 year1 = list.get(i).get("year").toString();
+	        	 }else {
+	        		 cnt += 1;
+	        	 }
+	         }
+	             
+	         if(cnt == 12) {
+	        	 response.setContentType("text/html;charset=UTF-8");
+	        	 PrintWriter out = response.getWriter();
+	        	 out.println("<script>");
+	        	 out.println("alert('매출데이터가 존재하지않은 년도입니다.')");
+	        	 out.println("history.back()");
+	        	 out.println("</script>");
+	        	return null;
+	         }
+	         
+	         
+	         //원형 그래프 메소드
+	        List<String> circle = paymentService.circle();
+	         System.out.println(circle);
+	         
+	         
+	         mv.addObject("circle",circle);
+	         
 	         mv.addObject("list",list);
+	         mv.addObject("year",year1);
 	         return mv;
 	      } else {
 	         ModelAndView mv = new ModelAndView("404");
@@ -83,10 +116,7 @@ public class PaymentController {
 			if (month == null) {
 				year = now.format(formatter);
 				month = now.format(formatter1);
-			} 
-
-			System.out.println("년은"+year + ", 월은" + month);
-			
+			}	
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("month",month);
@@ -96,10 +126,8 @@ public class PaymentController {
 			List<String> list = paymentService.paymentList(map);
 			System.out.println(list.size());
 			if(list.size() != 0) {
-				System.out.println("여기냐");
 				mv.addObject("list",list); 				
 			}else {
-				System.out.println("여기야?");
 				mv.addObject("month",month);
 				mv.addObject("year",year);
 			}

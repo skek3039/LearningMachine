@@ -129,14 +129,14 @@
 
 
 		<jsp:include page="./header.jsp" />
-		<div style="width: 100%; height: 705px;">
+		<div style="width: 100%;">
 			<jsp:include page="./lecture_nav.jsp" />
 			<div style="padding-top: 110px;">
 				<h3>&nbsp;&nbsp;강의 상세보기</h3>
 				<hr style="border: solid 1px;">
 			</div>
-			<div style="padding-top: 10px; text-align: center;">
-			</div>
+			<div style="padding-top: 10px; text-align: center; height: 770px;">
+			
 
 			<br>
 			<div style="text-align: center">

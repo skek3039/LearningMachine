@@ -2,8 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
-
-
+<%@page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,6 +50,16 @@ rel="stylesheet">
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="./resources/lib/wow/wow.min.js"></script>
+<script src="./resources/lib/easing/easing.min.js"></script>
+<script src="./resources/lib/waypoints/waypoints.min.js"></script>
+<script src="./resources/lib/owlcarousel/owl.carousel.min.js"></script>
+
 
 <style type="text/css">
     <style>@font-face {
@@ -110,8 +119,41 @@ window.onload = function() {
 
 	/* [bar 세로 막대 : 그리기 실시] */
 	drawBarHeight();
+	
+	drawPieChart();
 	    		
 };
+
+/*원형 막대*/
+	function drawPieChart(){
+	
+	
+		var list = new Array();
+		
+		var value = '<c:out value="${curcle[0].count }"/>';
+		alert(value);
+		
+		
+		new Chart(document.getElementById("pie-chart"), {
+		    type: 'pie',
+		    data: {
+		      labels: ['${circle[0].category}','${circle[1].category}','${circle[2].category}'],
+		      datasets: [{
+		        label: "Population (millions)",
+		        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+		        data: ['${circle[0].COUNT}','${circle[1].COUNT}','${circle[2].COUNT}']
+		      }]
+		    },
+		    options: {
+		      title: {
+		        display: true,
+		        text: '카테고리별 비율'
+		      }
+		    }
+		});
+}
+ 
+
 
 
 /* [bar 세로 막대 : 그리기 함수] */
@@ -126,10 +168,17 @@ function drawBarHeight(){
 	var myChart = new Chart(ctx, {
 		type: 'bar', // [차트 타입 지정]
 		data: {
-			labels: ['${list[0].month }월', '${list[1].month }월'], // [데이터 라벨 (제목)]
+			labels: [ '${list[0].month }월', '${list[1].month }월', '${list[2].month }월', '${list[3].month }월', 
+				'${list[4].month }월', '${list[5].month }월', '${list[6].month }월', '${list[7].month }월', 
+				'${list[8].month }월', '${list[9].month }월', '${list[10].month }월', '${list[11].month }월', 
+				'${list[12].month }월'], // [데이터 라벨 (제목)]
 			datasets: [{
-				label: '2022년 월 매출', // [데이터 시트 제목]
-				data: [${list[0].total}, ${list[1].total}], // [데이터 : Red ~ Orange]
+				label: '${year }년 월 매출', // [데이터 시트 제목]
+				
+				data: [${list[0].total}, ${list[1].total}, ${list[2].total},
+${list[3].total}, ${list[4].total}, ${list[5].total}, ${list[6].total}, 
+${list[7].total}, ${list[8].total}, ${list[9].total}, ${list[10].total}, 
+${list[11].total}, ${list[12].total}], // [데이터 : Red ~ Orange]
 				backgroundColor: [ // [막대 배경 색상 : Red ~ Orange ]
 					'rgba(255, 99, 132, 0.2)',
 					'rgba(54, 162, 235, 0.2)',
@@ -152,7 +201,7 @@ function drawBarHeight(){
 		options: {
 			legend: {
 				labels: {
-					fontColor: "red",
+					fontColor: "green",
 					fontSize: 18
 				}
 			},
@@ -165,21 +214,13 @@ function drawBarHeight(){
 	});
 };
 
-function search(){
-	var u_name= document.getElementById("u_name").value;
-	location.href = "./admin_studentSearch?u_name="+u_name;
-}
 
-function enterkey() {
-	if (window.event.keyCode == 13) {
-		search();
-	}
+function preNext(year,checkPN){
+	var checkPN = checkPN;
+	var year = Number(year);
 	
+	location.href="./payment?checkPN="+checkPN+"&year="+year;
 }
-function linkPage(pageNo){
-	location.href = "./admin_student?pageNo=" + pageNo;
-}
-   
 
 
 </script>
@@ -214,8 +255,16 @@ function linkPage(pageNo){
 				<div id="payment">
 					<div id="today">
 				 <!-- Begin Page Content -->
+						<h6 class="m-0 font-weight-bold text-primary"><a href="javascript:preNext('${year }','1')">◀</a>  ${year }년 <a href="javascript:preNext('${year }','2')">▶</a> </h6>
+						<br>
 						<canvas id = "myChart"></canvas>
+						<hr>
+						<div style="width: 400px; height: 400px;">
+						<canvas id="pie-chart" width="250" height="250"></canvas>
+						</div>
 					</div>
+					
+
 				</div>
 				<hr>
 			</div> 

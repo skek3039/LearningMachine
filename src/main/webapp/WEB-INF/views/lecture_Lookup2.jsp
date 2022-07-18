@@ -129,7 +129,7 @@
 
 
 		<jsp:include page="./header.jsp" />
-		<div style="width: 100%; height: 705px;">
+		<div style="width: 100%;">
 			<jsp:include page="./lecture_nav.jsp" />
 			<div style="padding-top: 110px;">
 				<h3>&nbsp;&nbsp;강의 상세보기</h3>
@@ -140,7 +140,7 @@
 
 			<br>
 			<div style="text-align: center">
-				<div id="requestform" style="padding-top: 10px; padding-left: 340px">
+				<div id="requestform" style="padding-top: 10px; padding-left: 340px; height: 735px;">
 				<div style="padding-left: 770px; padding-bottom: 5px;">
 				<img onclick="location.href='./lecture_update2?l_code=${dto.l_code}'" style="width: 25px; height: 25px;" id="update" alt="" src="./img/update.png" title="id">
 				</div>
@@ -172,6 +172,29 @@
 							</tr>
 						</tbody>
 					</table>
+							<div style="padding-top: 10px; padding-right: 150px; height: 770px;">
+				<div style="padding-top: 10px; padding-left: 865px;">
+					<img onclick="location.href='./video_upload_update?l_code=${dto.l_code }'" style="width: 30px; height: 30px;" id="update" alt="" src="./img/video.png" title="id"></img>
+				</div>
+				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
+					<tr>
+						<th>비디오 번호</th>
+						<th>비디오 제목</th>
+						<th>비디오 소개</th>
+						<th>강의 코드</th>
+						<th>파일 경로</th>
+					</tr>
+					<c:forEach items="${video_List}" var="v">
+					<tr>
+						<td><a href="./video_upload?v_no=${v.v_no }">${v.v_no }</a></td>
+						<td>${v.v_videotitle }</td>
+						<td>${v.v_introduce }</td>
+						<td>${v.l_code }</td>
+						<td>${v.v_root }</td>
+					</tr>
+					</c:forEach>
+			</table>
+			</div>
 				</div>
 			</div>
 		</div>

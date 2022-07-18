@@ -104,23 +104,28 @@ function search(){
 			if(month >0){
 				year = year;
 				month =Number(month) - 1;
-			}else{
+				if(month == 0){
+					month = 12;
+					year = Number(year)-1;
+				}
+			}
+			else{
 				year = Number(year)-1;
 				month = 12;
 			}
 	}else{
-			if(month < 13){
+			if(month < 12){
 				year = year;
 				month =	Number(month) + 1;
+				if(month == 12){
+					month = 1;
+					year = Number(year)+1;
+				}
 			}else{
 				year = Number(year)+1;
 				month = 1;
 			}
 		}  
-	/* else if(month>confirm){
-		alert("당월보다 큰 숫자는 클릭할 수 없습니다.");
-		history.back();
-	} 	 */
  	location.href="./payment_list?month="+month+"&year="+year;
 }
 </script>

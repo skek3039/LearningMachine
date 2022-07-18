@@ -2,11 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="Payment">
   
-  	<select id="paymentmain" resultType="map">
-  		SELECT MONTH(p_date) as month, sum(p_price2)as total FROM payment_lecture_view2 
+  	<select id="paymentmain" parameterType="integer" resultType="map">
+  		SELECT year(p_date)as year, MONTH(p_date) as month, sum(p_price2)as total FROM payment_lecture_view2 
+  		where year(p_date) = #{year}
   		group by month(p_date)
  
   	</select>
+  	
+  	
+  	<select id="circle" resultType="map">
+		SELECT COUNT(*)AS COUNT, (SELECT l_category FROM lecture_category c WHERE c.l_code = v.l_code)AS 'category'
+		FROM lecture_apply_user_view v
+		GROUP BY category
+  	</select>
+  	
   
 
   	<select id="paymentList" parameterType="map" resultType="map">

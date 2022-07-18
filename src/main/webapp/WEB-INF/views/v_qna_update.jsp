@@ -89,10 +89,10 @@
 
 
 		<jsp:include page="./header.jsp" />
-		<div style=" width: 100%; height: 705px;">
+		<div style=" width: 100%;">
 		 <jsp:include page="./lecture_nav.jsp"/>
 		<div style="padding-top: 110px;"></div>
-		<div style="padding-top: 100px; padding-left: 400px">
+		<div style="padding-top: 100px; padding-left: 400px; height: 835px;">
 				<div id="writeform" style="padding-right: 100px;">
 				<form action="./v_qna_update.do?vq_no=${v_qna_update[0].vq_no }" method="post">
 					<input style="width: 820px;" type="text" name="title" required="required" placeholder="제목을 입력해주세요.">
