@@ -3,7 +3,7 @@
   <mapper namespace="Payment">
   
   	<select id="paymentmain" resultType="map">
-  		SELECT MONTH(p_date) as month, sum(p_price2)as total FROM payment_lecture_view2 
+  		SELECT year(p_date)as year, MONTH(p_date) as month, sum(p_price2)as total FROM payment_lecture_view2 
   		group by month(p_date)
  
   	</select>

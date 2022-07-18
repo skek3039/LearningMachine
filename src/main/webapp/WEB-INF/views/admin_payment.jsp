@@ -2,8 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,6 +49,16 @@ rel="stylesheet">
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="./resources/lib/wow/wow.min.js"></script>
+<script src="./resources/lib/easing/easing.min.js"></script>
+<script src="./resources/lib/waypoints/waypoints.min.js"></script>
+<script src="./resources/lib/owlcarousel/owl.carousel.min.js"></script>
+
 
 <style type="text/css">
     <style>@font-face {
@@ -126,9 +134,9 @@ function drawBarHeight(){
 	var myChart = new Chart(ctx, {
 		type: 'bar', // [차트 타입 지정]
 		data: {
-			labels: ['${list[0].month }월', '${list[1].month }월'], // [데이터 라벨 (제목)]
+			labels: [ '${list[0].month }월', '${list[1].month }월'], // [데이터 라벨 (제목)]
 			datasets: [{
-				label: '2022년 월 매출', // [데이터 시트 제목]
+				label: '${list[0].year}년 월 매출', // [데이터 시트 제목]
 				data: [${list[0].total}, ${list[1].total}], // [데이터 : Red ~ Orange]
 				backgroundColor: [ // [막대 배경 색상 : Red ~ Orange ]
 					'rgba(255, 99, 132, 0.2)',
@@ -152,7 +160,7 @@ function drawBarHeight(){
 		options: {
 			legend: {
 				labels: {
-					fontColor: "red",
+					fontColor: "green",
 					fontSize: 18
 				}
 			},
@@ -165,21 +173,15 @@ function drawBarHeight(){
 	});
 };
 
-function search(){
-	var u_name= document.getElementById("u_name").value;
-	location.href = "./admin_studentSearch?u_name="+u_name;
-}
 
-function enterkey() {
-	if (window.event.keyCode == 13) {
-		search();
-	}
+function preNext(year,checkPN){
+	var checkPN = checkPN;
+	var year = Number(year);
+	
+	alert(checkPN + "," + year);
+	
 	
 }
-function linkPage(pageNo){
-	location.href = "./admin_student?pageNo=" + pageNo;
-}
-   
 
 
 </script>
@@ -215,7 +217,10 @@ function linkPage(pageNo){
 					<div id="today">
 				 <!-- Begin Page Content -->
 						<canvas id = "myChart"></canvas>
+						<a href="javascript:preNext('${list[0].year }','1')">◀</a>  ${list[0].year }년 <a href="javascript:preNext('${list[0].year }','2')">▶</a>
 					</div>
+					
+
 				</div>
 				<hr>
 			</div> 
