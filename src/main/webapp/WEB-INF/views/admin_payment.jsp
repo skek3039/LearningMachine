@@ -210,7 +210,6 @@ function preNext(year,checkPN){
 	var checkPN = checkPN;
 	var year = Number(year);
 	
-	alert(checkPN + "," + year);
 	location.href="./payment?checkPN="+checkPN+"&year="+year;
 }
 
@@ -250,6 +249,7 @@ function preNext(year,checkPN){
 						<h6 class="m-0 font-weight-bold text-primary"><a href="javascript:preNext('${year }','1')">◀</a>  ${year }년 <a href="javascript:preNext('${year }','2')">▶</a> </h6>
 						<br>
 						<canvas id = "myChart"></canvas>
+						<hr>
 						<div style="width: 400px; height: 400px;">
 						<canvas id="pie-chart" width="250" height="250"></canvas>
 						</div>

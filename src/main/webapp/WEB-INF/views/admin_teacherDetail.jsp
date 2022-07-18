@@ -96,13 +96,13 @@ function search(){
 
 
 		<jsp:include page="./header.jsp" />
-		<div style="width: 100%; height: 800px; ">
+		<div style="width: 100%;">
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
 		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;강사상세정보</h3><hr style="border: solid 1px;"></div>
-		<div style=" margin-left: 310px;">
-		<div id="teacher_">
+		<div style="padding-top: 10px;padding-left: 120px; height: 100%">
+			<div id="teacher_"  style=" width: 800px; height: 100%; margin: 0 auto; " >
 			강사이름 : ${list[0].t_nickname } <br>
 			아이디 : ${list[0].t_id } <br>
 			수업 총 ${list[0].total } 강의 진행.
