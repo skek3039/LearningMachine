@@ -67,7 +67,6 @@
         font-weight: normal;
         font-style: normal;
     }
-
     body {
         font-family: LeferiPoint-WhiteObliqueA;
     }
@@ -78,7 +77,6 @@
         font-size: 16px;
         padding: 15px;
     }
-
 
     details[open] summary {
         font-weight: 800;
@@ -141,7 +139,6 @@ function search(){
 			</div>
 		</div>
 		<!-- Spinner End -->
-
 
 		<jsp:include page="./header.jsp" />
 		<div style="width: 100%; ">

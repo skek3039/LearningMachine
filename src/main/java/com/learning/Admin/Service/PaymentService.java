@@ -18,4 +18,8 @@ public class PaymentService {
 		return paymentDAO.paymentList(map);
 	}
 
+	public List<String> payment() {
+		return paymentDAO.payment();
+	}
+
 }

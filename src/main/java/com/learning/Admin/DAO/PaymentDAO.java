@@ -7,8 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.learning.DTO.PaymentDTO;
-
 @Repository
 public class PaymentDAO {
 	@Autowired
@@ -17,5 +15,9 @@ public class PaymentDAO {
 	public List<String> paymentList(Map<String, Object> map) {
 		return  sqlSession.selectList("Payment.paymentList",map);
 		
+	}
+
+	public List<String> payment() {
+		return sqlSession.selectList("Payment.paymentmain");
 	}
 }

@@ -116,7 +116,6 @@ window.onload = function() {
 
 /* [bar 세로 막대 : 그리기 함수] */
 function drawBarHeight(){
-		
 	console.log("");
 	console.log("[drawBarHeight] : [start]");
 	console.log("");
@@ -126,10 +125,10 @@ function drawBarHeight(){
 	var myChart = new Chart(ctx, {
 		type: 'bar', // [차트 타입 지정]
 		data: {
-			labels: ['${list[0].month }월', '${list[1].month }월'], // [데이터 라벨 (제목)]
+			labels: ['1월', '2월', '3월', '4월', '5월', '6월'], // [데이터 라벨 (제목)]
 			datasets: [{
 				label: '2022년 월 매출', // [데이터 시트 제목]
-				data: [${list[0].total}, ${list[1].total}], // [데이터 : Red ~ Orange]
+				data: [20, 19, 3, 5, 2, 3], // [데이터 : Red ~ Orange]
 				backgroundColor: [ // [막대 배경 색상 : Red ~ Orange ]
 					'rgba(255, 99, 132, 0.2)',
 					'rgba(54, 162, 235, 0.2)',
@@ -179,7 +178,7 @@ function enterkey() {
 function linkPage(pageNo){
 	location.href = "./admin_student?pageNo=" + pageNo;
 }
-   
+
 
 
 </script>
