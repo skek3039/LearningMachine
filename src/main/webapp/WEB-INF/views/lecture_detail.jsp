@@ -108,7 +108,7 @@ function linkPage(pageNo){
 
 
 		<jsp:include page="./header.jsp" />
-		<div style=" width: 100%; height: 705px;">
+		<div style=" width: 100%;">
 			<jsp:include page="./lecture_nav.jsp"/>	
 			<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;내 강의관리</h3><hr style="border: solid 1px;"></div>
 		 			<div class="col-sm-offset-9" style=" text-align: center; padding-left: 840px">
@@ -117,7 +117,7 @@ function linkPage(pageNo){
 					 		<button class="btn btn-danger" id="search" style="width: 100px float: left; margin-right: 45px;"  onclick="search()">search</button>
 						</div><br>
                 	</div>
-		<div style="padding-top: 10px;">
+		<div style="padding-top: 10px; height: 700px;">
 			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
 						<th>강의 이름</th>
@@ -140,8 +140,8 @@ function linkPage(pageNo){
 					</tr>
 					</c:forEach>
 			</table>
-		</div>
 		<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
+		</div>
 	</div>
 		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />

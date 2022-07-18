@@ -97,11 +97,11 @@ function linkPage(pageNo){
 
 
 		<jsp:include page="./header.jsp" />
-		<div style=" width: 100%; height: 705px;">
+		<div style=" width: 100%;">
 		 <jsp:include page="./lecture_nav.jsp"/>
 		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;Q&A</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 40px;">
-				<div style="padding-top: 10px;">
+				<div style="padding-top: 10px; height: 730px;">
 			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
 						<th>번호</th>
@@ -146,9 +146,9 @@ function linkPage(pageNo){
 					</tr>
 					</c:forEach>
 			</table>
+		<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
 		</div>	
 		</div>
-		<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
 
 </div>
 		<%-- <jsp:include page="./team.jsp"/> --%>
