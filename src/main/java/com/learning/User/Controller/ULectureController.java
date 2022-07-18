@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import com.learning.User.Service.ULectureService;
 import com.learning.User.Service.UserService;
 
+import java.text.ParseException;
 import java.util.*;
 import com.learning.User.Form.*;
 
@@ -21,6 +22,7 @@ public class ULectureController {
 	@Autowired
 	private ULectureService lectureService;
 
+	// 카테고리 리스트도 보내주기 추가해야함
 	@GetMapping(value = "/LectureList")
 	public String lectureList(HttpServletRequest rq) {
 
@@ -36,15 +38,21 @@ public class ULectureController {
 	}
 
 	@GetMapping(value = "/LectureDetail")
-	public String lectureDetail(@RequestParam(name = "l_code") String l_code, HttpServletRequest rq) {
+	public String lectureDetail(@RequestParam(name = "l_code") String l_code, HttpServletRequest rq) throws ParseException {
 
 		String u_id = (String) rq.getSession().getAttribute("u_id");
 
+		// 카테고리 리스트도 보내주기 추가해야함
 		rq.setAttribute("LectureDetail", lectureService.LectureDetail(u_id, l_code));
 		rq.setAttribute("LectureQnas", lectureService.LuectureQnas(u_id, l_code));
-		rq.setAttribute("LectureVideos", lectureService.LectureVideos(l_code));
-		rq.setAttribute("RecentVideo", userService.RecentLectureVideo(u_id, l_code)); // 해당 강의 최근 동영상(v_no)
-
+		rq.setAttribute("LectureReviews", lectureService.LectureReviews(l_code));
+		
+		Map<Integer, VideoForm> LectureVideoMap = lectureService.LectureVideos(l_code);
+		rq.setAttribute("LectureVideos", LectureVideoMap);
+		if (LectureVideoMap.size() != 0) {
+			rq.setAttribute("FirstVideo", lectureService.LectureVideos(l_code).get(1).getV_no());
+			rq.setAttribute("RecentVideo", userService.RecentLectureVideo(u_id, l_code)); // 해당 강의 최근 동영상(v_no)
+		}
 		return "user/LectureDetail";
 	}
 

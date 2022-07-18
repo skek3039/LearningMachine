@@ -9,6 +9,7 @@ public class ULectureForm {
 	private String t_id;
 	private String t_nickname;
 	private String l_name;
+	private String l_info;
 	private String l_price;
 	private String l_curriculum;
 	private String l_thumbnail;
@@ -17,7 +18,9 @@ public class ULectureForm {
 	private int b_del;
 	private String t_introduce;
 	private String t_spec;
+	private String l_renewal;
 	
+	private int total_review;
 	private String grade_avg;
 	private int total_register;
 	private int payment_whether;

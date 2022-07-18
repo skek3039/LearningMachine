@@ -6,9 +6,11 @@ import org.springframework.stereotype.Service;
 import com.learning.User.DAO.ULectureDAO;
 import com.learning.User.DAO.UserDAO;
 
+import java.text.ParseException;
 import java.util.*;
 import com.learning.User.Form.*;
 import com.learning.utill.LectureListComparator;
+import com.learning.utill.Util;
 
 @Service
 public class ULectureService {
@@ -106,7 +108,7 @@ public class ULectureService {
 
 		for (ULectureQnaForm qna : qnaList) {
 
-			reply = lectureDAO.LectureQnaReply(qna.getLqa_no());
+			reply = lectureDAO.LectureQnaReply(qna.getLqa_no()); //밖으로뺴
 
 			if (reply != null && qna.getLqa_no() == reply.getLqa_no()) {
 
@@ -156,5 +158,16 @@ public class ULectureService {
 		}
 		
 		return regi;
+	}
+	
+	public List<ULectureReviewForm> LectureReviews(String l_code) throws ParseException{
+		
+		List<ULectureReviewForm> list = lectureDAO.LectureReviews(l_code);
+		
+		for(ULectureReviewForm form : list) {
+			form.setLr_date(Util.YMD(form.getLr_date()));
+		}
+		
+		return list;
 	}
 }

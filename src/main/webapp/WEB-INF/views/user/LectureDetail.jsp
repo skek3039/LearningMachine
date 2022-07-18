@@ -52,6 +52,21 @@
 
 <!-- Template Javascript -->
 <script src="./resources/js/main.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		   
+		  $('ul.tabs li').click(function(){
+			var tab_id = $(this).attr('data-tab');
+		 
+			$('ul.tabs li').removeClass('current');
+			$('.tab-content').removeClass('current');
+		 
+			$(this).addClass('current');
+			$("#"+tab_id).addClass('current');
+		  })
+		 
+		});
+	</script>
 <style type="text/css">
 <
 style
@@ -85,6 +100,34 @@ details>summary {
 	font-size: 17px;
 	padding: 15px 0;
 }
+ul.tabs{
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+ul.tabs li{
+  background: none;
+  color: #222;
+  display: inline-block;
+  padding: 10px 25px;
+  cursor: pointer;
+}
+
+ul.tabs li.current{
+  background: #ededed;
+  color: #222;
+}
+
+.tab-content{
+  display: none;
+}
+
+.tab-content.current{
+  display: flex;
+}
+.star-rating {width:304px; height: 10px;}
+.star-rating,.star-rating span {display:inline-block; height:55px; overflow:hidden; background:url(./img/ReviewStar.png)no-repeat; }
+.star-rating span{background-position:left bottom; line-height:0; vertical-align:top; }
 </style>
 </head>
 
@@ -103,7 +146,6 @@ details>summary {
 		<jsp:include page="./header.jsp" />
 		<div style="padding-top: 110px;">
 			<h3>&nbsp;&nbsp;${LectureDetail.l_name}</h3>
-			<hr style="border: solid 1px;">
 		</div>
 		<div style="padding-top: 20px; text-align: center;">
 		</div>
@@ -115,16 +157,20 @@ details>summary {
 				<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
 					<!-- <a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="">Read More</a> -->
 					<div class="d-inline-block border rounded-pill text-primary px-4 mb-3">${LectureDetail.l_category}</div>
-					<h2>${LectureDetail.t_nickname}</h2><h3 class="mb-4">선생님 소개</h3>
-					<p class="mb-4">${LectureDetail.t_spec}</p>
+					<h2>${LectureDetail.l_name}</h2><h3 class="mb-4">강의 소개</h3>
+					<h6><small>${LectureDetail.total_register}명 수강중</small>, <small>${LectureDetail.total_review}명의 리뷰(${LectureDetail.grade_avg }점)</small></h6>
+					<span class='star-rating'>
+						<span style="width : ${LectureDetail.grade_avg * 20}%;"></span>
+					</span>
+					<p class="mb-4">${LectureDetail.l_info}</p>
 					<div class="row g-3 mb-4">
 						<div class="col-12 d-flex">
 							<div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
 								<i class="fa fa-chart-line text-white"></i>
 							</div>
 							<div class="ms-4">
-								<h6>Financial Analaysis</h6>
-								<span>Tempor erat elitr rebum at clita. Diam dolor ipsum amet eos erat ipsum lorem et sit sed stet lorem sit clita duo</span>
+								<h6>${LectureDetail.t_nickname}선생님 스펙</h6>
+								<span>${LectureDetail.t_spec}</span>
 							</div>
 						</div>
 						<div class="col-12 d-flex">
@@ -132,6 +178,7 @@ details>summary {
 								<i class="fa fa-money-bill-wave text-white"></i>
 							</div>
 							<div class="ms-4">
+								<h6>${LectureDetail.l_name} 강의 가격</h6>
 								<h4><strong style="color: red; vertical-align: middle;">${LectureDetail.l_price}</Strong>원</h6>
 							</div>
 						</div>
@@ -143,7 +190,7 @@ details>summary {
 						<c:otherwise>
 							<c:choose>
 								<c:when test="${LectureDetail.payment_whether eq 1}">
-									<a href="./LetureVideo?v_no=${LectureVideos['1'].v_no}"
+									<a href="./LectureVideo?v_no=${FirstVideo}"
 							class="btn btn-outline-light rounded-pill border-2 py-3 px-5 animated slideInRight"  style="color: gray;">처음부터 듣기</a>
 									<c:if test="${RecentVideo > 0}">
 										<a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="./LectureVideo?v_no=${RecentVideo}">이어듣기</a>
@@ -160,35 +207,52 @@ details>summary {
 		</div>
 		<!-- Call to Action-->
 		<div class="card text-white bg-secondary my-5 py-4 text-center">
-			<div class="card-body"><p class="text-white m-0">This call to action card is a great place to showcase some important information or display a clever tagline!</p></div>
+			<div class="card-body"><p class="text-white m-0">${LectureDetail.l_curriculum}</p></div>
 		</div>
 		<!-- Content Row-->
-		<div class="row gx-4 gx-lg-5">
-			<div class="col-md-4 mb-5">
-				<div class="card h-100">
-					<div class="card-body">
-						<h2 class="card-title">Card One</h2>
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+		<div>
+			<ul class="tabs">
+				<li class="tab-link current" data-tab="tab-1">강의 리뷰</li>
+				<li class="tab-link" data-tab="tab-2">강의 Q&A</li>
+			</ul>
+		</div>
+		<div class="row tab-content current" id="tab-1">
+			<div class="row gx-4 gx-lg-5">
+				<c:forEach items = "${LectureReviews}" var = "i">
+				<div class="col-md-4 mb-5">
+					<div class="card h-100">
+						<div class="card-body">
+							<h2 class="card-title">${i.lr_title }</h2>
+							<h6>${i.u_nickname} / <small style="color: rgb(51, 179, 211);">${i.lr_grade}점</small></h6>
+							<p class="card-text">${i.lr_content }</p>
+						</div>
+						<div class="card-footer"><h6><small>${i.lr_date}</small></h6></div>
 					</div>
-					<div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>
 				</div>
+				</c:forEach>
 			</div>
-			<div class="col-md-4 mb-5">
-				<div class="card h-100">
-					<div class="card-body">
-						<h2 class="card-title">리뷰</h2>
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod tenetur ex natus at dolorem enim! Nesciunt pariatur voluptatem sunt quam eaque, vel, non in id dolore voluptates quos eligendi labore.</p>
+		</div>
+		<div class="row tab-content" id="tab-2">
+			<div class="row gx-4 gx-lg-5">
+				<div class="col-md-4 mb-5">
+					<div class="card h-100">
+						<div class="card-body">
+							<h2 class="card-title">QNA</h2>
+							<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex
+								numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+						</div>
+						<div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>
 					</div>
-					<div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>
 				</div>
-			</div>
-			<div class="col-md-4 mb-5">
-				<div class="card h-100">
-					<div class="card-body">
-						<h2 class="card-title">Card Three</h2>
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+				<div class="col-md-4 mb-5">
+					<div class="card h-100">
+						<div class="card-body">
+							<h2 class="card-title">Card One</h2>
+							<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex
+								numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+						</div>
+						<div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>
 					</div>
-					<div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>
 				</div>
 			</div>
 		</div>

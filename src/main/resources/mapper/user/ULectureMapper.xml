@@ -48,14 +48,24 @@
 		WHERE lqa_no = #{lqa_no}
 	</select>
 	
-	<select id="ULectureVideoQnas">
-		
+	<select id="ULectureVideoQnas" parameterType="String" resultType="com.learning.User.Form.ULectureReviewForm">
+		SELECT *,
+			(SELECT u_nickname FROM user WHERE lecture_review.u_id = user.u_id) as u_nickname
+		FROM lecture_review
+		WHERE l_code = #{l_code}
+		ORDER BY lr_date desc
 	</select>
 	
 	<select id="ULectureVideoQnaReplys">
 		
 	</select>
-	
+	<select id="ULectureReviews" parameterType="String" resultType="com.learning.User.Form.ULectureReviewForm">
+		SELECT *,
+			(SELECT u_nickname FROM user WHERE lecture_review.u_id = user.u_id) as u_nickname
+		FROM lecture_review
+		WHERE l_code = #{l_code}
+		ORDER BY lr_date desc
+	</select>
 	<select id="UCheckAttendance" parameterType="com.learning.User.Form.UserAttendanceForm" resultType="integer">
 	
 		SELECT COUNT(0) FROM lecture_video_attendance WHERE v_no = #{v_no}, u_id = #{u_id}, l_code = #{l_code}
@@ -70,5 +80,9 @@
 	
 	<select id="UVideoLectureCheck" parameterType="Integer" resultType="String">
 		SELECT l_code FROM lecture_video WHERE v_no = #{v_no}
+	</select>
+	
+	<select id="ULectureReview" resultType="com.learning.User.Form.ULectureReviewForm">
+	
 	</select>
   </mapper>

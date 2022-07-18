@@ -63,4 +63,10 @@ public class ULectureDAO {
 
 		return sqlSession.selectList(namespace + "ULectureVideoQnaReplys", l_code);
 	}
+	
+	public List<ULectureReviewForm> LectureReviews(String l_code){
+		
+		return sqlSession.selectList(namespace + ".ULectureReviews", l_code);
+	}
+	
 }
