@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
 #payment_body{
-	background-color:#F0FFF0;
 	box-sizing: border-box;
 	border-radius : 80px / 40px;
 	width: 100%;
@@ -10,9 +9,7 @@
 
 #payment{
 	margin-left:10px;
-	background-color: gray;
 	margin: 0 auto;
 	width: 900px;
 	height: 100%;
-
 }

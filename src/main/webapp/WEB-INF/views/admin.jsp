@@ -95,7 +95,7 @@
 
 
 		<jsp:include page="./header.jsp" />
-		<div style="width: 100%; height: 800px; ">
+		<div style="width: 100%;">
 				<div style="position: relative;">
 				<jsp:include page="./admin_nav.jsp" />
 				</div>
@@ -103,7 +103,7 @@
 				<h3>&nbsp;&nbsp;관리자님 안녕하세요.</h3>
 				<hr style="border: solid 1px;">
 			</div>
-			<div style="height: 100px">
+			<div style=" width: 800px; height: 100%; margin: 0 auto; ">
 				<div class="row no-gutters align-items-center">
 					<div class="col-auto">
 						<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
@@ -112,10 +112,8 @@
 					</div>
 				</div>
 				<br>
-
-
 			</div>
-
+		
 			<div class="row g-4">
 				 <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
@@ -195,10 +193,6 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        
-                        
-                        
                     </div>
                  <div class="row">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -244,7 +238,7 @@
                         </div>
                     </div>			 	
 		   		</div>
-			</div>
+		
 		<jsp:include page="./footer.jsp" />
  </div>       
                         
@@ -262,6 +256,7 @@
 				}
 			});
 		</script>
+		 </div> 
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

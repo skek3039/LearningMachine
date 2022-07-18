@@ -14,9 +14,8 @@
 		select count(*) as count from user_reported
 	</select>
 
-  	<select id="userList" parameterType="PageDTO" resultType="userDTO">
+  	<select id="userList" resultType="userDTO">
   		select * from user where u_authority IN (1,2,3)
-  		LIMIT #{startPage}, #{lastPage}
   	</select>
   	
   	<select id="userSearch" parameterType="string" resultType="userDTO">
@@ -101,8 +100,8 @@
  	</insert>
  	
  	<insert id="lectureGet" parameterType="map">
-		insert into lecture(t_id,l_code, l_curriculum, l_name, l_price) 
-		values (#{dto.t_id}, #{dto.l_code},#{dto.l_curriculum},#{dto.l_name},#{dto.l_price})
+		insert into lecture(t_id,l_code, l_curriculum, l_name, l_price, l_info) 
+		values (#{dto.t_id}, #{dto.l_code},#{dto.l_curriculum},#{dto.l_name},#{dto.l_price},#{dto.l_info})
     </insert>
     
     <update id = "lectureGet2" parameterType="string">
@@ -142,6 +141,5 @@
   	<update id="teacherAccept2" parameterType="map">
   		update teacher_apply set t_recognize = 1 where t_id = #{t_apply[0].u_id}
   	</update>
-  	
  	
   </mapper>

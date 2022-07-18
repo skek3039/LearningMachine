@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,21 +41,51 @@
 <!-- Template Stylesheet -->
 <link href="./resources/css/style.css" rel="stylesheet">
 <link href="./resources/css/admin.css" rel="stylesheet">
-<link href='./resources/css/main.css' rel='stylesheet' />
-<link href="/resources/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-
-<!-- JavaScript Libraries -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="./resources/lib/wow/wow.min.js"></script>
-<script src="./resources/lib/easing/easing.min.js"></script>
-<script src="./resources/lib/waypoints/waypoints.min.js"></script>
-<script src="./resources/lib/owlcarousel/owl.carousel.min.js"></script>
-
-
+</head>
 <style type="text/css">
-    <style>@font-face {
+.tg {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.tg td {
+	border-color: black;
+	border-style: solid;
+	border-width: 1px;
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	overflow: hidden;
+	padding: 10px 5px;
+	word-break: normal;
+}
+
+.tg th {
+	border-color: black;
+	border-style: solid;
+	border-width: 1px;
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	overflow: hidden;
+	padding: 10px 5px;
+	word-break: normal;
+}
+
+.tg .tg-llyw {
+	background-color: #c0c0c0;
+	border-color: inherit;
+	text-align: left;
+	vertical-align: top
+}
+
+.tg .tg-0pky {
+	border-color: inherit;
+	text-align: left;
+	vertical-align: top;
+	
+}
+<style>@font-face {
         font-family: 'LeferiPoint-WhiteObliqueA';
         src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
         font-weight: normal;
@@ -82,27 +113,10 @@
         font-size: 17px;
         padding: 15px 0;
     }
+    .box.on{
+    color:#999;
+    }
 </style>
-
-
-
-<script type="text/javascript">
-function search(){
-	var t_nickname= document.getElementById("t_nickname").value;
-	location.href = "./admin_teacherSearch?t_nickname="+t_nickname;
-}
-
-function enterkey() {
-	if (window.event.keyCode == 13) {
-		search();
-	}
-	
-}
-
-</script>
-
-</head>
-
 <body>
 	<div class="container-xxl bg-white p-0">
 		<!-- Spinner Start -->
@@ -117,55 +131,55 @@ function enterkey() {
 
 
 		<jsp:include page="./header.jsp" />
-		<div style=" width: 100%;">
-		<div style="position: relative;">
-		<jsp:include page="./admin_nav.jsp"/>
-		 </div>
-		<div style="padding-top:  110px;"><h3>&nbsp;&nbsp;강사관리</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px;padding-left: 120px; height: 100%">
-			 <div class="card shadow mb-4"style=" width: 800px; height: 100%; margin: 0 auto; ">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">
-                          전체 리스트</h6>
-                        </div>
-                        <div class="card-body">
-						<div class="table-responsive">
-							<table class="table table-bordered" id="dataTable">
-								<thead>
-									<tr>
-										<th>강사명</th>
-										<th>강사ID</th>
-										<th>총 수강학생수</th>
-										<th>총 강의수</th>
-									</tr>
-								</thead>
-								<tfoot>
-									<tr>
-										<th colspan="2" style="text-align: right">전체강사수</th>
-										<th><fmt:formatNumber value="50" pattern="#,###" /></th>
-									</tr>
-								</tfoot>
-								<tbody>
-									<c:forEach items="${list }" var="list">
-										<tr>
-											<td><a href="./admin_teacherDetail?t_id=${list.t_id }">${list.nick }</a></td>
-											<td>${list.t_id }</td>
-											<td><c:if test="${list.COUNT eq null }"> 0</c:if> <c:if
-													test="${list.COUNT ne null }">${list.COUNT }</c:if></td>
-											<td>${list.t_idcount }</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-
-						</div>
-					</div>
-                    </div>
+		<div style="width: 100%; height: 945px;">
+			<jsp:include page="./lecture_nav.jsp" />
+			<br>
+			<div style="text-align: center">
+				<div id="updateform" style="padding-top: 150px; padding-left: 340px">
+					<form action="./lecture_update2.do" method="post">
+					<table class="tg" style="table-layout: fixed; width: 900px">
+						<colgroup>
+							<col style="width: 100px">
+							<col style="width: 800px">
+						</colgroup>
+						<tbody>
+							<tr>
+								<td class="tg-llyw">강의 이름</td>
+								<td class="tg-0pky"><input name="l_name" style="width: 790px;"
+									type="text" placeholder="${dto.l_name }"></td>
+							</tr>
+							<tr>
+								<td class="tg-llyw">강의 정보</td>
+								<td class="tg-0pky"><input name="l_info" style="width: 790px;"
+								type="text" placeholder="${dto.l_info }"></td>
+							</tr>
+							<tr>
+								<td class="tg-llyw">카테고리</td>
+								<td class="tg-0pky">
+								<select name="l_category" style="width: 790px;">
+											<option value="">카테고리 선택</option>
+											<c:forEach items="${cate }" var="cate">											
+											<option value="${cate.l_category }">${cate.l_category }</option>
+											</c:forEach>
+									</select>
+									</td>
+							</tr>
+							<tr>
+								<td class="tg-llyw">커리큘럼</td>
+								<td class="tg-0pky"><textarea name="l_curriculum" id="summernote" required="required"></textarea></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="box on" style="padding-top: 10px; padding-left: 765px;">
+					<input type="hidden" name="l_code" value="${dto.l_code }">
+						<button type="submit" class="btn btn-outline-dark">저장</button>
+					</div></form>
+				</div>
 			</div>
+		</div>
 		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
 
-</div>		
 
 		<!-- Back to Top -->
 		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
@@ -182,9 +196,11 @@ function enterkey() {
 			});
 		</script>
 	</div>
+
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="./resources/lib/wow/wow.min.js"></script>
 	<script src="./resources/lib/easing/easing.min.js"></script>
 	<script src="./resources/lib/waypoints/waypoints.min.js"></script>
@@ -192,6 +208,22 @@ function enterkey() {
 
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
+	
 </body>
-
+		<script>
+			$(document).ready(function() {
+				   //여기 아래 부분
+				   $('#summernote').summernote({
+				        height: 200,        
+				        minHeight: null,        
+				        maxHeight: null,       
+				        focus: true,             
+				        lang: "ko-KR",          
+				        placeholder: '내용을 입력해주세요.' 
+				          
+				   });
+				});
+		</script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 </html>

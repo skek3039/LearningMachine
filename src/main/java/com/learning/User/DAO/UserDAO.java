@@ -45,5 +45,18 @@ public class UserDAO {
 		}
 	}
 	
+	public String CheckAttendance(UserAttendanceForm form) {
+		
+		return sqlSession.selectOne(namespace + ".UCheckAttendance", form);
+	}
 	
+	public int UserAttendanceInsert(UserAttendanceForm form) {
+		
+		return sqlSession.insert(namespace + ".UInsertVideoAttendance", form);
+	}
+	
+	public int UpdateVideoAttendance(UserAttendanceForm form) {
+		
+		return sqlSession.update(namespace + ".UpdateVideoAttendance", form);
+	}
 }

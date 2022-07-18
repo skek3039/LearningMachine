@@ -60,6 +60,33 @@ public class LectureService {
 		return lectureDAO.lecture_refusal(map);
 	}
 
+	public int lecture_update_write(LectureDTO lecture_update_write) {
+		return lectureDAO.lecture_update_write(lecture_update_write);
+	}
+
+	public Object lecture_update(LectureDTO lecture_update) {
+		return lectureDAO.lecture_update(lecture_update);
+	}
+
+	public int lecture_delete(LectureDTO lecture_delete) {
+		return lectureDAO.lecture_delete(lecture_delete);
+	}
+
+	public Object lecture_update2(LectureDTO lecture_update2) {
+		return lectureDAO.lecture_update2(lecture_update2);
+	}
+
+	public int lecture_update_write2(LectureDTO lecture_update_write2) {
+		return lectureDAO.lecture_update_write2(lecture_update_write2);
+		
+	}
+
+
+
+
+
+
+
 
 
 

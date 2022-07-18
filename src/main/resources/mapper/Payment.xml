@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?> <!-- 맵퍼파일 -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="Payment">
+  
+  	<select id="paymentmain" resultType="map">
+  		SELECT year(p_date)as year, MONTH(p_date) as month, sum(p_price2)as total FROM payment_lecture_view2 
+  		group by month(p_date)
+ 
+  	</select>
+  
 
   	<select id="paymentList" parameterType="map" resultType="map">
   		select *,
@@ -42,5 +49,4 @@
   			where u_id = #{u_id}
   		</if>
   	</select>
-  
   </mapper>

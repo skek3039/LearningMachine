@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.learning.Admin.DAO.PaymentDAO;
+import com.learning.DTO.PaymentDTO;
 
 @Service
 public class PaymentService {
@@ -16,4 +17,9 @@ public class PaymentService {
 	public List<String> paymentList(Map<String, Object> map) {
 		return paymentDAO.paymentList(map);
 	}
+
+	public List<String> payment() {
+		return paymentDAO.payment();
+	}
+
 }

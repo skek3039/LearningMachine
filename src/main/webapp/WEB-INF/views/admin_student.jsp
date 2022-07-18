@@ -20,8 +20,7 @@
 <!-- Google Web Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
 	rel="stylesheet">
 
 <!-- Icon Font Stylesheet -->
@@ -43,6 +42,18 @@
 <!-- Template Stylesheet -->
 <link href="./resources/css/style.css" rel="stylesheet">
 <link href="./resources/css/admin.css" rel="stylesheet">
+<link href='./resources/css/main.css' rel='stylesheet' />
+<link href="/resources/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="./resources/lib/wow/wow.min.js"></script>
+<script src="./resources/lib/easing/easing.min.js"></script>
+<script src="./resources/lib/waypoints/waypoints.min.js"></script>
+<script src="./resources/lib/owlcarousel/owl.carousel.min.js"></script>
+
 
 <style type="text/css">
     <style>@font-face {
@@ -111,40 +122,53 @@ function linkPage(pageNo){
 
 
 		<jsp:include page="./header.jsp" />
-		<div style="width: 100%; height: 800px; ">
+		<div style="width: 100%;">
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
 		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;학생리스트</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px; margin-left: 310px;">
-				<div style="padding-top: 10px;">
-					 <input type="search" id="u_name" name="u_name" class="form-control" required="required" placeholder="학생이름을 입력해주세요." style="width: 250px; float: left;" onkeyup="enterkey()"> &nbsp; 
-					 <button class="btn btn-danger" id="search" style="width: 100px" onclick="search()">search</button>
-				</div><br>
-			<div  id="student" style="height: 370px;" >
-				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
-					<tr>
-						<th>이름</th>
-						<th>ID</th>
-						<th>Point</th>											
-					</tr>
-					<c:forEach items="${list }" var="list">
-					<tr>
-						<td><a href="./admin_studentLecture?u_id=${list.u_id }">${list.u_name }</a></td>
-						<td>${list.u_id }</td>
-						<td style="text-align: right"><fmt:formatNumber value="${list.u_paypoint }" pattern="#,###"  /></td>						
-					</tr>
-					</c:forEach>
-				</table>
-			</div>
-			<hr>	
-			<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
-		</div>
-
+		<div style="padding-top: 10px;padding-left: 120px; height: 100%">
+				
+				
+	 		 <div class="card shadow mb-4"style=" width: 800px; height: 100%; margin: 0 auto; ">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">
+                          학생전체 리스트</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive" >    
+                                <table class="table table-bordered" id="dataTable"  cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>이름</th>
+                                            <th>ID</th>                                            
+                                            <th>Point</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="2" style="text-align: right">전체가입학생수 </th>                                       
+                                            <th><fmt:formatNumber value="50" pattern="#,###"  /></th>    
+                                        </tr>
+                                    </tfoot>
+                                    <tbody> 
+                                  <c:forEach items="${list }" var="list">
+                                        <tr>
+                                            <td><a href="./admin_studentLecture?u_id=${list.u_id }">${list.u_name }</a></td>
+                                            <td>${list.u_id }</td>
+                                           <td style="text-align: right"><fmt:formatNumber value="${list.u_paypoint }" pattern="#,###"  /></td>           
+                                        </tr>
+                                    </c:forEach>  
+                                	 </tbody>
+                                </table>
+                               
+                            </div>
+                        </div>
+                    </div>
 </div>
 		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
-
+</div>
 
 		<!-- Back to Top -->
 		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
@@ -161,17 +185,21 @@ function linkPage(pageNo){
 		</script>
 	</div>
 
-	<!-- JavaScript Libraries -->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="./resources/lib/wow/wow.min.js"></script>
-	<script src="./resources/lib/easing/easing.min.js"></script>
-	<script src="./resources/lib/waypoints/waypoints.min.js"></script>
-	<script src="./resources/lib/owlcarousel/owl.carousel.min.js"></script>
+
+  	<!-- Page level plugins -->
+    <script src="./resources/js/jquery.dataTables.min.js"></script>
+    <script src="./resources/js/dataTables.bootstrap4.min.js"></script>
+    <script src="./resources/js/datatables-demo.js"></script>
+
+
 
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
 	<script src="./resources/js/admin_student.js"></script>
+	<script src="./resources/js/sb-admin-2.min.js"></script>
+	
+	
+	
 </body>
 
 </html>

@@ -36,8 +36,8 @@ public class AdminDAO {
 		return sqlSession.selectOne("Admin.totalCount",tname);		
 	}
 	
-	public List<userDTO> userList(PageDTO page) {
-		return sqlSession.selectList("Admin.userList" , page);
+	public List<userDTO> userList() {
+		return sqlSession.selectList("Admin.userList");
 	}
 
 	public List<userDTO> userSearch(String u_name) {

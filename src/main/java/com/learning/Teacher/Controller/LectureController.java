@@ -8,16 +8,14 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;import org.springframework.validation.BindingResult;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.learning.DTO.LectureDTO;
 import com.learning.DTO.PageDTO;
-import com.learning.DTO.userDTO;
 import com.learning.Teacher.Service.LectureService;
 
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
@@ -183,7 +181,6 @@ public class LectureController {
 			ModelAndView mv = new ModelAndView("lecture_request");
 			
 			List<String> cate = lectureService.lectureCate();
-			System.out.println(cate.toString());
 			mv.addObject("cate",cate);
 			return mv;
 		} else {
@@ -272,4 +269,102 @@ public class LectureController {
 			return mv;
 		}
 	}
+	
+	//승인 거부 글 수정
+	@RequestMapping(value = "/lecture_update")
+	public ModelAndView lecture_update(HttpServletRequest request, HttpSession session) {
+		int la_no = Integer.parseInt(request.getParameter("la_no"));
+		if ((int) session.getAttribute("u_authority") > 3) {
+			ModelAndView mv = new ModelAndView("lecture_update");
+			List<String> cate = lectureService.lectureCate();
+			LectureDTO lecture_update = new LectureDTO();
+			lecture_update.setLa_no(la_no);
+			mv.addObject("cate",cate);
+			request.setAttribute("dto", lectureService.lecture_update(lecture_update));
+			
+			return mv;
+		} else {
+			ModelAndView mv = new ModelAndView("404");
+			return mv;
+		}
+	}
+	//수정 글 쓰기
+	@RequestMapping(value = "/lecture_update.do")
+	public String lecture_update_write(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
+		if ((int) session.getAttribute("u_authority") > 3) {
+			String u_id = (String) session.getAttribute("u_id");
+			LectureDTO lecture_update_write = new LectureDTO();
+			lecture_update_write.setT_id(u_id);
+			lecture_update_write.setL_name(request.getParameter("l_name"));
+			lecture_update_write.setL_info(request.getParameter("l_info"));
+			lecture_update_write.setL_category(request.getParameter("l_category"));
+			lecture_update_write.setL_curriculum(request.getParameter("l_curriculum"));
+			lecture_update_write.setLa_no(Integer.parseInt(request.getParameter("la_no")));
+			lectureService.lecture_update_write(lecture_update_write);
+			return "redirect:/lecture_refusal";
+		} else {
+			return "redirect:/404";
+
+		}
+	}
+	
+	@RequestMapping(value = "/lecture_delete")
+	public String lecture_delete(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
+		int la_no = Integer.parseInt(request.getParameter("la_no"));
+		if ((int) session.getAttribute("u_authority") > 3) {
+			String u_id = (String) session.getAttribute("u_id");
+			LectureDTO lecture_delete = new LectureDTO();
+			lecture_delete.setLa_no(la_no);
+			lecture_delete.setT_id(u_id);
+			
+			lectureService.lecture_delete(lecture_delete);
+			
+			return "redirect:/lecture_refusal";
+		} else {
+			return "redirect:/404";
+
+		}
+	}
+	
+	//승인 완료 글 수정
+		@RequestMapping(value = "/lecture_update2")
+		public ModelAndView lecture_update2(HttpServletRequest request, HttpSession session) {
+			String l_code = request.getParameter("l_code");
+			if ((int) session.getAttribute("u_authority") > 3) {
+				ModelAndView mv = new ModelAndView("lecture_update2");
+				List<String> cate = lectureService.lectureCate();
+				LectureDTO lecture_update2 = new LectureDTO();
+				lecture_update2.setL_code(l_code);
+				mv.addObject("cate",cate);
+				request.setAttribute("dto", lectureService.lecture_update2(lecture_update2));
+				
+				return mv;
+			} else {
+				ModelAndView mv = new ModelAndView("404");
+				return mv;
+			}
+		}
+		//수정 글 쓰기
+		@RequestMapping(value = "/lecture_update2.do")
+		public String lecture_update_write2(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+			request.setCharacterEncoding("UTF-8");
+			if ((int) session.getAttribute("u_authority") > 3) {
+				String u_id = (String) session.getAttribute("u_id");
+				LectureDTO lecture_update_write2 = new LectureDTO();
+				lecture_update_write2.setT_id(u_id);
+				lecture_update_write2.setL_name(request.getParameter("l_name"));
+				lecture_update_write2.setL_info(request.getParameter("l_info"));
+				lecture_update_write2.setL_curriculum(request.getParameter("l_curriculum"));
+				lecture_update_write2.setL_code(request.getParameter("l_code"));
+				lecture_update_write2.setL_category(request.getParameter("l_category"));
+				lectureService.lecture_update_write2(lecture_update_write2);
+				
+				return "redirect:/lecture_detail";
+			} else {
+				return "redirect:/404";
+
+			}
+		}
 }

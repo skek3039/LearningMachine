@@ -97,11 +97,12 @@ function linkPage(pageNo){
 
 
 		<jsp:include page="./header.jsp" />
-		<div style=" width: 100%; height: 705px;">
+		<div style="width: 100%;">
+		<div style="position: relative;">
 		<jsp:include page="./lecture_nav.jsp"/>
 		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;강의신청</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px; text-align: center;">
-				<div style="padding-top: 10px; padding-left: 1200px;">
+		<div style="padding-top: 10px;padding-left: 120px; height: 770px">
+				<div style="padding-top: 10px; padding-left: 1060px;">
 					<button type="button" class="btn btn-outline-dark" onclick="location.href='./lecture_request'">신청</button>
 				</div><br>
 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
@@ -147,13 +148,13 @@ function linkPage(pageNo){
 					</tr>
 					</c:forEach>
 			</table>
-		</div>
 	 	<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>	
+			</div>
+		</div>
 
-</div>
 		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
-
+	</div>
 
 		<!-- Back to Top -->
 		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
@@ -169,7 +170,9 @@ function linkPage(pageNo){
 				}
 			});
 		</script>
-	</div>
+</div>
+
+
 
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -182,6 +185,6 @@ function linkPage(pageNo){
 
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
-</body>
 
+</body>
 </html>

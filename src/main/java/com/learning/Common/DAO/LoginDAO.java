@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.learning.DTO.TeacherDTO;
 import com.learning.DTO.userDTO;
 
 @Repository
@@ -23,10 +24,22 @@ public class LoginDAO {
 	public ModelAndView ModelAndView(String email) {
 		return sqlSession.selectOne("Login.ModelAndView", email);
 	}
-	public userDTO forgotPW(userDTO user) {
+	public int forgotPW(userDTO user) {
 		return sqlSession.selectOne("Login.Check", user);
 	}
 	public int resetPw(userDTO user) {
 		return sqlSession.update("Login.resetPw", user);
-	} 
+	}
+	public int checkEmail(String u_email) {
+		return sqlSession.selectOne("Login.checkEmail", u_email);
+	}
+	public int checkNickname(String u_nickname) {
+		return sqlSession.selectOne("Login.checkNickname", u_nickname);
+	}
+	public int join2(userDTO dto) {
+		return sqlSession.insert("Login.join2", dto);
+	}
+	public int join3(TeacherDTO dto1) {
+		return sqlSession.insert("Login.join3", dto1);
+	}
 }

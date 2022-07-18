@@ -67,7 +67,6 @@
         font-weight: normal;
         font-style: normal;
     }
-
     body {
         font-family: LeferiPoint-WhiteObliqueA;
     }
@@ -78,7 +77,6 @@
         font-size: 16px;
         padding: 15px;
     }
-
 
     details[open] summary {
         font-weight: 800;
@@ -96,60 +94,38 @@ function search(){
 	location.href = "./admin_studentSearch?u_name="+u_name;
 }
 
-<%-- 
-$(document).ready(function() {
-
-	var checkMonth = <%=request.getParameter("checkMonth") %>;	
-	var pre = null;
-	var next = null;
-	var resultM = null;
-	if(checkMonth != null){
-		if(checkMonth == "1"){			
-			pre = <%=request.getParameter("month") %>;
-			pre = pre-1;
-			$("label[for='month']").text(pre);	
-			resultM = pre;
-		}else if(checkMonth == "2"){
-			next = <%=request.getParameter("month") %>;
-			next = next + 1;
-			$("label[for='month']").text(next);	
-			resultM = next;
-		}	
-	}else{
-		$("label[for='month']").text(<%=month.format(nowTime)%>);
-		resultM = <%=month.format(nowTime)%>;
-	}  
-
-});  --%>
-
  function preNext(year,month,checkPN){
 	var checkPN = checkPN;
 	var year = Number(year); 
 	var month = Number(month);
 	var confirm = Number(<%= month.format(nowTime)%>);
 	
-	alert(confirm + "," + month);
 	if(checkPN == "1"){
 			if(month >0){
 				year = year;
 				month =Number(month) - 1;
-			}else{
+				if(month == 0){
+					month = 12;
+					year = Number(year)-1;
+				}
+			}
+			else{
 				year = Number(year)-1;
 				month = 12;
 			}
 	}else{
-			if(month < 13){
+			if(month < 12){
 				year = year;
 				month =	Number(month) + 1;
+				if(month == 12){
+					month = 1;
+					year = Number(year)+1;
+				}
 			}else{
 				year = Number(year)+1;
 				month = 1;
 			}
 		}  
-	/* else if(month>confirm){
-		alert("당월보다 큰 숫자는 클릭할 수 없습니다.");
-		history.back();
-	} 	 */
  	location.href="./payment_list?month="+month+"&year="+year;
 }
 </script>
@@ -169,19 +145,18 @@ $(document).ready(function() {
 		</div>
 		<!-- Spinner End -->
 
-
 		<jsp:include page="./header.jsp" />
-		<div style="width: 100%; height: 800px; ">
+		<div style="width: 100%; ">
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
 		<div id="pay" style="padding-top: 110px;"> <h1 class="h3 mb-2 text-gray-800">결제내역</h1><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px;padding-left: 120px; height: 100%">
+		<div style="padding-top: 10px;padding-left: 120px; height: 100%;  margin: 0 auto; ">
 		      <!-- DataTable -->
-                             <fmt:parseDate value="${list[0].p_date}" var="time1" pattern="yyyy-MM-dd HH:mm:ss.S" />                                                                    
+                            <fmt:parseDate value="${list[0].p_date}" var="time1" pattern="yyyy-MM-dd HH:mm:ss.S" />                                                                    
                             <fmt:formatDate value="${time1 }" var="year" pattern="yyyy"/>
                             <fmt:formatDate value="${time1 }" var="month" pattern="MM"/>
-                    <div class="card shadow mb-4"style="width: 800px; height: 500px; ">
+                    <div class="card shadow mb-4"style=" width: 800px; height: 800px;margin: 0 auto; ">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">
                             <a href="javascript:preNext('${year }','${month }',1);">◀</a>
@@ -222,7 +197,7 @@ $(document).ready(function() {
                                             <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
                     						${time }</td>
                                            
-                                            <td><fmt:formatNumber value="${pay.p_price }" pattern="#,###"  /></td>
+                                            <td><fmt:formatNumber value="${pay.p_price2 }" pattern="#,###"  /></td>
                                         </tr>
                                     </c:forEach>  
                                      </c:if>         
@@ -234,9 +209,8 @@ $(document).ready(function() {
                     </div>
                 </div>
 		</div>
-		<%-- <jsp:include page="./team.jsp"/> --%>
-		<jsp:include page="./footer.jsp" />
 
+		<jsp:include page="./footer.jsp" />
 </div>
 
 		<!-- Back to Top -->

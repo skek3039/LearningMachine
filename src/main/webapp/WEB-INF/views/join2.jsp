@@ -66,22 +66,20 @@
       <jsp:include page="./header.jsp" />
 
       <section class="vh-100 gradient-custom">
-         <div class="container py-5 h-100" >
+         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
-            
-               <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                <div style="padding-top: 120px;">
-               </div>
+               <div class="col-12 col-ml-8 col-lg-6 col-xl-5">
+               <div style="padding-top: 120px;"></div>
                   <div class="card bg-dark text-white"
                      style="border-radius: 1rem; background-color: #00B98E;">
                      <div class="card-body p-5 text-center">
-
-                        <div class="mb-md-5 mt-md-4 pb-5">
+	
+                        <div class="mb-md-5 mt-md-4 pb-5" >
 
                            <h2 class="fw-bold mb-2 text-uppercase" style="color: white;">회원가입</h2>
-                           <p class="text-white-50 mb-5">Please enter your login and
-                              password!</p>
-                           <form action="./join" method="post" id="join">
+                           <p class="text-white-50 mb-5">강사는 관리자 승인 후 로그인 가능</p>
+                           <p class="text-white-50 mb-5">Please enter your login and password!</p>
+                           <form action="./join2" method="post" id="join2">
                               <div class="form-outline form-white mb-4">
                                  <input type="text" id="u_id" name="u_id"
                                     class="form-control form-control-md"
@@ -101,7 +99,7 @@
                                     placeholder="PW를 재입력 해주세요." /> <font id="pw_feedback"
                                     size="2"></font>
                               </div>
-
+                              <div id="checkPw"></div>
                               <div class="form-outline form-white mb-4">
                                  <input type="email" id="u_email" name="u_email"
                                     class="form-control form-control-md" required="required"
@@ -115,19 +113,20 @@
                                  <input type="text" id="u_name" name="u_name"
                                     class="form-control form-control-md" required="required"
                                     placeholder="이름을 입력해주세요." />
+                                    <p id="checkResult">
                               </div>
 
                               <div class="form-outline form-white mb-4">
                                  <input type="text" id="u_nickname" name="u_nickname"
                                     class="form-control form-control-md" required="required"
                                     placeholder="닉네임을 입력해주세요."  onchange="checkNickname()"/>
-                                    <p id="checkResult2" >
+                                    <p id="checkResult2" ></p>
                               </div>
-
+                              
                               <div class="form-outline form-white mb-4">
-                                 <input type="radio" id="u_gender" name="u_gender" value="남성"
+                                 <input type="radio" id="u_gender" name="u_gender" value="남"
                                     checked="checked">남 <input type="radio"
-                                    id="u_gender" name="u_gender" value="여성" checked="checked">여
+                                    id="u_gender" name="u_gender" value="여" checked="checked">여
                               </div>
 
                               <div class="form-outline form-white mb-4">
@@ -135,11 +134,29 @@
                                     class="form-control form-control-md" required="required"
                                     placeholder="생일을 입력해주세요." />
                               </div>
-
+                              
+                              <div class="form-outline form-white mb-4">
+                                 <input type="text" id="t_introduce" name="t_introduce"
+                                    class="form-control form-control-md" required="required"
+                                    placeholder="introduce" />
+                              </div>
+                              
+                              <div class="form-outline form-white mb-4">
+                                 <input type="text" id="t_etc" name="t_etc"
+                                    class="form-control form-control-md" required="required"
+                                    placeholder="기타정보사항" />
+                              </div>
+							
+							<div class="form-outline form-white mb-4">
+                             	<textarea id="t_spec" name="t_spec" style="width: 100%;" placeholder="강사님 스펙을 적어주세요." ></textarea>    
+                             </div>
+                                
+						     	
                               <button class="btn btn-outline-light btn-lg px-5"
                                  type="submit" id="joinBtn">Join</button>
                            </form>
                            
+                           </div>
                            
                            <div
                               class="d-flex justify-content-center text-center mt-4 pt-1">
@@ -147,15 +164,25 @@
                               <a href="#!" class="text-white"><i
                                  class="fab fa-google fa-lg"></i></a>
                            </div>
-
+                           
+                           
+				</div>
 
                      </div>
                   </div>
                </div>
+      <jsp:include page="./footer.jsp" />
             </div>
-         </div>
-		</div>
-         <!-- JavaScript Libraries -->
+
+
+
+   </section>
+   </div>
+      <!-- Back to Top -->
+      <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
+         class="bi bi-arrow-up"></i></a>
+
+        <!-- JavaScript Libraries -->
          <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
          <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -197,10 +224,10 @@
             }
          }
          $('#join').on("submit", function() {
-            var u_id = $("#u_id").val();
-            if (u_id == "") {
+            var t_id = $("#t_id").val();
+            if (t_id == "") {
                alert("아이디를 입력해주세요.");
-               $("#u_id").focus();
+               $("#t_id").focus();
                return false;
             }
             
@@ -220,7 +247,7 @@
             var u_pw = $("#u_pw").val();
             var reg_u_pw = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
             if(u_pw == "" || u_pw1.length < 3){
-               alert("암호는 1글자 이상으로 만들어주세요.");
+               alert("암호는 3글자 이상으로 만들어주세요.");
                $("#u_pw").focus();
                return false;
             } 
@@ -228,12 +255,17 @@
             var u_pw1 = $("#u_pw1").val();
             var reg_u_pw1 = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
             if(u_pw == "" || u_pw1.length < 3){
-               alert("암호는 1글자 이상으로 만들어주세요.");
+               alert("암호는 3글자 이상으로 만들어주세요.");
                $("#u_pw1").focus();
                return false;   
             } 
 
-            
+            var u_name = $("#u_name").val();
+            if (u_name == "") {
+               alert("이름을 입력해주세요.");
+               $("#u_name").focus();
+               return false;
+            }
             var u_email = $("#u_email").val();
             var reg_u_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
             if (u_email == "" || !reg_email.test(u_email)) {
@@ -242,19 +274,8 @@
                return false;
                
             }
-            var u_name = $("#u_name").val();
-            if (u_name == "") {
-               alert("이름을 입력해주세요.");
-               $("#u_name").focus();
-               return false;
-            }
-            var u_nickname = $("#u_nickname").val();
-            if (u_nickname == "") {
-               alert("이름을 입력해주세요.");
-               $("#u_nickname").focus();
-               return false;
-            }
       })
+      
       function checkNickname(){
             var u_nickname = $("#u_nickname").val();
             $.ajax({
@@ -279,6 +300,7 @@
                }
             });
          }
+      
       function checkEmail(){
             var u_email = $("#u_email").val();
             $.ajax({
@@ -304,18 +326,6 @@
             });
          }
       </script>
-         
-         
-      </section>
-
-      <jsp:include page="./footer.jsp" />
-
-      <!-- Back to Top -->
-      <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
-         class="bi bi-arrow-up"></i></a>
-   </div>
-
-
 
    <!-- Template Javascript -->
    <script src="./resources/js/main.js"></script>

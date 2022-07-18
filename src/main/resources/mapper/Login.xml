@@ -19,9 +19,26 @@
   	 update user set u_pw=#{u_pw} where u_id=#{u_id} AND u_email=#{u_email}
   </update>
   
-  <select id="Check" parameterType="userDTO" resultType="userDTO">
-  	select * FROM user where u_id=#{u_id} AND u_email=#{u_email}
+  <select id="Check" parameterType="userDTO" resultType="integer">
+  	select count(*) FROM user where u_id=#{u_id} AND u_email=#{u_email} 
   </select>
   
+  <select id="checkEmail" parameterType="string" resultType="integer">
+  	select count(*) FROM user where u_email=#{u_email}
+  </select>
+  
+  <select id="checkNickname" parameterType="string" resultType="integer">
+  	select count(*) FROM user where u_nickName=#{u_nickName}
+  </select>
+  
+  <insert id="join2" parameterType="userDTO">
+  		insert into user (u_id, u_pw, u_email, u_name, u_nickname, u_gender, u_birth)
+  		value (#{u_id},#{u_pw},#{u_email},#{u_name},#{u_nickname},#{u_gender},#{u_birth})
+  </insert>
+  
+  <insert id="join3" parameterType="teacherDTO">
+  		insert into teacher_apply (t_id, t_introduce, t_spec, t_etc,t_recognize)
+  		value (#{t_id},#{t_introduce}, #{t_spec}, #{t_etc},0)
+  </insert>
   
   </mapper>
