@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
+<%@page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -125,6 +126,14 @@ window.onload = function() {
 
 /*원형 막대*/
 	function drawPieChart(){
+	
+	
+		var list = new Array();
+		
+		var value = '<c:out value="${curcle[0].count }"/>';
+		alert(value);
+		
+		
 		new Chart(document.getElementById("pie-chart"), {
 		    type: 'pie',
 		    data: {
