@@ -1,7 +1,6 @@
 package com.learning.Admin.DAO;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,8 @@ public class PaymentDAO {
 		
 	}
 
-	public List<String> payment() {
-		return sqlSession.selectList("Payment.paymentmain");
+	public List<Map<String, Object>> payment(int year) {
+	
+		return sqlSession.selectList("Payment.paymentmain",year);
 	}
 }

@@ -134,10 +134,17 @@ function drawBarHeight(){
 	var myChart = new Chart(ctx, {
 		type: 'bar', // [차트 타입 지정]
 		data: {
-			labels: [ '${list[0].month }월', '${list[1].month }월'], // [데이터 라벨 (제목)]
+			labels: [ '${list[0].month }월', '${list[1].month }월', '${list[2].month }월', '${list[3].month }월', 
+				'${list[4].month }월', '${list[5].month }월', '${list[6].month }월', '${list[7].month }월', 
+				'${list[8].month }월', '${list[9].month }월', '${list[10].month }월', '${list[11].month }월', 
+				'${list[12].month }월'], // [데이터 라벨 (제목)]
 			datasets: [{
-				label: '${list[0].year}년 월 매출', // [데이터 시트 제목]
-				data: [${list[0].total}, ${list[1].total}], // [데이터 : Red ~ Orange]
+				label: '${year }년 월 매출', // [데이터 시트 제목]
+				
+				data: [${list[0].total}, ${list[1].total}, ${list[2].total},
+${list[3].total}, ${list[4].total}, ${list[5].total}, ${list[6].total}, 
+${list[7].total}, ${list[8].total}, ${list[9].total}, ${list[10].total}, 
+${list[11].total}, ${list[12].total}], // [데이터 : Red ~ Orange]
 				backgroundColor: [ // [막대 배경 색상 : Red ~ Orange ]
 					'rgba(255, 99, 132, 0.2)',
 					'rgba(54, 162, 235, 0.2)',
@@ -179,8 +186,7 @@ function preNext(year,checkPN){
 	var year = Number(year);
 	
 	alert(checkPN + "," + year);
-	
-	
+	location.href="./payment?checkPN="+checkPN+"&year="+year;
 }
 
 
@@ -216,8 +222,9 @@ function preNext(year,checkPN){
 				<div id="payment">
 					<div id="today">
 				 <!-- Begin Page Content -->
+						<h6 class="m-0 font-weight-bold text-primary"><a href="javascript:preNext('${year }','1')">◀</a>  ${year }년 <a href="javascript:preNext('${year }','2')">▶</a> </h6>
+						<br>
 						<canvas id = "myChart"></canvas>
-						<a href="javascript:preNext('${list[0].year }','1')">◀</a>  ${list[0].year }년 <a href="javascript:preNext('${list[0].year }','2')">▶</a>
 					</div>
 					
 
