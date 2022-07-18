@@ -118,8 +118,33 @@ window.onload = function() {
 
 	/* [bar 세로 막대 : 그리기 실시] */
 	drawBarHeight();
+	
+	drawPieChart();
 	    		
 };
+
+/*원형 막대*/
+	function drawPieChart(){
+		new Chart(document.getElementById("pie-chart"), {
+		    type: 'pie',
+		    data: {
+		      labels: ['${circle[0].category}','${circle[1].category}','${circle[2].category}'],
+		      datasets: [{
+		        label: "Population (millions)",
+		        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+		        data: ['${circle[0].COUNT}','${circle[1].COUNT}','${circle[2].COUNT}']
+		      }]
+		    },
+		    options: {
+		      title: {
+		        display: true,
+		        text: '카테고리별 비율'
+		      }
+		    }
+		});
+}
+ 
+
 
 
 /* [bar 세로 막대 : 그리기 함수] */
@@ -185,7 +210,6 @@ function preNext(year,checkPN){
 	var checkPN = checkPN;
 	var year = Number(year);
 	
-	alert(checkPN + "," + year);
 	location.href="./payment?checkPN="+checkPN+"&year="+year;
 }
 
@@ -225,6 +249,10 @@ function preNext(year,checkPN){
 						<h6 class="m-0 font-weight-bold text-primary"><a href="javascript:preNext('${year }','1')">◀</a>  ${year }년 <a href="javascript:preNext('${year }','2')">▶</a> </h6>
 						<br>
 						<canvas id = "myChart"></canvas>
+						<hr>
+						<div style="width: 400px; height: 400px;">
+						<canvas id="pie-chart" width="250" height="250"></canvas>
+						</div>
 					</div>
 					
 

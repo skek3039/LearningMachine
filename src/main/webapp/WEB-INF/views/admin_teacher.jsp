@@ -122,7 +122,7 @@ function enterkey() {
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
 		<div style="padding-top:  110px;"><h3>&nbsp;&nbsp;강사관리</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px;padding-left: 120px; height: 100%">
+		<div style="padding-top: 10px;padding-left: 120px; height: 750px;">
 			 <div class="card shadow mb-4"style=" width: 800px; height: 100%; margin: 0 auto; ">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">
@@ -182,16 +182,18 @@ function enterkey() {
 			});
 		</script>
 	</div>
-	<!-- JavaScript Libraries -->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="./resources/lib/wow/wow.min.js"></script>
-	<script src="./resources/lib/easing/easing.min.js"></script>
-	<script src="./resources/lib/waypoints/waypoints.min.js"></script>
-	<script src="./resources/lib/owlcarousel/owl.carousel.min.js"></script>
+  	<!-- Page level plugins -->
+    <script src="./resources/js/jquery.dataTables.min.js"></script>
+    <script src="./resources/js/dataTables.bootstrap4.min.js"></script>
+    <script src="./resources/js/datatables-demo.js"></script>
+
+
 
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
+	<script src="./resources/js/admin_student.js"></script>
+	<script src="./resources/js/sb-admin-2.min.js"></script>
+	
 </body>
 
 </html>

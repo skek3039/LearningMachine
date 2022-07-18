@@ -49,6 +49,8 @@ public class PaymentController {
 	      if ((int) session.getAttribute("u_authority") == 7) {
 	    	
 	         ModelAndView mv = new ModelAndView("admin_payment");
+	        
+	         //세로막대 그래프 나타내는 메소드
 	         int year = 0;
 	         if(request.getParameter("checkPN")!=null) {
 	        	 year = Integer.parseInt(request.getParameter("year"));
@@ -81,6 +83,14 @@ public class PaymentController {
 	        	return null;
 	         }
 	         
+	         
+	         //원형 그래프 메소드
+	        List<String> circle = paymentService.circle();
+	         System.out.println(circle);
+	         
+	         
+	         mv.addObject("circle",circle);
+	         
 	         mv.addObject("list",list);
 	         mv.addObject("year",year1);
 	         return mv;
@@ -106,10 +116,7 @@ public class PaymentController {
 			if (month == null) {
 				year = now.format(formatter);
 				month = now.format(formatter1);
-			} 
-
-			System.out.println("년은"+year + ", 월은" + month);
-			
+			}	
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("month",month);
@@ -119,10 +126,8 @@ public class PaymentController {
 			List<String> list = paymentService.paymentList(map);
 			System.out.println(list.size());
 			if(list.size() != 0) {
-				System.out.println("여기냐");
 				mv.addObject("list",list); 				
 			}else {
-				System.out.println("여기야?");
 				mv.addObject("month",month);
 				mv.addObject("year",year);
 			}

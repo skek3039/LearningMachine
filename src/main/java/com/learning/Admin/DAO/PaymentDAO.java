@@ -20,4 +20,8 @@ public class PaymentDAO {
 	
 		return sqlSession.selectList("Payment.paymentmain",year);
 	}
+
+	public List<String> circle() {
+		return sqlSession.selectList("Payment.circle");
+	}
 }

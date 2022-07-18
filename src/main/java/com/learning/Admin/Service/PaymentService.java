@@ -42,4 +42,8 @@ public class PaymentService {
 		return finallist;
 	}
 
+	public List<String> circle() {
+		return paymentDAO.circle();
+	}
+
 }
