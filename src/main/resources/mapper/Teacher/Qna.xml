@@ -7,11 +7,55 @@
   		from lecture_qna
   	</select>
 
-	<select id="qnaList" resultType="lectureDTO" parameterType="lectureDTO">
+	<select id="totalCount" resultType="integer">
+  		select COUNT(*) AS count
+  		from lecture_qna
+  	</select>
+	
+	<select id="qnaList" resultType="lectureDTO" parameterType="map">
 		SELECT * 
-		,(SELECT u_nickname FROM user WHERE u_id = lecture_qna.u_id) AS u_id 
-		FROM lecture_qna 
+		,(SELECT u_nickname FROM user WHERE u_id = q.u_id) AS u_id 
+		,(SELECT l_name FROM lecture l WHERE l.l_code = q.l_code) AS l_name
+		FROM lecture_qna q
 		WHERE lqa_confirm = 0
+		<if test="lqa_no != null">and lqa_no= #{lqa_no}
+		</if>
 	</select>
 
+	<select id="qna_reply" parameterType="map" resultType="LectureDTO">
+		SELECT *
+		,(SELECT u_nickname FROM user WHERE u_id = q.u_id) AS u_nickname
+		,(SELECT l_name FROM lecture l WHERE l.l_code = q.l_code) AS l_name
+		FROM lecture_qna q
+		WHERE lqa_confirm = 0
+		<if test="lqa_no != null">and lqa_no= #{lqa_no}
+		</if>
+	</select>
+	
+	<insert id="qna_reply2" parameterType="LectureDTO">
+		INSERT INTO lecture_qna_reply (lqa_no, t_id, lqar_title, lqar_content)
+		VALUES (#{lqa_no}, #{t_id}, #{lqar_title}, #{lqar_content})
+	</insert>
+	
+	<update id="lqa_confirm">
+		update lecture_qna set lqa_confirm = 1
+		where lqa_no = #{lqa_no} 
+	</update>
+	
+	<select id="qna_detail" parameterType="LectureDTO" resultType="LectureDTO">
+		select *
+		from lecture_qna_view
+		where lqa_no=#{lqa_no}
+	</select>
+	
+	<select id="qna_answer" resultType="map" parameterType="lectureDTO">
+		SELECT * 
+		,(SELECT u_nickname FROM user WHERE u_id = q.u_id) AS u_nickname 
+		,(SELECT l_name FROM lecture l WHERE l.l_code = q.l_code) AS l_name
+		FROM lecture_qna q
+		WHERE lqa_confirm = 1
+		<if test="lqa_no != null">and lqa_no= #{lqa_no}
+		</if>
+	</select>
+	
   </mapper>

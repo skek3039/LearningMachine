@@ -23,7 +23,7 @@
    	 					</details>
    	 				<details>
    	 					<summary>답변완료</summary>
-   	 						<a href="./qna">Q&A 답변완료</a> <br>
+   	 						<a href="./qna_answer">Q&A 답변완료</a> <br>
    	 						<a href="./video_qna_answer">VQ&A 답변완료</a> <br>
    	 					</details>	
 				</div>

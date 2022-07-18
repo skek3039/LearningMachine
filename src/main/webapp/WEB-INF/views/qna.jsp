@@ -103,9 +103,9 @@ function linkPage(pageNo){
 			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto; text-align: center;">
 					<tr>
 						<th>번호</th>
-						<th>이름</th>
 						<th>제목</th>
 						<th>내용</th>
+						<th>아이디</th>
 						<th>강의이름</th>
 						<th>날짜</th>
 						<th>Q&A</th>
@@ -113,13 +113,38 @@ function linkPage(pageNo){
 					
 					<c:forEach items="${qnaList}" var="q">
 					<tr>
-						<td>${q.lqa_no}</td>
+						<td>${q.lqa_no}</td>		
+						
+						<td>
+							<c:choose>
+							<c:when test="${fn:length(q.lqa_title) > 10}">
+							<c:out value="${fn:substring(q.lqa_title , 0, 9)} ... ">
+							</c:out></c:when>
+							<c:otherwise>
+							<c:out value="${q.lqa_title }">
+							</c:out></c:otherwise>
+							</c:choose>
+						</td>
+						
+						<td>
+							<c:choose>
+							<c:when test="${fn:length(q.lqa_content) > 10}">
+							<c:out value="${fn:substring(q.lqa_content, 0, 9)} ... ">
+							</c:out></c:when>
+							<c:otherwise>
+							<c:out value ="${q.lqa_content}">
+							</c:out></c:otherwise>
+							</c:choose>
+						</td>
+						
 						<td>${q.u_id}</td>
-						<td>${q.lqa_title}</td>
-						<td>${q.lqa_content}</td>
 						<td>${q.l_name}</td>
-						<td>${q.lqa_date}</td>
-						<td><a href="./qna_reply">답변</a></td>
+						
+						<td>
+							<fmt:parseDate value="${q.lqa_date}" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
+							<fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
+                    	${time }</td>
+						<td><a href="./qna_reply?lqa_no=${q.lqa_no }">답변</a></td>
 					</tr>
 					</c:forEach>
 			</table>
