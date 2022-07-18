@@ -8,6 +8,14 @@
   		group by month(p_date)
  
   	</select>
+  	
+  	
+  	<select id="circle" resultType="map">
+		SELECT COUNT(*)AS COUNT, (SELECT l_category FROM lecture_category c WHERE c.l_code = v.l_code)AS 'category'
+		FROM lecture_apply_user_view v
+		GROUP BY category
+  	</select>
+  	
   
 
   	<select id="paymentList" parameterType="map" resultType="map">
