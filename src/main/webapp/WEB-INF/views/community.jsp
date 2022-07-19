@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -167,56 +169,41 @@ $(document).ready(function(){
 
 		<jsp:include page="./header.jsp" />
 		<div style="padding-top: 110px;">
-			<h3>&nbsp;&nbsp;강의목록</h3>
+			<h3>&nbsp;&nbsp; Community</h3> <small>비방또는 비난등의 글은 무통보로 삭제됩니다.</small>
 			<hr style="border: solid 1px;">
 		</div>
+		<div class="container-xxl py-6" style="background-color: green ; ">
 		<div>
 			<ul class="tabs">
-				<li class="tab-link current" data-tab="tab-1">인기 강의</li>
-				<li class="tab-link" data-tab="tab-2">최신 강의</li>
+				<li class="tab-link current" data-tab="tab-1">강의 QnA</li>
+				<li class="tab-link" data-tab="tab-2">자유주제</li>
 			</ul>
 		</div>
-		<div style="padding-top: 20px; text-align: center;">
-			<div class="row tab-content current" id="tab-1">
-				<c:forEach items="${PopularList }" var="i">
-					<div class="col-sm-6 col-md-4">
-						<div id="content">
-							<div class="thumbnail">
-								<img src="./img/leaf.png" alt="" onclick="location.href = './LectureDetail?l_code=${i.l_code}';" width="150px">
-								<div class="caption">
-									<h3>
-										<a href="./LectureDetail?l_code=${i.l_code}">${i.l_name}</a>
-									</h3>
-									<p id ="teacher">${i.t_nickname}</p>
-									<strong style="color: red;">${i.l_price}원</strong><p><small>(${i.total_register}명 수강)</small></p>
-									<p id="category">${i.l_category }</p>
-									<c:choose>
-										<c:when test="${i.payment_whether eq 0 && sessionScope.u_id ne null}">
-											<p>
-												<a href="#" class="btn btn-default" role="button">이동하기</a>
-												<a href="#" class="btn btn-primary" role="button">찜하기</a>
-											</p>
-										</c:when>
-										<c:when test="${i.payment_whether eq 0 && sessionScope.u_id eq null}">
-											<p>
-												<a href="#" class="btn btn-default" role="button">이동하기</a>
-												<a href="#" class="btn btn-primary" role="button">찜하기(로그인)</a>
-											</p>
-										</c:when>
-										<c:otherwise>
-											<p>
-												<a href="#" class="btn btn-default" role="button">이동하기</a>
-												<a href="#" class="btn btn-primary" role="button">리뷰남기기</a>
-											</p>
-										</c:otherwise>
-									</c:choose>
-								</div>
-							</div>
-						</div>
-					</div>
-				</c:forEach>
-			</div>
-			<div class="row tab-content" id="tab-2">
+		<div style="padding-top: 20px; height:750px; text-align: center; border-radius: 2px;">
+				<div class="row tab-content current" id="tab-1">
+					<table border="1" style="width: 600px; margin: 0 auto;">
+					<c:forEach items="${list }" var = "list"> 
+					<tr>
+						<th><img style="width: 50px; height: 50px;" id="up" alt="" src="./img/q.png" title="질문"></th>
+							<td style="padding-top: 10px; word-break:break-all; width: 750px"><h5>${list.lqa_title }</h5></td>
+						</tr>
+					<tr>
+						<td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/id.png" title="id">
+						${dto.u_id }</h6></td><td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/date.png" title="date">
+						<fmt:parseDate value="${list.lqa_date }" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
+                        <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
+                    	${time }</h6></td>
+					</tr>
+					</c:forEach>
+					</table> <br>
+					<table>
+					<tr>
+						<td style="word-break:break-all; width: 820px">${dto.vq_content }</td>
+					</tr>
+					</table>
+					<br>
+				</div>
+<%-- 				<div class="row tab-content" id="tab-2">
 				<c:forEach items="${RecentList }" var="i">
 					<div class="col-sm-6 col-md-4">
 						<div id="content">
@@ -254,13 +241,13 @@ $(document).ready(function(){
 						</div>
 					</div>
 				</c:forEach>
-			</div>
+			</div> --%>
 		</div>
 	</div>
 	<%-- <jsp:include page="./team.jsp"/> --%>
 	<jsp:include page="./footer.jsp" />
 
-
+</div>
 	<!-- Back to Top -->
 	<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
 		class="bi bi-arrow-up"></i></a>
