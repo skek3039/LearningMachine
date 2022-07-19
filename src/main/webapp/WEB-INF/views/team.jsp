@@ -1,74 +1,73 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-        <!-- Team Start -->
+              <!-- Testimonial Start -->
         <div class="container-xxl py-6">
             <div class="container">
                 <div class="mx-auto text-center wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                    <div class="d-inline-block border rounded-pill text-primary px-4 mb-3">Our Team</div>
-                    <h2 class="mb-5">사이트 개발자</h2>
+                    <div class="d-inline-block border rounded-pill text-primary px-4 mb-3">개발자 소개</div>
+                    <h2 class="mb-5">개발자</h2>
                 </div>
-                <div class="row g-4">
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="team-item">
-                            <h5>박성균</h5>
-                            <p class="mb-4">개발자</p>
-                            <img class="img-fluid rounded-circle w-100 mb-4" src="img/team-1.jpg" alt="">
-                            <div class="d-flex justify-content-center">
-                                <a class="btn btn-square text-primary bg-white m-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square text-primary bg-white m-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square text-primary bg-white m-1" href=""><i class="fab fa-linkedin-in"></i></a>
+                <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="testimonial-item rounded p-5">
+                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                        <p>ㅇㅅㅇ소감~ </p>
+                        <div class="d-flex align-items-center">
+                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-1.jpg">
+                            <div class="ps-3">
+                                <h6 class="mb-1">문성균</h6>
+                                <small>개발자</small>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="team-item">
-                            <h5>이희진</h5>
-                            <p class="mb-4">개발자</p>
-                            <img class="img-fluid rounded-circle w-100 mb-4" src="img/team-2.jpg" alt="">
-                            <div class="d-flex justify-content-center">
-                                <a class="btn btn-square text-primary bg-white m-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square text-primary bg-white m-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square text-primary bg-white m-1" href=""><i class="fab fa-linkedin-in"></i></a>
+                    <div class="testimonial-item rounded p-5">
+                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                        <p>ㅇㅅㅇ소감~ </p>
+                        <div class="d-flex align-items-center">
+                           <a href="https://github.com/Hijineee"><img class="img-fluid flex-shrink-0 rounded-circle" src="./resources/img/testimonial-2.jpg"></a>
+                            <div class="ps-3">
+                                <h6 class="mb-1">이희진</h6>
+                                <small>개발자</small>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="team-item">
-                            <h5>명재성</h5>
-                            <p class="mb-4">개발자</p>
-                            <img class="img-fluid rounded-circle w-100 mb-4" src="img/team-3.jpg" alt="">
-                            <div class="d-flex justify-content-center">
-                                <a class="btn btn-square text-primary bg-white m-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square text-primary bg-white m-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square text-primary bg-white m-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                        </div>
-                    </div><br>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                        <div class="team-item">
-                            <h5>문형석</h5>
-                            <p class="mb-4">개발자</p>
-                            <img class="img-fluid rounded-circle w-100 mb-4" src="img/team-4.jpg" alt="">
-                            <div class="d-flex justify-content-center">
-                                <a class="btn btn-square text-primary bg-white m-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square text-primary bg-white m-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square text-primary bg-white m-1" href=""><i class="fab fa-linkedin-in"></i></a>
+                    <div class="testimonial-item rounded p-5">
+                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                        <p>ㅇㅅㅇ소감~ </p>
+                        <div class="d-flex align-items-center">
+                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-3.jpg">
+                            <div class="ps-3">
+                                <h6 class="mb-1">명재성</h6>
+                                <small>개발자</small>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                        <div class="team-item">
-                            <h5>안익현</h5>
-                            <p class="mb-4">개발자</p>
-                            <img class="img-fluid rounded-circle w-100 mb-4" src="img/team-4.jpg" alt="">
-                            <div class="d-flex justify-content-center">
-                                <a class="btn btn-square text-primary bg-white m-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square text-primary bg-white m-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square text-primary bg-white m-1" href=""><i class="fab fa-linkedin-in"></i></a>
+                    <div class="testimonial-item rounded p-5">
+                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                        <p>ㅇㅅㅇ소감~ </p>
+                        <div class="d-flex align-items-center">
+                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-4.jpg">
+                            <div class="ps-3">
+                                <h6 class="mb-1">문형석</h6>
+                                <small>개발자</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-item rounded p-5">
+                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                        <p>ㅇㅅㅇ소감~ </p>
+                        <div class="d-flex align-items-center">
+                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-4.jpg">
+                            <div class="ps-3">
+                                <h6 class="mb-1">안익현</h6>
+                                <small>개발자</small>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Team End -->
+        <!-- Testimonial End -->
+
+
+	
+        

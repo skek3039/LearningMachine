@@ -9,7 +9,7 @@
     					<summary>매출관리</summary>
     						<a href="./payment">매출조회</a> <br>
     						<a href="./payment_list">결제내역조회</a> <br>
-    						<a href="./payment_refunt">환불내역조회</a><br>
+    						<a href="./payment_refund">환불내역조회</a><br>
    	 				</details>
 					<details>
     					<summary>학생관리</summary>

@@ -46,4 +46,8 @@ public class PaymentService {
 		return paymentDAO.circle();
 	}
 
+	public List<String> refundList() {
+		return paymentDAO.refundList();
+	}
+
 }

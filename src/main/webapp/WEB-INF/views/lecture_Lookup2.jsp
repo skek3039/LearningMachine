@@ -167,6 +167,10 @@
 								<td class="tg-0pky">${dto.l_curriculum }</td>
 							</tr>
 							<tr>
+								<td class="tg-llyw">썸네일</td>
+								<td class="tg-0pky">${dto.l_thumbnail }</td>
+							</tr>
+							<tr>
 								<td class="tg-llyw">강의 가격</td>
 								<td class="tg-0pky">${dto.l_price }</td>
 							</tr>
@@ -174,7 +178,7 @@
 					</table>
 							<div style="padding-top: 10px; padding-right: 150px; height: 770px;">
 				<div style="padding-top: 10px; padding-left: 865px;">
-					<img onclick="location.href='./video_upload_update?l_code=${dto.l_code }'" style="width: 30px; height: 30px;" id="update" alt="" src="./img/video.png" title="id"></img>
+					<img onclick="location.href='./video_upload?l_code=${dto.l_code }'" style="width: 30px; height: 30px;" id="update" alt="" src="./img/video.png" title="id"></img>
 				</div>
 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
@@ -182,11 +186,11 @@
 						<th>비디오 제목</th>
 						<th>비디오 소개</th>
 						<th>강의 코드</th>
-						<th>파일 경로</th>
+						<th>비디오 경로</th>
 					</tr>
 					<c:forEach items="${video_List}" var="v">
 					<tr>
-						<td><a href="./video_upload?v_no=${v.v_no }">${v.v_no }</a></td>
+						<td><a href="./video_upload_detail?v_no=${v.v_no }&l_code=${dto.l_code}">${v.v_no }</a></td>
 						<td>${v.v_videotitle }</td>
 						<td>${v.v_introduce }</td>
 						<td>${v.l_code }</td>

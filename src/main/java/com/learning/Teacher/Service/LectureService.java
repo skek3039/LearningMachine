@@ -85,13 +85,26 @@ public class LectureService {
 		return lectureDAO.video_List(l_code);
 	}
 
-	public Object video_upload(LectureDTO video_upload) {
-		return lectureDAO.video_upload(video_upload);
+	public Object video_upload_detail(LectureDTO video_upload_detail) {
+		return lectureDAO.video_upload_detail(video_upload_detail);
 	}
 
-	public int video_upload_update(LectureDTO video_upload_update) {
-		return lectureDAO.video_upload_update(video_upload_update);
+	public int video_upload(LectureDTO video_upload) {
+		return lectureDAO.video_upload(video_upload);
 		
+	}
+
+	public Object video_upload_update(LectureDTO video_upload_update) {
+		return lectureDAO.video_upload_update(video_upload_update);
+	}
+
+	public int video_update_write(LectureDTO video_update_write) {
+		return lectureDAO.video_update_write(video_update_write);
+		
+	}
+
+	public int video_upload_delete(LectureDTO video_upload_delete) {
+		return lectureDAO.video_upload_delete(video_upload_delete);
 	}
 
 

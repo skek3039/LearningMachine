@@ -126,22 +126,22 @@ window.onload = function() {
 
 /*원형 막대*/
 	function drawPieChart(){
-	
-	
-		var list = new Array();
+		var labels= new Array();
+		var datas = new Array();
 		
-		var value = '<c:out value="${curcle[0].count }"/>';
-		alert(value);
-		
-		
+		<c:forEach items="${circle}" var = "c">
+			labels.push("${c.category}");
+			datas.push("${c.COUNT}");
+		</c:forEach>
+
 		new Chart(document.getElementById("pie-chart"), {
 		    type: 'pie',
 		    data: {
-		      labels: ['${circle[0].category}','${circle[1].category}','${circle[2].category}'],
+		      labels: labels,
 		      datasets: [{
 		        label: "Population (millions)",
 		        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-		        data: ['${circle[0].COUNT}','${circle[1].COUNT}','${circle[2].COUNT}']
+		        data: datas,
 		      }]
 		    },
 		    options: {
@@ -158,27 +158,24 @@ window.onload = function() {
 
 /* [bar 세로 막대 : 그리기 함수] */
 function drawBarHeight(){
-		
-	console.log("");
-	console.log("[drawBarHeight] : [start]");
-	console.log("");
+	var month= new Array();
+	var datas = new Array();	
+	
+	<c:forEach items="${list}" var = "l">
+		month.push("${l.month}");
+		datas.push("${l.total}");
+	</c:forEach>
 
 	// [body 에 선언된 캔버스 id 지정 실시]
 	var ctx = document.getElementById('myChart').getContext('2d');
 	var myChart = new Chart(ctx, {
 		type: 'bar', // [차트 타입 지정]
 		data: {
-			labels: [ '${list[0].month }월', '${list[1].month }월', '${list[2].month }월', '${list[3].month }월', 
-				'${list[4].month }월', '${list[5].month }월', '${list[6].month }월', '${list[7].month }월', 
-				'${list[8].month }월', '${list[9].month }월', '${list[10].month }월', '${list[11].month }월', 
-				'${list[12].month }월'], // [데이터 라벨 (제목)]
+			labels: month, // [데이터 라벨 (제목)]
 			datasets: [{
 				label: '${year }년 월 매출', // [데이터 시트 제목]
 				
-				data: [${list[0].total}, ${list[1].total}, ${list[2].total},
-${list[3].total}, ${list[4].total}, ${list[5].total}, ${list[6].total}, 
-${list[7].total}, ${list[8].total}, ${list[9].total}, ${list[10].total}, 
-${list[11].total}, ${list[12].total}], // [데이터 : Red ~ Orange]
+				data: datas, // [데이터 : Red ~ Orange]
 				backgroundColor: [ // [막대 배경 색상 : Red ~ Orange ]
 					'rgba(255, 99, 132, 0.2)',
 					'rgba(54, 162, 235, 0.2)',
@@ -261,6 +258,7 @@ function preNext(year,checkPN){
 						<hr>
 						<div style="width: 400px; height: 400px;">
 						<canvas id="pie-chart" width="250" height="250"></canvas>
+						<canvas id="genderchart" width="250" height="250"></canvas>
 						</div>
 					</div>
 					

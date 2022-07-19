@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,21 +19,21 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
-	href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
-	rel="stylesheet">
+   href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
+   rel="stylesheet">
 
 <!-- Icon Font Stylesheet -->
 <link
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
-	rel="stylesheet">
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+   rel="stylesheet">
 <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
-	rel="stylesheet">
+   href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+   rel="stylesheet">
 
 <!-- Libraries Stylesheet -->
 <link href="./resources/lib/animate/animate.min.css" rel="stylesheet">
 <link href="./resources/lib/owlcarousel/assets/owl.carousel.min.css"
-	rel="stylesheet">
+   rel="stylesheet">
 
 <!-- Customized Bootstrap Stylesheet -->
 <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
@@ -43,45 +45,45 @@
 </head>
 <style type="text/css">
 .tg {
-	border-collapse: collapse;
-	border-spacing: 0;
+   border-collapse: collapse;
+   border-spacing: 0;
 }
 
 .tg td {
-	border-color: black;
-	border-style: solid;
-	border-width: 1px;
-	font-family: Arial, sans-serif;
-	font-size: 14px;
-	overflow: hidden;
-	padding: 10px 5px;
-	word-break: normal;
+   border-color: black;
+   border-style: solid;
+   border-width: 1px;
+   font-family: Arial, sans-serif;
+   font-size: 14px;
+   overflow: hidden;
+   padding: 10px 5px;
+   word-break: normal;
 }
 
 .tg th {
-	border-color: black;
-	border-style: solid;
-	border-width: 1px;
-	font-family: Arial, sans-serif;
-	font-size: 14px;
-	font-weight: normal;
-	overflow: hidden;
-	padding: 10px 5px;
-	word-break: normal;
+   border-color: black;
+   border-style: solid;
+   border-width: 1px;
+   font-family: Arial, sans-serif;
+   font-size: 14px;
+   font-weight: normal;
+   overflow: hidden;
+   padding: 10px 5px;
+   word-break: normal;
 }
 
 .tg .tg-llyw {
-	background-color: #c0c0c0;
-	border-color: inherit;
-	text-align: left;
-	vertical-align: top
+   background-color: #c0c0c0;
+   border-color: inherit;
+   text-align: left;
+   vertical-align: top
 }
 
 .tg .tg-0pky {
-	border-color: inherit;
-	text-align: left;
-	vertical-align: top;
-	
+   border-color: inherit;
+   text-align: left;
+   vertical-align: top;
+   
 }
 <style>@font-face {
         font-family: 'LeferiPoint-WhiteObliqueA';
@@ -116,107 +118,86 @@
     }
 </style>
 <body>
-	<div class="container-xxl bg-white p-0">
-		<!-- Spinner Start -->
-		<div id="spinner"
-			class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-			<div class="spinner-border text-primary"
-				style="width: 3rem; height: 3rem;" role="status">
-				<span class="sr-only">Loading...</span>
-			</div>
-		</div>
-		<!-- Spinner End -->
+   <div class="container-xxl bg-white p-0">
+      <!-- Spinner Start -->
+      <div id="spinner"
+         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+         <div class="spinner-border text-primary"
+            style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+         </div>
+      </div>
+      <!-- Spinner End -->
 
 
-		<jsp:include page="./header.jsp" />
-		<div style="width: 100%;">
-			<jsp:include page="./lecture_nav.jsp" />
-			<div style="padding-top: 110px;">
-				<h3>&nbsp;&nbsp;강의 상세보기</h3>
-				<hr style="border: solid 1px;">
-			</div>
-			<div style="padding-top: 10px; text-align: center;">
-			</div>
-
-			<br>
-			<div style="text-align: center">
-				<div id="requestform" style="padding-top: 10px; padding-left: 340px; height: 735px;">
-					<table class="tg" style="table-layout: fixed; width: 900px">
-						<colgroup>
-							<col style="width: 100px">
-							<col style="width: 800px">
-						</colgroup>
-						<tbody>
-							<tr>
-								<td class="tg-llyw">비디오 번호</td>
-								<td class="tg-0pky">${dto.v_no }</td>
-							</tr>
-							<tr>
-								<td class="tg-llyw">비디오 제목</td>
-								<td class="tg-0pky">${dto.v_videotitle }</td>
-							</tr>
-							<tr>
-								<td class="tg-llyw">비디오 소개</td>
-								<td class="tg-0pky">${dto.v_introduce }</td>
-							</tr>
-							<tr>
-								<td class="tg-llyw">비디오 코드</td>
-								<td class="tg-0pky">${dto.l_code }</td>
-							</tr>
-							<tr>
-								<td class="tg-llyw">비디오 경로</td>
-								<td class="tg-0pky">${dto.v_root }</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-		<%-- <jsp:include page="./team.jsp"/> --%>
-		<jsp:include page="./footer.jsp" />
+      <jsp:include page="./header.jsp" />
+      <div style="width: 100%; height: 945px;">
+         <jsp:include page="./lecture_nav.jsp" />
+         <br>
+         <div style="text-align: center">
+            <div id="updateform" style="padding-top: 150px; padding-left: 340px">
+               <form action="./video_upload.do" method="post">
+               <table class="tg" style="table-layout: fixed; width: 900px">
+                  <colgroup>
+                     <col style="width: 100px">
+                     <col style="width: 800px">
+                  </colgroup>
+                  <tbody>
+                     <tr>
+                        <td class="tg-llyw">비디오 제목</td>
+                        <td class="tg-0pky"><input name="v_videotitle" style="width: 790px;"
+                           type="text"></td>
+                     </tr>
+                     <tr>
+                        <td class="tg-llyw">비디오 소개</td>
+                        <td class="tg-0pky"><input name="v_introduce" style="width: 790px;"
+                        type="text"></td>
+                     </tr>
+                     <tr>
+                        <td class="tg-llyw">파일 경로</td>
+                        <td class="tg-0pky"><input name="v_root" style="width: 790px;"
+                        type="text"></td>
+                     </tr>
+                  </tbody>
+               </table>
+               <div class="box on" style="padding-top: 10px; padding-left: 765px;">
+               <input type="hidden" name="l_code" value="${l_code }">
+                  <button type="submit" class="btn btn-outline-dark">저장</button>
+               </div></form>
+            </div>
+         </div>
+      </div>
+      <%-- <jsp:include page="./team.jsp"/> --%>
+      <jsp:include page="./footer.jsp" />
 
 
-		<!-- Back to Top -->
-		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
-			class="bi bi-arrow-up"></i></a>
-		<script type="text/javascript">
-			$('body > ul > li').click(function() {
-				if ($(this).hasClass('active')) {
-					$(this).find(' > ul').stop().slideUp(300);
-					$(this).removeClass('active');
-				} else {
-					$(this).find(' > ul').stop().slideDown(300);
-					$(this).addClass('active');
-				}
-			});
-		</script>
-	</div>
+      <!-- Back to Top -->
+      <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
+         class="bi bi-arrow-up"></i></a>
+      <script type="text/javascript">
+         $('body > ul > li').click(function() {
+            if ($(this).hasClass('active')) {
+               $(this).find(' > ul').stop().slideUp(300);
+               $(this).removeClass('active');
+            } else {
+               $(this).find(' > ul').stop().slideDown(300);
+               $(this).addClass('active');
+            }
+         });
+      </script>
+   </div>
 
-	<!-- JavaScript Libraries -->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="./resources/lib/wow/wow.min.js"></script>
-	<script src="./resources/lib/easing/easing.min.js"></script>
-	<script src="./resources/lib/waypoints/waypoints.min.js"></script>
-	<script src="./resources/lib/owlcarousel/owl.carousel.min.js"></script>
+   <!-- JavaScript Libraries -->
+   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+   <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+   <script src="./resources/lib/wow/wow.min.js"></script>
+   <script src="./resources/lib/easing/easing.min.js"></script>
+   <script src="./resources/lib/waypoints/waypoints.min.js"></script>
+   <script src="./resources/lib/owlcarousel/owl.carousel.min.js"></script>
 
-	<!-- Template Javascript -->
-	<script src="./resources/js/main.js"></script>
-	
-	<script type="text/javascript">
-	$(".box button").attr("disabled", true);
-    $("#chk").on('click',function(){
-        var chk = $('input:checkbox[id="chk"]').is(":checked");
-        if(chk==true){
-            $(".box button").removeAttr('disabled');
-            $(".box").removeClass("on");
-        }else{
-            $(".box button").attr("disabled", true);
-            $(".box").addClass("on");
-        }
-    });
-	</script>
+   <!-- Template Javascript -->
+   <script src="./resources/js/main.js"></script>
+   
 </body>
-
 </html>

@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -131,12 +129,22 @@
 
 
 		<jsp:include page="./header.jsp" />
-		<div style="width: 100%; height: 945px;">
+		<div style="width: 100%;">
 			<jsp:include page="./lecture_nav.jsp" />
+			<div style="padding-top: 110px;">
+				<h3>&nbsp;&nbsp;강의 상세보기</h3>
+				<hr style="border: solid 1px;">
+			</div>
+			<div style="padding-top: 10px; text-align: center;">
+			</div>
+
 			<br>
 			<div style="text-align: center">
-				<div id="updateform" style="padding-top: 150px; padding-left: 340px">
-					<form action="./lecture_update2.do" method="post">
+				<div id="requestform" style="padding-top: 10px; padding-left: 340px; height: 735px;">
+				<div style="padding-left: 770px; padding-bottom: 5px;">
+				<img onclick="location.href='./video_upload_update?v_no=${dto.v_no}'" style="width: 25px; height: 25px;" id="update" alt="" src="./img/update.png" title="id">
+				<img onclick="location.href='./video_upload_delete?v_no=${dto.v_no}&l_code=${dto.l_code }'" style="width: 25px; height: 25px;" id="delete" alt="" src="./img/delete.png" title="id">
+				</div>					
 					<table class="tg" style="table-layout: fixed; width: 900px">
 						<colgroup>
 							<col style="width: 100px">
@@ -144,41 +152,27 @@
 						</colgroup>
 						<tbody>
 							<tr>
-								<td class="tg-llyw">강의 이름</td>
-								<td class="tg-0pky"><input name="l_name" style="width: 790px;"
-									type="text" placeholder="${dto.l_name }"></td>
+								<td class="tg-llyw">비디오 번호</td>
+								<td class="tg-0pky">${dto.v_no }</td>
 							</tr>
 							<tr>
-								<td class="tg-llyw">강의 정보</td>
-								<td class="tg-0pky"><input name="l_info" style="width: 790px;"
-								type="text" placeholder="${dto.l_info }"></td>
+								<td class="tg-llyw">비디오 제목</td>
+								<td class="tg-0pky">${dto.v_videotitle }</td>
 							</tr>
 							<tr>
-								<td class="tg-llyw">카테고리</td>
-								<td class="tg-0pky">
-								<select name="l_category" style="width: 790px;">
-											<option value="">카테고리 선택</option>
-											<c:forEach items="${cate }" var="cate">											
-											<option value="${cate.l_category }">${cate.l_category }</option>
-											</c:forEach>
-									</select>
-									</td>
+								<td class="tg-llyw">비디오 소개</td>
+								<td class="tg-0pky">${dto.v_introduce }</td>
 							</tr>
 							<tr>
-								<td class="tg-llyw">커리큘럼</td>
-								<td class="tg-0pky"><textarea name="l_curriculum" id="summernote" required="required"></textarea></td>
+								<td class="tg-llyw">비디오 코드</td>
+								<td class="tg-0pky">${dto.l_code }</td>
 							</tr>
 							<tr>
-								<td class="tg-llyw">썸네일</td>
-								<td class="tg-0pky"><input name="l_thumbnail" style="width: 790px;"
-								type="text" placeholder="${dto.l_thumbnail }"></td>
+								<td class="tg-llyw">비디오 경로</td>
+								<td class="tg-0pky">${dto.v_root }</td>
 							</tr>
 						</tbody>
 					</table>
-					<div class="box on" style="padding-top: 10px; padding-left: 765px;">
-					<input type="hidden" name="l_code" value="${dto.l_code }">
-						<button type="submit" class="btn btn-outline-dark">저장</button>
-					</div></form>
 				</div>
 			</div>
 		</div>
@@ -214,21 +208,19 @@
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
 	
+	<script type="text/javascript">
+	$(".box button").attr("disabled", true);
+    $("#chk").on('click',function(){
+        var chk = $('input:checkbox[id="chk"]').is(":checked");
+        if(chk==true){
+            $(".box button").removeAttr('disabled');
+            $(".box").removeClass("on");
+        }else{
+            $(".box button").attr("disabled", true);
+            $(".box").addClass("on");
+        }
+    });
+	</script>
 </body>
-		<script>
-			$(document).ready(function() {
-				   //여기 아래 부분
-				   $('#summernote').summernote({
-				        height: 200,        
-				        minHeight: null,        
-				        maxHeight: null,       
-				        focus: true,             
-				        lang: "ko-KR",          
-				        placeholder: '내용을 입력해주세요.' 
-				          
-				   });
-				});
-		</script>
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
 </html>

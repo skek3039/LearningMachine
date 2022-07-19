@@ -85,12 +85,27 @@ public class LectureDAO {
 		return sqlSession.selectList("lecture.video_List", l_code);
 	}
 
-	public Object video_upload(LectureDTO video_upload) {
-		return sqlSession.selectOne("lecture.video_upload", video_upload);
+	public Object video_upload_detail(LectureDTO video_upload_detail) {
+		return sqlSession.selectOne("lecture.video_upload_detail", video_upload_detail);
 	}
 
-	public int video_upload_update(LectureDTO video_upload_update) {
-		return sqlSession.insert("lecture.video_upload_update", video_upload_update);
+	public int video_upload(LectureDTO video_upload) {
+		sqlSession.update("lecture.lecture_update_renewal",video_upload);
+		return sqlSession.insert("lecture.video_upload", video_upload);
+	}
+
+	public Object video_upload_update(LectureDTO video_upload_update) {
+		return sqlSession.selectOne("lecture.video_upload_update", video_upload_update);
+	}
+
+	public int video_update_write(LectureDTO video_update_write) {
+		sqlSession.update("lecture.lecture_update_renewal",video_update_write);
+		return sqlSession.update("lecture.video_update_write", video_update_write);
+	}
+
+	public int video_upload_delete(LectureDTO video_upload_delete) {
+		sqlSession.update("lecture.lecture_update_renewal",video_upload_delete);
+		return sqlSession.delete("lecture.video_upload_delete", video_upload_delete);
 	}
 
 

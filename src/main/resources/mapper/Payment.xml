@@ -9,14 +9,23 @@
  
   	</select>
   	
+  	<select id="refundList" resultType="map">
+		SELECT * ,
+		(SELECT COUNT(*) FROM payment_log p WHERE p.p_refund !=0  )AS count,
+		(SELECT SUM(p_price) FROM payment_log p WHERE p.p_refund !=0  )AS refundtotal,
+		(SELECT u_name FROM user WHERE user.u_id = l.u_id)AS NAME
+		FROM payment_log l  
+		WHERE l.p_refund != 0 
+		ORDER BY p_date
+  	</select>
+  	
   	
   	<select id="circle" resultType="map">
 		SELECT COUNT(*)AS COUNT, (SELECT l_category FROM lecture_category c WHERE c.l_code = v.l_code)AS 'category'
 		FROM lecture_apply_user_view v
 		GROUP BY category
   	</select>
-  	
-  
+
 
   	<select id="paymentList" parameterType="map" resultType="map">
   		select *,
