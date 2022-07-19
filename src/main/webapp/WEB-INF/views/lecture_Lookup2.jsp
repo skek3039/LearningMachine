@@ -167,6 +167,10 @@
 								<td class="tg-0pky">${dto.l_curriculum }</td>
 							</tr>
 							<tr>
+								<td class="tg-llyw">썸네일</td>
+								<td class="tg-0pky">${dto.l_thumbnail }</td>
+							</tr>
+							<tr>
 								<td class="tg-llyw">강의 가격</td>
 								<td class="tg-0pky">${dto.l_price }</td>
 							</tr>

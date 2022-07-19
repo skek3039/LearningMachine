@@ -205,6 +205,7 @@ public class LectureController {
 			lecture_request.setL_info(request.getParameter("l_info"));
 			lecture_request.setL_category(request.getParameter("l_category"));
 			lecture_request.setL_curriculum(request.getParameter("l_curriculum"));
+			lecture_request.setL_thumbnail(request.getParameter("l_thumbnail"));
 			lectureService.lecture_request(lecture_request);
 			return "redirect:/lecture";
 		} else {
@@ -363,6 +364,7 @@ public class LectureController {
 				lecture_update_write2.setL_curriculum(request.getParameter("l_curriculum"));
 				lecture_update_write2.setL_code(request.getParameter("l_code"));
 				lecture_update_write2.setL_category(request.getParameter("l_category"));
+				lecture_update_write2.setL_thumbnail(request.getParameter("l_thumbnail"));
 				lectureService.lecture_update_write2(lecture_update_write2);
 				
 				return "redirect:/lecture_detail";

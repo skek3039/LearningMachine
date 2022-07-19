@@ -168,6 +168,11 @@
 								<td class="tg-llyw">커리큘럼</td>
 								<td class="tg-0pky"><textarea name="l_curriculum" id="summernote" required="required"></textarea></td>
 							</tr>
+							<tr>
+								<td class="tg-llyw">썸네일</td>
+								<td class="tg-0pky"><input name="l_thumbnail" style="width: 790px;"
+								type="text" placeholder="${dto.l_thumbnail }"></td>
+							</tr>
 						</tbody>
 					</table>
 					<div class="box on" style="padding-top: 10px; padding-left: 765px;">

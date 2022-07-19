@@ -102,7 +102,7 @@
   	
   	<update id="lecture_update_write2" parameterType="LectureDTO">
 		UPDATE lecture
-		SET l_name=#{l_name}, l_info=#{l_info}, l_curriculum=#{l_curriculum}
+		SET l_name=#{l_name}, l_info=#{l_info}, l_curriculum=#{l_curriculum}, l_thumbnail=#{l_thumbnail}
 		WHERE l_code = #{l_code}
 	</update>
 	
