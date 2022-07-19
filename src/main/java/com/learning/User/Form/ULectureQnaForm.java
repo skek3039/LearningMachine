@@ -8,6 +8,7 @@ public class ULectureQnaForm {
 	private int lqa_no;
 	private String l_code;
 	private String u_id;
+	private String u_nickname;
 	private String lqa_title;
 	private String lqa_content;
 	private String lqa_date;
@@ -15,10 +16,10 @@ public class ULectureQnaForm {
 	
 	private String t_id;
 	private String t_name;
-	private String lqr_title;
-	private String lqr_content;
-	private String lqr_date;
+	private String t_nickname;
+	private String lqar_title;
+	private String lqar_content;
+	private String lqar_date;
 	
-	private int reply_whether;
 	private int my_qna;
 }

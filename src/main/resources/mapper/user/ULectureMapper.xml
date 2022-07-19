@@ -43,7 +43,7 @@
 	
 	<select id="ULectureQnaReplys" parameterType="int" resultType="com.learning.User.Form.ULectureQnaReplyForm">	
 		SELECT *
-				,(SELECT u_nickname FROM user WHERE user.u_id = lecture_qna_reply.t_id) as 'u_nickname'
+				,(SELECT u_nickname FROM user WHERE user.u_id = lecture_qna_reply.t_id) as t_nickname
 		FROM lecture_qna_reply
 		WHERE lqa_no = #{lqa_no}
 	</select>
@@ -57,6 +57,8 @@
 	</select>
 	
 	<select id="ULectureVideoQnaReplys">
+		
+		SELECT * FROM lecture_qna_reply 
 		
 	</select>
 	<select id="ULectureReviews" parameterType="String" resultType="com.learning.User.Form.ULectureReviewForm">
@@ -80,9 +82,5 @@
 	
 	<select id="UVideoLectureCheck" parameterType="Integer" resultType="String">
 		SELECT l_code FROM lecture_video WHERE v_no = #{v_no}
-	</select>
-	
-	<select id="ULectureReview" resultType="com.learning.User.Form.ULectureReviewForm">
-	
 	</select>
   </mapper>

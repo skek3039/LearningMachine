@@ -101,7 +101,7 @@ public class ULectureService {
 	}
 	
 
-	public List<ULectureQnaForm> LuectureQnas(String u_id, String l_code) {
+	public List<ULectureQnaForm> LuectureQnas(String u_id, String l_code) throws ParseException {
 
 		List<ULectureQnaForm> qnaList = lectureDAO.LectureQna(l_code);
 		ULectureQnaReplyForm reply = null;
@@ -109,14 +109,19 @@ public class ULectureService {
 		for (ULectureQnaForm qna : qnaList) {
 
 			reply = lectureDAO.LectureQnaReply(qna.getLqa_no()); //밖으로뺴
-
+			
+			qna.setLqa_date(Util.YMD(qna.getLqa_date()));
+			
 			if (reply != null && qna.getLqa_no() == reply.getLqa_no()) {
 
+				
+				reply.setLqar_date(Util.YMD(reply.getLqar_date()));
 				qna.setT_id(reply.getT_id());
 				qna.setT_name(reply.getT_name());
-				qna.setLqr_title(reply.getLqr_title());
-				qna.setLqr_content(reply.getLqr_content());
-				qna.setLqr_date(reply.getLqr_date());
+				qna.setT_nickname(reply.getT_nickname());
+				qna.setLqar_content(reply.getLqar_content());
+				qna.setLqar_date(reply.getLqar_date());
+				
 			}
 
 			if (u_id != null && qna.getU_id().equals(u_id))

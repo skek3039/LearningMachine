@@ -8,7 +8,8 @@ public class ULectureQnaReplyForm {
 	private int lqa_no;
 	private String t_id;
 	private String t_name;
-	private String lqr_title;
-	private String lqr_content;
-	private String lqr_date;
+	private String t_nickname;
+	private String lqar_title;
+	private String lqar_content;
+	private String lqar_date;
 }
