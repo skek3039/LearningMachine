@@ -182,11 +182,11 @@
 						<th>비디오 제목</th>
 						<th>비디오 소개</th>
 						<th>강의 코드</th>
-						<th>파일 경로</th>
+						<th>비디오 경로</th>
 					</tr>
 					<c:forEach items="${video_List}" var="v">
 					<tr>
-						<td><a href="./video_upload_detail?v_no=${v.v_no }">${v.v_no }</a></td>
+						<td><a href="./video_upload_detail?v_no=${v.v_no }&l_code=${dto.l_code}">${v.v_no }</a></td>
 						<td>${v.v_videotitle }</td>
 						<td>${v.v_introduce }</td>
 						<td>${v.l_code }</td>

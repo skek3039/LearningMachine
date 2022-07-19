@@ -136,7 +136,7 @@
          <br>
          <div style="text-align: center">
             <div id="updateform" style="padding-top: 150px; padding-left: 340px">
-               <form action="./video_upload.do" method="post">
+               <form action="./video_upload_update.do" method="post">
                <table class="tg" style="table-layout: fixed; width: 900px">
                   <colgroup>
                      <col style="width: 100px">
@@ -146,22 +146,22 @@
                      <tr>
                         <td class="tg-llyw">비디오 제목</td>
                         <td class="tg-0pky"><input name="v_videotitle" style="width: 790px;"
-                           type="text"></td>
+                           type="text" placeholder="${dto.v_videotitle }"></td>
                      </tr>
                      <tr>
                         <td class="tg-llyw">비디오 소개</td>
                         <td class="tg-0pky"><input name="v_introduce" style="width: 790px;"
-                        type="text"></td>
+                        type="text" placeholder="${dto.v_introduce }"></td>
                      </tr>
                      <tr>
                         <td class="tg-llyw">파일 경로</td>
                         <td class="tg-0pky"><input name="v_root" style="width: 790px;"
-                        type="text"></td>
+                        type="text" placeholder="${dto.v_root }"></td>
                      </tr>
                   </tbody>
                </table>
                <div class="box on" style="padding-top: 10px; padding-left: 765px;">
-               <input type="hidden" name="l_code" value="${l_code }">
+               <input type="hidden" name="v_no" value="${dto.v_no }">
                   <button type="submit" class="btn btn-outline-dark">저장</button>
                </div></form>
             </div>

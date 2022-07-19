@@ -134,4 +134,21 @@
 		INSERT INTO lecture_video (l_code, v_videotitle, v_introduce, v_root)
 		VALUES (#{l_code}, #{v_videotitle}, #{v_introduce}, #{v_root})
 	</insert> 
+	
+  	<select id="video_upload_update" parameterType ="LectureDTO" resultType="LectureDTO">
+  		SELECT *
+  		FROM lecture_video
+  		WHERE v_no = #{v_no}
+  	</select>		
+  	
+  	<update id="video_update_write" parameterType="LectureDTO">
+		UPDATE lecture_video
+		SET v_videotitle=#{v_videotitle}, v_introduce=#{v_introduce}, v_root=#{v_root}
+		WHERE v_no = #{v_no}
+	</update>  	
+	
+  	<delete id="video_upload_delete" parameterType="LectureDTO">
+  		DELETE FROM lecture_video
+  		WHERE v_no=#{v_no}
+  	</delete>
   </mapper>

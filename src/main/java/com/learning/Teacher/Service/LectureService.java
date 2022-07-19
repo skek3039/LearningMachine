@@ -94,6 +94,19 @@ public class LectureService {
 		
 	}
 
+	public Object video_upload_update(LectureDTO video_upload_update) {
+		return lectureDAO.video_upload_update(video_upload_update);
+	}
+
+	public int video_update_write(LectureDTO video_update_write) {
+		return lectureDAO.video_update_write(video_update_write);
+		
+	}
+
+	public int video_upload_delete(LectureDTO video_upload_delete) {
+		return lectureDAO.video_upload_delete(video_upload_delete);
+	}
+
 
 
 

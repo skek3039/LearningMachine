@@ -141,6 +141,10 @@
 			<br>
 			<div style="text-align: center">
 				<div id="requestform" style="padding-top: 10px; padding-left: 340px; height: 735px;">
+				<div style="padding-left: 770px; padding-bottom: 5px;">
+				<img onclick="location.href='./video_upload_update?v_no=${dto.v_no}'" style="width: 25px; height: 25px;" id="update" alt="" src="./img/update.png" title="id">
+				<img onclick="location.href='./video_upload_delete?v_no=${dto.v_no}&l_code=${dto.l_code }'" style="width: 25px; height: 25px;" id="delete" alt="" src="./img/delete.png" title="id">
+				</div>					
 					<table class="tg" style="table-layout: fixed; width: 900px">
 						<colgroup>
 							<col style="width: 100px">
