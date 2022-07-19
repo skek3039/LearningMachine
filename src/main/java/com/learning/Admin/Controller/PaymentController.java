@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.number.money.MonetaryAmountFormatter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -102,7 +103,6 @@ public class PaymentController {
 	   }
 	
 	
-	
 	//전체결제내역리스트 보기
 	@GetMapping(value = "/payment_list")
 	public @ResponseBody ModelAndView payment_list(HttpServletRequest request, HttpSession session,HttpServletResponse response) throws IOException {
@@ -137,6 +137,27 @@ public class PaymentController {
 			return mv;
 		}
 	}
+	
+	
+	
+	//실제 환불승인된 내역 보기
+	@GetMapping(value = "/payment_refund")
+	public ModelAndView admin_payment_refund(HttpSession session, HttpServletRequest request) {
+		if ((int) session.getAttribute("u_authority") == 7) {
+			ModelAndView mv = new ModelAndView("admin_refund_list");
+			List<String> list = paymentService.refundList();
+		
+			System.out.println(list);
+			mv.addObject("list", list);
+
+			return mv;
+		} else {
+			ModelAndView mv = new ModelAndView("404");
+			return mv;
+		}
+	}
+	
+	
 	
 	
 	// 환불신청내역 불러오기

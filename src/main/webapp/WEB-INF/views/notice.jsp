@@ -91,14 +91,13 @@
 
 
 		<jsp:include page="./header.jsp" />
-		<div style=" width: 100%; height: 800px;">
+		<div style=" width: 100%;">
 		<div style="position: relative;">
-		<div style="padding-top: 5px;">
 		<jsp:include page="./notice_nav.jsp"/>
 		 </div>
 		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;공지사항</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px;">
-				 <table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;"> 
+		<div style="padding-top: 10px;padding-left: 120px; height: 750px;">
+				 <table class="table table-bordered table-sm" style=" width: 800px; margin: 0 auto;"> 
 					<tr>
 						<th>번호</th>
 						<th>제목</th>
@@ -114,19 +113,18 @@
 					</tr>
 					</c:forEach>
 			</table>
-		</div>
 		<br>
 <div id="pagination" style="border-top: 1px solid black; text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
-</div>
+		</div>
 		<jsp:include page="./footer.jsp" />
 
+</div>
 
 		<!-- Back to Top -->
 		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
 			class="bi bi-arrow-up"></i></a>
 	</div>
 	
-	</div>
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

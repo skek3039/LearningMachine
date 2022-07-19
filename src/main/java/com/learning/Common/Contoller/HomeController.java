@@ -12,8 +12,8 @@ public class HomeController {
 	}
 	
 
-	@GetMapping(value = "/contact")
-	public String contact() {
-		return "contact";
+	@GetMapping(value = "/community")
+	public String community() {
+		return "community";
 	}
 }

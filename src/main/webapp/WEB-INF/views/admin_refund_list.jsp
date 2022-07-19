@@ -1,6 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%
+	Date nowTime = new Date();
+	SimpleDateFormat year = new SimpleDateFormat("yyyy");
+	SimpleDateFormat month = new SimpleDateFormat("M");
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,7 +67,6 @@
         font-weight: normal;
         font-style: normal;
     }
-
     body {
         font-family: LeferiPoint-WhiteObliqueA;
     }
@@ -71,7 +78,6 @@
         padding: 15px;
     }
 
-
     details[open] summary {
         font-weight: 800;
     }
@@ -82,33 +88,46 @@
         padding: 15px 0;
     }
 </style>
-
 <script type="text/javascript">
 function search(){
 	var u_name= document.getElementById("u_name").value;
 	location.href = "./admin_studentSearch?u_name="+u_name;
 }
 
-function refund(u_id,p_no){
-	if(confirm("정말 환불처리하시겠습니까?")){
-		$.ajax({
-			url:"./admin_student_refund",
-			type:"post",
-			dataType:"html",
-			data:{"u_id" : u_id,
-				  "p_no" : p_no	
-			},
-			success:function(data){
-				alert("환불처리가 완료되었습니다.");
-				location.href="./admin_student_refund";
-			},error:function(request, status, error){
-				alert("문제발생"+error);
+ function preNext(year,month,checkPN){
+	var checkPN = checkPN;
+	var year = Number(year); 
+	var month = Number(month);
+	var confirm = Number(<%= month.format(nowTime)%>);
+	
+	if(checkPN == "1"){
+			if(month >0){
+				year = year;
+				month =Number(month) - 1;
+				if(month == 0){
+					month = 12;
+					year = Number(year)-1;
+				}
 			}
-		});
-	}
+			else{
+				year = Number(year)-1;
+				month = 12;
+			}
+	}else{
+			if(month < 12){
+				year = year;
+				month =	Number(month) + 1;
+				if(month == 12){
+					month = 1;
+					year = Number(year)+1;
+				}
+			}else{
+				year = Number(year)+1;
+				month = 1;
+			}
+		}  
+ 	location.href="./payment_list?month="+month+"&year="+year;
 }
-
-
 </script>
 
 
@@ -126,75 +145,70 @@ function refund(u_id,p_no){
 		</div>
 		<!-- Spinner End -->
 
-
 		<jsp:include page="./header.jsp" />
-		<div style="width: 100%; height: 100%; ">
+		<div style="width: 100%; ">
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
-		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;환불신청내역</h3><hr style="border: solid 1px;"></div>
+		<div id="pay" style="padding-top: 110px;"> <h1 class="h3 mb-2 text-gray-800">환불내역</h1><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px;padding-left: 120px; height: 100%;  margin: 0 auto; ">
-		<div class="card shadow mb-4"style=" width: 800px; height: 800px;margin: 0 auto; ">
+		      <!-- DataTable -->
+                            <fmt:parseDate value="${list[0].p_date}" var="time1" pattern="yyyy-MM-dd HH:mm:ss.S" />                                                                    
+                            <fmt:formatDate value="${time1 }" var="year" pattern="yyyy"/>
+                            <fmt:formatDate value="${time1 }" var="month" pattern="MM"/>
+                    <div class="card shadow mb-4"style=" width: 800px; height: 800px;margin: 0 auto; ">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">
-                           환불내역
-                          </h6>
+                            <a href="javascript:preNext('${year }','${month }',1);">◀</a>
+                            ${year } 년  ${month } 월   <a href="javascript:preNext('${year }','${month }',2);">▶</a></h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive" >    
                                 <table class="table table-bordered" id="dataTable"  cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>학생ID</th>
-                                            <th>결제일자/환불일자</th>                                            
+                                            <th>이름(ID)</th>
                                             <th>강의코드</th>
-                                            <th>환불액</th>
-                                            <th>환불여부</th>
+                                            <th>매출일자</th>
+                                            <th>금액</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="4" style="text-align: right">총 환불금액</th>                                       
+                                            <th colspan="3" style="text-align: right">총 환불금액</th>                                       
                                             <th style="color: red"><fmt:formatNumber value="${list[0].refundtotal }" pattern="#,###"  /></th>
                                        
                                         </tr>
                                         <tr>
-                                            <th colspan="4" style="text-align: right">총 환불건수</th>
-                                            <th><fmt:formatNumber value="${list[0].sumtotal }" pattern="#,###"  /></th>
+                                            <th colspan="3" style="text-align: right">총 환불건</th>
+                                            <th>${list[0].count}" 건</th>
                                           </tr>
                                     </tfoot>
-                                    <tbody>
-									<c:forEach items="${list }" var="list">
-									<fmt:parseDate value="${list.p_date}" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />                                                                    
-        							<fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
-                  
-									<fmt:parseDate value="${list.r_date}" var="time1" pattern="yyyy-MM-dd HH:mm:ss.S" />                                                                    
-        							<fmt:formatDate value="${time1 }" var="time1" pattern="yyyy-MM-dd HH:mm:ss"/>
-                  
-
-										<input type="hidden" value="${list.p_no }" />
-										<tr>
-											<td>${list.u_id }</td>
-											<td>${time1 }/ ${time }</td>
-											<td>${list.l_code }</td>
-											<td><fmt:formatNumber value="${list.p_price }"
-													pattern="#,###" /></td>
-											<td><button class="btn btn-dark" id="search"
-													onclick="refund('${list.u_id }',${list.p_no })">
-													${list.refund }</button></td>
-										</tr>
-									</c:forEach>
-								</tbody>
+                                    <tbody> 
+                                    <c:if test="${list.size() ne 0 }">
+                                    <c:forEach items="${list }" var="pay">
+                                        <tr>
+                                            <td>${pay.NAME }(${pay.u_id })</td>
+                                            <td>${pay.l_code }</td>
+                                            <td>
+                                            <fmt:parseDate value="${pay.p_date}" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
+                                            <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
+                    						${time }</td>
+                                           
+                                            <td><fmt:formatNumber value="${pay.p_price }" pattern="#,###"  /></td>
+                                        </tr>
+                                    </c:forEach>  
+                                     </c:if>         
+									 </tbody>
                                 </table>
                                
                             </div>
                         </div>
                     </div>
+                </div>
 		</div>
 
-		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
-
 </div>
 
 		<!-- Back to Top -->
@@ -211,9 +225,8 @@ function refund(u_id,p_no){
 				}
 			});
 		</script>
-	</div>
 
-	<!-- Page level plugins -->
+  	<!-- Page level plugins -->
     <script src="./resources/js/jquery.dataTables.min.js"></script>
     <script src="./resources/js/dataTables.bootstrap4.min.js"></script>
     <script src="./resources/js/datatables-demo.js"></script>
@@ -226,6 +239,7 @@ function refund(u_id,p_no){
 	<script src="./resources/js/sb-admin-2.min.js"></script>
 	
 	
-</body>
+	
+	</body>
 
 </html>
