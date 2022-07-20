@@ -24,6 +24,12 @@
                                 <a href="./admin_student_refund" class="dropdown-item">강사관리</a>
                             </div>
                          </c:if>
+                         <c:if test="${sessionScope.u_authority == 4 }">
+                            <a href="./admin" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">강사</a>
+                            <div class="dropdown-menu m-0">                            	
+                                <a href="./lecture" class="dropdown-item">강사페이지</a>
+                                <a href="./student" class="dropdown-item">수강생관리</a>                            </div>
+                         </c:if>
                           <c:if test="${sessionScope.u_authority == 1 }">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu m-0">
