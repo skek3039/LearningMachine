@@ -18,9 +18,6 @@ public class QnaDAO {
 		return sqlSession.selectList("QnA.qnaList");
 	}
 
-	public int qnalistCount() {
-		return sqlSession.selectOne("QnA.qnalistCount");
-	}
 
 	public LectureDTO qna_reply(LectureDTO qna_reply) {
 		return sqlSession.selectOne("QnA.qna_reply", qna_reply);

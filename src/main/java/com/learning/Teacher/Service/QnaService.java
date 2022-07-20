@@ -17,10 +17,6 @@ public class QnaService {
 		return qnaDAO.qnaList();
 	}
 
-	public int qnalistCount() {
-		return qnaDAO.qnalistCount();
-	}
-
 	public LectureDTO qna_reply(LectureDTO qna_reply) {
 		return qnaDAO.qna_reply(qna_reply);
 	}

@@ -44,7 +44,7 @@ public class QnaController {
 			// pageSize = 페이지 리스트에 게시되는 페이지 수 yes
 			int pageScale = 10;			
 			// totalRecordCount 전체 게시물 건수				
-			int totalCount = qnaService.qnalistCount();
+			int totalCount = qnaService.totalCount();
 			
 			// 전자정부페이징 호출
 			PaginationInfo paginationInfo = new PaginationInfo();

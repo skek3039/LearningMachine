@@ -111,7 +111,7 @@ function linkPage(pageNo){
 						<th>Q&A</th>
 					</tr>
 					
-					<c:forEach items="${qnaList}" var="q">
+					<c:forEach items="${qna_answer}" var="q">
 					<tr>
 						<td>${q.lqa_no}</td>		
 						
