@@ -20,7 +20,8 @@
 
 	<select id="t_lectureApplyList" parameterType="map" resultType="LectureDTO">
   		SELECT *
-		FROM lecture_apply
+  		,(SELECT c_name FROM category c WHERE c.c_code = l.c_code) AS c_name
+		FROM lecture_apply l
 		WHERE t_id = #{u_id} AND l_recognize != 2
 		ORDER BY l_date DESC
 		limit #{page.startPage} , #{page.lastPage} 
@@ -49,8 +50,8 @@
 
 
 	<insert id="t_lecture_request" parameterType="LectureDTO">
-		INSERT INTO lecture_apply (t_id, l_name, l_category, l_info, l_curriculum)
-		VALUES (#{t_id}, #{l_name}, #{l_category}, #{l_info}, #{l_curriculum})
+		INSERT INTO lecture_apply (t_id, l_name, c_code, l_info, l_curriculum)
+		VALUES (#{t_id}, #{l_name}, #{c_code}, #{l_info}, #{l_curriculum})
 	</insert> 
 	
 	<select id="t_letureNameSearch" parameterType="String" resultType="LectureDTO">
@@ -60,11 +61,12 @@
   	</select>
   	
   	<select id="cate" resultType="hashmap">
-  		select * from lecture_category
+  		select * from category
   	</select>
   	
   	<select id="lecture_refusal" parameterType="map" resultType="LectureDTO">
-  		SELECT *,(SELECT c_name FROM category c WHERE c.c_code = l.c_code) AS c_name
+  		SELECT *
+  		,(SELECT c_name FROM category c WHERE c.c_code = l.c_code) AS c_name
 		FROM lecture_apply l
 		WHERE t_id = '333' AND l_recognize = 2
 		ORDER BY l_date DESC
@@ -72,8 +74,8 @@
   	</select>	
   	
   	<update id="lecture_update_write" parameterType="LectureDTO">
-		UPDATE lecture_apply 
-		SET l_name=#{l_name}, l_category=#{l_category}, l_info=#{l_info}, l_curriculum=#{l_curriculum}
+		UPDATE lecture_apply
+		SET l_name=#{l_name}, c_code=#{c_code}, l_info=#{l_info}, l_curriculum=#{l_curriculum}
 		WHERE la_no = #{la_no}
 	</update>
 	

@@ -237,7 +237,7 @@
 								<select name="l_category" style="width: 790px;">
 											<option value="">카테고리 선택</option>
 											<c:forEach items="${cate }" var="cate">											
-											<option value="${cate.l_category }">${cate.l_category }</option>
+											<option value="${cate.c_name }">${cate.c_name }</option>
 											</c:forEach>
 									</select>
 									</td>
