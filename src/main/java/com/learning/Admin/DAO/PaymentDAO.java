@@ -25,8 +25,8 @@ public class PaymentDAO {
 		return sqlSession.selectList("Payment.circle");
 	}
 
-	public List<String> refundList() {
-		return sqlSession.selectList("Payment.refundList");
+	public List<String> refundList(Map<String, Object> map) {
+		return sqlSession.selectList("Payment.refundList",map);
 	}
 
 	public List<String> gender() {

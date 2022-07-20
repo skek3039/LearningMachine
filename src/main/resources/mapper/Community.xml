@@ -8,8 +8,8 @@
   	</select>
   	
   	<select id="qnaList" parameterType="pageDTO" resultType="map">
-  		select *
-  		from lecture_qna
+  		SELECT * , (SELECT c.c_name FROM category c WHERE c.c_code = q.l_code)  l_category
+  		from lecture_qna q
   		limit #{startPage},#{lastPage}
   	</select>
   

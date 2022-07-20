@@ -144,4 +144,12 @@ public class AdminDAO {
 		return sqlSession.insert("Admin.teacherAccept",map);
 	}
 
+	public List<String> categorylist() {
+		return sqlSession.selectList("Admin.categoryList");
+	}
+
+	public int addCategory(String c_name) {
+		return sqlSession.insert("Admin.addCategory",c_name);
+	}
+
 }

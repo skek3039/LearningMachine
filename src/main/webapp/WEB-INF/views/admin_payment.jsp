@@ -94,14 +94,13 @@ rel="stylesheet">
     
     #myChart{
 			/* 가로 width 크기에 따라서 차트 크기가 지정됩니다 */
-			width: 70%;
+			width: 50%;
 			height: auto;
 			margin: 0 auto;
 			padding: 0;
 			border: 1px solid #000000;
 			border-radius: 20px;
 			background-color: #eeeeee;
-
 			position: relative;
 			top: 5%;
 			left: 0;
@@ -262,8 +261,7 @@ function preNext(year,checkPN){
 
 
 		<jsp:include page="./header.jsp" />
-		<div id = "payment_body">
-		<div style="position: relative;">
+		<div>
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
 			<div style="padding-top: 110px;">
@@ -285,7 +283,7 @@ function preNext(year,checkPN){
 					</div>
 					
 
-				</div>
+					</div>
 				<hr>
 			</div> 
 

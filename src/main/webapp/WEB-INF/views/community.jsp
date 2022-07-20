@@ -202,10 +202,11 @@ $(document).ready(function(){
 						<c:forEach items="${list }" var = "list"> 
 						  <tbody> 
 						    <tr role="alert">
-						      <th>005</th>
-						      <td>Gary</td>
-						      <td>Bird</td>
-						      <td>garybird@email.com</td>
+						      <th>${list.lqa_no }</th>
+						      <td>${list.l_category }</td>
+						      <td>${list.lqa_title }</td>
+						      <td>${list.lqa_date }</td>
+						      <td>${list.u_id }</td>
 						      <td>
 						      	<a href="#" class="close" data-dismiss="alert" aria-label="Close">
 				            	<span aria-hidden="true"><i class="fa fa-close"></i></span></a>

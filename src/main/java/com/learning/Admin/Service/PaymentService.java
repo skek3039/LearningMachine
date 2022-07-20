@@ -46,8 +46,8 @@ public class PaymentService {
 		return paymentDAO.circle();
 	}
 
-	public List<String> refundList() {
-		return paymentDAO.refundList();
+	public List<String> refundList(Map<String, Object> map) {
+		return paymentDAO.refundList(map);
 	}
 
 	public List<String> gender() {
