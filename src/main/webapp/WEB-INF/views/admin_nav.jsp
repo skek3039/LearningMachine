@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-		 <div class="card bg-dark text-white" style="width: 20%;height: 801px; float:left; padding-top: 80px;">
+		 <div class="card bg-dark text-white" style="width: 20%;height: 900px; float:left; ">
 
 				<div class="card-body p-5 text-left"><br><br><br>
 					<h3 style="text-align: left; color: white;">관리자</h3>
