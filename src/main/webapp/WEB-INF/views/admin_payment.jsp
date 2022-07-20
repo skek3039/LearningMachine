@@ -121,6 +121,7 @@ window.onload = function() {
 	drawBarHeight();
 	
 	drawPieChart();
+	genderchart();
 	    		
 };
 
@@ -148,6 +149,27 @@ window.onload = function() {
 		      title: {
 		        display: true,
 		        text: '카테고리별 비율'
+		      }
+		    }
+		});
+}
+ 
+	function genderchart(){
+
+		new Chart(document.getElementById("genderchart"), {
+		    type: 'pie',
+		    data: {
+		      labels: ["여","남"],
+		      datasets: [{
+		        label: "Population (millions)",
+		        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+		        data: ['${gender[0].f}', '${gender[0].m}']
+		      }]
+		    },
+		    options: {
+		      title: {
+		        display: true,
+		        text: '성별 비율'
 		      }
 		    }
 		});
@@ -249,17 +271,17 @@ function preNext(year,checkPN){
 				<hr style="border: solid 1px;">
 			</div>
 			<div style="padding-top: 10px; margin-left: 280px;">
-				<div id="payment">
 					<div id="today">
 				 <!-- Begin Page Content -->
 						<h6 class="m-0 font-weight-bold text-primary"><a href="javascript:preNext('${year }','1')">◀</a>  ${year }년 <a href="javascript:preNext('${year }','2')">▶</a> </h6>
 						<br>
 						<canvas id = "myChart"></canvas>
 						<hr>
-						<div style="width: 400px; height: 400px;">
-						<canvas id="pie-chart" width="250" height="250"></canvas>
-						<canvas id="genderchart" width="250" height="250"></canvas>
-						</div>
+					<div id="chart1" style="display: inline-block;">
+						<canvas id="pie-chart" width="350" height="350"></canvas>
+					</div>
+					<div id="chart2" style="display: inline-block;">
+						<canvas id="genderchart" width="350" height="350"></canvas>
 					</div>
 					
 

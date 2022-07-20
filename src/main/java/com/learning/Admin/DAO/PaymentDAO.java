@@ -28,4 +28,8 @@ public class PaymentDAO {
 	public List<String> refundList() {
 		return sqlSession.selectList("Payment.refundList");
 	}
+
+	public List<String> gender() {
+		return sqlSession.selectList("Payment.gender");
+	}
 }

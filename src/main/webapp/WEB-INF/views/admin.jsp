@@ -95,7 +95,7 @@
 
 
 		<jsp:include page="./header.jsp" />
-		<div style="width: 100%;">
+		<div style="width: 100%; height: 750px;">
 				<div style="position: relative;">
 				<jsp:include page="./admin_nav.jsp" />
 				</div>
@@ -239,6 +239,7 @@
                     </div>			 	
 		   		</div>
 		
+		 </div> 
 		<jsp:include page="./footer.jsp" />
  </div>       
                         
@@ -256,7 +257,6 @@
 				}
 			});
 		</script>
-		 </div> 
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
