@@ -115,27 +115,26 @@ ul.tabs li.current{
 	font-weight: 300px;
 }
 #content{
-	width: 80%;
+	width: 90%;
 	height: 100%;
 	border: 1px solid rgb(102, 202, 152);
 	border-radius: 10px;
 	display: inline-block;
+	margin-bottom: 30px;
 }
 .col-sm-6.col-md-4{
 	text-align: center;
 	margin-bottom: 10px;
 }
 #category{
-	
+	display: inline-block;
 	border: 1px solid rgb(201, 236, 219);
 	border-radius: 10px;
-	width: 20%;
+	width: 10%;
 	background-color: rgb(201, 236, 219);
 	text-align: center;
 }
-.caption{
-	text-align: center;
-}
+
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -172,16 +171,53 @@ $(document).ready(function(){
 			<h3>&nbsp;&nbsp; Community</h3> <small>비방또는 비난등의 글은 무통보로 삭제됩니다.</small>
 			<hr style="border: solid 1px;">
 		</div>
-		<div class="container-xxl py-6" style="background-color: green ; ">
 		<div>
 			<ul class="tabs">
 				<li class="tab-link current" data-tab="tab-1">강의 QnA</li>
 				<li class="tab-link" data-tab="tab-2">자유주제</li>
 			</ul>
 		</div>
-		<div style="padding-top: 20px; height:750px; text-align: center; border-radius: 2px;">
+		<div style="padding-top: 20px; text-align: center;">
+				<div style="width:500px; margin: 0 auto">
+					 <input type="text" class="form-control" style="width: 350px;display: inline-block;" placeholder="궁금한 질문을 검색해보세요!">
+					 <button type="button" class="btn btn-success" style="display: inline-block;">Search</button>
+				</div>	
+				<br>
+				<p id="category">프론트엔드</p>
+				<p id="category">백엔드</p>
+				<p id="category">자바</p>
+				<br>	
+				<div id="content">
 				<div class="row tab-content current" id="tab-1">
-					<table border="1" style="width: 600px; margin: 0 auto;">
+					<table class="table table-hover" style="width: 90%; margin: 0 auto" >
+						  <thead class="thead-dark">
+						    <tr>
+						      <th>ID no.</th>
+						      <th>강의카테고리</th>
+						      <th>제목</th>
+						      <th>날짜</th>
+						      <th>닉네임</th>
+						    </tr>
+						  </thead>
+						<c:forEach items="${list }" var = "list"> 
+						  <tbody> 
+						    <tr role="alert">
+						      <th>005</th>
+						      <td>Gary</td>
+						      <td>Bird</td>
+						      <td>garybird@email.com</td>
+						      <td>
+						      	<a href="#" class="close" data-dismiss="alert" aria-label="Close">
+				            	<span aria-hidden="true"><i class="fa fa-close"></i></span></a>
+				        	</td>
+						    </tr>
+						  </tbody>
+						  </c:forEach>
+						</table>
+					
+					
+					
+					<%-- <table border="1" style="width: 600px; margin: 0 auto;">
 					<c:forEach items="${list }" var = "list"> 
 					<tr>
 						<th><img style="width: 50px; height: 50px;" id="up" alt="" src="./img/q.png" title="질문"></th>
@@ -195,7 +231,7 @@ $(document).ready(function(){
                     	${time }</h6></td>
 					</tr>
 					</c:forEach>
-					</table> <br>
+					</table> <br> --%>
 					<table>
 					<tr>
 						<td style="word-break:break-all; width: 820px">${dto.vq_content }</td>
@@ -244,10 +280,11 @@ $(document).ready(function(){
 			</div> --%>
 		</div>
 	</div>
+</div>
 	<%-- <jsp:include page="./team.jsp"/> --%>
 	<jsp:include page="./footer.jsp" />
 
-</div>
+
 	<!-- Back to Top -->
 	<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
 		class="bi bi-arrow-up"></i></a>

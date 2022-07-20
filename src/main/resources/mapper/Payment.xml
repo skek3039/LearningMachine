@@ -25,7 +25,12 @@
 		FROM lecture_apply_user_view v
 		GROUP BY category
   	</select>
-
+	
+	<select id = "gender" resultType="map">
+		SELECT * ,(SELECT COUNT(*) FROM user_lecture_view l WHERE l.u_gender='여') AS f, 
+		(SELECT COUNT(*) FROM user_lecture_view l WHERE l.u_gender='남') AS m
+		FROM  user_lecture_view v
+	</select>
 
   	<select id="paymentList" parameterType="map" resultType="map">
   		select *,
