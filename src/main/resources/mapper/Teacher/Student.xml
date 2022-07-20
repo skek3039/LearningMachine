@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="student">
   
-  	<select id="totalCount" resultType="integer">
+  	<select id="totalCount" parameterType="String" resultType="integer">
   		select COUNT(*) AS count
-  		from lecture
+  		from ${name}
   	</select>
   
   	<select id="student_lectureList" parameterType="map" resultType="LectureDTO">
@@ -18,7 +18,7 @@
   	<select id="studentList" parameterType="String" resultType="HashMap">
   		SELECT *
   		FROM user_lecture_view
-  		WHERE t_id = #{t_id} 
+  		WHERE t_id = #{t_id} AND l_code = #{l_code}
   	</select>
   	
   	<select id="searchList" parameterType="String" resultType="LectureDTO">

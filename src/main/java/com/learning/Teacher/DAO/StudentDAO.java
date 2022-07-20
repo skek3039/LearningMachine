@@ -27,8 +27,8 @@ public class StudentDAO {
 		return sqlSession.selectList("student.searchList", l_name);
 	}
 
-	public int totalCount() {
-		return sqlSession.selectOne("student.totalCount");
+	public int totalCount(String name) {
+		return sqlSession.selectOne("student.totalCount",name);
 	}
 
 	public int stulistCount() {

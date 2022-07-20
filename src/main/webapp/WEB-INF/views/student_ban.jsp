@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,6 +73,25 @@
         padding: 15px 0;
     }
 </style>
+<script type="text/javascript">
+function search(){
+	var l_name= document.getElementById("l_name").value;
+	location.href = "./student_studentName?l_name="+l_name;
+}
+
+function enterkey() {
+	if (window.event.keyCode == 13) {
+		search();
+	}
+	
+}
+</script>
+<script type="text/javascript">
+function linkPage(pageNo){
+	location.href = "./student_ban?pageNo=" + pageNo;
+	}
+
+</script>
 </head>
 
 <body>
@@ -88,18 +110,29 @@
 		<jsp:include page="./header.jsp" />
 		<div style=" width: 100%; height: 705px;">
 				<jsp:include page="./lecture_nav.jsp"/>
-			<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;신고자리스트</h3><hr style="border: solid 1px;"></div>
-		 			<div class="col-sm-offset-9" style=" text-align: center; padding-left: 890px"></div>
+			<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;신고자리스트</h3><hr style="border: solid 1px;"></div>
+		 			<div class="col-sm-offset-9" style=" text-align: center; padding-left: 840px"></div>
+						<form action="" method="get">
+                              <!-- <select name="search" id="">
+                                  <option value="year">강의 이름</option>
+                              </select> -->
+                              <input type="search" id="l_name" name="l_name" class="form-control" required="required" placeholder="강의이름을 입력해주세요." style="width: 250px; float: left; margin-left: 75px;" onkeyup="enterkey()">
+                              <button class="btn btn-danger" id="search" style="width: 100px float: left; margin-right: 45px;"  onclick="search()">search</button>
+                          </form>
 		<div style="padding-top: 10px;">
 			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
-						<th>Firstname</th>
-						<th>Lastname</th>
-						<th>Email</th>
+						<th>아이디</th>
+						<th>닉네임</th>
+						<th>이름</th>
+						<th>이메일</th>
+						<th>신고당한 강의</th>
 					</tr>
 					<tr>
 						<td>John</td>
 						<td>Doe</td>
+						<td>john@example.com</td>
+						<td>john@example.com</td>
 						<td>john@example.com</td>
 					</tr>
 			</table>

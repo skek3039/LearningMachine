@@ -29,8 +29,8 @@ public class StudentService {
 	}
 
 
-	public int totalCount() {
-		return studentDAO.totalCount();
+	public int totalCount(String name) {
+		return studentDAO.totalCount(name);
 	}
 
 	public int stulistCount() {
