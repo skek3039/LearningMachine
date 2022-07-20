@@ -1,12 +1,12 @@
 package com.learning.Common.Service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.learning.Common.DAO.CommunityDAO;
-import com.learning.DTO.PageDTO;
 
 @Service
 public class CommunityService {
@@ -18,8 +18,8 @@ public class CommunityService {
 		return communityDAO.totalCount(name);
 	}
 
-	public List<String> QnAList(PageDTO page) {
-		return communityDAO.qnaList(page);
+	public List<String> QnAList(Map<String, Object> map) {
+		return communityDAO.qnaList(map);
 	}
 
 	public List<String> categoryList() {

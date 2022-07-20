@@ -1,12 +1,15 @@
 package com.learning.Common.Contoller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.learning.Admin.Service.AdminService;
@@ -41,7 +44,7 @@ public class HomeController {
 	
 
 	@GetMapping(value = "/community")
-	public ModelAndView community(HttpServletRequest request) {
+	public @ResponseBody ModelAndView community(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("community");
 		name ="lecture_qna";
 		int pageNo = 1;
@@ -70,9 +73,18 @@ public class HomeController {
 		page.setStartPage(startPage);
 		page.setLastPage(lastpage);
 		
-	
-		List<String> list = communityService.QnAList(page);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(request.getParameter("c_name") != null) {			
+			map.put("c_name", request.getParameter("c_name"));
+		}
+		map.put("page", page);
+		List<String> list = communityService.QnAList(map);		
+		
+		System.out.println(list.size());
+		List<String> category = adminService.categoryList();
 		mv.addObject("list",list);
+		mv.addObject("category",category);
 		mv.addObject("paginationInfo", paginationInfo);
 		mv.addObject("pageNo", pageNo);
 		return mv;

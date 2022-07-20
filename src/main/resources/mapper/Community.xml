@@ -7,10 +7,16 @@
   		from ${name}
   	</select>
   	
-  	<select id="qnaList" parameterType="pageDTO" resultType="map">
-  		SELECT * , (SELECT c.c_name FROM category c WHERE c.c_code = q.l_code)  l_category
-  		from lecture_qna q
-  		limit #{startPage},#{lastPage}
+  	<select id="qnaList" parameterType="map" resultType="map">
+  		SELECT c.c_name, l.*
+		FROM lecture_qna l JOIN category c
+		ON l.l_code = c.c_code
+
+  		<if test="c_name != null">
+  		where c_name = #{c_name}
+  		</if>
+  		ORDER BY lqa_no
+  		limit #{page.startPage},#{page.lastPage}
   	</select>
   
   </mapper>

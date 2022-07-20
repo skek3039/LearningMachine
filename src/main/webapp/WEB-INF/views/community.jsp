@@ -150,6 +150,31 @@ $(document).ready(function(){
 	  })
 	 
 	});
+	
+	
+function select(category){
+	let c_name = category;
+	let arr = new Array();
+	$.ajax({
+		url : "./community",
+		type : "get",
+		dataType : "text",
+		data : {"c_name" : c_name	
+		},
+		success : function(data){
+			// $('#tab-1').load(location.href+' #tab-1');
+			$('.tab-1').remove();
+			<c:forEach items="${list}" var="list">
+				arr.push("${list.lqa_no}");
+			</c:forEach>
+			alert(arr);
+			
+		},
+		error : function(){
+			alert("실패 ㅠ");
+			}
+		});
+}
 </script>
 </head>
 
@@ -183,9 +208,9 @@ $(document).ready(function(){
 					 <button type="button" class="btn btn-success" style="display: inline-block;">Search</button>
 				</div>	
 				<br>
-				<p id="category">프론트엔드</p>
-				<p id="category">백엔드</p>
-				<p id="category">자바</p>
+				<c:forEach items="${category }" var = "c">
+					<p id="category"><a href="javascript:select('${c.c_name}')">${c.c_name }</a></p>		
+				</c:forEach>
 				<br>	
 				<div id="content">
 				<div class="row tab-content current" id="tab-1">
@@ -203,7 +228,7 @@ $(document).ready(function(){
 						  <tbody> 
 						    <tr role="alert">
 						      <th>${list.lqa_no }</th>
-						      <td>${list.l_category }</td>
+						      <td>${list.c_name }</td>
 						      <td>${list.lqa_title }</td>
 						      <td>${list.lqa_date }</td>
 						      <td>${list.u_id }</td>

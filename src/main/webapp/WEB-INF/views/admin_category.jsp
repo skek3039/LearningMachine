@@ -94,7 +94,9 @@ function add(){
 				url : "./addCategory",
 				type : "get",
 				dataType : "html",
-				data : {"c_name" : c_name},
+				data : {"c_name" : c_name
+						"check" : "1"	
+				},
 				success : function(data){
 					if(data == 0 ){
 						 $('#categoryTable').load(location.href+' #categoryTable');
