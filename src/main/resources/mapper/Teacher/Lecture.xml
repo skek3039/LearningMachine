@@ -64,9 +64,9 @@
   	</select>
   	
   	<select id="lecture_refusal" parameterType="map" resultType="LectureDTO">
-  		SELECT *
-		FROM lecture_apply
-		WHERE t_id = #{u_id} AND l_recognize = 2
+  		SELECT *,(SELECT c_name FROM category c WHERE c.c_code = l.c_code) AS c_name
+		FROM lecture_apply l
+		WHERE t_id = '333' AND l_recognize = 2
 		ORDER BY l_date DESC
 		limit #{page.startPage} , #{page.lastPage} 
   	</select>	

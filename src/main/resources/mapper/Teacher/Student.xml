@@ -22,9 +22,15 @@
   	</select>
   	
   	<select id="searchList" parameterType="String" resultType="LectureDTO">
-  		select * 
-  		from lecture 
-  		where l_name LIKE '%' #{l_name } '%'
+  		SELECT * 
+  		FROM lecture 
+  		WHERE l_name LIKE '%' #{l_name } '%'
+  	</select>
+  	
+  	<select id="banList" parameterType="map" resultType="LectureDTO">
+  		SELECT *
+  		FROM user_banned
+  		WHERE u_id = #{u_id}
   	</select>
   	
   </mapper>

@@ -151,6 +151,7 @@ public class StudentController {
 			
 			ModelAndView mv = new ModelAndView("stdent_ban");
 			String u_id = (String)session.getAttribute("u_id");
+			
 			int pageNo = 1;
 			if (request.getParameter("pageNo")!=null) {
 				pageNo = Integer.parseInt(request.getParameter("pageNo"));
@@ -178,9 +179,22 @@ public class StudentController {
 		PageDTO page = new PageDTO();
 		page.setStartPage(startPage);
 		page.setLastPage(lastpage);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("u_id", u_id);
+		map.put("page", page);
+		List<String> banList = studentService.banList(map);
+		
+		System.out.println(banList);
+		mv.addObject("banList", banList);
+		mv.addObject("paginationInfo", paginationInfo);
+	
 		return mv;
+		} else {
+			ModelAndView mv = new ModelAndView("404");
+			return mv;
 		}
-		return null;
+		
 	}
 	
 }

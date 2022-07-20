@@ -36,5 +36,10 @@ public class StudentService {
 	public int stulistCount() {
 		return studentDAO.stulistCount();
 	}
+
+
+	public List<String> banList(Map<String, Object> map) {
+		return studentDAO.banList(map);
+	}
 	 
 }

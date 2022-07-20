@@ -34,5 +34,9 @@ public class StudentDAO {
 	public int stulistCount() {
 		return sqlSession.selectOne("student.stulistCount");
 	}
+
+	public List<String> banList(Map<String, Object> map) {
+		return sqlSession.selectList("student.banList", map);
+	}
 	 
 }

@@ -134,7 +134,7 @@ function linkPage(pageNo){
 							</c:out></c:otherwise>
 							</c:choose>
 						</td>
-						<td>${l.l_category }</td>
+						<td>${l.c_name }</td>
 						<td>
                         <fmt:parseDate value="${l.l_date}" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
                         <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>

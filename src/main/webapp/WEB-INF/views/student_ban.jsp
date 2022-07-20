@@ -122,9 +122,9 @@ function linkPage(pageNo){
 		<div style="padding-top: 10px;">
 			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
+						<th>이름</th>
 						<th>아이디</th>
 						<th>닉네임</th>
-						<th>이름</th>
 						<th>이메일</th>
 						<th>신고당한 강의</th>
 					</tr>
