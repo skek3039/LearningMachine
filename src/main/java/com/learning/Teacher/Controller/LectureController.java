@@ -185,6 +185,7 @@ public class LectureController {
 			ModelAndView mv = new ModelAndView("lecture_request");
 			
 			List<String> cate = lectureService.lectureCate();
+			System.out.println(cate);
 			mv.addObject("cate",cate);
 			return mv;
 		} else {
