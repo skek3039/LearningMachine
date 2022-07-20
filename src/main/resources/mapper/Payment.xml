@@ -3,25 +3,35 @@
   <mapper namespace="Payment">
   
   	<select id="paymentmain" parameterType="integer" resultType="map">
-  		SELECT year(p_date)as year, MONTH(p_date) as month, sum(p_price2)as total FROM payment_lecture_view2 
+  		SELECT year(p_date)as year, 
+  		MONTH(p_date) as month, 
+  		sum(p_price2)as total FROM payment_lecture_view2 
   		where year(p_date) = #{year}
   		group by month(p_date)
- 
   	</select>
   	
-  	<select id="refundList" resultType="map">
+  	<select id="refundList" parameterType="map" resultType="map">
 		SELECT * ,
 		(SELECT COUNT(*) FROM payment_log p WHERE p.p_refund !=0  )AS count,
 		(SELECT SUM(p_price) FROM payment_log p WHERE p.p_refund !=0  )AS refundtotal,
 		(SELECT u_name FROM user WHERE user.u_id = l.u_id)AS NAME
 		FROM payment_log l  
 		WHERE l.p_refund != 0 
+		<if test = "month != null">
+  		AND 
+  		DATE(p_date) >= DATE_FORMAT(NOW(), '${year}-${month}-01')
+		AND 
+		<![CDATA[ 
+		DATE(p_date) <= DATE('${year}-${month}-31')  
+		]]>	
+		</if>
 		ORDER BY p_date
   	</select>
   	
   	
   	<select id="circle" resultType="map">
-		SELECT COUNT(*)AS COUNT, (SELECT l_category FROM lecture_category c WHERE c.l_code = v.l_code)AS 'category'
+		SELECT COUNT(*)AS COUNT, 
+		(SELECT c_name FROM category c WHERE c.c_code = v.l_code )AS 'category'
 		FROM lecture_apply_user_view v
 		GROUP BY category
   	</select>

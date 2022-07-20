@@ -446,6 +446,14 @@ public class AdminController {
 			return "/404";
 		}
 	}
+	
+	
+	//카테고리추가
+	@GetMapping(value = "/addCategory")
+	public @ResponseBody void addCategory(HttpServletRequest request) {
+		String c_name = request.getParameter("c_name");
+		int result = adminService.addCategory(c_name);
+	}
 
 
 }

@@ -126,7 +126,7 @@ function search(){
 				month = 1;
 			}
 		}  
- 	location.href="./payment_list?month="+month+"&year="+year;
+ 	location.href="./payment_refund?month="+month+"&year="+year;
 }
 </script>
 
@@ -181,7 +181,7 @@ function search(){
                                         </tr>
                                         <tr>
                                             <th colspan="3" style="text-align: right">총 환불건</th>
-                                            <th>${list[0].count}" 건</th>
+                                            <th>${list[0].count} 건</th>
                                           </tr>
                                     </tfoot>
                                     <tbody> 

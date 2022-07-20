@@ -22,4 +22,9 @@ public class CommunityService {
 		return communityDAO.qnaList(page);
 	}
 
+	public List<String> categoryList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

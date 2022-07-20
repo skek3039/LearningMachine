@@ -13,12 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.number.money.MonetaryAmountFormatter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -38,9 +35,7 @@ public class PaymentController {
 	private LocalDate now = LocalDate.now();               
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy");
 	DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("MM");
-	
-	
-	
+
 	
 	//매출관리페이지
 	@GetMapping(value = "/payment")
@@ -123,7 +118,6 @@ public class PaymentController {
 			
 			
 			List<String> list = paymentService.paymentList(map);
-			System.out.println(list.size());
 			if(list.size() != 0) {
 				mv.addObject("list",list); 				
 			}else {
@@ -144,12 +138,28 @@ public class PaymentController {
 	public ModelAndView admin_payment_refund(HttpSession session, HttpServletRequest request) {
 		if ((int) session.getAttribute("u_authority") == 7) {
 			ModelAndView mv = new ModelAndView("admin_refund_list");
-			List<String> list = paymentService.refundList();
-		
-			System.out.println(list);
-			mv.addObject("list", list);
+			String month = request.getParameter("month");
+			String year = request.getParameter("year");
+			if (month == null) {
+				year = now.format(formatter);
+				month = now.format(formatter1);
+			}	
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("month",month);
+			map.put("year",year);
 
+
+			
+			List<String> list = paymentService.refundList(map);
+			if(list.size() != 0) {
+				mv.addObject("list",list); 				
+			}else {
+				mv.addObject("month",month);
+				mv.addObject("year",year);
+			}
 			return mv;
+		
 		} else {
 			ModelAndView mv = new ModelAndView("404");
 			return mv;
@@ -164,6 +174,7 @@ public class PaymentController {
 	public ModelAndView admin_student_refund(HttpSession session, HttpServletRequest request) {
 		if ((int) session.getAttribute("u_authority") == 7) {
 			ModelAndView mv = new ModelAndView("admin_student_refund");
+			
 			List<String> list = adminService.refundList();
 			mv.addObject("list", list);
 

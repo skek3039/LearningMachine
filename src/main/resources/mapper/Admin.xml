@@ -141,5 +141,13 @@
   	<update id="teacherAccept2" parameterType="map">
   		update teacher_apply set t_recognize = 1 where t_id = #{t_apply[0].u_id}
   	</update>
+  	
+  	<select id="categoryList" resultType="map">
+  		select * from category
+  	</select>
+  	
+  	<insert id="addCategory" parameterType="String">
+  		insert into category (c_name) values(#{c_name})
+  	</insert>
  	
   </mapper>

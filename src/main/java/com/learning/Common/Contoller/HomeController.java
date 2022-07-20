@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.learning.Admin.Service.AdminService;
 import com.learning.Common.Service.CommunityService;
+import com.learning.DTO.LectureDTO;
 import com.learning.DTO.PageDTO;
 
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
@@ -19,12 +21,22 @@ public class HomeController {
 
 	@Autowired
 	private CommunityService communityService;
+	@Autowired
+	private AdminService adminService;
 	
 	private String name = null;
 	
 	@GetMapping(value = "/404")
 	public String error404() {
 		return "404";
+	}
+	@GetMapping(value = "/admin_category")
+	public ModelAndView category() {
+		ModelAndView mv = new ModelAndView("admin_category");
+		List<String> cate = adminService.categoryList() ;
+		
+		mv.addObject("cate",cate);
+		return mv;
 	}
 	
 
@@ -37,9 +49,9 @@ public class HomeController {
 			pageNo = Integer.parseInt(request.getParameter("pageNo"));
 		}
 		// recordCountPageNo 한 페이지당 게시되는 게시물 수 yes
-		int listScale = 10;
+		int listScale = 20;
 		// pageSize = 페이지 리스트에 게시되는 페이지 수 yes
-		int pageScale = 10;
+		int pageScale = 5;
 		// totalRecordCount 전체 게시물 건수
 		int totalCount = communityService.totalCount(name);
 		// 전자정부페이징 호출
@@ -60,7 +72,6 @@ public class HomeController {
 		
 	
 		List<String> list = communityService.QnAList(page);
-		System.out.println(list);
 		mv.addObject("list",list);
 		mv.addObject("paginationInfo", paginationInfo);
 		mv.addObject("pageNo", pageNo);
