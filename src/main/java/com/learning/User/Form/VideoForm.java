@@ -10,4 +10,5 @@ public class VideoForm {
 	private String v_root;
 	private String v_videotitle;
 	private String v_introduce;
+	private int attendance;
 }

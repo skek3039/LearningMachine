@@ -219,14 +219,48 @@
 
 		<jsp:include page="./header.jsp" />
 		<div style="padding-top: 110px;">
-			<h3>&nbsp;&nbsp;${LectureDetail.l_name}</h3>
+			<h3>&nbsp;&nbsp;${LectureDetail.l_name} ${LectureVideos.key['1'].value.v_videotitle}</h3>
 		</div>
 		<div style="padding-top: 20px; text-align: center;">
 		</div>
 		<div class="container">
 			<div class="row g-5 align-items-center">
 				<div class="col-lg-6 wow zoomIn" data-wow-delay="0.1s">
-					<img class="img-fluid" src="img/about.png">
+					<c:choose>
+						<c:when test="${sessionScope.u_id eq null || LectureDetail.payment_whether eq 0}">
+							<img class="img-fluid" src="img/about.png">
+						</c:when>
+						<c:otherwise>
+							<table class="table" style="text-align: center;">
+								<thead>
+									<tr>
+										<th style="width: 50%">제목</th>
+										<th style="width: 30%">출석</th>
+										<th style="width: 20%"></th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items = "${LectureVideos}" var = "Map">
+										<c:set var ="key" value="${Map.key}"/>
+										<tr>
+											<td>[${Map.key}강] ${Map.value.v_videotitle}</td>
+											<td>
+												<c:choose>
+													<c:when test="${Map.value.attendance eq 1}">
+														출석
+													</c:when>
+													<c:otherwise>
+														미수강
+													</c:otherwise>
+												</c:choose>
+											</td>
+											<td><a class="btn btn-outline-light" style="background-color: rgba(55, 110, 92, 0.781);" href="./LectureVideo?v_no=${Map.value.v_no}">듣기</a></td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
 					<!-- <a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="">Read More</a> -->

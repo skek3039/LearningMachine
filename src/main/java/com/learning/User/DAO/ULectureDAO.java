@@ -28,10 +28,7 @@ public class ULectureDAO {
 
 	public ULectureForm LectureDetail(String l_code) {
 
-		ULectureForm form = sqlSession.selectOne(namespace + ".ULectureDetail", l_code);
-		form.setL_price(Util.PriceCut(form.getL_price()));
-
-		return form;
+		return sqlSession.selectOne(namespace + ".ULectureDetail", l_code);
 	}
 
 	public List<VideoForm> LectureVideos(String l_code) {

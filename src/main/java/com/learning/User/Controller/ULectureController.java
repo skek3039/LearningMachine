@@ -47,10 +47,10 @@ public class ULectureController {
 		rq.setAttribute("LectureQnas", lectureService.LuectureQnas(u_id, l_code));
 		rq.setAttribute("LectureReviews", lectureService.LectureReviews(l_code));
 		
-		Map<Integer, VideoForm> LectureVideoMap = lectureService.LectureVideos(l_code);
+		Map<Integer, VideoForm> LectureVideoMap = lectureService.LectureVideos(u_id, l_code);
 		rq.setAttribute("LectureVideos", LectureVideoMap);
 		if (LectureVideoMap.size() != 0) {
-			rq.setAttribute("FirstVideo", lectureService.LectureVideos(l_code).get(1).getV_no());
+			rq.setAttribute("FirstVideo", LectureVideoMap.get(1).getV_no());
 			rq.setAttribute("RecentVideo", userService.RecentLectureVideo(u_id, l_code)); // 해당 강의 최근 동영상(v_no)
 		}
 		return "user/LectureDetail";
@@ -72,7 +72,7 @@ public class ULectureController {
 
 		} else if (u_id != null && lectureService.RegisterVideo(l_code, u_id) == 1) {
 
-			Videos = lectureService.LectureVideos(l_code);
+			Videos = lectureService.LectureVideos(u_id, l_code);
 			UserAttendanceForm UAForm = new UserAttendanceForm();
 			for (int key : Videos.keySet()) {
 
@@ -87,7 +87,7 @@ public class ULectureController {
 				UAForm.setU_id(u_id);
 				UAForm.setL_code(l_code);
 				userService.LectureVideoAttendance(UAForm);
-				rq.setAttribute("LectureVideos", lectureService.LectureVideos(l_code));
+				rq.setAttribute("LectureVideos", lectureService.LectureVideos(u_id, l_code));
 				rq.setAttribute("Video", Videos.get(order));
 			} catch (Exception e) {
 
@@ -96,7 +96,7 @@ public class ULectureController {
 			return "user/video";
 		} else {
 
-			Videos = lectureService.LectureVideos(l_code);
+			Videos = lectureService.LectureVideos(u_id, l_code);
 			for (int key : Videos.keySet()) {
 
 				if (Videos.get(key).getV_no() == v_no) {
@@ -107,11 +107,11 @@ public class ULectureController {
 			}
 			if (order > 3) {
 
-				return "redirect:/Pay?l_code=" + l_code;
+				return "redirect:/Pay?l_code=" + l_code; //payment컨트롤러에서 유저확인 후 로그인 보낼지 확인
 			} else {
 				try {
 
-					rq.setAttribute("LectureVideos", lectureService.LectureVideos(l_code));
+					rq.setAttribute("LectureVideos", lectureService.LectureVideos(u_id, l_code));
 					rq.setAttribute("Video", Videos.get(order));
 				} catch (Exception e) {
 

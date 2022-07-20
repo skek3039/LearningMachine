@@ -77,7 +77,7 @@ public class ULectureService {
 	public ULectureForm LectureDetail(String u_id, String l_code) {
 
 		ULectureForm LectureForm = lectureDAO.LectureDetail(l_code);
-
+		LectureForm.setL_price(Util.PriceCut(LectureForm.getL_price()));
 		List<URegiForm> regiList = null;
 
 		if (u_id == null) {
@@ -133,16 +133,41 @@ public class ULectureService {
 
 	}
 	
-	public Map<Integer, VideoForm> LectureVideos(String l_code){
+	public Map<Integer, VideoForm> LectureVideos(String u_id, String l_code){
 		
 		List<VideoForm> vList = lectureDAO.LectureVideos(l_code);
+		
+		UserAttendanceForm attnForm = null;
+		
 		Map<Integer, VideoForm> vMap = new HashMap<Integer, VideoForm>();
-		for (int i = 1; i <= vList.size(); i++) {
+	
+		if(u_id == null) {
+			for (int i = 0; i < vList.size(); i++) {
+				
+				vMap.put(i + 1, vList.get(i));
+			}
 			
-			vMap.put(i, vList.get(i - 1));
+			return vMap;
+		}else {
+			
+			for (int i = 0; i < vList.size(); i++) {
+				attnForm = new UserAttendanceForm();
+				
+				attnForm.setU_id(u_id);
+				attnForm.setL_code(l_code);
+				attnForm.setV_no(vList.get(i).getV_no());
+				
+				if(userDAO.CheckAttendance(attnForm) != null) {
+					
+					vList.get(i).setAttendance(Integer.parseInt(userDAO.CheckAttendance(attnForm)));
+				}
+				
+				vMap.put(i + 1, vList.get(i));
+			}
+			
+			return vMap;
 		}
 		
-		return vMap;
 	}
 
 	public String CheckLectureRegister(int v_no) {
