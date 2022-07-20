@@ -155,19 +155,19 @@ $(document).ready(function(){
 function select(category){
 	let c_name = category;
 	let arr = new Array();
+	var html = "";
 	$.ajax({
 		url : "./community",
 		type : "get",
-		dataType : "text",
-		data : {"c_name" : c_name	
-		},
+		dataType : "html",
+		data : {"c_name" : c_name},
 		success : function(data){
 			// $('#tab-1').load(location.href+' #tab-1');
-			$('.tab-1').remove();
+			$('#tab-1').remove();
+			alert("${list}");
 			<c:forEach items="${list}" var="list">
-				arr.push("${list.lqa_no}");
+				arr.push({lqa_no:"${list.lqa_no}",lqa_title:"${list.lqa_title}"});
 			</c:forEach>
-			alert(arr);
 			
 		},
 		error : function(){

@@ -1,10 +1,13 @@
 package com.learning.Common.Contoller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,7 +47,9 @@ public class HomeController {
 	
 
 	@GetMapping(value = "/community")
-	public @ResponseBody ModelAndView community(HttpServletRequest request) {
+	public @ResponseBody ModelAndView community(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		ModelAndView mv = new ModelAndView("community");
 		name ="lecture_qna";
 		int pageNo = 1;
@@ -82,6 +87,10 @@ public class HomeController {
 		List<String> list = communityService.QnAList(map);		
 		
 		System.out.println(list.size());
+		
+		PrintWriter pw = response.getWriter();
+		pw.print(list);
+		
 		List<String> category = adminService.categoryList();
 		mv.addObject("list",list);
 		mv.addObject("category",category);
