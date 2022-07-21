@@ -127,7 +127,7 @@ function linkPage(pageNo){
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
 		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;학생리스트</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px;padding-left: 120px; height: 100%">
+		<div style="padding-top: 10px;padding-left: 120px; height: 995px;">
 	 		 <div class="card shadow mb-4"style=" width: 800px; height: 800px; margin: 0 auto; ">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">

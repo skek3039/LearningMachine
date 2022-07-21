@@ -151,7 +151,7 @@ function search(){
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
 		<div id="pay" style="padding-top: 110px;"> <h1 class="h3 mb-2 text-gray-800">환불내역</h1><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px;padding-left: 120px; height: 100%;  margin: 0 auto; ">
+		<div style="padding-top: 10px;padding-left: 120px; height: 995px;  margin: 0 auto; ">
 		      <!-- DataTable -->
                             <fmt:parseDate value="${list[0].p_date}" var="time1" pattern="yyyy-MM-dd HH:mm:ss.S" />                                                                    
                             <fmt:formatDate value="${time1 }" var="year" pattern="yyyy"/>

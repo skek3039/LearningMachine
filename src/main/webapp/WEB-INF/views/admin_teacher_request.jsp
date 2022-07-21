@@ -104,7 +104,7 @@ function linkPage(pageNo){
 
 
 		<jsp:include page="./header.jsp" />
-		<div style="width: 100%; height: 800px; ">
+		<div style="width: 100%; height: 1175px; ">
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
