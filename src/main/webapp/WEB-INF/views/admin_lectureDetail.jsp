@@ -143,6 +143,12 @@ function CloseModal(lqa_no) {
 	CloseModal.classList.remove("show");
 }
 
+
+function refuse(la_no){
+	let la_reason = $("#la_reason").val();
+	alert(la_reason);
+	location.href = "./admin_lecture_get?check=2&la_reason="+la_reason+"&la_no="+la_no;
+}
 </script>
 
 
@@ -211,9 +217,9 @@ function CloseModal(lqa_no) {
 										<h2 class="card-title">정지사유</h2>
 										<h6>${list[0].t_id } 선생님</h6>
 										<p class="card-text">
-										<textarea name="la_reason" placeholder="승인불가사유를 적어주세요." required="required" style="width: 100%; height: 100px;" ></textarea>
+										<textarea name="la_reason"id="la_reason" placeholder="승인불가사유를 적어주세요." required="required" style="width: 100%; height: 100px;" ></textarea>
 										</p>
-										<button type="button" onclick="location.href='./admin_lecture_get?check=2&la_no=${list[0].la_no}'" class="btn btn-outline-dark">승인거부</button>
+										<button type="button" onclick="refuse('${list[0].la_no}');" class="btn btn-outline-dark">승인거부</button>
 									</div>
 									<div>
 										<div></div>

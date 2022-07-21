@@ -35,7 +35,17 @@
 <link href="./resources/lib/animate/animate.min.css" rel="stylesheet">
 <link href="./resources/lib/owlcarousel/assets/owl.carousel.min.css"
 	rel="stylesheet">
+<!-- JavaScript Libraries -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="./resources/lib/wow/wow.min.js"></script>
+	<script src="./resources/lib/easing/easing.min.js"></script>
+	<script src="./resources/lib/waypoints/waypoints.min.js"></script>
+	<script src="./resources/lib/owlcarousel/owl.carousel.min.js"></script>
 
+	<!-- Template Javascript -->
+	<script src="./resources/js/main.js"></script>
+	<script src="./resources/js/admin_student.js"></script>
 <!-- Customized Bootstrap Stylesheet -->
 <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
 
@@ -85,18 +95,15 @@
 
 <script type="text/javascript">
 function add(){
+	
 	let c_name = $("#c_name").val();
-	if(c_name == ""){
-		alert("1자이상 입력해주세요.");
-	}else{
 		if(confirm("정말 " + c_name + "로 결정하시겠습니까?")){
 			$.ajax({
 				url : "./addCategory",
 				type : "get",
 				dataType : "html",
 				data : {"c_name" : c_name
-						"check" : "1"	
-				},
+						"check" : "1"	},
 				success : function(data){
 					if(data == 0 ){
 						 $('#categoryTable').load(location.href+' #categoryTable');
@@ -107,7 +114,7 @@ function add(){
 					}
 				});
 		}
-	}
+	
 }
 
 </script>
@@ -173,17 +180,7 @@ function add(){
 		</script>
 
 
-	<!-- JavaScript Libraries -->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="./resources/lib/wow/wow.min.js"></script>
-	<script src="./resources/lib/easing/easing.min.js"></script>
-	<script src="./resources/lib/waypoints/waypoints.min.js"></script>
-	<script src="./resources/lib/owlcarousel/owl.carousel.min.js"></script>
-
-	<!-- Template Javascript -->
-	<script src="./resources/js/main.js"></script>
-	<script src="./resources/js/admin_student.js"></script>
+	
 </body>
 
 </html>
