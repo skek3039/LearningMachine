@@ -22,5 +22,11 @@
   		UPDATE notice SET n_view=n_view+1 WHERE n_no=#{n_no}
   	</update>
   	
+  	<insert id="noticeWrite" parameterType="NoticeDTO" useGeneratedKeys="true" keyProperty="n_no">
+	  	INSERT INTO notice (n_title, n_content, u_id) 
+	  	VALUES (#{n_title}, #{n_content}, #{u_id})
+  	</insert>
+  	
+  	
   
   </mapper>
