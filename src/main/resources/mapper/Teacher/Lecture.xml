@@ -56,7 +56,7 @@
 	
 	<select id="t_letureNameSearch" parameterType="String" resultType="LectureDTO">
   		select * 
-  		from lecture 
+  		from lecture_info_view 
   		where l_name LIKE '%' #{l_name } '%'
   	</select>
   	

@@ -112,21 +112,22 @@ function enterkey() {
 		<div style="padding-top: 10px; height: 700px;">
 			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
-						<th>강사 이름</th>
 						<th>강의 이름</th>
 						<th>카테고리</th>
-						<th>커리큘럼</th>
 						<th>날짜</th>
 						<th>강의 가격</th>
 					</tr>
 					
 					<c:forEach items="${list}" var="l">
 					<tr>
-						<td>${l.t_id }</td>
-						<td>${l.l_name }</td>
+						<td>
+							<a href="./lecture_Lookup2?l_code=${l.l_code }">${l.l_name }</a>
+						</td>
 						<td>${l.l_category }</td>
-						<td>${l.l_curriculum }</td>
-						<td>${l.l_date }</td>
+						<td>
+                        <fmt:parseDate value="${l.l_date}" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
+                        <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
+                    	${time }</td>
 						<td><fmt:formatNumber value="${l.l_price }" pattern="#,###"  /></td>
 					</tr>
 					</c:forEach>
