@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="utf-8">
 	<title>러닝머신 :: ${LectureDetail.l_name}</title>
@@ -123,63 +124,63 @@
 
 
 
-	  .background {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background-color: rgba(0, 0, 0, 0.3);
-        z-index: 1000;
+		.background {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100vh;
+			background-color: rgba(0, 0, 0, 0.3);
+			z-index: 1000;
 
-        /* 숨기기 */
-        z-index: -1;
-        opacity: 0;
-      }
+			/* 숨기기 */
+			z-index: -1;
+			opacity: 0;
+		}
 
-      .show {
-        opacity: 1;
-        z-index: 1000;
-        transition: all 0.5s;
-      }
+		.show {
+			opacity: 1;
+			z-index: 1000;
+			transition: all 0.5s;
+		}
 
-      .window {
-        position: relative;
-        width: 100%;
-        height: 100%;
-      }
+		.window {
+			position: relative;
+			width: 100%;
+			height: 100%;
+		}
 
-      .popup {
-		padding: 10px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #ffffff;
-        box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+		.popup {
+			padding: 10px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background-color: #ffffff;
+			box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
 
-        /* 임시 지정 */
-        width: 70%;
-        height: 70%;
+			/* 임시 지정 */
+			width: 70%;
+			height: 70%;
 
-        /* 초기에 약간 아래에 배치 */
-        transform: translate(-50%, -40%);
-		overflow-y: auto;
-      }
+			/* 초기에 약간 아래에 배치 */
+			transform: translate(-50%, -40%);
+			overflow-y: auto;
+		}
 
-      .show .popup {
-        transform: translate(-50%, -50%);
-        transition: all 0.5s;
-      }
+		.show .popup {
+			transform: translate(-50%, -50%);
+			transition: all 0.5s;
+		}
 
-	  #closebtn{
-		position: fixed;
-		top: 0;
-        right: 0;
-		padding: 10px;
-	  }
+		#closebtn {
+			position: fixed;
+			top: 0;
+			right: 0;
+			padding: 10px;
+		}
 	</style>
-	
+
 	<script type="text/javascript">
 		$(document).ready(function () {
 
@@ -194,17 +195,17 @@
 			})
 
 		});
-		function OpenModal(lqa_no){
-				var OpenModal = document.querySelector(".background" + lqa_no);
-				OpenModal.classList.add("show");
+		function OpenModal(lqa_no) {
+			var OpenModal = document.querySelector(".background" + lqa_no);
+			OpenModal.classList.add("show");
 		}
 
 		function CloseModal(lqa_no) {
-				var CloseModal = document.querySelector(".background" + lqa_no);
-				CloseModal.classList.remove("show");
+			var CloseModal = document.querySelector(".background" + lqa_no);
+			CloseModal.classList.remove("show");
 		}
 	</script>
-	</head>
+</head>
 
 <body>
 	<div class="container-xxl bg-white p-0">
@@ -240,8 +241,8 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items = "${LectureVideos}" var = "Map">
-										<c:set var ="key" value="${Map.key}"/>
+									<c:forEach items="${LectureVideos}" var="Map">
+										<c:set var="key" value="${Map.key}" />
 										<tr>
 											<td>[${Map.key}강] ${Map.value.v_videotitle}</td>
 											<td>
@@ -254,7 +255,9 @@
 													</c:otherwise>
 												</c:choose>
 											</td>
-											<td><a class="btn btn-outline-light" style="background-color: rgba(55, 110, 92, 0.781);" href="./LectureVideo?v_no=${Map.value.v_no}">듣기</a></td>
+											<td><a class="btn btn-outline-light"
+													style="background-color: rgba(55, 110, 92, 0.781);"
+													href="./LectureVideo?v_no=${Map.value.v_no}">듣기</a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -274,7 +277,15 @@
 						<span style="width : ${LectureDetail.grade_avg * 20}%;"></span>
 					</span>
 					<p class="mb-4">${LectureDetail.l_info}</p>
-					<div class="row g-3 mb-4">
+					<c:if test="${sessionScope.u_id eq null}">
+						<div>
+							<ul class="tabs">
+								<li class="tab-link current" data-tab="tab-3">강의정보</li>
+								<li class="tab-link" data-tab="tab-4">미리보기</li>
+							</ul>
+						</div>
+					</c:if>
+					<div class="row g-3 mb-4 tab-content current" id="tab-3" style="padding: 5px;">
 						<div class="col-12 d-flex">
 							<div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
 								<i class="fa fa-chart-line text-white"></i>
@@ -296,9 +307,32 @@
 							</div>
 						</div>
 					</div>
+					<div class="row g-3 mb-4 tab-content" id="tab-4" style="padding: 5px;">
+						<table class="table" style="text-align: center;">
+							<thead>
+								<tr>
+									<th style="width: 50%">제목</th>
+									<td></td>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${LectureVideos}" var="Map" begin="0" end="2">
+									<c:set var="key" value="${Map.key}" />
+									<tr>
+										<td>[${Map.key}강] ${Map.value.v_videotitle}</td>
+										<td><a class="btn btn-outline-light"
+												style="background-color: rgba(55, 110, 92, 0.781);"
+												href="./LectureVideo?v_no=${Map.value.v_no}">듣기</a></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
 					<c:choose>
 						<c:when test="${sessionScope.u_id eq null}">
-							결재하기 찜하기(로그인)
+							<a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="./Pay?l_code=${LectureDetail.l_code}"">결제하기</a>
+							<a href=" ./Wish?l_code=${LectureDetail.l_code}" class="btn btn-outline-light rounded-pill border-2 py-3 px-5 animated slideInRight"
+									style="color: gray;">찜하기</a>
 						</c:when>
 						<c:otherwise>
 							<c:choose>
@@ -312,7 +346,9 @@
 									</c:if>
 								</c:when>
 								<c:otherwise>
-									결재하기 찜하기
+									<a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="./Pay?l_code=${LectureDetail.l_code}"">결제하기</a>
+									<a href=" ./Wish?l_code=${LectureDetail.l_code}" class="btn btn-outline-light rounded-pill border-2 py-3 px-5 animated slideInRight"
+										style="color: gray;">찜하기</a>
 								</c:otherwise>
 							</c:choose>
 						</c:otherwise>

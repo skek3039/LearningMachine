@@ -9,6 +9,7 @@ import java.util.*;
 import com.learning.User.DAO.*;
 import com.learning.User.Form.*;
 import com.learning.utill.Util;
+import com.learning.DTO.*;
 
 @Service
 public class UserService {
@@ -19,6 +20,11 @@ public class UserService {
 	@Autowired
 	private ULectureDAO lectureDAO;
 
+	public userDTO UserInfo(String u_id) {
+		
+		return userDAO.UserInfo(u_id);
+	}
+	
 	public List<UserAttendanceForm> RecentVideo(String u_id) throws ParseException {
 
 		List<UserAttendanceForm> list = userDAO.RecentVideo(u_id);

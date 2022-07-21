@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="UserMapper">
 
+	<select id="UserInfo" parameterType="com.learning.DTO.userDTO" resultType="com.learning.DTO.userDTO">
+	
+		SELECT u_name, u_email, u_tel FROM user WHERE u_id = #{u_id}
+		
+	</select>
+	
   	<select id="RecentVideo" parameterType = "String" resultType="com.learning.User.Form.UserAttendanceForm">
   		SELECT * FROM user_lecture_video_attendance_info_view
   		where

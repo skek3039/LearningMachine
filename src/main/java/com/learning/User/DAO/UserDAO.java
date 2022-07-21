@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.learning.DTO.userDTO;
 import com.learning.User.Form.ULectureForm;
 import com.learning.User.Form.URegiForm;
 import com.learning.User.Form.UserAttendanceForm;
@@ -17,6 +18,12 @@ public class UserDAO {
 	
 	@Autowired
 	private SqlSession sqlSession;
+	
+	public userDTO UserInfo(String u_id) {
+	
+		return sqlSession.selectOne(namespace + ".UserInfo", u_id);
+		
+	}
 	
 	public List<UserAttendanceForm> RecentVideo(String u_id) {
 		
