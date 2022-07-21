@@ -75,7 +75,7 @@ public class AdminController {
 			ModelAndView mv = new ModelAndView("admin_lectureDetail");
 			String la_no = request.getParameter("la_no");
 			List<String> list = adminService.admin_lectureRequest(la_no);
-
+			
 			mv.addObject("list", list);
 			return mv;
 		} else {
@@ -117,12 +117,15 @@ public class AdminController {
 				dto.setT_id(request.getParameter("t_id"));
 				dto.setL_info(request.getParameter("l_info"));
 				dto.setL_code(UUID.randomUUID().toString().replace("-", ""));
-				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("dto", dto);
-				map.put("l_category", (String)request.getParameter("l_category"));
 				
+				Map<String, Object> map = new HashMap<String, Object>();
+				
+				map.put("dto", dto);
+				map.put("c_name", (String)request.getParameter("c_name"));
+				map.put("c_code", (String)request.getParameter("c_code"));
 				result = adminService.admin_lectureGet(map);
-				adminService.admin_lectureGet1(request.getParameter("la_no"),c1);
+				map.put("la_no", request.getParameter("la_no"));
+				adminService.admin_lectureGet1(map);
 				if (result == 1) {
 					check = "redirect:/admin_lecture_request";
 				} else {
@@ -130,8 +133,12 @@ public class AdminController {
 				}
 			}
 		}else if (c1.equals("2")) {// 승인거부 했을때.
+				Map<String, Object> map = new HashMap<String, Object>();
 				if ((int) session.getAttribute("u_authority") == 7) {
-					adminService.admin_lectureGet1(request.getParameter("la_no"),c1);
+					map.put("la_no", request.getParameter("la_no"));
+					map.put("c1", c1);
+					map.put("la_reason", request.getParameter("la_reason"));
+					adminService.admin_lectureGet1(map);
 					check = "redirect:/admin_lecture_request";
 				} else {
 					check = "redirect:/404";

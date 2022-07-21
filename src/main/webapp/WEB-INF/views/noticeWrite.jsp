@@ -8,7 +8,7 @@
 
 <head>
 <meta charset="utf-8">
-<title>Learning Machine</title>
+<title>글쓰기</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
@@ -75,6 +75,24 @@
     
 </style>
 
+<script type="text/javascript">
+function check(){
+	var title1 = $('input[name=title]').val();
+	if (title1.length < 1 ) {
+		alert("제목은 5자 이상이어야 합니다.");
+		$('input[name=title]').focus();
+		return false;
+	}
+	
+	var content = $('textarea[name=content]').val();
+	if (content.length < 1 ) {
+		alert("내용은 20자 이상 이어야 합니다.");
+		$('textarea[name=content]').focus();
+		return false;
+	} 
+}
+</script>
+
 </head>
 
 <body>
@@ -95,29 +113,18 @@
 		<div style="position: relative;">
 		<jsp:include page="./notice_nav.jsp"/>
 		 </div>
-		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;공지사항</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;글쓰기</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px;padding-left: 120px; height: 750px;">
-				 <table class="table table-bordered table-sm" style=" width: 800px; margin: 0 auto;"> 
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>조회수</th>
-						<th>날짜</th>
-					</tr>
-					<c:forEach items="${noticeList}" var="n">
-					<tr onclick="location.href='noticedetail?n_no=${n.n_no}'"style="cursor: pointer;">
-						<th>${n.n_no }</th>
-						<th>${n.n_title }</th>
-						<th>${n.n_view}</th>
-						<th>${n.n_date }</th>
-					</tr>
-					</c:forEach>
-			</table>
-			<c:if test="${sessionScope.u_authority == 7 }">
-			<a href="./noticeWrite" ><button>글쓰기</button></a>
-			</c:if>
+				 <table class="table table-bordered table-sm" style=" width: 800px; margin: 0 auto;">
+				 	 <form action="./noticeWrite" method="post"  onsubmit="return check();">
+				<input type="text" name="n_title" ><br>
+				<textarea name="n_content" id="summernote"  ></textarea><br>
+				<c:if test="${sessionScope.u_authority == 7 }">
+				<button type="submit" style="margin-left: 92%;">글쓰기</button>
+				</c:if>
+					</form>
+				</table>
 		<br>
-<div id="pagination" style="border-top: 1px solid black; text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
 		</div>
 		<jsp:include page="./footer.jsp" />
 
@@ -139,7 +146,6 @@
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
 
-	<script type="text/javascript">function linkPage(pageNo){location.href = "./notice?n_cate${n_cate}&pageNo=" + pageNo;}</script>		
 	
 </body>
 
