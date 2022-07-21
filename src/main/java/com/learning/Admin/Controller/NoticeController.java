@@ -2,6 +2,7 @@ package com.learning.Admin.Controller;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,6 +30,9 @@ public class NoticeController {
 	@Autowired
 	private Util util;
 	
+	@Autowired
+	private ServletContext servletContext;
+	
 	@GetMapping(value = "/faq")
 	public String faq() {
 		return "faq";
@@ -37,6 +42,38 @@ public class NoticeController {
 	public String LM() {
 		return "LM";
 	}
+	
+	@GetMapping(value = "/noticeWrite")
+	public String noticeWrite(HttpSession session) {
+		if (session.getAttribute("u_id") != null) {
+			return "noticeWrite";
+		} else {
+			return "redirect:/login";
+		}
+	}
+	
+	@PostMapping(value = "/noticeWrite")
+	public String noticeWrite(HttpServletRequest request )  {
+		HttpSession session = request.getSession();
+		
+		NoticeDTO noticeWrite = new NoticeDTO();
+		noticeWrite.setU_id((String) session.getAttribute("u_id"));
+		noticeWrite.setN_title(request.getParameter("n_title"));
+		noticeWrite.setN_content(request.getParameter("n_content"));
+		
+		if (session.getAttribute("u_id") != null && request.getParameter("n_title").equals("") && request.getParameter("n_content") != null) {
+			
+		}
+		int result = noticeService.noticeWrite(noticeWrite);
+		
+			if (result == 1) {
+				return "redirect:/notice"; // 글쓰기 성공
+			} else {
+				return "redirect:/failure"; // 실패했습니다. 다시 시도하세요.
+			}
+		}
+	
+	
 	//공지사항 상세보기페이지구현
 	@GetMapping(value = "/noticedetail")
 	public ModelAndView noticedetail(HttpServletRequest request,HttpServletResponse response, HttpSession session) {

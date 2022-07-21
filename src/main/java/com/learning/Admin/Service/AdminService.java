@@ -86,8 +86,8 @@ public class AdminService {
 		return adminDAO.lectureGet(map);
 	}
 
-	public void admin_lectureGet1(String la_no, String c1) {
-		adminDAO.lectureGet1(la_no,c1);
+	public void admin_lectureGet1(Map<String, Object> map) {
+		adminDAO.lectureGet1(map);
 	}
 
 	public List<String> teacherDetail(String u_id) {
@@ -106,8 +106,8 @@ public class AdminService {
 		return adminDAO.teacherAccept(map);
 	}
 
-	public int addCategory(String c_name) {
-		return adminDAO.addCategory(c_name);
+	public int addCategory(Map<String, Object> map) {
+		return adminDAO.addCategory(map);
 	}
 
 	public List<String> categoryList() {

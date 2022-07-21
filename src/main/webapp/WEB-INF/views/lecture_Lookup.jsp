@@ -157,7 +157,7 @@
 							</tr>
 							<tr>
 								<td class="tg-llyw">카테고리</td>
-								<td class="tg-0pky">${dto.l_category }</td>
+								<td class="tg-0pky">${dto.c_name }</td>
 							</tr>
 							<tr>
 								<td class="tg-llyw">커리큘럼</td>

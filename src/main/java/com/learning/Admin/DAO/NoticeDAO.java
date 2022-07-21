@@ -31,5 +31,9 @@ public class NoticeDAO {
 		return sqlSession.update("notice.noticecountUp",n_no);
 	}
 
+	public int noticeWrite(NoticeDTO noticeWrite) {
+		return sqlSession.insert("notice.noticeWrite", noticeWrite);
+	}
+
 
 }

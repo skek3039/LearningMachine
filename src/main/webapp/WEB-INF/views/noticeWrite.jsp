@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 <meta charset="utf-8">
-<title>Learning Machine</title>
+<title>글쓰기</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
@@ -73,20 +72,26 @@
         font-size: 17px;
         padding: 15px 0;
     }
-      
+    
 </style>
 
 <script type="text/javascript">
-function search(){
-	var u_name= document.getElementById("u_name").value;
-	location.href = "./admin_studentSearch?u_name="+u_name;
-}
-
-function linkPage(pageNo){
-	location.href = "./admin_teacher_request?pageNo=" + pageNo;
+function check(){
+	var title1 = $('input[name=title]').val();
+	if (title1.length < 1 ) {
+		alert("제목은 5자 이상이어야 합니다.");
+		$('input[name=title]').focus();
+		return false;
+	}
+	
+	var content = $('textarea[name=content]').val();
+	if (content.length < 1 ) {
+		alert("내용은 20자 이상 이어야 합니다.");
+		$('textarea[name=content]').focus();
+		return false;
+	} 
 }
 </script>
-
 
 </head>
 
@@ -104,74 +109,32 @@ function linkPage(pageNo){
 
 
 		<jsp:include page="./header.jsp" />
-		<div style="width: 100%; height: 1175px; ">
+		<div style=" width: 100%;">
 		<div style="position: relative;">
-		<jsp:include page="./admin_nav.jsp"/>
+		<jsp:include page="./notice_nav.jsp"/>
 		 </div>
-		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;강사신청내역</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px; margin-left: 310px;">
-				<div style="padding-top: 10px;">
-					 <input type="search" id="u_name" name="u_name" class="form-control" required="required" placeholder="강사이름을 입력해주세요." style="width: 250px; float: left;"> &nbsp; 
-					 <button class="btn btn-danger" id="search" style="width: 100px" onclick="search()">search</button>
-				</div><br>
-			<div  id="teacher">
-				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
-					<tr>
-						<th>강사이름</th>
-						<th>강사ID</th>
-						<th>강사이력</th>											
-						<th>강사소개</th>											
-						<th>신청일자</th>	
-						<th>승인여부</th>										
-					</tr>
-					<c:forEach items="${list }" var="list">
-					<tr>
-						<td>${list.u_name}</td>
-						<td><a href="./admin_teacher_re?u_id=${list.u_id }"> ${list.u_id }</a></td>
-						<td>${list.t_spec }</td>
-						<td><c:choose>
-							<c:when test="${fn:length(list.t_introduce) > 10 }">
-							<c:out value="${fn:substring(list.t_introduce , 0, 9)}"><img alt="" src="./resources/img/more.png">
-							</c:out></c:when>
-							<c:otherwise>
-							<c:out value="${list.t_introduce  }">
-							</c:out></c:otherwise>
-							</c:choose>
-						</td>	
-						<td>${list.u_date }</td>						
-						<td><button class="btn btn-dark" > <span>${list.t_recognize }</span> </button></td>					
-						
-					</tr>
-					</c:forEach>
+		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;글쓰기</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 10px;padding-left: 120px; height: 750px;">
+				 <table class="table table-bordered table-sm" style=" width: 800px; margin: 0 auto;">
+				 	 <form action="./noticeWrite" method="post"  onsubmit="return check();">
+				<input type="text" name="n_title" ><br>
+				<textarea name="n_content" id="summernote"  ></textarea><br>
+				<c:if test="${sessionScope.u_authority == 7 }">
+				<button type="submit" style="margin-left: 92%;">글쓰기</button>
+				</c:if>
+					</form>
 				</table>
-			</div>
-			<br>
-				<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
+		<br>
 		</div>
-
-</div>
-
-
-		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
 
+</div>
 
 		<!-- Back to Top -->
 		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
 			class="bi bi-arrow-up"></i></a>
-		<script type="text/javascript">
-			$('body > ul > li').click(function() {
-				if ($(this).hasClass('active')) {
-					$(this).find(' > ul').stop().slideUp(300);
-					$(this).removeClass('active');
-				} else {
-					$(this).find(' > ul').stop().slideDown(300);
-					$(this).addClass('active');
-				}
-			});
-		</script>
 	</div>
-
+	
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -182,7 +145,8 @@ function linkPage(pageNo){
 
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
-	<script src="./resources/js/admin_student.js"></script>
+
+	
 </body>
 
 </html>

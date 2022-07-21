@@ -76,9 +76,12 @@
  	
 
  	<select id="lectureRequest" parameterType="String" resultType="hashmap">
- 		select * from lecture_apply where l_recognize = 0
+ 		SELECT * ,
+		if(l_recognize = 0 ,"승인대기","승인거부") AS request,
+		(SELECT c_name FROM category WHERE category.c_code = lecture_apply.c_code) AS c_name
+		FROM lecture_apply
  		<if test = "la_no != null">
-  			and la_no = #{la_no}
+  		where la_no = ${la_no}
   		</if>
   	</select>
 
@@ -96,7 +99,7 @@
  	</update>
  	
  	<insert id="lectureCate" parameterType="map">
- 		insert into lecture_category values(#{dto.l_code},#{l_category})
+ 		insert into lecture_category values (#{dto.l_code},#{c_code})
  	</insert>
  	
  	<insert id="lectureGet" parameterType="map">
@@ -106,12 +109,12 @@
     
     <update id = "lectureGet2" parameterType="string">
     	update lecture_apply set l_recognize = 1 
-    	where la_no = #{la_no} 
+    	where la_no = ${la_no} 
     </update>
     
     <update id = "lectureGet3" parameterType="string">
-    	update lecture_apply set l_recognize = 2 
-    	where la_no = #{la_no} 
+    	update lecture_apply set l_recognize = 2 , la_reason = #{la_reason}
+    	where la_no = ${la_no} 
     </update>
     
  	<select id="teacherDetail" parameterType="String" resultType="Hashmap">
@@ -146,8 +149,12 @@
   		select * from category
   	</select>
   	
-  	<insert id="addCategory" parameterType="String">
+  	<insert id="addCategory" parameterType="map">
   		insert into category (c_name) values(#{c_name})
+  	</insert>
+  	
+  	<insert id="deleteCategory" parameterType="map">
+  		delete from category where c_name = #{c_name};
   	</insert>
  	
   </mapper>

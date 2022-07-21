@@ -100,7 +100,7 @@ function search(){
 
 
 		<jsp:include page="./header.jsp" />
-		<div style="width: 100%; height: 800px; ">
+		<div style="width: 100%; height: 1175px; ">
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
@@ -118,12 +118,13 @@ function search(){
 						<th>카테고리</th>											
 						<th>커리큘럼</th>											
 						<th>신청일자</th>											
+						<th>승인여부</th>											
 					</tr>
 					<c:forEach items="${list }" var="list">
 					<tr>
 						<td>${list.t_id}</td>
 						<td><a href="./admin_lectureDetail?la_no=${list.la_no }"> ${list.l_name }</a></td>
-						<td>${list.l_category}</td>
+						<td>${list.c_name}</td>
 						<td><c:choose>
 							<c:when test="${fn:length(list.l_curriculum ) > 10 }">
 							<c:out value="${fn:substring(list.l_curriculum , 0, 9)} ...">
@@ -132,9 +133,9 @@ function search(){
 							<c:out value="${list.l_curriculum  }">
 							</c:out></c:otherwise>
 							</c:choose>
-						</td>						
-						
+						</td>
 						<td>${list.l_date }</td>						
+						<td>${list.request }</td>						
 					</tr>
 					</c:forEach>
 				</table>

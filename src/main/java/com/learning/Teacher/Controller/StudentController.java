@@ -149,14 +149,14 @@ public class StudentController {
 	public ModelAndView student_ban(HttpServletRequest request, HttpSession session) {
 		if((int)session.getAttribute("u_authority") > 3) {
 			
-			ModelAndView mv = new ModelAndView("stdent_ban");
+			ModelAndView mv = new ModelAndView("student_ban");
 			String u_id = (String)session.getAttribute("u_id");
+			String name = "user_banned";
 			
 			int pageNo = 1;
 			if (request.getParameter("pageNo")!=null) {
 				pageNo = Integer.parseInt(request.getParameter("pageNo"));
 			}
-		String name="";
 		// recordCountPageNo 한 페이지당 게시되는 게시물 수 yes
 		int listScale = 10;
 		// pageSize = 페이지 리스트에 게시되는 페이지 수 yes
@@ -184,7 +184,6 @@ public class StudentController {
 		map.put("u_id", u_id);
 		map.put("page", page);
 		List<String> banList = studentService.banList(map);
-		
 		System.out.println(banList);
 		mv.addObject("banList", banList);
 		mv.addObject("paginationInfo", paginationInfo);

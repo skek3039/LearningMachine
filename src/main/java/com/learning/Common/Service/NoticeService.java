@@ -25,5 +25,8 @@ public class NoticeService {
 	public int noticecountUp(int n_no) {
 		return noticeDAO.noticecountUp(n_no);
 	}
+	public int noticeWrite(NoticeDTO noticeWrite) {
+		return noticeDAO.noticeWrite(noticeWrite);
+	}
 	
 }

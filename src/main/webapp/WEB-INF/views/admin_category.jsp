@@ -35,7 +35,17 @@
 <link href="./resources/lib/animate/animate.min.css" rel="stylesheet">
 <link href="./resources/lib/owlcarousel/assets/owl.carousel.min.css"
 	rel="stylesheet">
+<!-- JavaScript Libraries -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="./resources/lib/wow/wow.min.js"></script>
+	<script src="./resources/lib/easing/easing.min.js"></script>
+	<script src="./resources/lib/waypoints/waypoints.min.js"></script>
+	<script src="./resources/lib/owlcarousel/owl.carousel.min.js"></script>
 
+	<!-- Template Javascript -->
+	<script src="./resources/js/main.js"></script>
+	<script src="./resources/js/admin_student.js"></script>
 <!-- Customized Bootstrap Stylesheet -->
 <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
 
@@ -80,35 +90,50 @@
 	
 	background-color: rgb(201, 236, 219);
 	text-align: center;
-}
+	}
 </style>
 
+
 <script type="text/javascript">
+
+function deletecate(c_name){
+	if(confirm("정말 " + c_name + "으로 카테고리 삭제하시겠습니까?")){
+		$.ajax({
+			url: "./addCategory?check=2",
+			type: "get",
+			dataType: "html",
+			data:{"c_name" : c_name,
+			},
+			success : function(data){
+				 $('#categoryTable').load(location.href+' #categoryTable');
+			}
+		});
+	}
+	
+} 
+
+
 function add(){
 	let c_name = $("#c_name").val();
 	if(c_name == ""){
 		alert("1자이상 입력해주세요.");
-	}else{
-		if(confirm("정말 " + c_name + "로 결정하시겠습니까?")){
+	}else{ 
+		if(confirm("정말 " + c_name + "으로 카테고리 추가하시겠습니까?")){
 			$.ajax({
-				url : "./addCategory",
-				type : "get",
-				dataType : "html",
-				data : {"c_name" : c_name
-						"check" : "1"	
+				url: "./addCategory?check=1",
+				type: "get",
+				dataType: "html",
+				data:{"c_name" : c_name,
 				},
 				success : function(data){
-					if(data == 0 ){
-						 $('#categoryTable').load(location.href+' #categoryTable');
-					}
-				},
-				error : function(){
-					alert("실패 ㅠ");
-					}
-				});
+					 $('#categoryTable').load(location.href+' #categoryTable');
+				}
+			});
 		}
 	}
+	
 }
+
 
 </script>
 
@@ -129,7 +154,7 @@ function add(){
 
 
 		<jsp:include page="./header.jsp" />
-		<div style="width: 100%; height: 800px; ">
+		<div style="width: 100%; height: 1175px; ">
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
@@ -144,7 +169,9 @@ function add(){
 					<div id = "title" style="text-align: center"><strong>카테고리</strong> </div>
 					<br>
 					<c:forEach items="${cate }" var = "cate">
-					<div style="width: 150px;  border-radius: 10px; background-color:#F0F8FF ;margin-left:10px;text-align:center; margin-top:10px; display: inline-block;"><p id="category" style="text-align: center">${cate.c_name }</p></div>
+					<div style="width: 150px;  border-radius: 10px; background-color:#F0F8FF ;margin-left:10px;text-align:center; margin-top:10px; display: inline-block;">
+					<p id="category" style="text-align: center; margin-top: 15px;">
+					<a href="#" onclick="deletecate('${cate.c_name}');" > ${cate.c_name }</a></p></div>
 					</c:forEach>				
 				</div>
 			</div>
@@ -173,17 +200,7 @@ function add(){
 		</script>
 
 
-	<!-- JavaScript Libraries -->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="./resources/lib/wow/wow.min.js"></script>
-	<script src="./resources/lib/easing/easing.min.js"></script>
-	<script src="./resources/lib/waypoints/waypoints.min.js"></script>
-	<script src="./resources/lib/owlcarousel/owl.carousel.min.js"></script>
-
-	<!-- Template Javascript -->
-	<script src="./resources/js/main.js"></script>
-	<script src="./resources/js/admin_student.js"></script>
+	
 </body>
 
 </html>
