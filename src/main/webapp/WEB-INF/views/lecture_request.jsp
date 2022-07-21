@@ -234,10 +234,10 @@
 							<tr>
 								<td class="tg-llyw">카테고리</td>
 								<td class="tg-0pky">
-								<select name="l_category" style="width: 790px;">
+								<select name="c_code" style="width: 790px;">
 											<option value="">카테고리 선택</option>
 											<c:forEach items="${cate }" var="cate">											
-											<option value="${cate.c_name }">${cate.c_name }</option>
+											<option value="${cate.c_code }">${cate.c_name }</option>
 											</c:forEach>
 									</select>
 									</td>

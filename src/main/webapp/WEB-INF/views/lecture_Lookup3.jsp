@@ -161,11 +161,15 @@
 							</tr>
 							<tr>
 								<td class="tg-llyw">카테고리</td>
-								<td class="tg-0pky">${dto.l_category }</td>
+								<td class="tg-0pky">${dto.c_name  }</td>
 							</tr>
 							<tr>
 								<td class="tg-llyw">커리큘럼</td>
 								<td class="tg-0pky">${dto.l_curriculum }</td>
+							</tr>
+							<tr>
+								<td class="tg-llyw">승인거부 이유</td>
+								<td class="tg-0pky">${dto.la_reason}</td>
 							</tr>
 						</tbody>
 					</table>
