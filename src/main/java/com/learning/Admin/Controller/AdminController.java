@@ -2,6 +2,7 @@ package com.learning.Admin.Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
@@ -16,12 +17,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.learning.Admin.Service.AdminService;
 import com.learning.Admin.Service.PaymentService;
 import com.learning.DTO.BannedDTO;
+import com.learning.DTO.LectureDTO;
+import com.learning.DTO.NoticeDTO;
 import com.learning.DTO.PageDTO;
 import com.learning.DTO.userDTO;
 import com.learning.User.DTO.ULectureDTO;
@@ -459,13 +463,86 @@ public class AdminController {
 	@GetMapping(value = "/addCategory")
 	public @ResponseBody void addCategory(HttpServletRequest request) {
 		String c_name = request.getParameter("c_name");
-		String check = request.getParameter("check");
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("c_name",c_name);
-		map.put("check", check);
-		
-		int result = adminService.addCategory(map);			
-		
+		int result = adminService.addCategory(c_name);
 	}
 
+	// 공지사항 페이지
+	@RequestMapping(value = "/admin_notice")
+	public ModelAndView admin_notice(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
+		if ((int) session.getAttribute("u_authority") > 6) {
+			ModelAndView mv = new ModelAndView("admin_notice");
+			String u_id = (String) session.getAttribute("u_id");
+			int pageNo = 1;
+			if (request.getParameter("pageNo")!=null) {
+				pageNo = Integer.parseInt(request.getParameter("pageNo"));
+			}
+			// recordCountPageNo 한 페이지당 게시되는 게시물 수 yes
+			int listScale = 10;
+			// pageSize = 페이지 리스트에 게시되는 페이지 수 yes
+			int pageScale = 10;			
+			// totalRecordCount 전체 게시물 건수				
+			int totalCount = adminService.notice_totalCount();
+			
+			// 전자정부페이징 호출
+			PaginationInfo paginationInfo = new PaginationInfo();
+			// 값 대입
+			paginationInfo.setCurrentPageNo(pageNo);
+			paginationInfo.setRecordCountPerPage(listScale);
+			paginationInfo.setPageSize(pageScale);
+			paginationInfo.setTotalRecordCount(totalCount);
+			// 전자정부 계산하기
+			int startPage = paginationInfo.getFirstRecordIndex();
+			int lastpage = paginationInfo.getRecordCountPerPage();
+
+			// 서버로 보내기
+			PageDTO page = new PageDTO();
+			page.setStartPage(startPage);
+			page.setLastPage(lastpage);
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("u_id", u_id);
+			map.put("page", page);
+
+			List<NoticeDTO> noticeList = adminService.noticeList(map);
+			mv.addObject("noticeList", noticeList);
+			mv.addObject("paginationInfo", paginationInfo);
+			return mv;
+		} else {
+			ModelAndView mv = new ModelAndView("404");
+			return mv;
+		}
+	}
+	
+	//글 수정
+	@RequestMapping(value = "/notice_request")
+	public ModelAndView notice_request(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
+		if ((int) session.getAttribute("u_authority") > 6) {
+			ModelAndView mv = new ModelAndView("notice_request");
+			return mv;
+		} else {
+			ModelAndView mv = new ModelAndView("404");
+			return mv;
+		}
+	}
+	//수정 글 쓰기
+	@RequestMapping(value = "/notice_request.do")
+	public String update(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
+		if ((int) session.getAttribute("u_authority") > 6) {
+			String u_id = (String) session.getAttribute("u_id");
+
+			NoticeDTO notice_request = new NoticeDTO();
+			notice_request.setU_id(u_id);
+			notice_request.setN_title(request.getParameter("title"));
+			notice_request.setN_content(request.getParameter("content"));
+			adminService.notice_request(notice_request);
+				return "redirect:/admin_notice";
+			}else {
+				return "redirect:/404";
+				
+
+		}
+	}	
 }

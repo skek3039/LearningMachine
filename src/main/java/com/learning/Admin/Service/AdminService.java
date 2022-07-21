@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.learning.Admin.DAO.AdminDAO;
 import com.learning.Admin.DAO.PaymentDAO;
 import com.learning.DTO.BannedDTO;
+import com.learning.DTO.LectureDTO;
+import com.learning.DTO.NoticeDTO;
 import com.learning.DTO.PageDTO;
 import com.learning.DTO.userDTO;
 
@@ -106,11 +108,24 @@ public class AdminService {
 		return adminDAO.teacherAccept(map);
 	}
 
-	public int addCategory(Map<String, Object> map) {
-		return adminDAO.addCategory(map);
+	public int addCategory(String c_name) {
+		return adminDAO.addCategory(c_name);
 	}
 
 	public List<String> categoryList() {
 		return adminDAO.categorylist();
 	}
+
+	public List<NoticeDTO> noticeList(Map<String, Object> map) {
+		return adminDAO.admin_notice(map);
+	}
+
+	public int notice_totalCount() {
+		return adminDAO.notice_totalCount();
+	}
+
+	public int notice_request(NoticeDTO notice_request) {
+		return adminDAO.notice_request(notice_request);
+	}
+
 }

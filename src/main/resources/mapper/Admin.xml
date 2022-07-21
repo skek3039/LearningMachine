@@ -149,12 +149,24 @@
   		select * from category
   	</select>
   	
-  	<insert id="addCategory" parameterType="map">
+  	<insert id="addCategory" parameterType="String">
   		insert into category (c_name) values(#{c_name})
   	</insert>
-  	
-  	<insert id="deleteCategory" parameterType="map">
-  		delete from category where c_name = #{c_name};
-  	</insert>
  	
+ 	<select id="admin_notice" parameterType="map" resultType="NoticeDTO">
+ 		SELECT *
+ 		FROM notice
+ 		ORDER BY n_no DESC
+		limit #{page.startPage} , #{page.lastPage} 
+ 	</select>
+ 	
+ 	<select id="notice_totalCount" resultType="integer">
+ 		select COUNT(*) AS count
+  		from notice
+ 	</select>
+ 	
+ 	<insert id="notice_request">
+ 		INSERT INTO notice (u_id, n_title, n_content)
+ 		VALUES (#{u_id}, #{n_title}, #{n_content})
+ 	</insert>
   </mapper>
