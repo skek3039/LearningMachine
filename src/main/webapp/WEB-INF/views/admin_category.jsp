@@ -90,32 +90,50 @@
 	
 	background-color: rgb(201, 236, 219);
 	text-align: center;
-}
+	}
 </style>
 
+
 <script type="text/javascript">
-function add(){
+
+function deletecate(c_name){
+	if(confirm("정말 " + c_name + "으로 카테고리 삭제하시겠습니까?")){
+		$.ajax({
+			url: "./addCategory?check=2",
+			type: "get",
+			dataType: "html",
+			data:{"c_name" : c_name,
+			},
+			success : function(data){
+				 $('#categoryTable').load(location.href+' #categoryTable');
+			}
+		});
+	}
 	
+} 
+
+
+function add(){
 	let c_name = $("#c_name").val();
-		if(confirm("정말 " + c_name + "로 결정하시겠습니까?")){
+	if(c_name == ""){
+		alert("1자이상 입력해주세요.");
+	}else{ 
+		if(confirm("정말 " + c_name + "으로 카테고리 추가하시겠습니까?")){
 			$.ajax({
-				url : "./addCategory",
-				type : "get",
-				dataType : "html",
-				data : {"c_name" : c_name
-						"check" : "1"	},
-				success : function(data){
-					if(data == 0 ){
-						 $('#categoryTable').load(location.href+' #categoryTable');
-					}
+				url: "./addCategory?check=1",
+				type: "get",
+				dataType: "html",
+				data:{"c_name" : c_name,
 				},
-				error : function(){
-					alert("실패 ㅠ");
-					}
-				});
+				success : function(data){
+					 $('#categoryTable').load(location.href+' #categoryTable');
+				}
+			});
 		}
+	}
 	
 }
+
 
 </script>
 
@@ -136,7 +154,7 @@ function add(){
 
 
 		<jsp:include page="./header.jsp" />
-		<div style="width: 100%; height: 800px; ">
+		<div style="width: 100%; height: 1175px; ">
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
@@ -151,7 +169,9 @@ function add(){
 					<div id = "title" style="text-align: center"><strong>카테고리</strong> </div>
 					<br>
 					<c:forEach items="${cate }" var = "cate">
-					<div style="width: 150px;  border-radius: 10px; background-color:#F0F8FF ;margin-left:10px;text-align:center; margin-top:10px; display: inline-block;"><p id="category" style="text-align: center">${cate.c_name }</p></div>
+					<div style="width: 150px;  border-radius: 10px; background-color:#F0F8FF ;margin-left:10px;text-align:center; margin-top:10px; display: inline-block;">
+					<p id="category" style="text-align: center; margin-top: 15px;">
+					<a href="#" onclick="deletecate('${cate.c_name}');" > ${cate.c_name }</a></p></div>
 					</c:forEach>				
 				</div>
 			</div>

@@ -106,8 +106,8 @@ public class AdminService {
 		return adminDAO.teacherAccept(map);
 	}
 
-	public int addCategory(String c_name) {
-		return adminDAO.addCategory(c_name);
+	public int addCategory(Map<String, Object> map) {
+		return adminDAO.addCategory(map);
 	}
 
 	public List<String> categoryList() {

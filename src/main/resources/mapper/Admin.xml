@@ -149,8 +149,12 @@
   		select * from category
   	</select>
   	
-  	<insert id="addCategory" parameterType="String">
+  	<insert id="addCategory" parameterType="map">
   		insert into category (c_name) values(#{c_name})
+  	</insert>
+  	
+  	<insert id="deleteCategory" parameterType="map">
+  		delete from category where c_name = #{c_name};
   	</insert>
  	
   </mapper>

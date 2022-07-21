@@ -459,8 +459,13 @@ public class AdminController {
 	@GetMapping(value = "/addCategory")
 	public @ResponseBody void addCategory(HttpServletRequest request) {
 		String c_name = request.getParameter("c_name");
-		int result = adminService.addCategory(c_name);
+		String check = request.getParameter("check");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("c_name",c_name);
+		map.put("check", check);
+		
+		int result = adminService.addCategory(map);			
+		
 	}
-
 
 }

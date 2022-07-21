@@ -148,8 +148,12 @@ public class AdminDAO {
 		return sqlSession.selectList("Admin.categoryList");
 	}
 
-	public int addCategory(String c_name) {
-		return sqlSession.insert("Admin.addCategory",c_name);
+	public int addCategory(Map<String, Object> map) {
+		if(map.get("check").equals("1")) {
+			return sqlSession.insert("Admin.addCategory",map);			
+		}else {
+			return sqlSession.delete("Admin.deleteCategory",map);
+		}
 	}
 
 }
