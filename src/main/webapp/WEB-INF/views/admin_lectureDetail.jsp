@@ -68,6 +68,62 @@
         font-size: 17px;
         padding: 15px 0;
     }
+    
+    	  .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+
+        /* 숨기기 */
+        z-index: -1;
+        opacity: 0;
+      }
+
+      .show {
+        opacity: 1;
+        z-index: 1000;
+        transition: all 0.5s;
+      }
+
+      .window {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      .popup {
+		padding: 10px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #ffffff;
+        box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+
+        /* 임시 지정 */
+        width: 70%;
+        height: 70%;
+
+        /* 초기에 약간 아래에 배치 */
+        transform: translate(-50%, -40%);
+		overflow-y: auto;
+      }
+
+      .show .popup {
+        transform: translate(-50%, -50%);
+        transition: all 0.5s;
+      }
+
+	  #closebtn{
+		position: fixed;
+		top: 0;
+        right: 0;
+		padding: 10px;
+	  }
 </style>
 
 <script type="text/javascript">
@@ -75,6 +131,16 @@ function search(){
 	var u_name= document.getElementById("u_name").value;
 	location.href = "./admin_studentSearch?u_name="+u_name;
 	
+}
+
+function OpenModal(la_no){
+	var OpenModal = document.querySelector(".background" + la_no);
+	OpenModal.classList.add("show");
+}
+
+function CloseModal(lqa_no) {
+	var CloseModal = document.querySelector(".background" + lqa_no);
+	CloseModal.classList.remove("show");
 }
 
 </script>
@@ -104,42 +170,59 @@ function search(){
 		<div style="padding-top: 10px; margin-left: 310px;">
 			<div  id="student" >
 				<small>신중하게 승인처리해주세요. </small>
-				
-				<form action="./admin_lecture_get" method="get">
-					<input type="hidden" name="t_id" value="${list[0].t_id}">
-					<input type="hidden" name="la_no" value="${list[0].la_no}">
-					<input type="hidden" name="check" value="1">
-					<input type="hidden" name="l_category" value="${list[0].l_category }"> 
-					<input type="hidden" name="l_name" value="${list[0].l_name }">
-					<input type="hidden" name="l_curriculum" value="${list[0].l_curriculum }">
-					<input type="hidden" name="l_info" value="${list[0].l_info }">
-					<table class="table table-bordered table-sm" style="width: 900px;">
-					<tr>
-						<th>강사아이디 | ${list[0].t_id}</th>																
-						<th>강의이름 | ${list[0].l_name }</th>								
-						<th>카테고리 | ${list[0].l_category }</th>								
-					</tr>	
-					<tr>
-						<td colspan="3">
-							<label style="height: 150px;">${list[0].l_curriculum }</label>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3">
-							<label style="height: 150px;">${list[0].l_info }</label>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3">
-							<label>강의가격</label>
-							<input type="text" id= "l_price" name="l_price" placeholder="강의가격을 입력해주세요." required="required">	 
-						</td>
-					</tr>
-				</table>
-					<button type="submit" style="float: left; margin-right : 10px;" class="btn btn-outline-dark">승인</button>
-				</form>
-					<button type="submit" onclick="location.href='./admin_lecture_get?check=2&la_no=${list[0].la_no}'" class="btn btn-outline-dark">승인거부</button>
-			</div>
+
+					<form action="./admin_lecture_get" method="get">
+						<input type="hidden" name="t_id" value="${list[0].t_id}">
+						<input type="hidden" name="la_no" value="${list[0].la_no}">
+						<input type="hidden" name="check" value="1"> <input
+							type="hidden" name="c_code" value="${list[0].c_code }"> <input
+							type="hidden" name="c_name" value="${list[0].c_name }"> <input
+							type="hidden" name="l_name" value="${list[0].l_name }"> <input
+							type="hidden" name="l_curriculum"
+							value="${list[0].l_curriculum }"> <input type="hidden"
+							name="l_info" value="${list[0].l_info }">
+						<table class="table table-bordered table-sm" style="width: 900px;">
+							<tr>
+								<th>강사아이디 | ${list[0].t_id}</th>
+								<th>강의이름 | ${list[0].l_name }</th>
+								<th>카테고리 | ${list[0].c_name } / ${list[0].c_code }</th>
+							</tr>
+							<tr>
+								<td colspan="3"><label style="height: 150px;">${list[0].l_curriculum }</label>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3"><label style="height: 150px;">${list[0].l_info }</label>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3"><label>강의가격</label> <input type="text"
+									id="l_price" name="l_price" placeholder="강의가격을 입력해주세요."
+									required="required"></td>
+							</tr>
+						</table>
+						<c:if test="${list[0].l_recognize == 0 }">
+							<button type="submit" style="float: left; margin-right: 10px;" class="btn btn-outline-dark">승인</button>
+							<button onclick="OpenModal(${list[0].la_no});" class="btn btn-outline-dark">승인거부</button>
+							<div class="background background${list[0].la_no}">
+								<div class="window">
+									<div class="popup">
+										<button id="closebtn" onclick="CloseModal(${list[0].la_no});">닫기</button>
+										<h2 class="card-title">정지사유</h2>
+										<h6>${list[0].t_id } 선생님</h6>
+										<p class="card-text">
+										<textarea name="la_reason" placeholder="승인불가사유를 적어주세요." required="required" style="width: 100%; height: 100px;" ></textarea>
+										</p>
+										<button type="button" onclick="location.href='./admin_lecture_get?check=2&la_no=${list[0].la_no}'" class="btn btn-outline-dark">승인거부</button>
+									</div>
+									<div>
+										<div></div>
+									</div>
+								</div>
+							</div>
+						</c:if>
+					</form>
+				</div>
 		</div>
 
 </div>
