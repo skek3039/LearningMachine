@@ -204,7 +204,7 @@ public class LectureController {
 			lecture_request.setT_id(u_id);
 			lecture_request.setL_name(request.getParameter("l_name"));
 			lecture_request.setL_info(request.getParameter("l_info"));
-			lecture_request.setL_category(request.getParameter("l_category"));
+			lecture_request.setC_code(request.getParameter("c_code"));
 			lecture_request.setL_curriculum(request.getParameter("l_curriculum"));
 			lecture_request.setL_thumbnail(request.getParameter("l_thumbnail"));
 			lectureService.lecture_request(lecture_request);
@@ -304,7 +304,7 @@ public class LectureController {
 			lecture_update_write.setT_id(u_id);
 			lecture_update_write.setL_name(request.getParameter("l_name"));
 			lecture_update_write.setL_info(request.getParameter("l_info"));
-			lecture_update_write.setL_category(request.getParameter("l_category"));
+			lecture_update_write.setC_code(request.getParameter("c_code"));
 			lecture_update_write.setL_curriculum(request.getParameter("l_curriculum"));
 			lecture_update_write.setLa_no(Integer.parseInt(request.getParameter("la_no")));
 			lectureService.lecture_update_write(lecture_update_write);
@@ -364,7 +364,7 @@ public class LectureController {
 				lecture_update_write2.setL_info(request.getParameter("l_info"));
 				lecture_update_write2.setL_curriculum(request.getParameter("l_curriculum"));
 				lecture_update_write2.setL_code(request.getParameter("l_code"));
-				lecture_update_write2.setL_category(request.getParameter("l_category"));
+				lecture_update_write2.setC_code(request.getParameter("c_code"));
 				lecture_update_write2.setL_thumbnail(request.getParameter("l_thumbnail"));
 				lectureService.lecture_update_write2(lecture_update_write2);
 				
