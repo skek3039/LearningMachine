@@ -107,15 +107,15 @@ public class AdminDAO {
 
 	public int lectureGet(Map<String, Object> map ) {
 		sqlSession.insert("Admin.lectureGet",map);
+		System.out.println(map.toString());
 		return sqlSession.insert("Admin.lectureCate",map);
 	}
 
-	public void lectureGet1(String la_no, String c1) {
-		if(c1.equals("1")) {
-			sqlSession.update("Admin.lectureGet2",la_no);							
+	public void lectureGet1(Map<String, Object> map) {
+		if(map.get("c1").equals("1")) {
+			sqlSession.update("Admin.lectureGet2",map);							
 		}else {
-			System.out.println(la_no);
-			sqlSession.update("Admin.lectureGet3",la_no);							
+			sqlSession.update("Admin.lectureGet3",map);							
 		}
 	}
 	public List<String> teacherDetail(String u_id) {

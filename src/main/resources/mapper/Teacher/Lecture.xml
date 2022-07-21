@@ -37,14 +37,14 @@
   	
   	<select id="lecture_Lookup" parameterType ="LectureDTO" resultType="LectureDTO">
   		SELECT *
-  		FROM lecture_apply
+  		,(SELECT c_name FROM category c WHERE c.c_code = l.c_code) AS c_name
+		FROM lecture_apply l
   		WHERE la_no = #{la_no}
   	</select>
   	
   	<select id="lecture_Lookup2" parameterType ="LectureDTO" resultType="LectureDTO">
   		SELECT *
-  		,(select l_category from lecture_category c where c.l_code = l.l_code) AS l_category
-  		FROM lecture l
+  		FROM lecture_info_view
   		WHERE l_code = #{l_code}
   	</select>
 
@@ -97,8 +97,7 @@
   	
   	<select id="lecture_update2" parameterType ="LectureDTO" resultType="LectureDTO">
   		SELECT *
-  		,(select l_category from lecture_category c where c.l_code = l.l_code) AS l_category
-  		FROM lecture l
+  		FROM lecture_info_view
   		WHERE l_code = #{l_code}
   	</select>	
   	
@@ -109,9 +108,9 @@
 	</update>
 	
 	<update id="lecture_update_write3" parameterType="LectureDTO">
-		UPDATE lecture_category
-		SET l_category=#{l_category}
-		WHERE l_code = #{l_code}
+		UPDATE category
+		SET c_code=#{c_code}
+		WHERE c_code = #{c_code}
 	</update>
 	
 	<update id="lecture_update_renewal">
