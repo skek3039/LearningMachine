@@ -15,8 +15,11 @@
   		<if test="c_name != null">
   		where c_name = #{c_name}
   		</if>
+  	
   		ORDER BY lqa_no
+  		<if test="page != null">
   		limit #{page.startPage},#{page.lastPage}
+  		</if>
   	</select>
   
   </mapper>

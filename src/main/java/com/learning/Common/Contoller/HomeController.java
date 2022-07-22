@@ -9,18 +9,21 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.JsonObject;
 import com.learning.Admin.Service.AdminService;
 import com.learning.Common.Service.CommunityService;
 import com.learning.DTO.LectureDTO;
 import com.learning.DTO.PageDTO;
 
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
+import retrofit2.http.GET;
 
 @Controller
 public class HomeController {
@@ -47,7 +50,7 @@ public class HomeController {
 	
 
 	@GetMapping(value = "/community")
-	public @ResponseBody ModelAndView community(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public ModelAndView community(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		ModelAndView mv = new ModelAndView("community");
@@ -84,18 +87,30 @@ public class HomeController {
 			map.put("c_name", request.getParameter("c_name"));
 		}
 		map.put("page", page);
-		List<String> list = communityService.QnAList(map);		
-		
-		System.out.println(list.size());
-		
-		PrintWriter pw = response.getWriter();
-		pw.print(list);
+		List<String> list = communityService.QnAList(map);
 		
 		List<String> category = adminService.categoryList();
 		mv.addObject("list",list);
+		
 		mv.addObject("category",category);
 		mv.addObject("paginationInfo", paginationInfo);
 		mv.addObject("pageNo", pageNo);
 		return mv;
 	}
+	
+	
+	@ResponseBody
+	@GetMapping(value = "community_category")
+	public List<String> community_category(HttpServletRequest request){		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(request.getParameter("c_name") != null) {			
+			map.put("c_name", request.getParameter("c_name"));
+		}
+		List<String> list1 = communityService.QnAList(map);
+		
+		System.out.println(list1);
+		return list1; 	
+	}	
+	
 }

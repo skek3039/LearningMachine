@@ -148,27 +148,62 @@ $(document).ready(function(){
 	    $(this).addClass('current');
 	    $("#"+tab_id).addClass('current');
 	  })
-	 
+	  var html = "";
+	  
+		  
+	  var lqa_title = new Array();	
+	  var lqa_no = new Array();
+	  var lqa_date = new Array();
+	  var c_name = new Array();
+	  var u_id = new Array();
+	  
+	  <c:forEach items="${list }" var = "l">
+	 	lqa_title.push("${l.lqa_title}");
+		lqa_no.push("${l.lqa_no}");
+		lqa_date.push("${l.lqa_date}");
+		c_name.push("${l.c_name}");
+		u_id.push("${l.u_id}");
+	 </c:forEach>
+	 for(var i=0 in lqa_no){ 
+		html = "<tr>";
+		html += "<td>" + lqa_no[i] + "</td>";
+		html += "<td>" + c_name[i] + "</td>";
+		html += "<td>" + lqa_title[i] + "</td>";
+		html += "<td>" + lqa_date[i] + "</td>";
+		html += "<td>" + u_id[i] + "</td>";
+		html += "</tr>"; 
+		$("#detailTable").append(html); 
+	 }
+	  
 	});
 	
 	
 function select(category){
 	let c_name = category;
 	let arr = new Array();
+	
+	$("#detailTable").empty();  
+	$("#detailTable").remove();  
+	 
 	var html = "";
 	$.ajax({
-		url : "./community",
+		url : "./community_category",
 		type : "get",
-		dataType : "html",
+		dataType : "json",
 		data : {"c_name" : c_name},
-		success : function(data){
-			// $('#tab-1').load(location.href+' #tab-1');
-			$('#tab-1').remove();
-			alert("${list}");
-			<c:forEach items="${list}" var="list">
-				arr.push({lqa_no:"${list.lqa_no}",lqa_title:"${list.lqa_title}"});
-			</c:forEach>
-			
+		success : function(data){	
+			var result = data.json;
+
+			for(var i=0 in data){                                                        
+				html = "<tr>";
+				html += "<td>" + data[i].lqa_no + "</td>";
+				html += "<td>" + data[i].c_name + "</td>";
+				html += "<td>" + data[i].lqa_title + "</td>";
+				html += "<td>" + data[i].lqa_date + "</td>";
+				html += "<td>" + data[i].u_id + "</td>";
+				html += "</tr>";
+				$("#detailTable").append(html);   
+			}
 		},
 		error : function(){
 			alert("실패 ㅠ");
@@ -225,8 +260,8 @@ function select(category){
 						    </tr>
 						  </thead>
 						<c:forEach items="${list }" var = "list"> 
-						  <tbody> 
-						    <tr role="alert">
+						  <tbody id = "detailTable"> 
+						     <%-- <tr role="alert">
 						      <th>${list.lqa_no }</th>
 						      <td>${list.c_name }</td>
 						      <td>${list.lqa_title }</td>
@@ -236,7 +271,7 @@ function select(category){
 						      	<a href="#" class="close" data-dismiss="alert" aria-label="Close">
 				            	<span aria-hidden="true"><i class="fa fa-close"></i></span></a>
 				        	</td>
-						    </tr>
+						    </tr>   --%>
 						  </tbody>
 						  </c:forEach>
 						</table>
