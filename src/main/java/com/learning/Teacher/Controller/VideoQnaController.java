@@ -181,11 +181,13 @@ public class VideoQnaController {
 		@RequestMapping(value = "/v_qna_update")
 		public ModelAndView v_qna_update(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
 			request.setCharacterEncoding("UTF-8");
+			int vq_no = Integer.parseInt(request.getParameter("vq_no"));
 			if ((int) session.getAttribute("u_authority") > 3) {
 				ModelAndView mv = new ModelAndView("v_qna_update");
-				String vq_no = request.getParameter("vq_no");
-				List<LectureDTO> v_qna_update = video_qnaService.v_qna_update(vq_no);
-				mv.addObject("v_qna_update", v_qna_update);
+				LectureDTO v_qna_update = new LectureDTO();
+				v_qna_update.setVq_no(vq_no);
+				request.setAttribute("dto", video_qnaService.v_qna_update(v_qna_update));
+				
 				return mv;
 			} else {
 				ModelAndView mv = new ModelAndView("404");

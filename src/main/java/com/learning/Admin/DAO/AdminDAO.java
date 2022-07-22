@@ -166,4 +166,12 @@ public class AdminDAO {
 		return sqlSession.insert("Admin.notice_request", notice_request);
 	}
 
+	public Object notice_update(NoticeDTO notice_update) {
+		return sqlSession.selectOne("Admin.notice_update", notice_update);
+	}
+
+	public int notice_delete(NoticeDTO notice_delete) {
+		return sqlSession.delete("Admin.notice_delete", notice_delete);
+	}
+
 }

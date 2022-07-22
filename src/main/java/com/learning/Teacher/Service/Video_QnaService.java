@@ -40,8 +40,8 @@ public class Video_QnaService {
 		return video_qnaDAO.qna_answer_detail(qna_answer_detail);
 	}
 
-	public List<LectureDTO> v_qna_update(String vq_no) {
-		return video_qnaDAO.v_qna_update(vq_no);
+	public Object v_qna_update(LectureDTO v_qna_update) {
+		return video_qnaDAO.v_qna_update(v_qna_update);
 	}
 
 	public int v_qna_write(LectureDTO v_qna_write) {

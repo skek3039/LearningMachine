@@ -169,4 +169,15 @@
  		INSERT INTO notice (u_id, n_title, n_content)
  		VALUES (#{u_id}, #{n_title}, #{n_content})
  	</insert>
+ 	
+ 	<select id="notice_update" parameterType="NoticeDTO" resultType="NoticeDTO">
+ 		SELECT *
+ 		FROM notice
+ 		WHERE n_no = #{n_no}
+ 	</select>
+ 	
+ 	<delete id="notice_delete" parameterType="NoticeDTO">
+ 		DELETE FROM notice
+ 		WHERE n_no = #{n_no}
+ 	</delete>
   </mapper>

@@ -40,8 +40,8 @@ public class Video_QnaDAO {
 		return sqlSession.selectOne("video_qna.qna_answer_detail", qna_answer_detail);
 	}
 
-	public List<LectureDTO> v_qna_update(String vq_no) {
-		return sqlSession.selectList("video_qna.v_qna_update", vq_no);
+	public Object v_qna_update(LectureDTO v_qna_update) {
+		return sqlSession.selectOne("video_qna.v_qna_update", v_qna_update);
 	}
 
 	public int v_qna_write(LectureDTO v_qna_write) {

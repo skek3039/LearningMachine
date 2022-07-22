@@ -514,7 +514,7 @@ public class AdminController {
 		}
 	}
 	
-	//글 수정
+	//공지사항 쓰기
 	@RequestMapping(value = "/notice_request")
 	public ModelAndView notice_request(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
 		request.setCharacterEncoding("UTF-8");
@@ -526,7 +526,7 @@ public class AdminController {
 			return mv;
 		}
 	}
-	//수정 글 쓰기
+	//공지사항 글 쓰기
 	@RequestMapping(value = "/notice_request.do")
 	public String update(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
 		request.setCharacterEncoding("UTF-8");
@@ -542,7 +542,60 @@ public class AdminController {
 			}else {
 				return "redirect:/404";
 				
-
+			}
 		}
+		//승인 거부 글 수정
+		@RequestMapping(value = "/notice_update")
+		public ModelAndView notice_update(HttpServletRequest request, HttpSession session) {
+			int n_no = Integer.parseInt(request.getParameter("n_no"));
+			if ((int) session.getAttribute("u_authority") > 3) {
+				ModelAndView mv = new ModelAndView("notice_update");
+				NoticeDTO notice_update = new NoticeDTO();
+				notice_update.setN_no(n_no);
+				request.setAttribute("dto", adminService.notice_update(notice_update));
+				
+				return mv;
+			} else {
+				ModelAndView mv = new ModelAndView("404");
+				return mv;
+			}
 	}	
+		//공지사항 글 쓰기
+		@RequestMapping(value = "/notice_update.do")
+		public String notice_update_write(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+			request.setCharacterEncoding("UTF-8");
+			if ((int) session.getAttribute("u_authority") > 6) {
+				String u_id = (String) session.getAttribute("u_id");
+
+				NoticeDTO notice_request = new NoticeDTO();
+				notice_request.setU_id(u_id);
+				notice_request.setN_title(request.getParameter("title"));
+				notice_request.setN_content(request.getParameter("content"));
+				adminService.notice_request(notice_request);
+					return "redirect:/admin_notice";
+				}else {
+					return "redirect:/404";
+					
+				}
+			}	
+		//글 삭제
+		@RequestMapping(value = "/notice_delete")
+		public String notice_delete(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+			request.setCharacterEncoding("UTF-8");
+			int n_no = Integer.parseInt(request.getParameter("n_no"));
+			if ((int) session.getAttribute("u_authority") > 6) {
+				String u_id = (String) session.getAttribute("u_id");
+				NoticeDTO notice_delete = new NoticeDTO();
+				notice_delete.setN_no(n_no);
+				notice_delete.setU_id(u_id);
+				
+				adminService.notice_delete(notice_delete);
+				
+				return "redirect:/admin_notice";
+			} else {
+				return "redirect:/404";
+
+			}
+		}
+				
 }

@@ -101,7 +101,8 @@
 						<td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/id.png" title="id">
 						${dto.u_id }</h6></td><td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/date.png" title="날짜">
 						${dto.n_date }
-						<img onclick="location.href='./v_qna_update?vq_no=${dto.n_no}'" style="width: 20px; height: 20px;" id="update" alt="" src="./img/update.png" title="id">
+						<img onclick="location.href='./notice_update?n_no=${dto.n_no}'" style="width: 20px; height: 20px;" id="update" alt="" src="./img/update.png" title="id">
+						<img onclick="location.href='./notice_delete?n_no=${dto.n_no}'" style="width: 20px; height: 20px;" id="delete" alt="" src="./img/delete.png" title="id">
 					</h6></td>
 					</tr></table><br>
 					<table>
@@ -109,7 +110,7 @@
 						<td style="word-break:break-all; width: 820px">${dto.n_content }</td>
 					</tr>
 					</table>
-					<div style="padding-top: 150px;">
+					<div style="padding-top: auto;">
 					<hr style="width: 850px; height: 2px;">
 					</div>
 					<br>

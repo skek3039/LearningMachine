@@ -59,7 +59,7 @@
     	where vq_no = #{vq_no} 
 	</update>
 	
-	<select id="v_qna_update" parameterType="String" resultType="LectureDTO">
+	<select id="v_qna_update" parameterType="LectureDTO" resultType="LectureDTO">
 		SELECT *
 		FROM lecture_video_qna_reply
 		WHERE vq_no = #{vq_no}

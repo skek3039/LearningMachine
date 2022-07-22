@@ -90,14 +90,14 @@
 
 		<jsp:include page="./header.jsp" />
 		<div style=" width: 100%;">
-		 <jsp:include page="./lecture_nav.jsp"/>
+		 <jsp:include page="./admin_nav.jsp"/>
 		<div style="padding-top: 110px;"></div>
 		<div style="padding-top: 100px; padding-left: 400px; height: 835px;">
 				<div id="writeform" style="padding-right: 100px;">
-				<form action="./v_qna_update.do?vq_no=${v_qna_update[0].vq_no }" method="post">
-					<input style="width: 820px;" type="text" name="title" required="required" placeholder="${dto.vqr_title }">
+				<form action="./notice_update.do" method="post">
+					<input style="width: 820px;" type="text" name="title" required="required" placeholder="${dto.n_title }">
 					<textarea name="content" id="summernote" required="required"></textarea>
-					<button type="submit" style="float:right;">답변등록</button>
+					<button type="submit" style="float:right;">수정하기</button>
 				</form>
 			</div>
 		</div>
@@ -143,7 +143,7 @@ $(document).ready(function() {
 	        maxHeight: null,       
 	        focus: true,             
 	        lang: "ko-KR",          
-	        placeholder: '${dto.vqr_content }' 
+	        placeholder: '${dto.n_content }' 
 	          
 	   });
 	});

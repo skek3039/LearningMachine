@@ -128,4 +128,13 @@ public class AdminService {
 		return adminDAO.notice_request(notice_request);
 	}
 
+	public Object notice_update(NoticeDTO notice_update) {
+		return adminDAO.notice_update(notice_update);
+	}
+
+	public int notice_delete(NoticeDTO notice_delete) {
+		return adminDAO.notice_delete(notice_delete);
+		
+	}
+
 }
