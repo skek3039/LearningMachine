@@ -11,7 +11,7 @@
     					<summary onclick="location.href='faq'">FAQ</summary>
     				</details>
     				 <details>
-    					<summary onclick="location.href='LM'">LM<br>Introduction
+    					<summary onclick="location.href='Lm'">LM<br>Introduction
 
     					</summary>
     				</details>

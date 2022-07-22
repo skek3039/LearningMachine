@@ -7,6 +7,21 @@
   		where n_category = 1 
   		LIMIT #{startPage} , #{lastPage}
   	</select>
+  	
+  	<select id="faq"  parameterType="PageDTO" resultType="noticeDTO" >
+  		select * from notice 
+  		where n_category = 1 
+  		LIMIT #{startPage} , #{lastPage}
+  	</select>
+  	
+  	<select id="faqdetail" parameterType="Integer" resultType="noticeDTO" >
+  		select * from notice WHERE n_no = #{n_no}
+  	</select>
+  	
+  	<insert id="faqWrite" parameterType="NoticeDTO" useGeneratedKeys="true" keyProperty="n_no">
+	  	INSERT INTO notice (n_title, n_content, u_id) 
+	  	VALUES (#{n_title}, #{n_content}, #{u_id})
+  	</insert>
   
   	<select id="noticedetail" parameterType="Integer" resultType="noticeDTO" >
   		select * from notice WHERE n_no = #{n_no}
@@ -26,6 +41,11 @@
 	  	INSERT INTO notice (n_title, n_content, u_id) 
 	  	VALUES (#{n_title}, #{n_content}, #{u_id})
   	</insert>
+  	
+  	<select id="">
+  		select * from notice
+  		WHERE n_category = #{n_category}
+  	</select>
   	
   	
   
