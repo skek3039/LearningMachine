@@ -33,7 +33,7 @@
 
 <!-- Libraries Stylesheet -->
 <link href="./resources/lib/animate/animate.min.css" rel="stylesheet">
-<link href="./resources/lib/owlcarousel/assets/owl.carousel.min.css"
+<link href="./resources/lib/owlcar ousel/assets/owl.carousel.min.css"
 	rel="stylesheet">
 
 <!-- Customized Bootstrap Stylesheet -->
@@ -74,7 +74,7 @@
     }
 </style>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 function search(){
 	var u_name= document.getElementById("u_name").value;
 	location.href = "./admin_studentSearch?u_name="+u_name;
@@ -102,7 +102,7 @@ function linkPage(pageNo){
 	location.href = "./lecture_student_report?pageNo=" + pageNo;
 }
 
-</script>
+</script> -->
 
 
 </head>
@@ -125,32 +125,29 @@ function linkPage(pageNo){
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		 </div>
-		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;신고사유</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;신고하기</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px; margin-left: 310px;">
-				<div style="padding-top: 10px;">
+				<!-- <div style="padding-top: 10px;">
 					 <input type="search" id="u_name" name="u_name" class="form-control" required="required" placeholder="학생이름을 입력해주세요." style="width: 250px; float: left;"> &nbsp; 
 					 <button class="btn btn-danger" id="search" style="width: 100px" onclick="search()">search</button>
-				</div><br>
+				</div><br> -->
 			<div  id="student" style=" height: 200px;">
 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
-						<th>이름</th>
-						<th>ID</th>
-						<th>Point</th>		
-						<th>신고강사</th>								
+						<td colspan="2">
+							<textarea name="reason" placeholder="신고사유를 적어주세요." required="required" style="width: 100%; height: 100px;" ></textarea>
+						</td>
 					</tr>
-					<c:forEach items="${list }" var="i">
+					<%-- <c:forEach items="${list }" var="i">
 					<tr>
 						<td><a href="###"> ${i.u_name }</a> </td>
 						<td>${i.u_id }</td> 
 						<td><fmt:formatNumber value="${i.u_paypoint }" pattern="#,###"  /></td>						
 						<td>${i.t_name}</td>						
 					</tr>
-					</c:forEach>				
+					</c:forEach> --%>				
 				</table>
 			<hr>	
-			<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
-			</div>
 
 			<%-- <div id="student1" style="width: 500px;">
 				<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;학생정지리스트</h3><hr style="border: solid 1px;"></div>
@@ -203,6 +200,7 @@ function linkPage(pageNo){
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
 	<script src="./resources/js/admin_student.js"></script>
+	</div>
 </body>
 
 </html>

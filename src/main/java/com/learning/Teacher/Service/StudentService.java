@@ -41,5 +41,16 @@ public class StudentService {
 	public List<String> banList(Map<String, Object> map) {
 		return studentDAO.banList(map);
 	}
+
+
+	public int ban_reason(LectureDTO dto) {
+		return studentDAO.ban_reason(dto);
+	}
+
+
+	
+
+
+	
 	 
 }

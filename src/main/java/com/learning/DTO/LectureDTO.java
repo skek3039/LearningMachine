@@ -25,5 +25,5 @@ private String lqar_title, lqar_content, lqar_date;
 private int vq_no;
 private String vq_title, vq_content, vq_date;
 
-private String vqr_title, vqr_content, vqr_date;
+private String vqr_title, vqr_content, vqr_date, ur_reason;
 }

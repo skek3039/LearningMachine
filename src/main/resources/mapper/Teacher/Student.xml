@@ -33,4 +33,10 @@
   		WHERE u_id = #{u_id}
   	</select>
   	
+  	<insert id="ban_reason" parameterType="LectureDTO">
+  		INSERT INTO user_reported (u_id, t_id, ur_reason, l_code)
+  		VALUES (#{u_id}, #{t_id}, #{ur_reason}, #{l_code})
+  	</insert>
+  	
+  	
   </mapper>

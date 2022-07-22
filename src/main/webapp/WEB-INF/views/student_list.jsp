@@ -72,11 +72,84 @@
         font-size: 17px;
         padding: 15px 0;
     }
+    
+       .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 500px;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+
+        /* 숨기기 */
+        z-index: -1;
+        opacity: 0;
+      }
+
+      .show {
+        opacity: 1;
+        z-index: 1000;
+        transition: all 0.5s;
+      }
+
+      .window {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      .popup {
+		padding: 10px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #ffffff;
+        box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+
+        /* 임시 지정 */
+        width: 70%;
+        height: 70%;
+
+        /* 초기에 약간 아래에 배치 */
+        transform: translate(-50%, -40%);
+		overflow-y: auto;
+      }
+
+      .show .popup {
+        transform: translate(-50%, -50%);
+        transition: all 0.5s;
+      }
+
+	  #closebtn{
+		position: fixed;
+		top: 0;
+        right: 0;
+		padding: 10px;
+	  }
 </style>
 <script type="text/javascript">
 function linkPage(pageNo){
 	location.href = "./student_list?pageNo=" + pageNo;
 	}
+
+
+function OpenModal(la_no){
+	var OpenModal = document.querySelector(".background" + la_no);
+	OpenModal.classList.add("show");
+}
+
+function CloseModal(lqa_no) {
+	var CloseModal = document.querySelector(".background" + lqa_no);
+	CloseModal.classList.remove("show");
+}
+
+function report(l_code){
+	let ur_reason = $("#ur_reason").val();
+	alert(ur_reason);
+	location.href = "./lecture_student_report?l_code="+l_code+ "&ur_reason="+ur_reason ;
+}
 
 </script>
 </head>
@@ -112,12 +185,35 @@ function linkPage(pageNo){
 					
 					<c:forEach items="${studentList}" var="s">
 					<tr>
-						<td>${s.u_name }</td>					
 						<td>${s.l_name }</td>
+						<td>${s.u_id }</td>					
 						<td>${s.u_gender }</td>
 						<td>${s.u_paypoint }</td>
 						<td>${s.attendance_rate }</td>
-						<td><a href = "./lecture_student_report">신고하기</a></td>
+						<td><a href = "#" onclick="OpenModal(${s.l_code})">신고하기</a>
+						<form action="./lecture_student_report" method="get">
+									<div class="background background${s.l_code}">
+										<div class="window">
+											<div class="popup">
+												<button id="closebtn" onclick="CloseModal(${s.l_code});">닫기</button>
+												<h2 class="card-title">신고사유</h2>
+												<h6>수업 : ${s.l_name } | 수강생 : ${s.u_id }</h6>
+												<input type="hidden" name="u_id" value="${s.u_id }"> <input
+													type="hidden" name="l_code" value="${s.l_code }">
+												<p class="card-text">
+													<textarea name="ur_reason" id="ur_reason"
+														placeholder="신고사유를 적어주세요." required="required"
+														style="width: 100%; height: 100px;"></textarea>
+												</p>
+												<button type="submit" class="btn btn-outline-dark">신고</button>
+											</div>
+											<div>
+												<div></div>
+											</div>
+										</div>
+									</div>
+								</form></td>
+						
 						<!-- <button type="button" onclick="locaion.href='lecture_student_report.jsp'">신고</button> -->
 					</tr>
 					</c:forEach>

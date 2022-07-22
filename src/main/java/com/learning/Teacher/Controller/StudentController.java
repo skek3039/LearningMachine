@@ -196,4 +196,23 @@ public class StudentController {
 		
 	}
 	
+	//수강생 신고 사유 작성페이지
+	@RequestMapping(value = "/lecture_student_report")
+	public String lecture_student_report(HttpServletRequest request, HttpSession session) {
+		if ((int) session.getAttribute("u_authority") > 3) {
+			
+			LectureDTO dto = new LectureDTO();
+			dto.setU_id(request.getParameter("u_id"));
+			dto.setT_id((String)request.getSession().getAttribute("u_id"));
+			dto.setL_code(request.getParameter("l_code"));
+			dto.setUr_reason(request.getParameter("ur_reason"));
+
+			studentService.ban_reason(dto);
+			
+			return "redirect:/student_list?l_code=" +request.getParameter("l_code"); 
+		} else {
+			return "redirect:/404";
+		}
+	}
+	
 }

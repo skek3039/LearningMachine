@@ -38,5 +38,12 @@ public class StudentDAO {
 	public List<String> banList(Map<String, Object> map) {
 		return sqlSession.selectList("student.banList", map);
 	}
+
+	public int ban_reason(LectureDTO dto) {
+		return sqlSession.insert("student.ban_reason", dto);
+	}
+
+	
+	
 	 
 }
