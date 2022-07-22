@@ -28,5 +28,14 @@ public class NoticeService {
 	public int noticeWrite(NoticeDTO noticeWrite) {
 		return noticeDAO.noticeWrite(noticeWrite);
 	}
+	public List<NoticeDTO> faq(PageDTO page) {
+		return noticeDAO.faq(page);
+	}
+	public int faqWrite(NoticeDTO faq) {
+		return noticeDAO.faqWrite(faq);
+	}
+	public NoticeDTO faqdetail(NoticeDTO faqdetail) {
+		return noticeDAO.faqdetail(faqdetail);
+	}
 	
 }

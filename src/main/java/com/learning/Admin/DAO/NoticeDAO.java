@@ -35,5 +35,22 @@ public class NoticeDAO {
 		return sqlSession.insert("notice.noticeWrite", noticeWrite);
 	}
 
+	public NoticeDTO faq(NoticeDTO faq) {
+		return (NoticeDTO) sqlSession.selectList("notice.faq", faq);
+	}
+
+	public List<NoticeDTO> faq(PageDTO page) {
+		return sqlSession.selectList("notice.faq",page);
+	}
+
+	public int faqWrite(NoticeDTO faq) {
+		return sqlSession.insert("notice.faqWrite", faq);
+	}
+
+	public NoticeDTO faqdetail(NoticeDTO faqdetail) {
+		return sqlSession.selectOne("notice.faqdetail",faqdetail);
+	}
+
+
 
 }

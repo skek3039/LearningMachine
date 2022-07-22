@@ -52,7 +52,7 @@ public class AdminController {
 			mv.addObject("refund",refund);
 			mv.addObject("lecture",lecture);
 			mv.addObject("payment", payment);
-			
+				
 			return mv;
 		} else {
 			ModelAndView mv = new ModelAndView("404");
