@@ -82,7 +82,7 @@ public class UserService {
 		if(result == null) {
 			
 			userDAO.UserAttendanceInsert(form);
-		}else if(result.equals("0")) {
+		}else{
 			
 			userDAO.UpdateVideoAttendance(form);
 		}

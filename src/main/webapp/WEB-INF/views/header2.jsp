@@ -56,7 +56,7 @@
 									<tbody>
 									<c:forEach items ="${RegistedLecture}" var="i">
 											<tr>
-												<th scope="row">${i.l_name}</th>
+												<th scope="row"><a href="./LectureDetail?l_code=${i.l_code}">${i.l_name}</a></th>
 												<td>${i.t_nickname}</td>
 												<td><small>출석률 : ${i.attendance_rate}%</small></td>
 											</tr>
@@ -96,7 +96,7 @@
 											<tr>
 												<th scope="row">${i.l_name}</th>
 												<td>${i.t_nickname}</td>
-												<td><small>${i.v_videotitle}</small></td>
+												<td><small><a href="./LectureVideo?v_no=${i.v_no}">${i.v_videotitle}</a></small></td>
 												<td><small>${i.va_date}</small></td>
 											</tr>
 										</c:forEach>
@@ -106,9 +106,9 @@
 									<tbody>
 										<c:forEach items="${RecentVideo}" var="i">
 											<tr>
-												<th scope="row">${i.l_name}</th>
+												<th scope="row"><a href="./LectureDetail?l_code=${i.l_code}">${i.l_name}</a></th>
 												<td>${i.t_nickname}</td>
-												<td><small>${i.v_videotitle}</small></td>
+												<td><small><a href="./LectureVideo?v_no=${i.v_no}">${i.v_videotitle}</a></small></td>
 												<td><small>${i.va_date}</small></td>
 											</tr>
 										</c:forEach>

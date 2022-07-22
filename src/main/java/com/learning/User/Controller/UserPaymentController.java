@@ -7,14 +7,16 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.learning.DTO.PaymentDTO;
+import com.learning.User.DTO.UPaymentDTO;
 import com.learning.User.Form.PaymentForm;
 import com.learning.User.Form.ULectureForm;
 import com.learning.User.Service.ULectureService;
 import com.learning.User.Service.UserService;
-import com.siot.IamportRestClient.Iamport;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.response.IamportResponse;
@@ -36,7 +38,7 @@ public class UserPaymentController {
 	private UserService UserService;
 	
 	@GetMapping(value = "/Pay")
-	public String LecturePay(HttpServletRequest rq) {
+	public String LecturePay(HttpServletRequest rq, UPaymentDTO dto) {
 		
 		String u_id = (String) rq.getSession().getAttribute("u_id");
 		String l_code = rq.getParameter("l_code");
@@ -53,7 +55,18 @@ public class UserPaymentController {
 				
 				rq.setAttribute("error", "<script>alert('이미 결제한 강의입니다.');</script>");
 				return "404";
-			}else {
+			}
+//			else if(!u_id.equals(dto.getU_id())) {
+//				
+//				rq.setAttribute("error", "<script>alert('잘못된 권한입니다.');</script>");
+//				
+//				return "404";
+//			}
+			else {
+				
+				String l_price = LectureInfo.getL_price().replaceAll(",", "");
+				
+				LectureInfo.setL_price(l_price);
 				
 				rq.setAttribute("UserInfo", UserService.UserInfo(u_id));
 				rq.setAttribute("LectureInfo", LectureInfo);
@@ -66,13 +79,10 @@ public class UserPaymentController {
 		}
 	}
 	
-	@PostMapping(value = "Pay.do")
+	@PostMapping(value = "/Pay.do/{imp_uid}")
 	@ResponseBody
-	public IamportResponse<Payment> LecturePay(HttpServletRequest rq, PaymentForm payForm) throws IamportResponseException, IOException {
+	public IamportResponse<Payment> LecturePay(@PathVariable(value = "imp_uid")String imp_uid,HttpServletRequest rq, PaymentForm payForm) throws IamportResponseException, IOException {
 		
-		String u_id = (String) rq.getSession().getAttribute("u_id");
-		String l_code = payForm.getL_code();
-		
-		return api.paymentByImpUid(l_code);
+		return api.paymentByImpUid(imp_uid);
 	}
 }

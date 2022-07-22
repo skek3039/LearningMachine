@@ -201,7 +201,7 @@
 									<p id="teacher">${i.t_nickname}</p>
 									<strong style="color: red;">${i.l_price}원</strong>
 									<p>
-										<small>(${i.total_register}명 수강)</small>
+										<small>${i.grade_avg}점(${i.total_register}명 수강)</small>
 									</p>
 									<p>
 										<a href="./LectureDetail?l_code=${i.l_code }" class="btn btn-primary"
@@ -240,7 +240,7 @@
 									<p id="category">${i.l_category }</p>
 									<p id="teacher">${i.t_nickname}</p>
 									<strong style="color: red;">${i.l_price}원</strong>
-									<p><small>(${i.total_register}명 수강)</small></p>
+									<p><small>${i.grade_avg}점(${i.total_register}명 수강)</small></p>
 									<p>
 										<a href="./LectureDetail?l_code=${i.l_code }" class="btn btn-primary"
 											role="button">이동하기</a>
