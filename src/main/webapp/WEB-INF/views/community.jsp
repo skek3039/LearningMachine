@@ -156,21 +156,23 @@ $(document).ready(function(){
 	  var lqa_date = new Array();
 	  var c_name = new Array();
 	  var u_id = new Array();
-	  
+	  var confirm = new Array();
 	  <c:forEach items="${list }" var = "l">
 	 	lqa_title.push("${l.lqa_title}");
 		lqa_no.push("${l.lqa_no}");
 		lqa_date.push("${l.lqa_date}");
 		c_name.push("${l.c_name}");
 		u_id.push("${l.u_id}");
+		confirm.push("${l.confirm}");
 	 </c:forEach>
 	 for(var i=0 in lqa_no){ 
 		html = "<tr>";
 		html += "<td>" + lqa_no[i] + "</td>";
 		html += "<td>" + c_name[i] + "</td>";
 		html += "<td>" + lqa_title[i] + "</td>";
-		html += "<td>" + lqa_date[i] + "</td>";
 		html += "<td>" + u_id[i] + "</td>";
+		html += "<td>" + lqa_date[i] + "</td>";
+		html += "<td>" + confirm[i] + "</td>";		
 		html += "</tr>"; 
 		$("#detailTable").append(html); 
 	 }
@@ -199,8 +201,9 @@ function select(category){
 				html += "<td>" + data[i].lqa_no + "</td>";
 				html += "<td>" + data[i].c_name + "</td>";
 				html += "<td>" + data[i].lqa_title + "</td>";
-				html += "<td>" + data[i].lqa_date + "</td>";
 				html += "<td>" + data[i].u_id + "</td>";
+				html += "<td>" + data[i].lqa_date + "</td>";
+				html += "<td>" + data[i].confirm + "</td>";
 				html += "</tr>";
 				$("#detailTable").append(html);   
 			}
@@ -255,8 +258,9 @@ function select(category){
 						      <th>ID no.</th>
 						      <th>강의카테고리</th>
 						      <th>제목</th>
-						      <th>날짜</th>
 						      <th>닉네임</th>
+						      <th>날짜</th>
+						      <th>답변여부</th>
 						    </tr>
 						  </thead>
 						<c:forEach items="${list }" var = "list"> 

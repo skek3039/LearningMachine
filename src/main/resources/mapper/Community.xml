@@ -8,7 +8,7 @@
   	</select>
   	
   	<select id="qnaList" parameterType="map" resultType="map">
-  		SELECT c.c_name, l.*
+  		SELECT c.c_name, l.* , if(lqa_confirm=0,"답변미완료","답변완료")AS confirm 
 		FROM lecture_qna l JOIN category c
 		ON l.l_code = c.c_code
 
