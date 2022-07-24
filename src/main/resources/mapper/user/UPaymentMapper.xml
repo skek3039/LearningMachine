@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?> <!-- 맵퍼파일 -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="UPaymentMapper">
-	<select id="PaymentMethods"></select>
+	<insert id="LectureRegist" parameterType="com.learning.User.DTO.ULectureDTO">
+	
+		INSERT INTO user_lecture_registration(u_id, l_code) 
+		VALUES(
+			#{u_id}
+			,#{l_code}
+		)
+	
+	</insert>
+	
+	<insert id="PaymentRegist" parameterType="com.learning.User.DTO.UPaymentDTO">
+	
+		INSERT INTO payment_log(u_id, l_code, p_price, p_order)
+		VALUES(
+			#{u_id}
+			, #{l_code}
+			, #{p_price}
+			, #{p_order}
+		)
+	
+	</insert>
   </mapper>

@@ -52,6 +52,10 @@ public class UserDAO {
 		}
 	}
 	
+	public int CheckLectureRegist(URegiForm form) {
+		
+		return sqlSession.selectOne(namespace + ".CheckLectureRegist", form);
+	}
 	public String CheckAttendance(UserAttendanceForm form) {
 		
 		return sqlSession.selectOne(namespace + ".UCheckAttendance", form);

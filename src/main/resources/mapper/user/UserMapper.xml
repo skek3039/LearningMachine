@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="UserMapper">
 
-	<select id="UserInfo" parameterType="com.learning.DTO.userDTO" resultType="com.learning.DTO.userDTO">
+	<select id="UserInfo" parameterType="String" resultType="com.learning.DTO.userDTO">
 	
-		SELECT u_name, u_email, u_tel FROM user WHERE u_id = #{u_id}
+		SELECT u_id, u_name, u_email, u_tel FROM user WHERE u_id = #{u_id}
 		
 	</select>
 	
@@ -27,7 +27,7 @@
   
   	<select id="RegistedLecture" parameterType = "String" resultType = "com.learning.User.Form.ULectureForm">
   		
-  		SELECT * from user_lecture_view WHERE u_id = #{u_id} ORDER BY lr_date ASC
+  		SELECT * from user_lecture_view WHERE u_id = #{u_id} ORDER BY p_date DESC
   		
   	</select>
   	
@@ -40,6 +40,12 @@
   	<select id="UCheckAttendance" parameterType="com.learning.User.Form.UserAttendanceForm" resultType="String">
 	
 		SELECT va_attendance FROM lecture_video_attendance WHERE v_no = #{v_no} AND u_id = #{u_id} AND l_code = #{l_code}
+	
+	</select>
+	
+	<select id="CheckLectureRegist" parameterType="com.learning.User.Form.URegiForm" resultType="int">
+	
+		SELECT COUNT(0) FROM user_lecture_registration WHERE u_id = #{l_code} AND l_code = #{l_code}
 	
 	</select>
 	

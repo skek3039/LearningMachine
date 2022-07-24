@@ -12,4 +12,6 @@ public class UPaymentDTO {
 	private String p_price;
 	private int p_refund;
 	private int pm_no;
+	private String p_order;
+
 }

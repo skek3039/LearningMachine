@@ -61,7 +61,7 @@
 			pay_method: "card", // 지불 수단
 			merchant_uid: 'merchant_' + new Date().getTime(), //가맹점에서 구별할 수 있는 고유한id
 			name: "${LectureInfo.l_name}", // 상품명
-			amount: parseInt(${ LectureInfo.l_price }, 10), // 가격
+			amount: parseInt('${ LectureInfo.l_price}', 10), // 가격
 			buyer_email: "${UserInfo.u_email}",
 			buyer_name: "${UserInfo.u_name}", // 구매자 이름
 			buyer_tel: "${UserInfo.u_tel}", // 구매자 연락처 
@@ -73,21 +73,21 @@
 			$.ajax({
 				type: "POST",
 				url: "/web/Pay.do/" + rsp.imp_uid,
-				success: function () {// 성공 했을 때 처리    
-					alert("sucksex");
-				},
-				error: function (request, status, error) {
-					alert("code=" + request.status + "message=" + request.responseText + "error" + error);
-				},
-				complete: function () { alert("complete!"); }
+				data : {
+					l_code : '${LectureInfo.l_code}',
+					l_price : '${ LectureInfo.l_price }',
+					u_id : '${UserInfo.u_id}'
+				}
 			}).done(function (data) {
 
 				console.log(data);
 
 				// 위의 rsp.paid_amount 와 data.response.amount를 비교한후 로직 실행 (import 서버검증)
-				if (rsp.paid_amount == data.response.amount) {
+				if (rsp.success) {
 					location.href = "/web/LectureDetail?l_code=${LectureInfo.l_code}";
+					alert("성공");
 				} else {
+					location.href = "/web/LectureDetail?l_code=${LectureInfo.l_code}";
 					alert("결제 실패");
 				}
 			});
@@ -98,5 +98,6 @@
 <body>
 	<input name="l_price" value = "${LectureInfo.l_price }">
 	<button onclick="pay()">결제</button>
+
 </body>
 </html>

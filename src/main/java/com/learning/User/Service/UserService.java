@@ -87,4 +87,14 @@ public class UserService {
 			userDAO.UpdateVideoAttendance(form);
 		}
 	}
+
+	public int CheckLectureRegist(String u_id, String l_code) {
+
+		URegiForm form = new URegiForm();
+		form.setU_id(u_id);
+		form.setL_code(l_code);
+		
+		return userDAO.CheckLectureRegist(form);
+	}
+	
 }

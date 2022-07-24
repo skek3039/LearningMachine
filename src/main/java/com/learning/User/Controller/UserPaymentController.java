@@ -1,6 +1,7 @@
 package com.learning.User.Controller;
 
 import java.io.IOException;
+import java.rmi.server.UID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,11 +13,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.learning.Admin.Service.PaymentService;
 import com.learning.DTO.PaymentDTO;
 import com.learning.User.DTO.UPaymentDTO;
 import com.learning.User.Form.PaymentForm;
 import com.learning.User.Form.ULectureForm;
+import com.learning.User.Form.URegiForm;
 import com.learning.User.Service.ULectureService;
+import com.learning.User.Service.UPaymentService;
 import com.learning.User.Service.UserService;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
@@ -37,6 +41,9 @@ public class UserPaymentController {
 	
 	@Autowired
 	private UserService UserService;
+	
+	@Autowired
+	private UPaymentService paymentService;
 	
 	@GetMapping(value = "/Pay")
 	public String LecturePay(HttpServletRequest rq, UPaymentDTO dto) {
@@ -82,8 +89,72 @@ public class UserPaymentController {
 	
 	@PostMapping(value = "/Pay.do/{imp_uid}")
 	@ResponseBody
-	public IamportResponse<Payment> LecturePay(@PathVariable(value = "imp_uid")String imp_uid,HttpServletRequest rq, PaymentForm payForm) throws IamportResponseException, IOException {
+	public IamportResponse<Payment> LecturePay(@PathVariable(value = "imp_uid")String imp_uid,HttpServletRequest rq, UPaymentDTO paydto) throws IamportResponseException, IOException {
 		
-		return api.paymentByImpUid(imp_uid);
+		String s_id = (String) rq.getSession().getAttribute("u_id");
+		String u_id = rq.getParameter("u_id");
+		String l_code = rq.getParameter("l_code");
+		URegiForm regiform = null;
+		System.out.println(u_id);
+		if(s_id == null ||u_id == null || l_code == null) {
+			System.out.println("로그인 안한놈");	
+			return null;
+		}else if(u_id.equals(s_id)) {
+			
+			if(UserService.CheckLectureRegist(u_id, l_code) == 1) {
+				System.out.println("이미 있는 결제 인댑쇼?");
+				return null;
+			}else {
+				regiform = new URegiForm();
+				
+				regiform.setU_id(u_id);
+				regiform.setL_code(l_code);
+				
+				paydto.setP_order(imp_uid);
+				
+				//쿠폰 적용시 paymentlog에 쿠폰, 원래가격, 할인가격 컬럼추가, 쿠폰테이블 추가
+				//적용된 p_price가격도 수정
+				paydto.setP_price(rq.getParameter("l_price"));
+				if(paymentService.PayDone(regiform, paydto) == 1) {
+					
+					return api.paymentByImpUid(imp_uid);
+				}else {
+					
+					return null;
+				}
+				
+			}			
+		}else {
+			
+			System.out.println("십새");
+			return null;
+		}
+		
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
