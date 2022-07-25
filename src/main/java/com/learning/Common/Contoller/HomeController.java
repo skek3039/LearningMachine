@@ -116,9 +116,14 @@ public class HomeController {
 	//강의검색불러오기
 	@GetMapping(value = "/community_communityName" , produces="text/plain;charset=utf-8")
 	public ModelAndView community_communityName(HttpServletRequest request, HttpSession session) {	
+		Map<String, Object> map = new HashMap<String, Object>();
 			String lqa_title = request.getParameter("lqa_title"); 
+		
+			List<String> category = adminService.categoryList();
+		
 			List<LectureDTO> list = communityService.communitySearch(lqa_title);	
 			ModelAndView mv = new ModelAndView("community2");				
+			mv.addObject("category",category);
 			mv.addObject("list",list);
 			return mv; 
 	}	

@@ -198,7 +198,12 @@ ul.tabs li.current{
 <script type="text/javascript">
 function search(){
 	var lqa_title= document.getElementById("lqa_title").value;
-	location.href = "./community_communityName?lqa_title="+lqa_title;
+	if(lqa_title != ""){
+		location.href = "./community_communityName?lqa_title="+lqa_title;
+	}else{
+		location.href="./community";
+	}
+		
 }
 
 function enterkey() {

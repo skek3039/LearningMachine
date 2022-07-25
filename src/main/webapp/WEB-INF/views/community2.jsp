@@ -198,9 +198,13 @@ ul.tabs li.current{
 <script type="text/javascript">
 function search(){
 	var lqa_title= document.getElementById("lqa_title").value;
-	location.href = "./community_communityName?lqa_title="+lqa_title;
+	if(lqa_title != ""){
+		location.href = "./community_communityName?lqa_title="+lqa_title;
+	}else{
+		location.href="./community";
+	}
+		
 }
-
 function enterkey() {
 	if (window.event.keyCode == 13) {
 		search();
@@ -248,7 +252,7 @@ $(document).ready(function(){
 		lqa_date.push("${l.lqa_date}");
 		c_name.push("${l.c_name}");
 		u_id.push("${l.u_id}");
-		confirm.push("${l.lqa_confirm}");
+		confirm.push("${l.confirm}");
 	 </c:forEach>
 	 for(var i=0 in lqa_no){ 
 		html = "<tr>";
@@ -257,7 +261,7 @@ $(document).ready(function(){
 		html += "<td>"+"<a href=javascript:OpenModal('"+lqa_no[i]+"')>" + lqa_title[i] + "</a></td>";
 		html += "<td>" + u_id[i] + "</td>";
 		html += "<td>" + lqa_date[i] + "</td>";
-		html += "<td>" + lqa_confirm[i] + "</td>";		
+		html += "<td>" + confirm[i] + "</td>";		
 		html += "</tr>"; 
 		$("#detailTable").append(html); 
 	 }
@@ -288,7 +292,7 @@ function select(category){
 				html += "<td>" + data[i].lqa_title + "</td>";
 				html += "<td>" + data[i].u_id + "</td>";
 				html += "<td>" + data[i].lqa_date + "</td>";
-				html += "<td>" + data[i].lqa_confirm + "</td>";
+				html += "<td>" + data[i].confirm + "</td>";
 				html += "</tr>";
 				$("#detailTable").append(html);   
 			}
