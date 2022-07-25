@@ -197,7 +197,7 @@ ul.tabs li.current{
 </style>
 <script type="text/javascript">
 function search(){
-	var lqa_name= document.getElementById("lqa_title").value;
+	var lqa_title= document.getElementById("lqa_title").value;
 	location.href = "./community_communityName?lqa_title="+lqa_title;
 }
 
