@@ -88,17 +88,33 @@
 
 
 		<jsp:include page="./header.jsp" />
-		<div style=" width: 100%; height: 800px; padding-top: 90px;">
-			<div style="padding-top: 5px;">
-				<jsp:include page="./notice_nav.jsp"/>
-		 	</div>
-		<div style="padding-top: 50px;"><h3>&nbsp;&nbsp;${dto.n_title }</h3><hr style="border: solid 1px;"></div>
-			<div id ="noticedetail">
-				<h5>관리자</h5>
-				${dto.n_content }
-			</div>
-
+		<div style=" width: 100%;">
+		 <jsp:include page="./admin_nav.jsp"/>
+		<div style="padding-top: 110px;"></div>
+		<div style="padding-top: 10px; padding-left: 400px; height: 835px;">
+				<table>
+					<tr>
+					<th><img style="width: 50px; height: 50px; " id="up" alt="" src="./img/notice.png" title="공지"></th>
+						<td style="padding-top: 10px; word-break:break-all; width: 750px"><h5>${dto.n_title }</h5></td>
+					</tr>
+					<tr>
+						<td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/id.png" title="id">
+						${dto.u_id }</h6></td><td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/date.png" title="날짜">
+						${dto.n_date }
+					</h6></td>
+					</tr></table><br>
+					<table>
+					<tr>
+						<td style="word-break:break-all; width: 820px">${dto.n_content }</td>
+					</tr>
+					</table>
+					<div style="padding-top: auto;">
+					<hr style="width: 850px; height: 2px;">
+					</div>
+					<br>
 		</div>
+
+</div>
 		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
 
