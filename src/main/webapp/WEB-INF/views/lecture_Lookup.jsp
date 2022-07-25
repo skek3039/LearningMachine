@@ -141,7 +141,7 @@
 			<br>
 			<div style="text-align: center">
 				<div id="requestform" style="padding-top: 10px; padding-left: 340px; height: 735px;">
-					<table class="tg" style="table-layout: fixed; width: 900px">
+					<table class="tg" style="table-layout: fixed; width: 900px; height: auto;">
 						<colgroup>
 							<col style="width: 100px">
 							<col style="width: 800px">
@@ -161,7 +161,7 @@
 							</tr>
 							<tr>
 								<td class="tg-llyw">커리큘럼</td>
-								<td class="tg-0pky">${dto.l_curriculum }</td>
+								<td class="tg-0pky" style="word-break:break-all;">${dto.l_curriculum }</td>
 							</tr>
 						</tbody>
 					</table>

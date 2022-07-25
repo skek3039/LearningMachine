@@ -214,7 +214,7 @@
 			<br>
 			<div style="text-align: center">
 				<h5>&nbsp;&nbsp;■강의계획</h5>
-				<div id="requestform" style="padding-top: 10px; padding-left: 340px; height: 500px;">
+				<div id="requestform" style="padding-top: 10px; padding-left: 340px; height: 495px;">
 					<form action="./lecture_request.do" method="post">
 					<table class="tg" style="table-layout: fixed; width: 900px">
 						<colgroup>

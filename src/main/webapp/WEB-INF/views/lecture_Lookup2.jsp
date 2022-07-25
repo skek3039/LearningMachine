@@ -164,7 +164,7 @@
 							</tr>
 							<tr>
 								<td class="tg-llyw">커리큘럼</td>
-								<td class="tg-0pky">${dto.l_curriculum }</td>
+								<td class="tg-0pky" style="word-break:break-all;">${dto.l_curriculum }</td>
 							</tr>
 							<tr>
 								<td class="tg-llyw">썸네일</td>
