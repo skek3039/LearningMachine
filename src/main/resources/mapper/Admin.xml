@@ -153,6 +153,10 @@
   		insert into category (c_name) values(#{c_name})
   	</insert>
  	
+ 	<delete id="deleteCategory" parameterType="String">
+ 		delete from category where c_name = #{c_name}
+ 	</delete>
+ 	
  	<select id="admin_notice" parameterType="map" resultType="NoticeDTO">
  		SELECT *
  		FROM notice

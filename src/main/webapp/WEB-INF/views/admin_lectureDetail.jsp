@@ -106,7 +106,7 @@
 
         /* 임시 지정 */
         width: 70%;
-        height: 70%;
+        height: 30%;
 
         /* 초기에 약간 아래에 배치 */
         transform: translate(-50%, -40%);
@@ -138,8 +138,8 @@ function OpenModal(la_no){
 	OpenModal.classList.add("show");
 }
 
-function CloseModal(lqa_no) {
-	var CloseModal = document.querySelector(".background" + lqa_no);
+function CloseModal(la_no) {
+	var CloseModal = document.querySelector(".background" + la_no);
 	CloseModal.classList.remove("show");
 }
 
@@ -213,7 +213,7 @@ function refuse(la_no){
 							<div class="background background${list[0].la_no}">
 								<div class="window">
 									<div class="popup">
-										<button id="closebtn" onclick="CloseModal(${list[0].la_no});">닫기</button>
+										<button id="closebtn" class="btn btn-outline-dark" onclick="CloseModal(${list[0].la_no});">닫기</button>
 										<h2 class="card-title">정지사유</h2>
 										<h6>${list[0].t_id } 선생님</h6>
 										<p class="card-text">

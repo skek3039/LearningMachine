@@ -108,8 +108,8 @@ public class AdminService {
 		return adminDAO.teacherAccept(map);
 	}
 
-	public int addCategory(String c_name) {
-		return adminDAO.addCategory(c_name);
+	public int addCategory(String c_name, String check) {
+		return adminDAO.addCategory(c_name,check);
 	}
 
 	public List<String> categoryList() {

@@ -463,7 +463,9 @@ public class AdminController {
 	@GetMapping(value = "/addCategory")
 	public @ResponseBody void addCategory(HttpServletRequest request) {
 		String c_name = request.getParameter("c_name");
-		int result = adminService.addCategory(c_name);
+		String check = request.getParameter("check");
+		
+		int result = adminService.addCategory(c_name,check);
 	}
 
 	// 공지사항 페이지

@@ -135,8 +135,80 @@ ul.tabs li.current{
 	text-align: center;
 }
 
+
+
+    	  .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+
+        /* 숨기기 */
+        z-index: -1;
+        opacity: 0;
+      }
+
+      .show {
+        opacity: 1;
+        z-index: 1000;
+        transition: all 0.5s;
+      }
+
+      .window {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      .popup {
+		padding: 10px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #ffffff;
+        box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+
+        /* 임시 지정 */
+        width: 50%;
+        height: 50%;
+
+        /* 초기에 약간 아래에 배치 */
+        transform: translate(-50%, -40%);
+		overflow-y: auto;
+      }
+
+      .show .popup {
+        transform: translate(-50%, -50%);
+        transition: all 0.5s;
+      }
+
+	  #closebtn{
+		position: fixed;
+		top: 0;
+        right: 0;
+		padding: 10px;
+	  }
+
+
 </style>
 <script type="text/javascript">
+
+function OpenModal(lqa_no){
+	var OpenModal = document.querySelector(".background" + lqa_no);
+	OpenModal.classList.add("show");
+}
+
+function CloseModal(lqa_no) {
+	var CloseModal = document.querySelector(".background" + lqa_no);
+	CloseModal.classList.remove("show");
+}
+
+
+
 $(document).ready(function(){
 	   
 	  $('ul.tabs li').click(function(){
@@ -169,7 +241,7 @@ $(document).ready(function(){
 		html = "<tr>";
 		html += "<td>" + lqa_no[i] + "</td>";
 		html += "<td>" + c_name[i] + "</td>";
-		html += "<td>" + lqa_title[i] + "</td>";
+		html += "<td>"+"<a href=javascript:OpenModal('"+lqa_no[i]+"')>" + lqa_title[i] + "</a></td>";
 		html += "<td>" + u_id[i] + "</td>";
 		html += "<td>" + lqa_date[i] + "</td>";
 		html += "<td>" + confirm[i] + "</td>";		
@@ -243,7 +315,7 @@ function select(category){
 		<div style="padding-top: 20px; text-align: center;">
 				<div style="width:500px; margin: 0 auto">
 					 <input type="text" class="form-control" style="width: 350px;display: inline-block;" placeholder="궁금한 질문을 검색해보세요!">
-					 <button type="button" class="btn btn-success" style="display: inline-block;">Search</button>
+					 <button type="button"  class="btn btn-success" style="display: inline-block;">Search</button>
 				</div>	
 				<br>
 				<c:forEach items="${category }" var = "c">
@@ -264,25 +336,33 @@ function select(category){
 						    </tr>
 						  </thead>
 						<c:forEach items="${list }" var = "list"> 
-						  <tbody id = "detailTable"> 
-						     <%-- <tr role="alert">
-						      <th>${list.lqa_no }</th>
-						      <td>${list.c_name }</td>
-						      <td>${list.lqa_title }</td>
-						      <td>${list.lqa_date }</td>
-						      <td>${list.u_id }</td>
-						      <td>
-						      	<a href="#" class="close" data-dismiss="alert" aria-label="Close">
-				            	<span aria-hidden="true"><i class="fa fa-close"></i></span></a>
-				        	</td>
-						    </tr>   --%>
+						  <tbody id = "detailTable">
+						   
+						   
+						   
 						  </tbody>
-						  </c:forEach>
+						  
+						  
+							<div class="background background${list.lqa_no }">
+								<div class="window">
+									<div class="popup">
+										<button id="closebtn" class="btn btn-outline-dark" onclick="CloseModal(${list.lqa_no});">닫기</button>
+										<h2 class="card-title" style="text-align: left">${list.lqa_title }</h2>
+										<h6 style="text-align: left"> ${list.u_id }</h6>
+										<p class="card-text">
+										<label style="border: 1px solid rgb(201, 236, 219); width: 750px; height: 300px;">${list.lqa_content }</label>
+										</p>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
 						</table>
 					
+
 					
 					
-					<%-- <table border="1" style="width: 600px; margin: 0 auto;">
+					
+		<%--			<table border="1" style="width: 600px; margin: 0 auto;">
 					<c:forEach items="${list }" var = "list"> 
 					<tr>
 						<th><img style="width: 50px; height: 50px;" id="up" alt="" src="./img/q.png" title="질문"></th>
@@ -296,7 +376,7 @@ function select(category){
                     	${time }</h6></td>
 					</tr>
 					</c:forEach>
-					</table> <br> --%>
+					</table> <br>
 					<table>
 					<tr>
 						<td style="word-break:break-all; width: 820px">${dto.vq_content }</td>
@@ -304,7 +384,7 @@ function select(category){
 					</table>
 					<br>
 				</div>
-<%-- 				<div class="row tab-content" id="tab-2">
+ 				<div class="row tab-content" id="tab-2">
 				<c:forEach items="${RecentList }" var="i">
 					<div class="col-sm-6 col-md-4">
 						<div id="content">
@@ -341,8 +421,8 @@ function select(category){
 							</div>
 						</div>
 					</div>
-				</c:forEach>
-			</div> --%>
+				</c:forEach>--%>
+			</div> 
 		</div>
 	</div>
 </div>
