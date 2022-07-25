@@ -58,7 +58,9 @@ public class PaymentController {
 	         }else {
 	        		year = Integer.parseInt(now.format(formatter));
 	         }
+	         
 	        String year1 = null;
+	        
 	         List<Map<String, Object>> list = paymentService.payment(year);
 	         int cnt = 0;
 	         for(int i=0; i<list.size(); i++) {
@@ -82,6 +84,7 @@ public class PaymentController {
 	         
 	         //원형 그래프 메소드
 	        List<String> circle = paymentService.circle();
+	        System.out.println(circle);
 	        List<String> gender = paymentService.gender();
 	        
 	         mv.addObject("circle",circle);

@@ -112,9 +112,6 @@ rel="stylesheet">
 
 <script type="text/javascript">
 window.onload = function() {
-	console.log("");
-	console.log("[window onload] : [start]");
-	console.log("");
 
 	/* [bar 세로 막대 : 그리기 실시] */
 	drawBarHeight();

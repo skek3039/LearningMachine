@@ -350,8 +350,7 @@ function select(category){
 										<h2 class="card-title" style="text-align: left">${list.lqa_title }</h2>
 										<h6 style="text-align: left"> ${list.u_id }</h6>
 										<p class="card-text">
-										<label style="border: 1px solid rgb(201, 236, 219); width: 750px; height: 300px;"><strong>Q</strong> ${list.lqa_content }</label>
-										<label style="border: 1px solid rgb(201, 236, 219); width: 750px; height: 300px;"><strong>A</strong> ${list.lqar_content }</label>
+										<label style="border: 1px solid rgb(201, 236, 219); width: 750px; height: 300px;">${list.lqa_content }</label>
 										</p>
 									</div>
 								</div>
@@ -363,7 +362,29 @@ function select(category){
 					
 					
 					
-		<%--<div class="row tab-content" id="tab-2">
+		<%--			<table border="1" style="width: 600px; margin: 0 auto;">
+					<c:forEach items="${list }" var = "list"> 
+					<tr>
+						<th><img style="width: 50px; height: 50px;" id="up" alt="" src="./img/q.png" title="질문"></th>
+							<td style="padding-top: 10px; word-break:break-all; width: 750px"><h5>${list.lqa_title }</h5></td>
+						</tr>
+					<tr>
+						<td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/id.png" title="id">
+						${dto.u_id }</h6></td><td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/date.png" title="date">
+						<fmt:parseDate value="${list.lqa_date }" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
+                        <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
+                    	${time }</h6></td>
+					</tr>
+					</c:forEach>
+					</table> <br>
+					<table>
+					<tr>
+						<td style="word-break:break-all; width: 820px">${dto.vq_content }</td>
+					</tr>
+					</table>
+					<br>
+				</div>
+ 				<div class="row tab-content" id="tab-2">
 				<c:forEach items="${RecentList }" var="i">
 					<div class="col-sm-6 col-md-4">
 						<div id="content">
@@ -405,7 +426,8 @@ function select(category){
 		</div>
 	</div>
 </div>
-	<%-- <jsp:include page="./team.jsp"/> --%>
+
+
 	<jsp:include page="./footer.jsp" />
 
 
