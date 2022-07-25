@@ -18,7 +18,7 @@
 
 <!-- Google Web Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" />
 <link
 	href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
 	rel="stylesheet">
@@ -277,24 +277,38 @@ $(document).ready(function(){
 				<br>	
 				<div id="content">
 				<div class="row tab-content current" id="tab-1">
-					<table class="table table-hover" style="width: 90%; margin: 0 auto" >
+					<table class="table table-hover" style="width: 90%; height:700px; margin: 0 auto" >
 						  <thead class="thead-dark">
 						    <tr>
-						      <th>ID no.</th>
-						      <th>${boardDetail.b_no }</th>
-						      <th>제목</th>
-						      <th>${boardDetail.b_title }</th>
-						      <th>날짜</th>
-						      <th>${boardDetail.b_date }</th>
+						      <th style="width: 100px;">No. ${boardDetail.b_no }</th>
+						      <th style="background-color :#F0FFF0; width: 100px;">제목</th>
+						      <th style="text-align: left;">${boardDetail.b_title }</th>
+						      <th style="background-color :#F0FFF0; width: 100px;">조회수</th>
+						      <th style="width: 80px;">${boardDetail.b_view }</th>
+						      <th style="background-color :#F0FFF0; width: 100px;">날짜</th>
+						      <th style="width: 150px;">${boardDetail.b_date }</th>
 						    </tr>
 						  </thead>
-						
 						  <tbody id = "detailTable">
-						   
-						   
-						   
-						  </tbody>
-						  
+						  	<tr>
+						  		<td colspan="7"> ${boardDetail.b_content } </td>
+						  	</tr>
+						  	<tr>
+						  		<td colspan="7" style="height: 15px; text-align: left;background-color :#F0FFF0;">글쓴이<small style="text-align: right">2022.10.20</small> </td>
+						  	</tr>
+						  	<tr>
+						  		<td colspan="7" style="height: 80px;text-align: left;">내용내뇽요요요요ㅛ용ㅇ</td>
+						  	</tr>
+						  </tbody>	
+						  <tfoot>
+						  	<tr>
+						  		<td colspan="7"><textarea style="width: 100%; height: 70px;">로그인한 사람만 댓글을 달 수 있습니다.</textarea> </td>
+						  	</tr>
+						  	<tr>
+						  		<td colspan="7"><button>등록</button></td>
+						  	</tr>
+						  </tfoot>					   
+						 						   
 						</table>
 						  
 							<%-- <div class="background background${board.lqa_no }">

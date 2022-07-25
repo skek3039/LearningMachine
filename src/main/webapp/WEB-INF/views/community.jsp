@@ -390,12 +390,12 @@ function select(category){
 						</c:forEach>
 						</table>
 					
-	<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
 			</div>			
-					
+	
 					
 		<div class="row tab-content" id="tab-2">
 		<jsp:include page="./board.jsp"/>
+	
 		
 			<%-- <table class="table table-hover" style="width: 90%; margin: 0 auto" >
 						  <thead class="thead-dark">
@@ -417,11 +417,13 @@ function select(category){
 						</c:forEach>
 			</table>	 --%>
 		</div> 
-		
+
 		
 	
 		
 </div>
+<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
+					
 	</div>
 	<%-- <jsp:include page="./team.jsp"/> --%>
 	<jsp:include page="./footer.jsp" />

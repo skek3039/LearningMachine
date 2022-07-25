@@ -18,7 +18,7 @@
 						  <tbody id = "detailTable">
 						   <tr>
 						   		<td>${b.b_no }</td>
-						   		<td><a href = "./boardDetail?b_no=${b.b_no }"> ${b.b_title } </a></td>
+						   		<td><a href = "./boardDetail?b_no=${b.b_no }"> ${b.b_title } </a> <small></small></td>
 						   		<td>${b.u_nickname }</td>
 						   		<td>${b.b_date }</td>
 						   		<td>${b.b_view }</td>
@@ -26,4 +26,8 @@
 						  </tbody>
 						</c:forEach>
 			</table>	
-		
+		<br>
+		<br>
+		<div id = "more_btn_div" align="center">
+			<a id="more_btn_a" href="javascript:moreList();"><button class="btn btn-outline-dark">More</button></a>
+		</div>
