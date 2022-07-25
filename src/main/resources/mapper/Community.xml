@@ -24,7 +24,7 @@
   	
   	<select id="communitySearch" parameterType="String" resultType="LectureDTO">
   		select * 
-  		from lecture_qna
+  		from lecture_qna_view
   		where lqa_title LIKE '%' #{lqa_title } '%'
   	</select>	
   
