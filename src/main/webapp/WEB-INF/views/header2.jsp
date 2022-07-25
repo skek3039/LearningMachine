@@ -41,7 +41,7 @@
 										</tr>
 									</thead>
 								</c:when>
-								<c:when test="${fn:length(RegistedLecture) > 5}">
+								<c:when test="${fn:length(RegistedLecture) >= 5}">
 									<tbody>
 										<c:forEach items="${RegistedLecture}" var="i" begin ="0" end = "4">
 											<tr>
@@ -90,7 +90,7 @@
 										</tr>
 									</thead>
 								</c:when>
-								<c:when test="${fn:length(RecentVideo) > 5}">
+								<c:when test="${fn:length(RecentVideo) >= 5}">
 									<tbody>
 										<c:forEach items="${RecentVideo}" var="i" begin ="0" end = "4">
 											<tr>
@@ -175,7 +175,7 @@
 										</tr>
 									</thead>
 								</c:when>
-								<c:when test="${fn:length(RecentMessage) > 5}">
+								<c:when test="${fn:length(RecentMessage) >= 5}">
 									<tbody>
 										<c:forEach items="${RecentMessage}" var="i" begin ="0" end = "4">
 											<tr>

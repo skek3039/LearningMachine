@@ -128,7 +128,8 @@
 			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 			allowfullscreen></iframe>
 	</div>
-	${Video}
+	${Video}<br><br><br>
+	${VideoQnas}
 </body>
 
 </html>

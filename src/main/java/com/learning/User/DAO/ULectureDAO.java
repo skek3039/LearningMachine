@@ -51,14 +51,9 @@ public class ULectureDAO {
 		return sqlSession.selectOne(namespace + ".ULectureQnaReplys", lqa_no);
 	}
 
-	public List<ULectureViedoQnaForm> LectureVideoQna(String l_code) {
+	public List<ULectureViedoQnaForm> LectureVideoQnas(int v_no) {
 
-		return sqlSession.selectList(namespace + "ULectureVideoQnas", l_code);
-	}
-
-	public List<ULectureVideoQnaReplyForm> LectureVideoQnaReply(String l_code) {
-
-		return sqlSession.selectList(namespace + "ULectureVideoQnaReplys", l_code);
+		return sqlSession.selectList(namespace + ".ULectureVideoQnas", v_no);
 	}
 	
 	public List<ULectureReviewForm> LectureReviews(String l_code){
@@ -66,4 +61,19 @@ public class ULectureDAO {
 		return sqlSession.selectList(namespace + ".ULectureReviews", l_code);
 	}
 	
+	//20220725
+	public int InsertLectureReview(ULectureReviewForm form) {
+		
+		return sqlSession.insert(namespace + ".InsertLectureReview", form);
+	}
+	
+	public int InsertLectureQnA(ULectureQnaForm form) {
+		
+		return sqlSession.insert(namespace + ".InsertLectureQnA", form);
+	}
+	
+	public int InsertLectureVideoQnA(ULectureViedoQnaForm form) {
+		
+		return sqlSession.insert(namespace + ".InsertLectureVideoQnA", form);
+	}
 }

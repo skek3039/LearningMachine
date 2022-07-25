@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.learning.Admin.Service.PaymentService;
-import com.learning.DTO.PaymentDTO;
 import com.learning.User.DTO.UPaymentDTO;
-import com.learning.User.Form.PaymentForm;
 import com.learning.User.Form.ULectureForm;
 import com.learning.User.Form.URegiForm;
 import com.learning.User.Service.ULectureService;

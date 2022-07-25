@@ -55,6 +55,9 @@
 			font-style: normal;
 		}
 
+		#rDone{
+			margin: 0 auto;
+		}
 		body {
 			font-family: LeferiPoint-WhiteObliqueA;
 		}
@@ -303,7 +306,7 @@
 								<h6>${LectureDetail.l_name} 강의 가격</h6>
 								<h4><strong
 										style="color: red; vertical-align: middle;">${LectureDetail.l_price}</Strong>원
-									</h6>
+									</h4>
 							</div>
 						</div>
 					</div>
@@ -330,7 +333,7 @@
 					</div>
 					<c:choose>
 						<c:when test="${sessionScope.u_id eq null}">
-							<a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="./Pay?l_code=${LectureDetail.l_code}"">결제하기</a>
+							<a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="./Pay?l_code=${LectureDetail.l_code}">결제하기</a>
 							<a href=" ./Wish?l_code=${LectureDetail.l_code}" class="btn btn-outline-light rounded-pill border-2 py-3 px-5 animated slideInRight"
 									style="color: gray;">찜하기</a>
 						</c:when>
@@ -346,7 +349,7 @@
 									</c:if>
 								</c:when>
 								<c:otherwise>
-									<a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="./Pay?l_code=${LectureDetail.l_code}"">결제하기</a>
+									<a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="./Pay?l_code=${LectureDetail.l_code}">결제하기</a>
 									<a href=" ./Wish?l_code=${LectureDetail.l_code}" class="btn btn-outline-light rounded-pill border-2 py-3 px-5 animated slideInRight"
 										style="color: gray;">찜하기</a>
 								</c:otherwise>
@@ -370,7 +373,23 @@
 			</ul>
 		</div>
 		<div class="row tab-content current" id="tab-1">
-			<div class="row gx-4 gx-lg-5">
+			<!-- 로그인 되어있으면서 결제가 된 강의라면 리뷰 남기기 버튼 및 창 생성 -->
+			<c:if test="${sessionScope.u_id ne null && LectureDetail.payment_whether eq 1}">
+				<a class="btn btn-primary" role="button" onclick="OpenModal('Review${LectureDetail.l_code}')"
+					style="width: 120px; margin: 4px auto; right: 0;">리뷰남기기</a>
+				<div class="background backgroundReview${LectureDetail.l_code}">
+					<div class="window">
+						<div class="popup">
+							<button id="closebtn" onclick="CloseModal('Review${LectureDetail.l_code}');">닫기</button>
+							입력창들
+						</div>
+						<div>
+							<div></div>
+						</div>
+					</div>
+				</div>
+			</c:if>
+			<div class="row gx-4 gx-lg-5" style="margin: 0 auto;">
 				<c:forEach items="${LectureReviews}" var="i">
 					<div class="col-md-4 mb-5" style="height: 330px;">
 						<div class="card h-100">
@@ -413,11 +432,44 @@
 			</div>
 		</div>
 		<div class="row tab-content" id="tab-2">
-			<div class="row gx-4 gx-lg-5">
+			<c:if test="${sessionScope.u_id ne null}">
+				<a class="btn btn-primary" role="button" onclick="OpenModal('qna${LectureDetail.l_code}')"
+					style="width: 120px; margin: 4px auto; right: 0;">질문하기</a>
+				<div class="background backgroundqna${LectureDetail.l_code}">
+					<div class="window">
+						<div class="popup">
+							<button id="closebtn" onclick="CloseModal('qna${LectureDetail.l_code}');">닫기</button>
+							질문입력창
+						</div>
+						<div>
+							<div></div>
+						</div>
+					</div>
+				</div>
+			</c:if>
+			<div class="row gx-4 gx-lg-5" style="margin: 0 auto;">
 				<c:forEach items="${LectureQnas}" var="i">
+					<!-- 질문과 답변 모달창 -->
+					<div class="background background${i.lqa_no}${i.u_id}">
+						<div class="window">
+							<div class="popup">
+								<button id="closebtn" onclick="CloseModal('${i.lqa_no}${i.u_id}');">닫기</button>
+								<h2 class="card-title">답변된 질문</h2>
+								${i.lqar_title}<br>
+								${i.lqar_content}
+							</div>
+							<div>
+								<div></div>
+							</div>
+						</div>
+					</div>
+					<!--/ 질문과 답변 모달창 -->
 					<div class="col-md-4 mb-5" style="height: 330px;">
 						<div class="card h-100">
 							<div class="card-body">
+								<c:if test="${i.lqa_confirm eq 1}">
+									<div id="rDone" class="d-inline-block border rounded-pill text-primary px-4 mb-3">답변완료</div>
+								</c:if>
 								<h2 class="card-title">${i.lqa_title}</h2>
 								<h6>${i.u_nickname}</h6>
 								<c:set var="content" value="${i.lqa_content}" />
@@ -429,22 +481,11 @@
 										<p class="card-text">
 											${fn:substring(content,0,101)}
 										</p>
-										<button onclick="OpenModal(${i.lqa_no});">자세히 보기</button>
-										<div class="background background${i.lqa_no}">
-											<div class="window">
-												<div class="popup">
-													<button id="closebtn" onclick="CloseModal(${i.lqa_no});">닫기</button>
-													<h2 class="card-title">${i.lqa_title}</h2>
-													<h6>${i.u_nickname}</h6>
-													<p class="card-text">${i.lqa_content}</p>
-												</div>
-												<div>
-													<div></div>
-												</div>
-											</div>
-										</div>
 									</c:otherwise>
 								</c:choose>
+								<c:if test="${i.lqa_confirm eq 1}">
+									<button onclick="OpenModal('${i.lqa_no}${i.u_id}');">답변 보기</button>
+								</c:if>
 							</div>
 							<div class="card-footer">
 								<h6><small>${i.lqa_date}</small></h6>

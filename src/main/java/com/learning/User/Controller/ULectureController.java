@@ -63,7 +63,7 @@ public class ULectureController {
 		String l_code = lectureService.CheckLectureRegister(v_no);
 		// n번째 동영상(미리보기 3개를 위해 key값이 1부터 올라가는 값을 파라미터로 받음)
 		Map<Integer, VideoForm> Videos = null;
-		VideoForm form = null;
+		VideoForm videoform = null;
 		int order = 0;
 
 		if (l_code == null) {
@@ -87,10 +87,15 @@ public class ULectureController {
 				UAForm.setU_id(u_id);
 				UAForm.setL_code(l_code);
 				userService.LectureVideoAttendance(UAForm);
+				
+				videoform = Videos.get(order);
+				
 				rq.setAttribute("LectureVideos", lectureService.LectureVideos(u_id, l_code));
-				rq.setAttribute("Video", Videos.get(order));
+				rq.setAttribute("Video", videoform);
+				rq.setAttribute("VideoQnas", lectureService.LectureVideoQnas(v_no));
 			} catch (Exception e) {
 
+				e.printStackTrace();
 				return "redirect:/404";
 			}
 			return "user/video";
@@ -111,9 +116,13 @@ public class ULectureController {
 			} else {
 				try {
 
+					videoform = Videos.get(order);
+					
 					rq.setAttribute("LectureVideos", lectureService.LectureVideos(u_id, l_code));
-					rq.setAttribute("Video", Videos.get(order));
+					rq.setAttribute("Video", videoform);
+					rq.setAttribute("VideoQnas", lectureService.LectureVideoQnas(v_no));
 				} catch (Exception e) {
+					e.printStackTrace();
 
 					return "redirect:/404";
 				}

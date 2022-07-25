@@ -106,9 +106,10 @@ public class ULectureService {
 		List<ULectureQnaForm> qnaList = lectureDAO.LectureQna(l_code);
 		ULectureQnaReplyForm reply = null;
 
+		//Left Join으로 이렇게 복잡하게 할 필요 없음.
 		for (ULectureQnaForm qna : qnaList) {
 
-			reply = lectureDAO.LectureQnaReply(qna.getLqa_no()); //밖으로뺴
+			reply = lectureDAO.LectureQnaReply(qna.getLqa_no());
 			
 			qna.setLqa_date(Util.YMD(qna.getLqa_date()));
 			
@@ -119,6 +120,7 @@ public class ULectureService {
 				qna.setT_id(reply.getT_id());
 				qna.setT_name(reply.getT_name());
 				qna.setT_nickname(reply.getT_nickname());
+				qna.setLqar_title(reply.getLqar_title());
 				qna.setLqar_content(reply.getLqar_content());
 				qna.setLqar_date(reply.getLqar_date());
 				
@@ -170,6 +172,11 @@ public class ULectureService {
 		
 	}
 
+	public List<ULectureViedoQnaForm> LectureVideoQnas(int v_no){
+		
+		return lectureDAO.LectureVideoQnas(v_no);
+	}
+	
 	public String CheckLectureRegister(int v_no) {
 		
 		return lectureDAO.VideoLectureCheck(v_no);
