@@ -29,6 +29,19 @@
 		<if test="lqa_title != null">
   		where q.lqa_title LIKE '%' #{lqa_title } '%'
   		</if>
+  	</select>
+  	
+  	
+  	<select id="boardList" resultType="BoardDTO">
+  		select * 
+  		from user_board
+  		order by b_no desc;
   	</select>	
+  	
+  	<select id="boardDetail" parameterType="Integer" resultType="BoardDTO">
+  		select * 
+  		from user_board
+  		where b_no = ${b_no}
+  	</select>
   
   </mapper>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.learning.Common.DAO.CommunityDAO;
+import com.learning.DTO.BoardDTO;
 import com.learning.DTO.LectureDTO;
 
 @Service
@@ -28,13 +29,17 @@ public class CommunityService {
 		return communityDAO.qnaList(map);
 	}
 
-	public List<String> categoryList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public List<LectureDTO> communitySearch(String lqa_title) {
 		return communityDAO.communitySearch(lqa_title);
+	}
+
+	public List<BoardDTO> boardList() {
+		return communityDAO.boardList();
+	}
+
+	public BoardDTO boardDetail(int b_no) {
+		return communityDAO.boardDetail(b_no);
 	}
 
 }

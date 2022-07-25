@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.JsonObject;
 import com.learning.Admin.Service.AdminService;
 import com.learning.Common.Service.CommunityService;
+import com.learning.DTO.BoardDTO;
 import com.learning.DTO.LectureDTO;
 import com.learning.DTO.PageDTO;
 
@@ -89,15 +90,28 @@ public class HomeController {
 		}
 		map.put("page", page);
 		List<String> list = communityService.QnAList(map);
+		List<BoardDTO> board = communityService.boardList();
 		
 		List<String> category = adminService.categoryList();
 		mv.addObject("list",list);
 		
+		mv.addObject("board",board);
 		mv.addObject("category",category);
 		mv.addObject("paginationInfo", paginationInfo);
 		mv.addObject("pageNo", pageNo);
 		return mv;
 	}
+	
+	
+	@GetMapping(value = "/boardDetail")
+	public ModelAndView boardDetail(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("boardDetail");
+		int b_no = Integer.parseInt(request.getParameter("b_no"));
+		BoardDTO board = communityService.boardDetail(b_no);
+		mv.addObject("boardDetail",board);
+		return mv;
+	}
+	
 	
 	
 	@ResponseBody
@@ -109,7 +123,6 @@ public class HomeController {
 			map.put("c_name", request.getParameter("c_name"));
 		}
 		List<String> list1 = communityService.QnAList(map);
-		System.out.println(list1);
 		return list1; 	
 	}	
 

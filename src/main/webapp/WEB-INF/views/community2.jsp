@@ -273,8 +273,7 @@ function select(category){
 	let c_name = category;
 	let arr = new Array();
 	
-	$("#detailTable").empty();  
-	$("#detailTable").remove();  
+	
 	 
 	var html = "";
 	$.ajax({
@@ -284,7 +283,8 @@ function select(category){
 		data : {"c_name" : c_name},
 		success : function(data){	
 			var result = data.json;
-			alert(data);
+			$("#detailTable").empty();  
+			$("#detailTable").remove();  
 			for(var i=0 in data){     
 				                                                   
 				html = "<tr>";

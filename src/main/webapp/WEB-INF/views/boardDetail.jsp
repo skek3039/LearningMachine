@@ -239,81 +239,8 @@ $(document).ready(function(){
 	    $(this).addClass('current');
 	    $("#"+tab_id).addClass('current');
 	  })
-	  
-	  
-	  var html = "";
-	  
-	//Q&A부분
-	  var lqa_title = new Array();	
-	  var lqa_no = new Array();
-	  var lqa_date = new Array();
-	  var c_name = new Array();
-	  var u_id = new Array();
-	  var confirm = new Array();
-	  <c:forEach items="${list }" var = "l">
-	 	lqa_title.push("${l.lqa_title}");
-		lqa_no.push("${l.lqa_no}");
-		lqa_date.push("${l.lqa_date}");
-		c_name.push("${l.c_name}");
-		u_id.push("${l.u_id}");
-		confirm.push("${l.confirm}");
-	 </c:forEach>
-	 for(var i=0 in lqa_no){ 
-		html = "<tr>";
-		html += "<td>" + lqa_no[i] + "</td>";
-		html += "<td>" + c_name[i] + "</td>";
-		html += "<td>"+"<a href=javascript:OpenModal('"+lqa_no[i]+"')>" + lqa_title[i] + "</a></td>";
-		html += "<td>" + u_id[i] + "</td>";
-		html += "<td>" + lqa_date[i] + "</td>";
-		html += "<td>" + confirm[i] + "</td>";		
-		html += "</tr>"; 
-		$("#detailTable").append(html); 
-	 }
-	 
-	 
-	 //자유게시판 
-	 
-	 
-	 
-	 
-	 
-	  
-	});
-	
-	
-function select(category){
-	let c_name = category;
-	let arr = new Array();
-	 
-	var html = "";
-	$.ajax({
-		url : "./community_category",
-		type : "get",
-		dataType : "json",
-		data : {"c_name" : c_name},
-		success : function(data){	
-			var result = data.json;
-				$("#detailTable").empty();  
-				$("#detailTable").remove();  
+}); 
 
-			for(var i=0 in data){                                                        
-				html = "<tr>";
-				html += "<td>" + data[i].lqa_no + "</td>";
-				html += "<td>" + data[i].c_name + "</td>";
-				html += "<td>" + data[i].lqa_title + "</td>";
-				html += "<td>" + data[i].u_id + "</td>";
-				html += "<td>" + data[i].lqa_date + "</td>";
-				html += "<td>" + data[i].confirm + "</td>";
-				html += "</tr>";
-				
-				$("#detailTable").append(html);   
-			}
-		},
-		error : function(){
-			alert("실패 ㅠ");
-			}
-		});
-}
 </script>
 </head>
 
@@ -337,8 +264,8 @@ function select(category){
 		</div>
 		<div>
 			<ul class="tabs">
-				<li class="tab-link current" data-tab="tab-1">강의 QnA</li>
-				<li class="tab-link" data-tab="tab-2">자유주제</li>
+				<li class="tab-link" data-tab="tab-1">강의 QnA</li>
+				<li class="tab-link current" data-tab="tab-2">자유주제</li>
 			</ul>
 		</div>
 		<div style="padding-top: 20px; text-align: center;">
@@ -347,9 +274,6 @@ function select(category){
 					 <button type="button" id="search" class="btn btn-success" style="display: inline-block;" onclick="search()">Search</button>
 				</div>	
 				<br>
-				<c:forEach items="${category }" var = "c">
-					<p id="category"><a href="javascript:select('${c.c_name}')">${c.c_name }</a></p>		
-				</c:forEach>
 				<br>	
 				<div id="content">
 				<div class="row tab-content current" id="tab-1">
@@ -357,22 +281,23 @@ function select(category){
 						  <thead class="thead-dark">
 						    <tr>
 						      <th>ID no.</th>
-						      <th>강의카테고리</th>
+						      <th>${boardDetail.b_no }</th>
 						      <th>제목</th>
-						      <th>닉네임</th>
+						      <th>${boardDetail.b_title }</th>
 						      <th>날짜</th>
-						      <th>답변여부</th>
+						      <th>${boardDetail.b_date }</th>
 						    </tr>
 						  </thead>
-						<c:forEach items="${list }" var = "list"> 
+						
 						  <tbody id = "detailTable">
 						   
 						   
 						   
 						  </tbody>
 						  
+						</table>
 						  
-							<div class="background background${list.lqa_no }">
+							<%-- <div class="background background${board.lqa_no }">
 								<div class="window">
 									<div class="popup">
 										<button id="closebtn" class="btn btn-outline-dark" onclick="CloseModal(${list.lqa_no});">닫기</button>
@@ -386,36 +311,16 @@ function select(category){
 										</p>
 									</div>
 								</div>
-							</div>
-						</c:forEach>
-						</table>
+							</div> --%>
+						
 					
-	<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
 			</div>			
 					
 					
 		<div class="row tab-content" id="tab-2">
 		<jsp:include page="./board.jsp"/>
 		
-			<%-- <table class="table table-hover" style="width: 90%; margin: 0 auto" >
-						  <thead class="thead-dark">
-						    <tr>
-						      <th>ID no.</th>
-						      <th>강의카테고리</th>
-						      <th>제목</th>
-						      <th>닉네임</th>
-						      <th>날짜</th>
-						      <th>답변여부</th>
-						    </tr>
-						  </thead>
-						<c:forEach items="${list }" var = "list"> 
-						  <tbody id = "detailTable">
-						   
-						   
-						   
-						  </tbody>
-						</c:forEach>
-			</table>	 --%>
+		
 		</div> 
 		
 		
@@ -423,7 +328,6 @@ function select(category){
 		
 </div>
 	</div>
-	<%-- <jsp:include page="./team.jsp"/> --%>
 	<jsp:include page="./footer.jsp" />
 
 </div>

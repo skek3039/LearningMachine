@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.learning.DTO.BoardDTO;
 import com.learning.DTO.LectureDTO;
 
 @Repository
@@ -24,6 +25,14 @@ public class CommunityDAO {
 
 	public List<LectureDTO> communitySearch(String lqa_title) {
 		return sqlSession.selectList("Community.communitySearch", lqa_title);
+	}
+
+	public List<BoardDTO> boardList() {
+		return sqlSession.selectList("Community.boardList");
+	}
+
+	public BoardDTO boardDetail(int b_no) {
+		return sqlSession.selectOne("Community.boardDetail",b_no);
 	}
 
 }

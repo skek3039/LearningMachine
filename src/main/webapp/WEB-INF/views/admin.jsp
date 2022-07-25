@@ -103,7 +103,7 @@
             <h3>&nbsp;&nbsp;관리자님 안녕하세요.</h3>
             <hr style="border: solid 1px;">
          </div>
-         <div style=" width: 800px; height: 995px;">
+         <div style=" width: 800px;">
             <div class="row no-gutters align-items-center">
                <div class="col-auto">
                   <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
@@ -112,9 +112,9 @@
                </div>
             </div>
             <br>
-         </div>
+ 		</div>
       
-         <div class="row g-4" style="position: absolute; top: 250px; right: 500px;">
+         <div class="row g-4">
              <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
@@ -194,7 +194,7 @@
                             </div>
                         </div>
                     </div>
-                 <div class="row" style="position: absolute; top: 400px; right: 600px;">
+                 <div class="row">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="service-item rounded h-100">
                             <div class="d-flex justify-content-between">
@@ -237,8 +237,8 @@
                             </div>
                         </div>
                     </div>             
-               </div>
-      
+  
+      </div>
       <jsp:include page="./footer.jsp" />
  </div>       
                         

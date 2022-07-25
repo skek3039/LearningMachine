@@ -12,6 +12,7 @@
 		<typeAlias type="com.learning.DTO.BannedDTO" alias="bannedDTO"/>		
 		<typeAlias type="com.learning.DTO.TeacherDTO" alias="teacherDTO"/>		
 		<typeAlias type="com.learning.DTO.PaymentDTO" alias="paymentDTO"/>		
+		<typeAlias type="com.learning.DTO.BoardDTO" alias="BoardDTO"/>		
 	</typeAliases>  
   
   </configuration>
