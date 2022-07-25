@@ -109,7 +109,7 @@ public class HomeController {
 			map.put("c_name", request.getParameter("c_name"));
 		}
 		List<String> list1 = communityService.QnAList(map);
-		
+		System.out.println(list1);
 		return list1; 	
 	}	
 

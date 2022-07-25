@@ -284,8 +284,9 @@ function select(category){
 		data : {"c_name" : c_name},
 		success : function(data){	
 			var result = data.json;
-
-			for(var i=0 in data){                                                        
+			alert(data);
+			for(var i=0 in data){     
+				                                                   
 				html = "<tr>";
 				html += "<td>" + data[i].lqa_no + "</td>";
 				html += "<td>" + data[i].c_name + "</td>";
