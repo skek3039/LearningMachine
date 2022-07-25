@@ -103,7 +103,7 @@
             <h3>&nbsp;&nbsp;관리자님 안녕하세요.</h3>
             <hr style="border: solid 1px;">
          </div>
-         <div style=" width: 800px; height: 995px; margin: 0 auto;">
+         <div style=" width: 800px; height: 995px;">
             <div class="row no-gutters align-items-center">
                <div class="col-auto">
                   <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
