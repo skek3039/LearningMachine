@@ -194,7 +194,7 @@
                             </div>
                         </div>
                     </div>
-                 <div class="row" style="position: absolute; top: 400px; right: 500px;">
+                 <div class="row" style="position: absolute; top: 400px; right: 600px;">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="service-item rounded h-100">
                             <div class="d-flex justify-content-between">

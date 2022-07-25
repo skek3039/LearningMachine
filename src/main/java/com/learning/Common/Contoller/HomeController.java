@@ -110,7 +110,6 @@ public class HomeController {
 		}
 		List<String> list1 = communityService.QnAList(map);
 		
-		System.out.println(list1);
 		return list1; 	
 	}	
 

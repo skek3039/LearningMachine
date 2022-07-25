@@ -233,6 +233,11 @@ $(document).ready(function(){
 	    $(this).addClass('current');
 	    $("#"+tab_id).addClass('current');
 	  })
+	  
+	  
+	  
+	  
+	  
 	  var html = "";
 	  
 		  
@@ -248,7 +253,7 @@ $(document).ready(function(){
 		lqa_date.push("${l.lqa_date}");
 		c_name.push("${l.c_name}");
 		u_id.push("${l.u_id}");
-		confirm.push("${l.lqa_confirm}");
+		confirm.push("${l.confirm}");
 	 </c:forEach>
 	 for(var i=0 in lqa_no){ 
 		html = "<tr>";
@@ -364,7 +369,9 @@ function select(category){
 										<h6 style="text-align: left"> ${list.u_id }</h6>
 										<p class="card-text">
 										<label style="border: 1px solid rgb(201, 236, 219); width: 750px; height: 300px;"><strong>Q</strong> ${list.lqa_content }</label>
+										<c:if test="${list.lqar_content ne null }">
 										<label style="border: 1px solid rgb(201, 236, 219); width: 750px; height: 300px;"><strong>A</strong> ${list.lqar_content }</label>
+										</c:if>
 										</p>
 									</div>
 								</div>
@@ -376,45 +383,31 @@ function select(category){
 					
 					
 					
-		<%--<div class="row tab-content" id="tab-2">
-				<c:forEach items="${RecentList }" var="i">
-					<div class="col-sm-6 col-md-4">
-						<div id="content">
-							<div class="thumbnail">
-								<img src="./img/leaf.png" alt="" onclick="location.href = './LectureDetail?l_code=${i.l_code}';" width="150px">
-								<div class="caption">
-									<h3>
-										<a href="./LectureDetail?l_code=${i.l_code}">${i.l_name}</a>
-									</h3>
-									<p id ="teacher">${i.t_nickname}</p>
-									<strong style="color: red;">${i.l_price}원</strong><p><small>(${i.total_register}명 수강)</small></p>
-									<p id="category">${i.l_category }</p>
-									<c:choose>
-										<c:when test="${i.payment_whether eq 0 && sessionScope.u_id ne null}">
-											<p>
-												<a href="#" class="btn btn-default" role="button">이동하기</a>
-												<a href="#" class="btn btn-primary" role="button">찜하기</a>
-											</p>
-										</c:when>
-										<c:when test="${i.payment_whether eq 0 && sessionScope.u_id eq null}">
-											<p>
-												<a href="#" class="btn btn-default" role="button">이동하기</a>
-												<a href="#" class="btn btn-primary" role="button">찜하기(로그인)</a>
-											</p>
-										</c:when>
-										<c:otherwise>
-											<p>
-												<a href="#" class="btn btn-default" role="button">이동하기</a>
-												<a href="#" class="btn btn-primary" role="button">리뷰남기기</a>
-											</p>
-										</c:otherwise>
-									</c:choose>
-								</div>
-							</div>
-						</div>
-					</div>
-				</c:forEach>--%>
-			</div> 
+		<div class="row tab-content" id="tab-2">
+			<table class="table table-hover" style="width: 90%; margin: 0 auto" >
+						  <thead class="thead-dark">
+						    <tr>
+						      <th>ID no.</th>
+						      <th>강의카테고리</th>
+						      <th>제목</th>
+						      <th>닉네임</th>
+						      <th>날짜</th>
+						      <th>답변여부</th>
+						    </tr>
+						  </thead>
+						<c:forEach items="${list }" var = "list"> 
+						  <tbody id = "detailTable">
+						   
+						   
+						   
+						  </tbody>
+						</c:forEach>
+			</table>	
+		</div> 
+		
+		
+		</div>
+		
 		</div>
 	</div>
 </div>
