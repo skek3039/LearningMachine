@@ -95,7 +95,7 @@ function linkPage(pageNo){
 
 
 		<jsp:include page="./header.jsp" />
-		<div style=" width: 100%; height: 705px;">
+		<div style=" width: 100%; height: 950px;">
 		 <jsp:include page="./lecture_nav.jsp"/>
 		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;Q&A</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 40px;">

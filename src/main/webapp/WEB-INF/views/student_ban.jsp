@@ -96,7 +96,7 @@ function linkPage(pageNo){
 
 
 		<jsp:include page="./header.jsp" />
-		<div style=" width: 100%; height: 705px;">
+		<div style=" width: 100%; height: 950px;">
 				<jsp:include page="./lecture_nav.jsp"/>
 			<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;신고자리스트</h3><hr style="border: solid 1px;"></div>
 		 			<div class="col-sm-offset-9" style=" text-align: center; padding-left: 840px"></div>
