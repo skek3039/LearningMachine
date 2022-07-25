@@ -257,7 +257,7 @@ $(document).ready(function(){
 		html += "<td>"+"<a href=javascript:OpenModal('"+lqa_no[i]+"')>" + lqa_title[i] + "</a></td>";
 		html += "<td>" + u_id[i] + "</td>";
 		html += "<td>" + lqa_date[i] + "</td>";
-		html += "<td>" + confirm[i] + "</td>";		
+		html += "<td>" + lqa_confirm[i] + "</td>";		
 		html += "</tr>"; 
 		$("#detailTable").append(html); 
 	 }
@@ -288,7 +288,7 @@ function select(category){
 				html += "<td>" + data[i].lqa_title + "</td>";
 				html += "<td>" + data[i].u_id + "</td>";
 				html += "<td>" + data[i].lqa_date + "</td>";
-				html += "<td>" + data[i].confirm + "</td>";
+				html += "<td>" + data[i].lqa_confirm + "</td>";
 				html += "</tr>";
 				$("#detailTable").append(html);   
 			}
