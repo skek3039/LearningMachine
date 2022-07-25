@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -191,10 +192,37 @@
 					<c:forEach items="${video_List}" var="v">
 					<tr>
 						<td><a href="./video_upload_detail?v_no=${v.v_no }&l_code=${dto.l_code}">${v.v_no }</a></td>
-						<td>${v.v_videotitle }</td>
-						<td>${v.v_introduce }</td>
+						<td>
+							<c:choose>
+							<c:when test="${fn:length(v.v_videotitle ) > 10 }">
+							<c:out value="${fn:substring(v.v_videotitle , 0, 9)} ...">
+							</c:out></c:when>
+							<c:otherwise>
+							<c:out value="${v.v_videotitle  }">
+							</c:out></c:otherwise>
+							</c:choose>							
+						</td>
+						<td>
+							<c:choose>
+							<c:when test="${fn:length(v.v_introduce ) > 10 }">
+							<c:out value="${fn:substring(v.v_introduce , 0, 9)} ...">
+							</c:out></c:when>
+							<c:otherwise>
+							<c:out value="${v.v_introduce  }">
+							</c:out></c:otherwise>
+							</c:choose>							
+						</td>
 						<td>${v.l_code }</td>
-						<td>${v.v_root }</td>
+						<td>
+							<c:choose>
+							<c:when test="${fn:length(v.v_root ) > 10 }">
+							<c:out value="${fn:substring(v.v_root , 0, 9)} ...">
+							</c:out></c:when>
+							<c:otherwise>
+							<c:out value="${v.v_root  }">
+							</c:out></c:otherwise>
+							</c:choose>							
+						</td>
 					</tr>
 					</c:forEach>
 			</table>

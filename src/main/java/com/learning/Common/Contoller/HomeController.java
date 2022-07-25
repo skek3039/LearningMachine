@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,5 +113,14 @@ public class HomeController {
 		System.out.println(list1);
 		return list1; 	
 	}	
-	
+
+	//강의검색불러오기
+	@GetMapping(value = "/community_communityName" , produces="text/plain;charset=utf-8")
+	public ModelAndView community_communityName(HttpServletRequest request, HttpSession session) {	
+			String lqa_title = request.getParameter("lqa_title"); 
+			List<LectureDTO> list = communityService.communitySearch(lqa_title);	
+			ModelAndView mv = new ModelAndView("community2");				
+			mv.addObject("list",list);
+			return mv; 
+	}	
 }

@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.learning.DTO.LectureDTO;
+
 @Repository
 public class CommunityDAO {
 	@Autowired
@@ -18,6 +20,10 @@ public class CommunityDAO {
 
 	public List<String> qnaList(Map<String, Object> map) {
 		return sqlSession.selectList("Community.qnaList",map);
+	}
+
+	public List<LectureDTO> communitySearch(String lqa_title) {
+		return sqlSession.selectList("Community.communitySearch", lqa_title);
 	}
 
 }

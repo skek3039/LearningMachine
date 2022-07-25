@@ -18,7 +18,7 @@ private int lr_grade, la_no;
 private String lr_title, lr_content;
 
 private int lqa_no; 
-private String lqa_title, lqa_content, lqa_date;
+private String lqa_title, lqa_content, lqa_date, lqa_confirm;
 
 private String lqar_title, lqar_content, lqar_date;
 
