@@ -235,9 +235,6 @@ $(document).ready(function(){
 	  })
 	  
 	  
-	  
-	  
-	  
 	  var html = "";
 	  
 		  
@@ -408,7 +405,7 @@ function select(category){
 		
 		</div>
 		
-		</div>
+</div>
 	</div>
 </div>
 	<%-- <jsp:include page="./team.jsp"/> --%>
