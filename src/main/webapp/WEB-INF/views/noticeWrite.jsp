@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -8,7 +9,7 @@
 
 <head>
 <meta charset="utf-8">
-<title>글쓰기</title>
+<title>Learning Machine</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
@@ -44,54 +45,53 @@
 <link href="./resources/css/admin.css" rel="stylesheet">
 
 <style type="text/css">
-    <style>@font-face {
-        font-family: 'LeferiPoint-WhiteObliqueA';
-        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
-        font-weight: normal;
-        font-style: normal;
-    }
-
-    body {
-        font-family: LeferiPoint-WhiteObliqueA;
-    }
-
-    details {
-        border-bottom: 1px solid #efefef;
-        color: #666;
-        font-size: 16px;
-        padding: 15px;
-    }
-
-
-    details[open] summary {
-        font-weight: 800;
-    }
-
-    details > summary {
-        color: white;
-        font-size: 17px;
-        padding: 15px 0;
-    }
-    
-</style>
-
-<script type="text/javascript">
-function check(){
-	var title1 = $('input[name=title]').val();
-	if (title1.length < 1 ) {
-		alert("제목은 5자 이상이어야 합니다.");
-		$('input[name=title]').focus();
-		return false;
-	}
-	
-	var content = $('textarea[name=content]').val();
-	if (content.length < 1 ) {
-		alert("내용은 20자 이상 이어야 합니다.");
-		$('textarea[name=content]').focus();
-		return false;
-	} 
+<
+style
+>
+@font-face {
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
-</script>
+
+body {
+	font-family: LeferiPoint-WhiteObliqueA;
+}
+
+details {
+	border-bottom: 1px solid #efefef;
+	color: #666;
+	font-size: 16px;
+	padding: 15px;
+}
+
+details[open] summary {
+	font-weight: 800;
+}
+
+details>summary {
+	color: white;
+	font-size: 17px;
+	padding: 15px 0;
+}
+
+textarea {
+	width: 80%;
+	text-align: center;
+	height: 6.25em;
+	resize: none;
+	outline-color: #FE6B8B;	
+}
+
+input {
+	width: 80%;
+	text-align: center;
+	outline-color: #FE6B8B;
+}
+</style>
 
 </head>
 
@@ -109,35 +109,40 @@ function check(){
 
 
 		<jsp:include page="./header.jsp" />
-		<div style=" width: 100%;">
-		<div style="position: relative;">
-		<jsp:include page="./notice_nav.jsp"/>
-		 </div>
-		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;글쓰기</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px;padding-left: 120px; height: 750px;">
-				 <table class="table table-bordered table-sm" style=" width: 800px; margin: 0 auto;">
-				 	 <form action="./noticeWrite" method="post"  onsubmit="return check();">
-				<input type="text" name="n_title" ><br>
-				<textarea name="n_content" id="summernote"  ></textarea><br>
-				<c:if test="${sessionScope.u_authority == 7 }">
-				<button type="submit" style="margin-left: 92%;">글쓰기</button>
-				</c:if>
-					</form>
+		<div style="width: 100%;">
+			<div style="position: relative;">
+				<jsp:include page="./notice_nav.jsp" />
+			</div>
+			<div style="padding-top: 110px;">
+				<h3>&nbsp;&nbsp;공지사항 작성</h3>
+				<hr style="border: solid 1px;">
+			</div>
+			<div style="padding-top: 10px; padding-left: 120px; height: 620px;">
+				<table class="table table-bordered table-sm" style="width: 500px; margin: 0 auto;">
+					<input type="text" name="n_title" placeholder="제목">
+					<br>
+					<textarea placeholder="내용입력 " name="n_content" id="summernote"></textarea>
+					<c:if test="${sessionScope.u_authority == 7 }">
+						<button type="submit" style="margin-left: 92%;">글쓰기</button>
+					</c:if>
+					<br>
 				</table>
-		<br>
-		</div>
-		<jsp:include page="./footer.jsp" />
+				<br>
+			</div>
 
-</div>
+			<jsp:include page="./footer.jsp" />
+
+		</div>
 
 		<!-- Back to Top -->
 		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
 			class="bi bi-arrow-up"></i></a>
 	</div>
-	
+
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="./resources/lib/wow/wow.min.js"></script>
 	<script src="./resources/lib/easing/easing.min.js"></script>
 	<script src="./resources/lib/waypoints/waypoints.min.js"></script>
@@ -146,7 +151,7 @@ function check(){
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
 
-	
+
 </body>
 
 </html>

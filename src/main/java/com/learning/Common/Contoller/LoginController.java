@@ -182,7 +182,7 @@ public class LoginController {
 		
 		int result = loginService.join(dto);
 		
-		return "redirect:/join";
+		return "redirect:/login";
 	}
 	
 	@GetMapping(value = "/login")
