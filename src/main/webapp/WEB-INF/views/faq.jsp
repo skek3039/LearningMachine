@@ -61,9 +61,6 @@
 <link href="./resources/css/admin.css" rel="stylesheet">
 
 <style type="text/css">
-<
-style
->
 @font-face {
 	font-family: 'LeferiPoint-WhiteObliqueA';
 	src:
