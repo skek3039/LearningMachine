@@ -115,6 +115,9 @@
 			</table>
 		<br>
 <div id="pagination" style="border-top: 1px solid black; text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
+					<c:if test="${ a_authority ne 7}" > 
+					<a href="./noticeWrite"><button type="button" >글쓰기</button></a>
+					</c:if>
 		</div>
 		<jsp:include page="./footer.jsp" />
 
