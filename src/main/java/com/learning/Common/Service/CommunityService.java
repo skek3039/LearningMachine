@@ -42,4 +42,12 @@ public class CommunityService {
 		return communityDAO.boardDetail(b_no);
 	}
 
+	public int commentWrite(BoardDTO dto) {
+		return communityDAO.commentWrite(dto);
+	}
+
+	public List<BoardDTO> commentList(int b_no) {
+		return communityDAO.commentList(b_no);
+	}
+
 }

@@ -10,14 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.JsonObject;
 import com.learning.Admin.Service.AdminService;
 import com.learning.Common.Service.CommunityService;
 import com.learning.DTO.BoardDTO;
@@ -25,7 +24,6 @@ import com.learning.DTO.LectureDTO;
 import com.learning.DTO.PageDTO;
 
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
-import retrofit2.http.GET;
 
 @Controller
 public class HomeController {
@@ -102,12 +100,16 @@ public class HomeController {
 		return mv;
 	}
 	
-	
+	//자유게시판 상세보기
 	@GetMapping(value = "/boardDetail")
 	public ModelAndView boardDetail(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("boardDetail");
 		int b_no = Integer.parseInt(request.getParameter("b_no"));
 		BoardDTO board = communityService.boardDetail(b_no);
+		
+		List<BoardDTO> comment = communityService.commentList(b_no);
+		
+		mv.addObject("comment",comment);
 		mv.addObject("boardDetail",board);
 		return mv;
 	}
@@ -139,5 +141,19 @@ public class HomeController {
 			mv.addObject("category",category);
 			mv.addObject("list",list);
 			return mv; 
-	}	
+	}
+	
+	//댓글작성
+	@PostMapping(value = "/boardCommentwrite")
+	public @ResponseBody void boardCommentwirte(HttpServletRequest request , HttpSession session , HttpServletResponse response) throws IOException {
+		BoardDTO dto = new BoardDTO();
+		dto.setU_id((String)session.getAttribute("u_id"));
+		dto.setB_no(Integer.parseInt(request.getParameter("b_no")));
+		dto.setBr_content((String)request.getParameter("br_content"));
+		
+		int result = communityService.commentWrite(dto);
+		PrintWriter pw = response.getWriter();
+		pw.print(result);
+		
+	}
 }

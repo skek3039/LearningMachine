@@ -51,6 +51,7 @@
 <script src="./resources/lib/easing/easing.min.js"></script>
 <script src="./resources/lib/waypoints/waypoints.min.js"></script>
 <script src="./resources/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="./resources/js/board.js"></script>
 
 <!-- Template Javascript -->
 <script src="./resources/js/main.js"></script>
@@ -214,34 +215,7 @@ function enterkey() {
 	
 }
 </script>
-<script type="text/javascript">
 
-function OpenModal(lqa_no){
-	var OpenModal = document.querySelector(".background" + lqa_no);
-	OpenModal.classList.add("show");
-}
-
-function CloseModal(lqa_no) {
-	var CloseModal = document.querySelector(".background" + lqa_no);
-	CloseModal.classList.remove("show");
-}
-
-
-
-$(document).ready(function(){
-	   
-	  $('ul.tabs li').click(function(){
-	    var tab_id = $(this).attr('data-tab');
-	 
-	    $('ul.tabs li').removeClass('current');
-	    $('.tab-content').removeClass('current');
-	 
-	    $(this).addClass('current');
-	    $("#"+tab_id).addClass('current');
-	  })
-}); 
-
-</script>
 </head>
 
 <body>
@@ -302,13 +276,22 @@ $(document).ready(function(){
 						  </tbody>	
 						  <tfoot>
 						  	<tr>
-						  		<td colspan="7"><textarea style="width: 100%; height: 70px;">로그인한 사람만 댓글을 달 수 있습니다.</textarea> </td>
+						  	<td colspan="6" style="height: 100%;">
+						  	<c:if test="${sessionScope.u_id ne null }">
+						  		<textarea id="comment" placeholder="불쾌감을 주는 댓글은 예고없이 삭제처리 될 수 있습니다." required="required" style="width: 100%;" onclick="commentwrite('${sessionScope.u_id }')"></textarea>
+						  	</c:if>
+						  	<c:if test="${sessionScope.u_id eq null }">
+								<textarea id="comment" placeholder="로그인후 사용해주세요." style=" background-color: #F0FFF0;width: 100%; display: inline; "  onclick="commentwrite('${sessionScope.u_id }')"></textarea>
+							</c:if>
+							</td>
+								<td>
+						  		<input type="hidden" id="b_no" value="${boardDetail.b_no }">
+						  		<button id="textCount" onclick="boardCommentwrite()" class ="btn btn-outline-dark" style="width: 100%;">댓글쓰기<br>(0/280)</button>
+						  		
+						  		</td>
 						  	</tr>
-						  	<tr>
-						  		<td colspan="7"><button>등록</button></td>
-						  	</tr>
-						  </tfoot>					   
-						 						   
+						  	
+						  </tfoot>	 			   						   
 						</table>
 						  
 							<%-- <div class="background background${board.lqa_no }">

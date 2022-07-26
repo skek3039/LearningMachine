@@ -35,4 +35,12 @@ public class CommunityDAO {
 		return sqlSession.selectOne("Community.boardDetail",b_no);
 	}
 
+	public int commentWrite(BoardDTO dto) {
+		return sqlSession.insert("Community.commentWrite",dto);
+	}
+
+	public List<BoardDTO> commentList(int b_no) {
+		return sqlSession.selectList("Community.commentList",b_no);
+	}
+
 }
