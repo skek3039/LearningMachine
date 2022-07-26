@@ -43,18 +43,12 @@
 	<script src="./resources/lib/easing/easing.min.js"></script>
 	<script src="./resources/lib/waypoints/waypoints.min.js"></script>
 	<script src="./resources/lib/owlcarousel/owl.carousel.min.js"></script>
-
+	<script src="./resources/summernote/summernote-lite.js"></script>
+	<script src="./resources/summernote/lang/summernote-ko-KR.js"></script>
+	<link rel="stylesheet" href="./resources/summernote/summernote-lite.css">
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
 	<style type="text/css">
-		< style>@font-face {
-			font-family: 'LeferiPoint-WhiteObliqueA';
-			src:
-				url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
-			font-weight: normal;
-			font-style: normal;
-		}
-
 		#rDone{
 			margin: 0 auto;
 		}
@@ -197,6 +191,13 @@
 				$("#" + tab_id).addClass('current');
 			})
 
+			$('.summernote').summernote({
+				placeholder: 'content',
+				minHeight: 370,
+				maxHeight: null,
+				focus: true,
+				lang: 'ko-KR'
+			});
 		});
 		function OpenModal(lqa_no) {
 			var OpenModal = document.querySelector(".background" + lqa_no);
@@ -206,6 +207,70 @@
 		function CloseModal(lqa_no) {
 			var CloseModal = document.querySelector(".background" + lqa_no);
 			CloseModal.classList.remove("show");
+		}
+
+		function LectureQNASubmit(){
+			
+			var lqa_title = $('input[name=lqa_title]').val();
+			var lqa_content = $('textarea[name="lqa_content"]').val();
+			$.ajax({
+
+				type : "post",
+				url : "/web/LectureQnaWrite.do?l_code="+'${LectureDetail.l_code}',
+				data : {
+					lqa_title : lqa_title,
+					lqa_content : lqa_content
+				},
+				success : function(){
+					
+					$('#qnatab').load(location.href+' #qnatab');
+				},
+				error : function(){
+					alert('머선 일이고');
+				}
+			}).done(function(result){
+				if(result == 1){
+					$('input[name=lqa_title]').val("");
+					alert('질문이 등록되었습니다');
+					CloseModal('qna');
+				}else if(result == 0){
+
+					alert('권한이 없습니다.');
+					CloseModal('qna');
+				}
+			});
+		}
+
+		function LectureReviewSubmit(){
+			
+			var lr_title = $('input[name=lr_title]').val();
+			var lr_content = $('textarea[name="lr_content"]').val();
+			$.ajax({
+
+				type : "post",
+				url : "/web/LectureReviewWrite.do?l_code="+'${LectureDetail.l_code}',
+				data : {
+					lr_title : lr_title,
+					lr_content : lr_content
+				},
+				success : function(){
+					
+					$('#reviewtab').load(location.href+' #reviewtab');
+				},
+				error : function(){
+					alert('머선 일이고');
+				}
+			}).done(function(result){
+				if(result == 1){
+					$('input[name=lr_title]').val("");
+					alert('리뷰가 등록되었습니다');
+					CloseModal('Review');
+				}else if(result == 0){
+
+					alert('권한이 없습니다.');
+					CloseModal('Review');
+				}
+			});
 		}
 	</script>
 </head>
@@ -232,7 +297,14 @@
 				<div class="col-lg-6 wow zoomIn" data-wow-delay="0.1s">
 					<c:choose>
 						<c:when test="${sessionScope.u_id eq null || LectureDetail.payment_whether eq 0}">
-							<img class="img-fluid" src="img/about.png">
+							<c:choose>
+								<c:when test = "${LectureDetail.l_thumbnail eq null}">
+									<img class="img-fluid" src="./resources/img/spring.png" width="100%">
+								</c:when>
+								<c:otherwise>
+									<img class="img-fluid" src="${LectureDetail.l_thumbnail}" width="100%">
+								</c:otherwise>
+							</c:choose>
 						</c:when>
 						<c:otherwise>
 							<table class="table" style="text-align: center;">
@@ -374,14 +446,29 @@
 		</div>
 		<div class="row tab-content current" id="tab-1">
 			<!-- 로그인 되어있으면서 결제가 된 강의라면 리뷰 남기기 버튼 및 창 생성 -->
+			<!-- 리뷰남기기 -->
 			<c:if test="${sessionScope.u_id ne null && LectureDetail.payment_whether eq 1}">
-				<a class="btn btn-primary" role="button" onclick="OpenModal('Review${LectureDetail.l_code}')"
+				<a class="btn btn-primary" role="button" onclick="OpenModal('Review')"
 					style="width: 120px; margin: 4px auto; right: 0;">리뷰남기기</a>
-				<div class="background backgroundReview${LectureDetail.l_code}">
+				<div class="background backgroundReview">
 					<div class="window">
 						<div class="popup">
-							<button id="closebtn" onclick="CloseModal('Review${LectureDetail.l_code}');">닫기</button>
-							입력창들
+							<button id="closebtn" onclick="CloseModal('Review');">닫기</button>
+							<form>
+								<div class="row g-3">
+									<div class="col-md-6">
+										<div class="form-floating">
+											<input type="text" class="form-control" id="name" name = "lr_title"placeholder="리뷰 제목">
+											<label for="name">제목</label>
+										</div>
+									</div>
+									<textarea class="summernote" id="message" name="lr_content"
+										style="height: 150px; resize: none; z-index: 1100;"></textarea>
+								</div>
+								<div class="col-12">
+									<button class="btn btn-primary w-100 py-3" type="button" onclick="LectureReviewSubmit()">리뷰 제출하기</button>
+								</div>
+							</form>
 						</div>
 						<div>
 							<div></div>
@@ -389,7 +476,7 @@
 					</div>
 				</div>
 			</c:if>
-			<div class="row gx-4 gx-lg-5" style="margin: 0 auto;">
+			<div class="row gx-4 gx-lg-5" style="margin: 0 auto;" id="reviewtab">
 				<c:forEach items="${LectureReviews}" var="i">
 					<div class="col-md-4 mb-5" style="height: 330px;">
 						<div class="card h-100">
@@ -432,22 +519,33 @@
 			</div>
 		</div>
 		<div class="row tab-content" id="tab-2">
+			<!-- 질문하기 모달창 : 결제 안한사람도 질문할 수 있으므로 로그인 여부에 따라 띄워줄지 결정 -->
 			<c:if test="${sessionScope.u_id ne null}">
-				<a class="btn btn-primary" role="button" onclick="OpenModal('qna${LectureDetail.l_code}')"
+				<a class="btn btn-primary" role="button" onclick="OpenModal('qna')"
 					style="width: 120px; margin: 4px auto; right: 0;">질문하기</a>
-				<div class="background backgroundqna${LectureDetail.l_code}">
+				<div class="background backgroundqna">
 					<div class="window">
 						<div class="popup">
-							<button id="closebtn" onclick="CloseModal('qna${LectureDetail.l_code}');">닫기</button>
-							질문입력창
-						</div>
-						<div>
-							<div></div>
+							<button id="closebtn" onclick="CloseModal('qna');">닫기</button>
+							<div class="row g-3">
+								<div class="col-md-6">
+									<div class="form-floating">
+										<input type="text" class="form-control" id="name" name="lqa_title" placeholder="질문 제목">
+										<label for="name">제목</label>
+									</div>
+								</div>
+								<textarea class="summernote" id="message"
+									style="height: 150px; resize: none; z-index: 1100;" name="lqa_content"></textarea>
+							</div>
+							<div class="col-12">
+								<button class="btn btn-primary w-100 py-3" type="button" onclick="LectureQNASubmit()">질문 제출하기</button>
+							</div>
 						</div>
 					</div>
 				</div>
 			</c:if>
-			<div class="row gx-4 gx-lg-5" style="margin: 0 auto;">
+			<!--/ 질문하기 모달창 -->
+			<div class="row gx-4 gx-lg-5" style="margin: 0 auto;" id = "qnatab">
 				<c:forEach items="${LectureQnas}" var="i">
 					<!-- 질문과 답변 모달창 -->
 					<div class="background background${i.lqa_no}${i.u_id}">

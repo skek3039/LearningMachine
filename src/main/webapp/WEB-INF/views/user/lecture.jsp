@@ -191,8 +191,15 @@
 					<div class="col-sm-6 col-md-4">
 						<div id="content">
 							<div class="thumbnail">
-								<img src="./img/leaf.png" alt=""
-									onclick="location.href = './LectureDetail?l_code=${i.l_code}';" width="150px">
+								<c:choose>
+									<c:when test="${i.l_thumbnail eq null}">
+										<img src="./img/leaf.png" alt="" onclick="location.href = './LectureDetail?l_code=${i.l_code}';" height="150px">
+									</c:when>
+									<c:otherwise>
+										<img src="${i.l_thumbnail}" alt=""
+									onclick="location.href = './LectureDetail?l_code=${i.l_code}';" height="150px">
+									</c:otherwise>
+								</c:choose>
 								<div class="caption">
 									<h3>
 										<a href="./LectureDetail?l_code=${i.l_code}">${i.l_name}</a>
@@ -231,8 +238,15 @@
 					<div class="col-sm-6 col-md-4">
 						<div id="content">
 							<div class="thumbnail">
-								<img src="./img/leaf.png" alt=""
-									onclick="location.href = './LectureDetail?l_code=${i.l_code}';" width="150px">
+								<c:choose>
+									<c:when test="${i.l_thumbnail eq null}">
+										<img src="./img/leaf.png" alt="" onclick="location.href = './LectureDetail?l_code=${i.l_code}';" height="150px">
+									</c:when>
+									<c:otherwise>
+										<img src="${i.l_thumbnail}" alt=""
+									onclick="location.href = './LectureDetail?l_code=${i.l_code}';" height="150px">
+									</c:otherwise>
+								</c:choose>
 								<div class="caption">
 									<h3>
 										<a href="./LectureDetail?l_code=${i.l_code}">${i.l_name}</a>
