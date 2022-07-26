@@ -13,7 +13,7 @@
 		<typeAlias type="com.learning.DTO.TeacherDTO" alias="teacherDTO"/>		
 		<typeAlias type="com.learning.DTO.PaymentDTO" alias="paymentDTO"/>		
 		<typeAlias type="com.learning.DTO.BoardDTO" alias="BoardDTO"/>		
-		<typeAlias type="com.learning.DTO.FaqDTO" alias="faqDTO"/>		
+		<typeAlias type="com.learning.DTO.FaqDTO" alias="FaqDTO"/>		
 	</typeAliases>  
   
   </configuration>

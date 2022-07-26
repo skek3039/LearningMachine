@@ -131,23 +131,6 @@ public class ULectureController {
 		}
 		
 	}
-	@RequestMapping(value = "/LectureQnaWrite.do")
-	@ResponseBody
-	public int LectureQnA(@RequestParam(name = "l_code")String l_code, HttpServletRequest rq) {
-		
-		String u_id = (String) rq.getSession().getAttribute("u_id");
-		String lqa_title = rq.getParameter("lqa_title");
-		String lqa_content = rq.getParameter("lqa_content");
-		
-		System.out.println(lqa_title + lqa_content + l_code);
-		if(u_id == null) {
-			
-			return 0;
-		}else {
-			
-			return 1;
-		}
-	}
 	
 	@PostMapping(value = "/LectureReviewWrite.do")
 	@ResponseBody
@@ -166,4 +149,23 @@ public class ULectureController {
 			return 1;
 		}
 	}
+	
+	@RequestMapping(value = "/LectureQnaWrite.do")
+	@ResponseBody
+	public int LectureQnA(@RequestParam(name = "l_code")String l_code, HttpServletRequest rq) {
+		
+		String u_id = (String) rq.getSession().getAttribute("u_id");
+		String lqa_title = rq.getParameter("lqa_title");
+		String lqa_content = rq.getParameter("lqa_content");
+		
+		System.out.println(lqa_title + lqa_content + l_code);
+		if(u_id == null) {
+			
+			return 0;
+		}else {
+			
+			return 1;
+		}
+	}
+	
 }
