@@ -90,7 +90,6 @@ details>summary {
 	font-size: 17px;
 	padding: 15px 0;
 }
-
 </style>
 
 </head>
@@ -116,74 +115,64 @@ details>summary {
 				<h3>&nbsp;&nbsp;자주묻는질문</h3>
 				<hr style="border: solid 1px;">
 			</div>
-			<div style="padding-top: 10px;padding-left: 300px; height: 750px;">
-			<div class="accordion accordion-flush" id="accordionFlushExample">
-				<div class="accordion-item">
-					<h2 class="accordion-header" id="flush-headingOne">
-						<button class="accordion-button collapsed" type="button"
-							data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
-							aria-expanded="false" aria-controls="flush-collapseOne">
-							Accordion Item #1</button>
-					</h2>
-					<div id="flush-collapseOne" class="accordion-collapse collapse"
-						aria-labelledby="flush-headingOne"
-						data-bs-parent="#accordionFlushExample">
-						<div class="accordion-body">
-							Placeholder content for this accordion, which is intended to
-							demonstrate the
-							<code>.accordion-flush</code>
-							class. This is the first item's accordion body.
+			<div
+				style="padding-top: 10px; padding-left: 300px; padding-right: 30px; height: 620px;">
+				<div class="accordion accordion-flush" id="accordionFlushExample">
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="flush-headingOne">
+							<button class="accordion-button collapsed" type="button"
+								data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
+								aria-expanded="false" aria-controls="flush-collapseOne">
+								구매했던 강의가 전부 사라졌어요.</button>
+						</h2>
+						<div id="flush-collapseOne" class="accordion-collapse collapse"
+							aria-labelledby="flush-headingOne"
+							data-bs-parent="#accordionFlushExample">
+							<div class="accordion-body">잠깐! 지금 로그인하신 계정으로 구매하신 것이
+								맞으신가요? 러닝은 여러 개의 계정을 동시에 사용할 수 있어요. 소유하신 다른 계정이 있다면 확인 부탁드려요. ※
+								혹시 다른 계정 확인 후에도 구매한 강의를 찾지 못하셨나요? 우측 하단의 1:1 문의하기로 내용 남겨주시면 확인 후
+								계정을 찾아드릴게요 :-)</div>
 						</div>
 					</div>
-				</div>
-				<div class="accordion-item">
-					<h2 class="accordion-header" id="flush-headingTwo">
-						<button class="accordion-button collapsed" type="button"
-							data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
-							aria-expanded="false" aria-controls="flush-collapseTwo">
-							Accordion Item #2</button>
-					</h2>
-					<div id="flush-collapseTwo" class="accordion-collapse collapse"
-						aria-labelledby="flush-headingTwo"
-						data-bs-parent="#accordionFlushExample">
-						<div class="accordion-body">
-							Placeholder content for this accordion, which is intended to
-							demonstrate the
-							<code>.accordion-flush</code>
-							class. This is the second item's accordion body. Let's imagine
-							this being filled with some actual content.
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="flush-headingTwo">
+							<button class="accordion-button collapsed" type="button"
+								data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
+								aria-expanded="false" aria-controls="flush-collapseTwo">
+								비밀번호를 찾고 싶어요.</button>
+						</h2>
+						<div id="flush-collapseTwo" class="accordion-collapse collapse"
+							aria-labelledby="flush-headingTwo"
+							data-bs-parent="#accordionFlushExample">
+							<div class="accordion-body">
+							로그인 화면에서 '비밀번호 찾기'를 클릭해주세요.
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="accordion-item">
-					<h2 class="accordion-header" id="flush-headingThree">
-						<button class="accordion-button collapsed" type="button"
-							data-bs-toggle="collapse" data-bs-target="#flush-collapseThree"
-							aria-expanded="false" aria-controls="flush-collapseThree">
-							Accordion Item #3</button>
-					</h2>
-					<div id="flush-collapseThree" class="accordion-collapse collapse"
-						aria-labelledby="flush-headingThree"
-						data-bs-parent="#accordionFlushExample">
-						<div class="accordion-body">
-							Placeholder content for this accordion, which is intended to
-							demonstrate the
-							<code>.accordion-flush</code>
-							class. This is the third item's accordion body. Nothing more
-							exciting happening here in terms of content, but just filling up
-							the space to make it look, at least at first glance, a bit more
-							representative of how this would look in a real-world
-							application.
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="flush-headingThree">
+							<button class="accordion-button collapsed" type="button"
+								data-bs-toggle="collapse" data-bs-target="#flush-collapseThree"
+								aria-expanded="false" aria-controls="flush-collapseThree">
+								영상 재생 중 오류가 발생해요.</button>
+						</h2>
+						<div id="flush-collapseThree" class="accordion-collapse collapse"
+							aria-labelledby="flush-headingThree"
+							data-bs-parent="#accordionFlushExample">
+							<div class="accordion-body">
+								현재 러닝강의 재생과 관련하여 몇 가지 오류가 있어
+								조치 중입니다. 재생 오류와 관련한 자세한 내용은 아래 링크로 첨부해드리니, 해당되는 내용이 있으신지 확인 후
+								문서에 안내된 내용에 따라 이용해주시기 바랍니다. 관련 문제는 빠르게 해결하도록 하겠습니다. 
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<jsp:include page="./footer.jsp" />
-	<!-- Back to Top -->
-	<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
-		class="bi bi-arrow-up"></i></a>
+		<jsp:include page="./footer.jsp" />
+		<!-- Back to Top -->
+		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
+			class="bi bi-arrow-up"></i></a>
 	</div>
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

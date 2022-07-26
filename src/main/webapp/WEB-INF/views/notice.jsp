@@ -96,7 +96,7 @@
 		<jsp:include page="./notice_nav.jsp"/>
 		 </div>
 		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;공지사항</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px;padding-left: 120px; height: 750px;">
+		<div style="padding-top: 10px;padding-left: 120px; height: 620px;">
 				 <table class="table table-bordered table-sm" style=" width: 800px; margin: 0 auto;"> 
 					<tr>
 						<th>번호</th>
