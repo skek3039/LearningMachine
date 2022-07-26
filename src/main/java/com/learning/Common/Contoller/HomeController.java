@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,6 +23,7 @@ import com.learning.Common.Service.CommunityService;
 import com.learning.DTO.BoardDTO;
 import com.learning.DTO.LectureDTO;
 import com.learning.DTO.PageDTO;
+import com.learning.utill.Util;
 
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
@@ -105,7 +107,21 @@ public class HomeController {
 	public ModelAndView boardDetail(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("boardDetail");
 		int b_no = Integer.parseInt(request.getParameter("b_no"));
+
+		Cookie[] cookies = request.getCookies();
+		Cookie viewCookie = null;
+		
+		if(cookies != null && cookies.length > 0) {
+			for(int i=0; i<cookies.length ; i++) {
+				if(cookies[i].getName().equals("cookie"+b_no)) {
+					viewCookie = cookies[i];
+				}
+			}
+		}
+		
+		
 		BoardDTO board = communityService.boardDetail(b_no);
+		
 		
 		List<BoardDTO> comment = communityService.commentList(b_no);
 		

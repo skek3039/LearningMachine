@@ -42,7 +42,6 @@ function boardCommentwrite(){
 					"br_content" : comment
 			}, 
 			success : function(data){
-				alert(data);
 				if(data == 1){
 					 $('#comment').val("");
 					 location.reload();			 

@@ -251,7 +251,7 @@ function enterkey() {
 				<br>	
 				<div id="content">
 				<div class="row tab-content current" id="tab-1">
-					<table class="table table-hover" style="width: 90%; height:700px; margin: 0 auto" >
+					<table class="table" style="width: 90%; height:100%; margin: 0 auto" >
 						  <thead class="thead-dark">
 						    <tr>
 						      <th style="width: 100px;">No. ${boardDetail.b_no }</th>
@@ -265,14 +265,20 @@ function enterkey() {
 						  </thead>
 						  <tbody id = "detailTable">
 						  	<tr>
-						  		<td colspan="7"> ${boardDetail.b_content } </td>
+						  		<td colspan="7" style="height: 600px;"> ${boardDetail.b_content } </td>
+						  	</tr>
+						  	<c:forEach items="${comment }" var="c">
+						  	<tr>
+						  		<td colspan="7" style="height: 15px; text-align: left;background-color :#F0FFF0;">${c.u_nickname }
+						  		<fmt:parseDate value="${c.br_date}" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
+            				    <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
+			
+						  		<small style="text-align: right; float: right;">${time }</small> </td>
 						  	</tr>
 						  	<tr>
-						  		<td colspan="7" style="height: 15px; text-align: left;background-color :#F0FFF0;">글쓴이<small style="text-align: right">2022.10.20</small> </td>
+						  		<td colspan="7" style="height: 80px;text-align: left;">${c.br_content }</td>
 						  	</tr>
-						  	<tr>
-						  		<td colspan="7" style="height: 80px;text-align: left;">내용내뇽요요요요ㅛ용ㅇ</td>
-						  	</tr>
+						  	</c:forEach>
 						  </tbody>	
 						  <tfoot>
 						  	<tr>
