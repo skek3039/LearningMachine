@@ -74,7 +74,6 @@
  		select * from user_paymentRefund_view
  	</select>
  	
-
  	<select id="lectureRequest" parameterType="String" resultType="hashmap">
  		SELECT * ,
 		if(l_recognize = 0 ,"승인대기","승인거부") AS request,
@@ -202,4 +201,6 @@
  		DELETE FROM user_board
  		WHERE b_no = #{b_no}
  	</delete>	
+
+ 	
   </mapper>

@@ -28,8 +28,11 @@ public class LoginController {
 	
 	//로그인처리.
 	@PostMapping(value = "/login")
-	   public String login(HttpServletRequest request) {
-	      userDTO dto = new userDTO();
+	public String login(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=utf-8"); 
+		  userDTO dto = new userDTO();
 	      dto.setU_id(request.getParameter("id"));
 	      dto.setU_pw(request.getParameter("pw"));
 	      
@@ -45,8 +48,12 @@ public class LoginController {
 	            System.out.println("강사");
 	            return "redirect:/lecture";                        
 	         }
+	         return "redirect:/";
+	      }else {
+	    	  response.getWriter().println("<script type='text/javascript' charset='utf-8' >alert('아이디, 비밀번호 확인해주세요\\n로그인 창으로 이동 합니다.'); window.location.href = './login'; "+ "</script>");
+	    	  return null;
 	      }
-	      return "redirect:/";
+	      
 	   }
 	   
 	
@@ -59,6 +66,7 @@ public class LoginController {
 	//비밀번호 
 	@PostMapping(value = "/resetPw")
 	public void resetPw(@ModelAttribute userDTO user, HttpServletResponse response) throws Exception{
+		
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=utf-8"); 
 		int Reset = loginService.resetPw(user);
@@ -188,6 +196,7 @@ public class LoginController {
 	
 	@GetMapping(value = "/login")
 	public String login() {
+		
 		return "login";
 	}
 

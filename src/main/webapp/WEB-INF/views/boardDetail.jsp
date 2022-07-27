@@ -175,8 +175,8 @@ ul.tabs li.current{
         box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
 
         /* 임시 지정 */
-        width: 50%;
-        height: 60%;
+        width: 800px;
+        height: 350px;
 
         /* 초기에 약간 아래에 배치 */
         transform: translate(-50%, -40%);
@@ -232,8 +232,9 @@ function commentDelete(br_no,b_no){
 }
 
 function commentUpdate(br_no, b_no){
+	let br_content = $("#br_content").val();
 	if(confirm("댓글을 수정하시겠습니까?")){
-		
+		location.href="./commentUpdate.do?br_no="+br_no + "&b_no="+b_no + "&br_content="+br_content;
 	}
 
 }
@@ -300,8 +301,8 @@ function commentUpdate(br_no, b_no){
 										<button id="closebtn" class="btn btn-outline-dark" onclick="CloseModal(${c.br_no});">닫기</button>
 										<h2 class="card-title" style="text-align: left">${c.u_nickname }</h2>
 										<p class="card-text">
-										<input type="text" value="${c.br_content }" style="border: 1px solid rgb(201, 236, 219); width: 750px; height: 300px;"><br>
-										<button type="submit" class="btn btn-outline-dark" onclick="commentUpdate('${c.br_no}','${boardDetail.b_no }')" >수정</button>
+										<input type="text" name="br_content" id = "br_content" value="${c.br_content }" style="border: 1px solid rgb(201, 236, 219); width: 750px; height: 150px;"><br><br>
+										<button type="submit" class="btn btn-outline-dark" style="margin: 0 auto;text-align: center;" onclick="commentUpdate('${c.br_no}','${boardDetail.b_no }')" >수정</button>
 										</p>
 									</div>
 								</div>

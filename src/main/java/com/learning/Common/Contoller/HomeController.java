@@ -85,6 +85,20 @@ public class HomeController {
 		return "redirect:/boardDetail?b_no="+b_no;
 	}
 	
+	@RequestMapping(value = "/commentUpdate.do")
+	public String commentUpdate(HttpServletRequest request) {
+		int b_no = Integer.parseInt(request.getParameter("b_no"));
+		
+		BoardDTO dto = new BoardDTO();
+		dto.setB_no(b_no);
+		dto.setBr_content((String)request.getParameter("br_content"));
+		dto.setBr_no(Integer.parseInt(request.getParameter("br_no")));
+		
+		communityService.commentUpdate(dto);
+		
+		return "redirect:/boardDetail?b_no="+b_no;
+	}
+	
 	
 	//자유게시판 글쓰기처리
 	@PostMapping(value = "boardWrite.do")

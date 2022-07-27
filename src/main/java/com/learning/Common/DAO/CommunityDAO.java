@@ -68,4 +68,8 @@ public class CommunityDAO {
 		sqlSession.delete("Community.commentDelete", br_no);
 	}
 
+	public void commentUpdate(BoardDTO dto) {
+		sqlSession.update("Community.commentUpdate",dto);
+	}
+
 }

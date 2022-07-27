@@ -82,4 +82,9 @@
 	<delete id="commentDelete" parameterType="integer">
 		delete from user_board_reply where br_no = #{br_no}	
 	</delete>
+	
+	<update id="commentUpdate" parameterType="BoardDTO">
+		update user_board_reply set br_content = #{br_content} 	where br_no = #{br_no}
+	</update>
+	
   </mapper>

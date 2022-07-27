@@ -74,4 +74,8 @@ public class CommunityService {
 		communityDAO.commentDelete(br_no);
 	}
 
+	public void commentUpdate(BoardDTO dto) {
+		communityDAO.commentUpdate(dto);
+	}
+
 }
