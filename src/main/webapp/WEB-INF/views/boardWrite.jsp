@@ -18,7 +18,7 @@
 
 <!-- Google Web Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" />
 <link
 	href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
 	rel="stylesheet">
@@ -51,6 +51,10 @@
 <script src="./resources/lib/easing/easing.min.js"></script>
 <script src="./resources/lib/waypoints/waypoints.min.js"></script>
 <script src="./resources/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="./resources/js/board.js"></script>
+<script src="./resources/summernote/summernote-lite.js"></script>
+<script src="./resources/summernote/lang/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="./resources/summernote/summernote-lite.css">
 
 <!-- Template Javascript -->
 <script src="./resources/js/main.js"></script>
@@ -106,10 +110,6 @@ ul.tabs li.current{
 }
 
 .tab-content{
-  display: none;
-}
-
-.search.current{
   display: none;
 }
 
@@ -201,6 +201,20 @@ ul.tabs li.current{
 
 </style>
 <script type="text/javascript">
+
+$(document).ready(function () {
+
+	$('.summernote').summernote({
+		placeholder: 'content',
+		minHeight: 370,
+		maxHeight: null,
+		focus: true,
+		lang: 'ko-KR'
+	});
+});
+
+
+
 function search(){
 	var lqa_title= document.getElementById("lqa_title").value;
 	if(lqa_title != ""){
@@ -218,113 +232,7 @@ function enterkey() {
 	
 }
 </script>
-<script type="text/javascript">
 
-function linkPage(pageNo){
-	location.href = "./community?pageNo=" + pageNo;
-}
-
-
-function OpenModal(lqa_no){
-	var OpenModal = document.querySelector(".background" + lqa_no);
-	OpenModal.classList.add("show");
-}
-
-function CloseModal(lqa_no) {
-	var CloseModal = document.querySelector(".background" + lqa_no);
-	CloseModal.classList.remove("show");
-}
-
-
-
-$(document).ready(function(){
-	   
-	  $('ul.tabs li').click(function(){
-	    var tab_id = $(this).attr('data-tab');
-	 
-	    $('ul.tabs li').removeClass('current');
-	    $('.tab-content').removeClass('current');
-	 
-	    $(this).addClass('current');
-	    $("#"+tab_id).addClass('current');
-	 
-	  })
-	  
-	  
-	  var html = "";
-	  
-	//Q&A부분
-	  var lqa_title = new Array();	
-	  var lqa_no = new Array();
-	  var lqa_date = new Array();
-	  var c_name = new Array();
-	  var u_id = new Array();
-	  var confirm = new Array();
-	  <c:forEach items="${list }" var = "l">
-	 	lqa_title.push("${l.lqa_title}");
-		lqa_no.push("${l.lqa_no}");
-		lqa_date.push("${l.lqa_date}");
-		c_name.push("${l.c_name}");
-		u_id.push("${l.u_id}");
-		confirm.push("${l.confirm}");
-	 </c:forEach>
-	 for(var i=0 in lqa_no){ 
-		html = "<tr>";
-		html += "<td>" + lqa_no[i] + "</td>";
-		html += "<td>" + c_name[i] + "</td>";
-		html += "<td>"+"<a href=javascript:OpenModal('"+lqa_no[i]+"')>" + lqa_title[i] + "</a></td>";
-		html += "<td>" + u_id[i] + "</td>";
-		html += "<td>" + lqa_date[i] + "</td>";
-		html += "<td>" + confirm[i] + "</td>";		
-		html += "</tr>"; 
-		$("#detailTable").append(html); 
-	 }
-	 
-	 
-	 //자유게시판 
-	 
-	 
-	 
-	 
-	 
-	  
-	});
-	
-	
-function select(category){
-	let c_name = category;
-	let arr = new Array();
-	 
-	var html = "";
-	$.ajax({
-		url : "./community_category",
-		type : "get",
-		dataType : "json",
-		data : {"c_name" : c_name},
-		success : function(data){	
-			var result = data.json;
-				$("#detailTable").empty();  
-				$("#detailTable").remove();  
-
-			for(var i=0 in data){                                                        
-				html = "<tr>";
-				html += "<td>" + data[i].lqa_no + "</td>";
-				html += "<td>" + data[i].c_name + "</td>";
-				html += "<td>" + data[i].lqa_title + "</td>";
-				html += "<td>" + data[i].u_id + "</td>";
-				html += "<td>" + data[i].lqa_date + "</td>";
-				html += "<td>" + data[i].confirm + "</td>";
-				html += "</tr>";
-				
-				$("#detailTable").append(html);   
-			}
-		},
-		error : function(){
-			alert("실패 ㅠ");
-			}
-		});
-}
-</script>
 </head>
 
 <body>
@@ -345,103 +253,28 @@ function select(category){
 			<h3>&nbsp;&nbsp; Community</h3> <small>비방또는 비난등의 글은 무통보로 삭제됩니다.</small>
 			<hr style="border: solid 1px;">
 		</div>
-		<div>
-			<ul class="tabs">
-				<li class="tab-link current" data-tab="tab-1">강의 QnA</li>
-				<li class="tab-link" data-tab="tab-2">자유주제</li>
-			</ul>
-		</div>
-		<div style="padding-top: 20px; text-align: center;">
-				<div class ="search" style="width:500px; margin: 0 auto">
-					 <input type="search" id="lqa_title" name="lqa_title" class="form-control" style="width: 350px;display: inline-block;" placeholder="궁금한 질문을 검색해보세요!" onkeyup="enterkey()">
-					 <button type="button" id="search" class="btn btn-success" style="display: inline-block;" onclick="search()">Search</button>
-				</div>	
-				<br>
-				<c:forEach items="${category }" var = "c">
-					<p id="category"><a href="javascript:select('${c.c_name}')">${c.c_name }</a></p>		
-				</c:forEach>
-				<br>	
-				<div id="content">
+		<div id="content">
 				<div class="row tab-content current" id="tab-1">
-					<table class="table table-hover" style="width: 90%; margin: 0 auto" >
-						  <thead class="thead-dark">
+				<form action="./boardWrite.do" method="Post">
+					<table class="table" style="width: 90%; height:100%; margin: 0 auto" >						 
 						    <tr>
-						      <th>ID no.</th>
-						      <th>강의카테고리</th>
-						      <th>제목</th>
-						      <th>닉네임</th>
-						      <th>날짜</th>
-						      <th>답변여부</th>
+						      <th style="width: 100px;"><input type="text" name="b_title" required="required"  placeholder="제목을 입력해주세요." style="width: 100%"> </th>
 						    </tr>
-						  </thead>
-						<c:forEach items="${list }" var = "list"> 
-						  <tbody id = "detailTable">
-						   
-						   
-						   
-						  </tbody>
-						  
-						  
-							<div class="background background${list.lqa_no }">
-								<div class="window">
-									<div class="popup">
-										<button id="closebtn" class="btn btn-outline-dark" onclick="CloseModal(${list.lqa_no});">닫기</button>
-										<h2 class="card-title" style="text-align: left">${list.lqa_title }</h2>
-										<h6 style="text-align: left"> ${list.u_id }</h6>
-										<p class="card-text">
-										<label style="border: 1px solid rgb(201, 236, 219); width: 750px; height: 300px;"><strong>Q</strong> ${list.lqa_content }</label><br>
-										<c:if test="${list.lqar_content ne null }">
-										<label style="border: 1px solid rgb(201, 236, 219); width: 750px; height: 300px;"><strong>A</strong> ${list.lqar_content }</label>
-										</c:if>
-										</p>
-									</div>
-								</div>
-							</div>
-						</c:forEach>
+						 	<tr>
+						 		<td>	<textarea class="summernote" id="b_content" name="b_content" required="required" style="height: 150px; resize: none; z-index: 1100;"></textarea></td>
+						 		
+						 	</tr>
+						 	<tr>
+						 		<td><button type="submit" onclick="./boardWrite" class ="btn btn-outline-dark" style="width: 100%;">글쓰기</button></td>
+							</tr>
 						</table>
-						<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
+				</form>	
 			</div>			
-	
-					
-		<div class="row tab-content" id="tab-2">
-		<c:if test="${sessionScope.u_id ne null }">
-		<div id = "more_btn_div" align="right">
-			<a class="btn btn-primary" role="button" href="./boardWrite" style="width: 120px;float:right; margin: 4px auto; margin-right: 30px;">Write</a>	
-		</div>
-		</c:if>		
-		 <table class="table table-hover" style="width: 90%; margin: 0 auto" >
-						  <thead class="thead-dark">
-						    <tr>
-						      <th>no.</th>
-						      <th>제목</th>
-						      <th>닉네임</th>
-						      <th>날짜</th>
-						 	  <th>조회수</th>
-						    </tr>
-						  </thead>
-						<c:forEach items="${board }" var = "b"> 
-						  <tbody id = "detailTable">
-						   <tr>
-						   		<td>${b.b_no }</td>
-						   		<td><a href = "./boardDetail?b_no=${b.b_no }"> ${b.b_title } </a> <small></small></td>
-						   		<td>${b.u_nickname }</td>
-						   		<td>${b.b_date }</td>
-						   		<td>${b.b_view }</td>
-						   </tr>
-						  </tbody>
-						</c:forEach>
-			</table>	
-		</div> 
-
-		
-	
-		
+		</div> 	
 </div>
-					
-	</div>
 	<jsp:include page="./footer.jsp" />
 
-</div>
+
 
 	<!-- Back to Top -->
 	<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i

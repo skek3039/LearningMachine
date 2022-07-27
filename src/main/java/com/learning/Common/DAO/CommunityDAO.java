@@ -43,4 +43,21 @@ public class CommunityDAO {
 		return sqlSession.selectList("Community.commentList",b_no);
 	}
 
+	public int boardWrite(BoardDTO dto) {
+		return sqlSession.insert("Community.boardWrite" , dto);
+		
+	}
+
+	public void boardDelete(String b_no) {
+		sqlSession.update("Community.boardDelete", b_no);
+	}
+
+	public void boardModify(BoardDTO dto) {
+		sqlSession.update("Community.boardModify",dto);
+	}
+
+	public int boardCountUp(int b_no) {
+		return sqlSession.update("Community.boardCountUp", b_no);
+	}
+
 }

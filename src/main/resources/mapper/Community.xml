@@ -35,6 +35,7 @@
   	<select id="boardList" resultType="BoardDTO">
   		select * 
   		from user_board
+  		where b_del = 0
   		order by b_no desc;
   	</select>	
   	
@@ -55,4 +56,20 @@
   		VALUES(#{b_no},#{u_id} , #{br_content},(select u_nickname from user where u_id = #{u_id}))
   	</insert>
   
+  	<insert id="boardWrite" parameterType="BoardDTO">
+ 		insert into user_board (u_nickname, b_title, b_content)
+ 		values((select u_nickname from user where u_id = #{u_id}), #{b_title}, #{b_content}) 	
+  	</insert>
+  
+  	<update id="boardDelete" parameterType="String">
+		update user_board set b_del = 1 where b_no = #{b_no} 	
+  	</update>
+  	
+  	<update id="boardModify" parameterType="BoardDTO">
+  		update user_board set b_title = #{b_title}, b_content = #{b_content} where b_no=#{b_no}
+  	</update>
+  	
+  	<update id="boardCountUp" parameterType="integer" >
+  		update user_board set b_view = b_view+1 where b_no = #{b_no}
+  	</update>
   </mapper>

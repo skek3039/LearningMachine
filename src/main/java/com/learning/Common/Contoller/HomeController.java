@@ -2,10 +2,12 @@ package com.learning.Common.Contoller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.Session;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,6 +29,7 @@ import com.learning.DTO.PageDTO;
 import com.learning.utill.Util;
 
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
+import retrofit2.http.GET;
 
 @Controller
 public class HomeController {
@@ -48,6 +52,60 @@ public class HomeController {
 		
 		mv.addObject("cate",cate);
 		return mv;
+	}
+	
+	@GetMapping(value = "/boardWrite")
+	public String boardWrtie() {
+		return "boardWrite";
+	}
+	
+	@GetMapping(value = "boardModify")
+	public ModelAndView boardModify(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("boardModify");
+		int b_no = Integer.parseInt(request.getParameter("b_no"));
+		BoardDTO board = communityService.boardDetail(b_no);
+		
+		mv.addObject("board",board);
+		
+		return mv;
+	}
+	
+	@PostMapping(value = "boardModify")
+	public String boardModify(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		int b_no = Integer.parseInt(request.getParameter("b_no"));
+		BoardDTO dto = new BoardDTO();
+		dto.setB_no(b_no);
+		dto.setB_title(request.getParameter("b_title"));
+		dto.setB_content(request.getParameter("b_content"));
+		
+		communityService.boardModify(dto);
+		
+		return "redirect:/boardDetail?b_no="+b_no;
+	}
+	
+	
+	//자유게시판 글쓰기처리
+	@PostMapping(value = "boardWrite.do")
+	public String boardWrite(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
+		BoardDTO dto = new BoardDTO();
+		dto.setU_id((String)session.getAttribute("u_id"));
+		dto.setB_title(request.getParameter("b_title"));
+		dto.setB_content(request.getParameter("b_content"));
+		
+		int result = communityService.boardWrite(dto);
+		System.out.println(result);
+		
+		return "redirect:/community";
+	}
+	
+	@RequestMapping(value = "/boardDelete.do")
+	public String boardDelete(HttpServletRequest request) {
+		communityService.boardDelete(request.getParameter("b_no"));
+		
+		return "redirect:/community";
 	}
 	
 
@@ -104,7 +162,7 @@ public class HomeController {
 	
 	//자유게시판 상세보기
 	@GetMapping(value = "/boardDetail")
-	public ModelAndView boardDetail(HttpServletRequest request) {
+	public ModelAndView boardDetail(HttpServletRequest request,HttpServletResponse response, HttpSession session) {
 		ModelAndView mv = new ModelAndView("boardDetail");
 		int b_no = Integer.parseInt(request.getParameter("b_no"));
 
@@ -119,9 +177,21 @@ public class HomeController {
 			}
 		}
 		
-		
 		BoardDTO board = communityService.boardDetail(b_no);
-		
+		if(board !=null ) {
+			if(viewCookie == null) {
+				Cookie newCookie = new Cookie("cookie"+b_no , "|" + b_no + "|" );
+				response.addCookie(newCookie);
+				int result = communityService.boardCountUp(b_no);
+				if(result > 0) {
+					System.out.println("조회수 증가");
+				}else {
+					System.out.println("조회수 증가에러");
+				}
+			}else {
+				String value= viewCookie.getValue();
+			}
+		}
 		
 		List<BoardDTO> comment = communityService.commentList(b_no);
 		

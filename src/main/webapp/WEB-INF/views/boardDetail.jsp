@@ -236,19 +236,15 @@ function enterkey() {
 			<h3>&nbsp;&nbsp; Community</h3> <small>비방또는 비난등의 글은 무통보로 삭제됩니다.</small>
 			<hr style="border: solid 1px;">
 		</div>
-		<div>
-			<ul class="tabs">
-				<li class="tab-link" data-tab="tab-1">강의 QnA</li>
-				<li class="tab-link current" data-tab="tab-2">자유주제</li>
-			</ul>
-		</div>
 		<div style="padding-top: 20px; text-align: center;">
-				<div style="width:500px; margin: 0 auto">
-					 <input type="search" id="lqa_title" name="lqa_title" class="form-control" style="width: 350px;display: inline-block;" placeholder="궁금한 질문을 검색해보세요!" onkeyup="enterkey()">
-					 <button type="button" id="search" class="btn btn-success" style="display: inline-block;" onclick="search()">Search</button>
-				</div>	
 				<br>
 				<br>	
+		<c:if test="${sessionScope.u_nickname eq boardDetail.u_nickname }">
+		<div id = "more_btn_div" align="right">
+			<a class="btn btn-primary" role="button" href="./boardModify?b_no=${boardDetail.b_no }" style="width: 100px; margin: 4px auto;float:right;  margin-right: 100px;">수정</a>	
+			<a class="btn btn-primary" role="button" href="./boardDelete.do?b_no=${boardDetail.b_no }" style="width: 100px;margin: 4px auto; float:right; margin-right: 100px;">삭제</a>	
+		</div>
+		</c:if>	
 				<div id="content">
 				<div class="row tab-content current" id="tab-1">
 					<table class="table" style="width: 90%; height:100%; margin: 0 auto" >
@@ -257,6 +253,7 @@ function enterkey() {
 						      <th style="width: 100px;">No. ${boardDetail.b_no }</th>
 						      <th style="background-color :#F0FFF0; width: 100px;">제목</th>
 						      <th style="text-align: left;">${boardDetail.b_title }</th>
+						      <th style="border-color: gray">${boardDetail.u_nickname }</th>
 						      <th style="background-color :#F0FFF0; width: 100px;">조회수</th>
 						      <th style="width: 80px;">${boardDetail.b_view }</th>
 						      <th style="background-color :#F0FFF0; width: 100px;">날짜</th>
@@ -265,24 +262,24 @@ function enterkey() {
 						  </thead>
 						  <tbody id = "detailTable">
 						  	<tr>
-						  		<td colspan="7" style="height: 600px;"> ${boardDetail.b_content } </td>
+						  		<td colspan="8" style="height: 600px;"> ${boardDetail.b_content } </td>
 						  	</tr>
 						  	<c:forEach items="${comment }" var="c">
 						  	<tr>
-						  		<td colspan="7" style="height: 15px; text-align: left;background-color :#F0FFF0;">${c.u_nickname }
+						  		<td colspan="8" style="height: 15px; text-align: left;background-color :#F0FFF0;">${c.u_nickname }
 						  		<fmt:parseDate value="${c.br_date}" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
             				    <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
 			
 						  		<small style="text-align: right; float: right;">${time }</small> </td>
 						  	</tr>
 						  	<tr>
-						  		<td colspan="7" style="height: 80px;text-align: left;">${c.br_content }</td>
+						  		<td colspan="8" style="height: 80px;text-align: left;">${c.br_content }</td>
 						  	</tr>
 						  	</c:forEach>
 						  </tbody>	
 						  <tfoot>
 						  	<tr>
-						  	<td colspan="6" style="height: 100%;">
+						  	<td colspan="7" style="height: 100%;">
 						  	<c:if test="${sessionScope.u_id ne null }">
 						  		<textarea id="comment" placeholder="불쾌감을 주는 댓글은 예고없이 삭제처리 될 수 있습니다." required="required" style="width: 100%;" onclick="commentwrite('${sessionScope.u_id }')"></textarea>
 						  	</c:if>
@@ -321,7 +318,6 @@ function enterkey() {
 					
 					
 		<div class="row tab-content" id="tab-2">
-		<jsp:include page="./board.jsp"/>
 		
 		
 		</div> 

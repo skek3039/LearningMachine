@@ -50,4 +50,20 @@ public class CommunityService {
 		return communityDAO.commentList(b_no);
 	}
 
+	public int boardWrite(BoardDTO dto) {
+		return communityDAO.boardWrite(dto);
+	}
+
+	public void boardDelete(String b_no) {
+		communityDAO.boardDelete(b_no);
+	}
+
+	public void boardModify(BoardDTO dto) {
+		communityDAO.boardModify(dto);
+	}
+
+	public int boardCountUp(int b_no) {
+		return communityDAO.boardCountUp(b_no);
+	}
+
 }

@@ -38,6 +38,7 @@ public class LoginController {
 	         HttpSession session = request.getSession();
 	         session.setAttribute("u_id",dto.getU_id());
 	         session.setAttribute("u_authority", dto.getU_authority());
+	         session.setAttribute("u_nickname", dto.getU_nickname());
 	         if(dto.getU_authority() > 6) {
 	            return "redirect:/admin";            
 	         }else if(dto.getU_authority() > 3) {            
