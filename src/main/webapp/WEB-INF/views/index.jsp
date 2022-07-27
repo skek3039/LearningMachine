@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -90,119 +93,50 @@
         <div class="container-xxl py-6">
             <div class="container">
                 <div class="mx-auto text-center wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                ${popLecture}
                     <div class="d-inline-block border rounded-pill text-primary px-4 mb-3">인기강의 Top6</div>
                     <h2 class="mb-5">지금 러닝머신에서 가장 인기있는 강의. </h2>
                 </div>
                 <div class="row g-4">
+                     <c:forEach items="${popLecture}" var="pop" step="1" end="5">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="service-item rounded h-100">
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between" style="height: 10px;">
+                            <small>현재 ${pop.total_register } 명 수강중</small>
                                 <a class="service-btn" href="">
                                     <i class="fa fa-link fa-2x"></i>
                                 </a>
                             </div>
-                            <div class="p-5">
-                                <h5 class="mb-3">강의카테고리1</h5>
-                                <span>강의 1</span>
+                            <div class="p-5" style="padding-top: 10px;">
+                                <h5 class="mb-3">${pop.l_name }</h5>
+                                <span><strong>${pop.t_nickname } </strong></span><br>
+                                <c:choose>
+								<c:when test="${fn:length(pop.l_curriculum ) > 25 }">
+                               <c:out value="${fn:substring(pop.l_curriculum , 0, 25)} ..." />
+                          		</c:when>
+                          		<c:otherwise>
+								<c:out value="${pop.l_curriculum  }">
+							</c:out></c:otherwise>
+							</c:choose>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="service-item rounded h-100">
-                            <div class="d-flex justify-content-between">
-                                <div class="service-icon">
-                                    <i class="fa fa-chart-pie fa-2x"></i>
-                                </div>
-                                <a class="service-btn" href="">
-                                    <i class="fa fa-link fa-2x"></i>
-                                </a>
-                            </div>
-                            <div class="p-5">
-                                <h5 class="mb-3">강의카테고리2</h5>
-                                <span>강의2</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
-                        <div class="service-item rounded h-100">
-                            <div class="d-flex justify-content-between">
-                                <div class="service-icon">
-                                    <i class="fa fa-chart-line fa-2x"></i>
-                                </div>
-                                <a class="service-btn" href="">
-                                    <i class="fa fa-link fa-2x"></i>
-                                </a>
-                            </div>
-                            <div class="p-5">
-                                <h5 class="mb-3">Market Analysis</h5>
-                                <span>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="service-item rounded h-100">
-                            <div class="d-flex justify-content-between">
-                                <div class="service-icon">
-                                    <i class="fa fa-chart-area fa-2x"></i>
-                                </div>
-                                <a class="service-btn" href="">
-                                    <i class="fa fa-link fa-2x"></i>
-                                </a>
-                            </div>
-                            <div class="p-5">
-                                <h5 class="mb-3">Financial Analaysis</h5>
-                                <span>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="service-item rounded h-100">
-                            <div class="d-flex justify-content-between">
-                                <div class="service-icon">
-                                    <i class="fa fa-balance-scale fa-2x"></i>
-                                </div>
-                                <a class="service-btn" href="">
-                                    <i class="fa fa-link fa-2x"></i>
-                                </a>
-                            </div>
-                            <div class="p-5">
-                                <h5 class="mb-3">legal Advisory</h5>
-                                <span>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
-                        <div class="service-item rounded h-100">
-                            <div class="d-flex justify-content-between">
-                                <div class="service-icon">
-                                    <i class="fa fa-house-damage fa-2x"></i>
-                                </div>
-                                <a class="service-btn" href="">
-                                    <i class="fa fa-link fa-2x"></i>
-                                </a>
-                            </div>
-                            <div class="p-5">
-                                <h5 class="mb-3">Tax & Insurance</h5>
-                                <span>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</span>
-                            </div>
-                        </div>
-                    </div>
+                    </c:forEach>
                 </div>
             </div>
         </div>
         <!-- Service End -->
 
 
-        <!-- Features Start -->
+             <!-- Features Start -->
         <div class="container-xxl py-6">
             <div class="container">
                 <div class="row g-5">
                     <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="d-inline-block border rounded-pill text-primary px-4 mb-3">Features</div>
-                        <h2 class="mb-4">Why People Choose Us? We Are Trusted & Award Wining Agency</h2>
-                        <p>Clita nonumy sanctus nonumy et clita tempor, et sea amet ut et sadipscing rebum amet takimata amet, sed accusam eos eos dolores dolore et. Et ea ea dolor rebum invidunt clita eos. Sea accusam stet stet ipsum, sit ipsum et ipsum kasd</p>
-                        <p>Et ea ea dolor rebum invidunt clita eos. Sea accusam stet stet ipsum, sit ipsum et ipsum kasd</p>
+                        <div class="d-inline-block border rounded-pill text-primary px-4 mb-3">Learning Machine</div>
+                        <h2 class="mb-4">왜 Learning Machine 일까?</h2>
+                        <p>꿈을 이루기 위해서, 하고 싶은걸 해나가기 위해선 그 분야에 대한 배움이 가장 기본적인 요소이기 때문입니다. 하지만, 모두에게 배우기 좋은 환경이 보장 되진 않죠.<br>
+
+너무 비싸서, 거리가 멀어서.. 여러 이유로 당연하다고 생각되어 지는것들이 어떤 누군가에게는 사치가 되기도 합니다. 그런 현실에 도전하려 합니다.<br> <strong>러닝머신</strong>은 누구나, 경제적으로 시간적 제약없이 내가 원하는 것을 배우고, 지식을 나눌 수 있는 공간입니다.</p>
                         <a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="">Read More</a>
                     </div>
                     <div class="col-lg-7">
@@ -212,9 +146,9 @@
                                     <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
                                         <i class="fa fa-cubes text-white"></i>
                                     </div>
-                                    <h6 class="mb-0">Best In Industry</h6>
+                                    <h6 class="mb-0">업계중 최고</h6>
                                 </div>
-                                <span>Magna sea eos sit dolor, ipsum amet ipsum lorem diam eos diam dolor</span>
+                                <span>수년~십수년씩 커리어를 쌓고 노력해온 지식공유자들이 지식과 노하우를 공유합니다. 당장 좋은 사수가 없거나, 교육을 받지 못하더라도 걱정하지 마세요. </span>
                             </div>
                             <div class="col-sm-6 wow fadeIn" data-wow-delay="0.2s">
                                 <div class="d-flex align-items-center mb-3">
@@ -223,25 +157,25 @@
                                     </div>
                                     <h6 class="mb-0">99% Success Rate</h6>
                                 </div>
-                                <span>Magna sea eos sit dolor, ipsum amet ipsum lorem diam eos diam dolor</span>
+                                <span>출석률 99%에 육박하는 계속해서 듣고싶은 강의</span>
                             </div>
                             <div class="col-sm-6 wow fadeIn" data-wow-delay="0.3s">
                                 <div class="d-flex align-items-center mb-3">
                                     <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
                                         <i class="fa fa-award text-white"></i>
                                     </div>
-                                    <h6 class="mb-0">Award Winning</h6>
+                                    <h6 class="mb-0">질좋은 강의</h6>
                                 </div>
-                                <span>Magna sea eos sit dolor, ipsum amet ipsum lorem diam eos diam dolor</span>
+                                <span>수강평 좋은 강의들로만 엄선했습니다.</span>
                             </div>
                             <div class="col-sm-6 wow fadeIn" data-wow-delay="0.4s">
                                 <div class="d-flex align-items-center mb-3">
                                     <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
                                         <i class="fa fa-smile-beam text-white"></i>
                                     </div>
-                                    <h6 class="mb-0">100% Happy Client</h6>
+                                    <h6 class="mb-0">100% Happy Student</h6>
                                 </div>
-                                <span>Magna sea eos sit dolor, ipsum amet ipsum lorem diam eos diam dolor</span>
+                                <span>모두가 만족하는 강의</span>
                             </div>
                             <div class="col-sm-6 wow fadeIn" data-wow-delay="0.5s">
                                 <div class="d-flex align-items-center mb-3">
@@ -250,16 +184,16 @@
                                     </div>
                                     <h6 class="mb-0">Professional Advisors</h6>
                                 </div>
-                                <span>Magna sea eos sit dolor, ipsum amet ipsum lorem diam eos diam dolor</span>
+                                <span>현업 종사자들의 생생한 어드바이스까지!</span>
                             </div>
                             <div class="col-sm-6 wow fadeIn" data-wow-delay="0.6s">
                                 <div class="d-flex align-items-center mb-3">
                                     <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
                                         <i class="fa fa-headset text-white"></i>
                                     </div>
-                                    <h6 class="mb-0">24/7 Customer Support</h6>
+                                    <h6 class="mb-0">24/7 Support</h6>
                                 </div>
-                                <span>Magna sea eos sit dolor, ipsum amet ipsum lorem diam eos diam dolor</span>
+                                <span>언제 어디서나 질문을 하시면 답변을 빠르게받을수 있습니다.</span>
                             </div>
                         </div>
                     </div>
