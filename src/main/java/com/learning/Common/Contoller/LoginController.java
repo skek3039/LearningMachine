@@ -28,8 +28,11 @@ public class LoginController {
 	
 	//로그인처리.
 	@PostMapping(value = "/login")
-	   public String login(HttpServletRequest request) {
-	      userDTO dto = new userDTO();
+	public String login(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=utf-8"); 
+		  userDTO dto = new userDTO();
 	      dto.setU_id(request.getParameter("id"));
 	      dto.setU_pw(request.getParameter("pw"));
 	      
@@ -38,14 +41,19 @@ public class LoginController {
 	         HttpSession session = request.getSession();
 	         session.setAttribute("u_id",dto.getU_id());
 	         session.setAttribute("u_authority", dto.getU_authority());
+	         session.setAttribute("u_nickname", dto.getU_nickname());
 	         if(dto.getU_authority() > 6) {
 	            return "redirect:/admin";            
 	         }else if(dto.getU_authority() > 3) {            
 	            System.out.println("강사");
 	            return "redirect:/lecture";                        
 	         }
+	         return "redirect:/";
+	      }else {
+	    	  response.getWriter().println("<script type='text/javascript' charset='utf-8' >alert('아이디, 비밀번호 확인해주세요\\n로그인 창으로 이동 합니다.'); window.location.href = './login'; "+ "</script>");
+	    	  return null;
 	      }
-	      return "redirect:/";
+	      
 	   }
 	   
 	
@@ -58,6 +66,7 @@ public class LoginController {
 	//비밀번호 
 	@PostMapping(value = "/resetPw")
 	public void resetPw(@ModelAttribute userDTO user, HttpServletResponse response) throws Exception{
+		
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=utf-8"); 
 		int Reset = loginService.resetPw(user);
@@ -127,7 +136,7 @@ public class LoginController {
 		return "join2";
 	}
 	
-	// 강사회원가입 후 관리자 승인 
+	// 강사회원가입 후 관리자 승인 대기
 	@PostMapping(value = "/join2")
 	public String join2(HttpServletRequest request, HttpSession session, HttpServletResponse response) throws IOException {
 		
@@ -153,9 +162,12 @@ public class LoginController {
 		int result1 = loginService.join3(dto1);
 		
 		if(result == 1 && result1 == 1) {
-			response.getWriter().println("<script>alert('강사회원가입성공 \\n로그인 창으로 이동 합니다.'); window.location.href = './login'; "+ "</script>");
+			response.getWriter().println("<script>alert('강사회원가입성공 \\n관리자승인대기중입니다.'); window.location.href = './login'; "+ "</script>");
+			return "redirect:/login";
+		}else {
+			response.getWriter().println("<script>alert('회원가입실패 \\n회원가입 창으로 이동 합니다.'); window.location.href = './join2'; "+ "</script>");			
+			return "redirect:/join2";
 		}
-		return "redirect:/join2";
 	}
 	
 	//유저 회원가입
@@ -187,6 +199,7 @@ public class LoginController {
 	
 	@GetMapping(value = "/login")
 	public String login() {
+		
 		return "login";
 	}
 

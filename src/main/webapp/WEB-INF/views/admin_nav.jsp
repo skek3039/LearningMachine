@@ -28,6 +28,7 @@
 					<details>
     					<summary>게시판관리</summary>
     						<a href="./admin_notice">공지사항</a> <br>
+    						<a href="./admin_community">자유게시판</a> <br>
    	 				</details>
 				</div>
 			</div>

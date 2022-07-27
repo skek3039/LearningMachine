@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,7 +41,6 @@
 <!-- Template Stylesheet -->
 <link href="./resources/css/style.css" rel="stylesheet">
 <link href="./resources/css/admin.css" rel="stylesheet">
-<link href="./css/notice.css" rel="stylesheet">
 
 <style type="text/css">
     <style>@font-face {
@@ -48,18 +49,23 @@
         font-weight: normal;
         font-style: normal;
     }
+
     body {
         font-family: LeferiPoint-WhiteObliqueA;
     }
+
     details {
         border-bottom: 1px solid #efefef;
         color: #666;
         font-size: 16px;
         padding: 15px;
     }
+
+
     details[open] summary {
         font-weight: 800;
     }
+
     details > summary {
         color: white;
         font-size: 17px;
@@ -86,44 +92,40 @@
 		<div style=" width: 100%;">
 		 <jsp:include page="./admin_nav.jsp"/>
 		<div style="padding-top: 110px;"></div>
-		<div style="padding-top: 10px; padding-left: 400px; height: 835px;">
-				<table>
-					<tr>
-					<th><img style="width: 50px; height: 50px; " id="up" alt="" src="./img/notice.png" title="공지"></th>
-						<td style="padding-top: 10px; word-break:break-all; width: 750px"><h5>${dto.n_title }</h5></td>
-					</tr>
-					<tr>
-						<td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/id.png" title="id">
-						${dto.u_id }</h6></td><td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/date.png" title="날짜">
-						${dto.n_date }
-						<img onclick="location.href='./notice_update?n_no=${dto.n_no}'" style="width: 20px; height: 20px;" id="update" alt="" src="./img/update.png" title="id">
-						<img onclick="location.href='./notice_delete?n_no=${dto.n_no}'" style="width: 20px; height: 20px;" id="delete" alt="" src="./img/delete.png" title="id">
-					</h6></td>
-					</tr></table><br>
-					<table>
-					<tr>
-						<td style="word-break:break-all; width: 820px">${dto.n_content }</td>
-					</tr>
-					</table>
-					<div style="padding-top: auto;">
-					<hr style="width: 850px; height: 2px;">
-					</div>
-					<br>
+		<div style="padding-top: 100px; padding-left: 400px; height: 835px;">
+				<div id="writeform" style="padding-right: 100px;">
+				<form action="./notice_request.do" method="post">
+					<input style="width: 820px;" type="text" name="title" required="required" placeholder="제목을 입력해주세요.">
+					<textarea name="content" id="summernote" required="required"></textarea>
+					<button type="submit" style="float:right;">글쓰기</button>
+				</form>
+			</div>
 		</div>
 
 </div>
-		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
 
 
 		<!-- Back to Top -->
 		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
 			class="bi bi-arrow-up"></i></a>
+		<script type="text/javascript">
+			$('body > ul > li').click(function() {
+				if ($(this).hasClass('active')) {
+					$(this).find(' > ul').stop().slideUp(300);
+					$(this).removeClass('active');
+				} else {
+					$(this).find(' > ul').stop().slideDown(300);
+					$(this).addClass('active');
+				}
+			});
+		</script>
 	</div>
 
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="./resources/lib/wow/wow.min.js"></script>
 	<script src="./resources/lib/easing/easing.min.js"></script>
 	<script src="./resources/lib/waypoints/waypoints.min.js"></script>
@@ -132,5 +134,20 @@
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
 </body>
-
+<script>
+$(document).ready(function() {
+	   //여기 아래 부분
+	   $('#summernote').summernote({
+	        height: 400,        
+	        minHeight: null,        
+	        maxHeight: null,       
+	        focus: true,             
+	        lang: "ko-KR",          
+	        placeholder: '내용을 입력해주세요.' 
+	          
+	   });
+	});
+</script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 </html>

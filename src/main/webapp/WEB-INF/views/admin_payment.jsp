@@ -158,7 +158,7 @@ window.onload = function() {
 		      labels: ["여","남"],
 		      datasets: [{
 		        label: "Population (millions)",
-		        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+		        backgroundColor: ["rgba(255, 255, 0, 0.5)", "orange"],
 		        data: ['${gender[0].f}', '${gender[0].m}']
 		      }]
 		    },

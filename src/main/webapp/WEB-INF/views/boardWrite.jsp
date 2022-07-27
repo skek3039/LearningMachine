@@ -52,6 +52,9 @@
 <script src="./resources/lib/waypoints/waypoints.min.js"></script>
 <script src="./resources/lib/owlcarousel/owl.carousel.min.js"></script>
 <script src="./resources/js/board.js"></script>
+<script src="./resources/summernote/summernote-lite.js"></script>
+<script src="./resources/summernote/lang/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="./resources/summernote/summernote-lite.css">
 
 <!-- Template Javascript -->
 <script src="./resources/js/main.js"></script>
@@ -175,8 +178,8 @@ ul.tabs li.current{
         box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
 
         /* 임시 지정 */
-        width: 800px;
-        height: 350px;
+        width: 50%;
+        height: 60%;
 
         /* 초기에 약간 아래에 배치 */
         transform: translate(-50%, -40%);
@@ -198,15 +201,19 @@ ul.tabs li.current{
 
 </style>
 <script type="text/javascript">
-function OpenModal(br_no){
-	var OpenModal = document.querySelector(".background" + br_no);
-	OpenModal.classList.add("show");
-}
 
-function CloseModal(br_no) {
-	var CloseModal = document.querySelector(".background" + br_no);
-	CloseModal.classList.remove("show");
-}
+$(document).ready(function () {
+
+	$('.summernote').summernote({
+		placeholder: 'content',
+		minHeight: 370,
+		maxHeight: null,
+		focus: true,
+		lang: 'ko-KR'
+	});
+});
+
+
 
 function search(){
 	var lqa_title= document.getElementById("lqa_title").value;
@@ -223,20 +230,6 @@ function enterkey() {
 		search();
 	}
 	
-}
-
-function commentDelete(br_no,b_no){
-	if(confirm("댓글을 삭제하시겠습니까?")){
-		location.href="./commentDelete?br_no="+br_no + "&b_no="+b_no;
-	}
-}
-
-function commentUpdate(br_no, b_no){
-	let br_content = $("#br_content").val();
-	if(confirm("댓글을 수정하시겠습니까?")){
-		location.href="./commentUpdate.do?br_no="+br_no + "&b_no="+b_no + "&br_content="+br_content;
-	}
-
 }
 </script>
 
@@ -260,98 +253,28 @@ function commentUpdate(br_no, b_no){
 			<h3>&nbsp;&nbsp; Community</h3> <small>비방또는 비난등의 글은 무통보로 삭제됩니다.</small>
 			<hr style="border: solid 1px;">
 		</div>
-		<div style="padding-top: 20px; text-align: center;">
-				<br>
-				<br>	
-		<c:if test="${sessionScope.u_nickname eq boardDetail.u_nickname }">
-		<div id = "more_btn_div" align="right">
-			<a class="btn btn-primary" role="button" href="./boardModify?b_no=${boardDetail.b_no }" style="width: 100px; margin: 4px auto;float:right;  margin-right: 100px;">수정</a>	
-			<a class="btn btn-primary" role="button" href="./boardDelete.do?b_no=${boardDetail.b_no }" style="width: 100px;margin: 4px auto; float:right; margin-right: 100px;">삭제</a>	
-		</div>
-		</c:if>	
-				<div id="content">
+		<div id="content">
 				<div class="row tab-content current" id="tab-1">
-					<table class="table" style="width: 90%; height:100%; margin: 0 auto" >
-						  <thead class="thead-dark">
+				<form action="./boardWrite.do" method="Post">
+					<table class="table" style="width: 90%; height:100%; margin: 0 auto" >						 
 						    <tr>
-						      <th style="width: 100px;">No. ${boardDetail.b_no }</th>
-						      <th style="background-color :#F0FFF0; width: 100px;">제목</th>
-						      <th style="text-align: left;">${boardDetail.b_title }</th>
-						      <th style="border-color: gray">${boardDetail.u_nickname }</th>
-						      <th style="background-color :#F0FFF0; width: 100px;">조회수</th>
-						      <th style="width: 80px;">${boardDetail.b_view }</th>
-						      <th style="background-color :#F0FFF0; width: 100px;">날짜</th>
-						      <th style="width: 150px;">${boardDetail.b_date }</th>
+						      <th style="width: 100px;"><input type="text" name="b_title" required="required"  placeholder="제목을 입력해주세요." style="width: 100%"> </th>
 						    </tr>
-						  </thead>
-						  <tbody id = "detailTable">
-						  	<tr>
-						  		<td colspan="8" style="height: 600px;"> ${boardDetail.b_content } </td>
-						  	</tr>
-						  	<c:forEach items="${comment }" var="c">
-						  	<tr>
-						  		<td colspan="8" style="height: 15px; text-align: left;background-color :#F0FFF0;">${c.u_nickname }
-						  		<c:if test="${sessionScope.u_nickname eq c.u_nickname }">
-						  			<img alt="수정" src="./img/update.png" onclick="OpenModal(${c.br_no})" style="width: 15px;cursor: pointer; height: 15px;">
-						  			<img alt="삭제" src="./img/delete.png" onclick="commentDelete('${c.br_no}','${boardDetail.b_no }')" style="width: 15px;cursor: pointer; height: 15px;">
-						  		</c:if>
-						  		<div class="background background${c.br_no }">
-								<div class="window">
-									<div class="popup">
-										<button id="closebtn" class="btn btn-outline-dark" onclick="CloseModal(${c.br_no});">닫기</button>
-										<h2 class="card-title" style="text-align: left">${c.u_nickname }</h2>
-										<p class="card-text">
-										<input type="text" name="br_content" id = "br_content" value="${c.br_content }" style="border: 1px solid rgb(201, 236, 219); width: 750px; height: 150px;"><br><br>
-										<button type="submit" class="btn btn-outline-dark" style="margin: 0 auto;text-align: center;" onclick="commentUpdate('${c.br_no}','${boardDetail.b_no }')" >수정</button>
-										</p>
-									</div>
-								</div>
-							</div>
-						  		<fmt:parseDate value="${c.br_date}" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
-            				    <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
-			
-						  		<small style="text-align: right; float: right;">${time }</small> </td>
-						  	</tr>
-						  	<tr>
-						  		<td colspan="8" style="height: 80px;text-align: left;">${c.br_content }</td>
-						  	</tr>
-						  	</c:forEach>
-						  </tbody>	
-						  <tfoot>
-						  	<tr>
-						  	<td colspan="7" style="height: 100%;">
-						  	<c:if test="${sessionScope.u_id ne null }">
-						  		<textarea id="comment" placeholder="불쾌감을 주는 댓글은 예고없이 삭제처리 될 수 있습니다." required="required" style="width: 100%;" onclick="commentwrite('${sessionScope.u_id }')"></textarea>
-						  	</c:if>
-						  	<c:if test="${sessionScope.u_id eq null }">
-								<textarea id="comment" placeholder="로그인후 사용해주세요." style=" background-color: #F0FFF0;width: 100%; display: inline; "  onclick="commentwrite('${sessionScope.u_id }')"></textarea>
-							</c:if>
-							</td>
-								<td>
-						  		<input type="hidden" id="b_no" value="${boardDetail.b_no }">
-						  		<button id="textCount" onclick="boardCommentwrite()" class ="btn btn-outline-dark" style="width: 100%;">댓글쓰기<br>(0/280)</button>
-						  		
-						  		</td>
-						  	</tr>
-						  	
-						  </tfoot>	 			   						   
+						 	<tr>
+						 		<td>	<textarea class="summernote" id="b_content" name="b_content" required="required" style="height: 150px; resize: none; z-index: 1100;"></textarea></td>
+						 		
+						 	</tr>
+						 	<tr>
+						 		<td><button type="submit" onclick="./boardWrite" class ="btn btn-outline-dark" style="width: 100%;">글쓰기</button></td>
+							</tr>
 						</table>
+				</form>	
 			</div>			
-					
-					
-		<div class="row tab-content" id="tab-2">
-		
-		
-		</div> 
-		
-		
-	
-		
+		</div> 	
 </div>
-	</div>
 	<jsp:include page="./footer.jsp" />
 
-</div>
+
 
 	<!-- Back to Top -->
 	<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i

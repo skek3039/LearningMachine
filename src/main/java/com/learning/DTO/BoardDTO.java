@@ -8,5 +8,6 @@ public class BoardDTO {
 	private int b_no, b_view, b_like, b_del;
 	
 	private String br_content, br_date, u_id; 
-	private int br_del;
+	private int  commentTotal, br_no;
+
 }

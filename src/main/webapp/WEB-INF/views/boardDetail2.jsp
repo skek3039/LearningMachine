@@ -48,18 +48,23 @@
         font-weight: normal;
         font-style: normal;
     }
+
     body {
         font-family: LeferiPoint-WhiteObliqueA;
     }
+
     details {
         border-bottom: 1px solid #efefef;
         color: #666;
         font-size: 16px;
         padding: 15px;
     }
+
+
     details[open] summary {
         font-weight: 800;
     }
+
     details > summary {
         color: white;
         font-size: 17px;
@@ -96,8 +101,6 @@
 						<td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/id.png" title="id">
 						${dto.u_id }</h6></td><td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/date.png" title="날짜">
 						${dto.n_date }
-						<img onclick="location.href='./notice_update?n_no=${dto.n_no}'" style="width: 20px; height: 20px;" id="update" alt="" src="./img/update.png" title="id">
-						<img onclick="location.href='./notice_delete?n_no=${dto.n_no}'" style="width: 20px; height: 20px;" id="delete" alt="" src="./img/delete.png" title="id">
 					</h6></td>
 					</tr></table><br>
 					<table>

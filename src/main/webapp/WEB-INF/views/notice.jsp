@@ -69,9 +69,32 @@
 
     details > summary {
         color: white;
-        font-size: 17px;
+        font-size: 14px;
         padding: 15px 0;
     }
+    
+    th {
+	background-color: #c0c0c0;
+	height: 30px;
+	border-bottom: 1px solid purple;
+	text-align: center;
+}
+
+#r1 {
+	width: 3%;
+}
+
+#r2 {
+	width: 8%;
+}
+
+#r3 {
+	width: 40%;
+	text-align: left;
+}
+#r4{
+	width: 5%;
+}
     
 </style>
 
@@ -106,17 +129,17 @@
 					</tr>
 					<c:forEach items="${noticeList}" var="n">
 					<tr onclick="location.href='noticedetail?n_no=${n.n_no}'"style="cursor: pointer;">
-						<th>${n.n_no }</th>
-						<th>${n.n_title }</th>
-						<th>${n.n_view}</th>
-						<th>${n.n_date }</th>
+						<th id="r1">${n.n_no }</th>
+						<th id="r3">${n.n_title }</th>
+						<th id="r4">${n.n_view}</th>
+						<th id="r2">${n.n_date }</th>
 					</tr>
 					</c:forEach>
 			</table>
 		<br>
 <div id="pagination" style="border-top: 1px solid black; text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
 					<c:if test="${ a_authority ne 7}" > 
-					<a href="./noticeWrite"><button type="button" >글쓰기</button></a>
+					<a href="./noticeWrite"><button type="button" style="position: fixed; left: 73%; ">글쓰기</button></a>
 					</c:if>
 		</div>
 		<jsp:include page="./footer.jsp" />

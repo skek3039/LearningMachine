@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.learning.Admin.DAO.AdminDAO;
 import com.learning.Admin.DAO.PaymentDAO;
 import com.learning.DTO.BannedDTO;
+import com.learning.DTO.BoardDTO;
 import com.learning.DTO.LectureDTO;
 import com.learning.DTO.NoticeDTO;
 import com.learning.DTO.PageDTO;
@@ -88,8 +89,8 @@ public class AdminService {
 		return adminDAO.lectureGet(map);
 	}
 
-	public void admin_lectureGet1(Map<String, Object> map) {
-		adminDAO.lectureGet1(map);
+	public void admin_lectureGet1(Map<String, Object> map, String c1) {
+		adminDAO.lectureGet1(map,c1);
 	}
 
 	public List<String> teacherDetail(String u_id) {
@@ -136,5 +137,20 @@ public class AdminService {
 		return adminDAO.notice_delete(notice_delete);
 		
 	}
+
+	public List<BoardDTO> boardList(Map<String, Object> map) {
+		return adminDAO.boardList(map);
+	}
+
+	public int community_totalCount() {
+		return adminDAO.community_totalCount();
+	}
+
+	public int board_delete(BoardDTO board_delete) {
+		return adminDAO.board_delete(board_delete);
+		
+	}
+	
+
 
 }

@@ -70,15 +70,13 @@
             <div class="row d-flex justify-content-center align-items-center h-100">
                <div class="col-12 col-ml-8 col-lg-6 col-xl-5">
                <div style="padding-top: 120px;"></div>
-                  <div class="card bg-dark text-white"
-                     style="border-radius: 1rem; background-color: #00B98E;">
+                  <div class="card bg-dark text-white" style="border-radius: 1rem; background-color: #00B98E;">
                      <div class="card-body p-5 text-center">
 	
                         <div class="mb-md-5 mt-md-4 pb-5" >
 
                            <h2 class="fw-bold mb-2 text-uppercase" style="color: white;">회원가입</h2>
-                           <p class="text-white-50 mb-5">강사는 관리자 승인 후 로그인 가능</p>
-                           <p class="text-white-50 mb-5">Please enter your login and password!</p>
+                           <p class="text-white-50 mb-5">강사는 관리자 승인 후 로그인 가능합니다.</p>
                            <form action="./join2" method="post" id="join2">
                               <div class="form-outline form-white mb-4">
                                  <input type="text" id="u_id" name="u_id"
@@ -171,11 +169,11 @@
                      </div>
                   </div>
                </div>
-      <jsp:include page="./footer.jsp" />
             </div>
 
 
 
+      <jsp:include page="./footer.jsp" />
    </section>
    </div>
       <!-- Back to Top -->

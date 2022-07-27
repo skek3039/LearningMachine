@@ -74,14 +74,14 @@
  		select * from user_paymentRefund_view
  	</select>
  	
-
  	<select id="lectureRequest" parameterType="String" resultType="hashmap">
  		SELECT * ,
 		if(l_recognize = 0 ,"승인대기","승인거부") AS request,
 		(SELECT c_name FROM category WHERE category.c_code = lecture_apply.c_code) AS c_name
 		FROM lecture_apply
+		where l_recognize != 1
  		<if test = "la_no != null">
-  		where la_no = ${la_no}
+  		AND la_no = ${la_no}
   		</if>
   	</select>
 
@@ -184,4 +184,23 @@
  		DELETE FROM notice
  		WHERE n_no = #{n_no}
  	</delete>
+ 	
+  	<select id="boardList" parameterType="map" resultType="BoardDTO">
+ 		SELECT *
+ 		FROM user_board
+ 		ORDER BY b_no DESC
+		limit #{page.startPage} , #{page.lastPage} 
+ 	</select>	
+ 	
+ 	<select id="community_totalCount" resultType="integer">
+ 		select COUNT(*) AS count
+  		from user_board
+ 	</select>
+ 	
+  	<delete id="board_delete" parameterType="BoardDTO">
+ 		DELETE FROM user_board
+ 		WHERE b_no = #{b_no}
+ 	</delete>	
+
+ 	
   </mapper>

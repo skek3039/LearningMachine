@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="Payment">
   
+  	<select id = "refundRate" resultType="map">
+  		SELECT ROUND(((select count(*) from payment_log l WHERE l.p_refund = 1 )/ COUNT(*) * 100),0) AS refundRate
+		FROM payment_log
+  	
+  	</select>
+  
   	<select id="paymentmain" parameterType="integer" resultType="map">
   		SELECT year(p_date)as year, 
   		MONTH(p_date) as month, 

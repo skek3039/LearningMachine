@@ -109,6 +109,10 @@ ul.tabs li.current{
   display: none;
 }
 
+.search.current{
+  display: none;
+}
+
 .tab-content.current{
   display: flex;
 }
@@ -216,6 +220,11 @@ function enterkey() {
 </script>
 <script type="text/javascript">
 
+function linkPage(pageNo){
+	location.href = "./community?pageNo=" + pageNo;
+}
+
+
 function OpenModal(lqa_no){
 	var OpenModal = document.querySelector(".background" + lqa_no);
 	OpenModal.classList.add("show");
@@ -238,6 +247,7 @@ $(document).ready(function(){
 	 
 	    $(this).addClass('current');
 	    $("#"+tab_id).addClass('current');
+	 
 	  })
 	  
 	  
@@ -342,7 +352,7 @@ function select(category){
 			</ul>
 		</div>
 		<div style="padding-top: 20px; text-align: center;">
-				<div style="width:500px; margin: 0 auto">
+				<div class ="search" style="width:500px; margin: 0 auto">
 					 <input type="search" id="lqa_title" name="lqa_title" class="form-control" style="width: 350px;display: inline-block;" placeholder="궁금한 질문을 검색해보세요!" onkeyup="enterkey()">
 					 <button type="button" id="search" class="btn btn-success" style="display: inline-block;" onclick="search()">Search</button>
 				</div>	
@@ -365,13 +375,8 @@ function select(category){
 						    </tr>
 						  </thead>
 						<c:forEach items="${list }" var = "list"> 
-						  <tbody id = "detailTable">
-						   
-						   
-						   
+						  <tbody id = "detailTable">					   
 						  </tbody>
-						  
-						  
 							<div class="background background${list.lqa_no }">
 								<div class="window">
 									<div class="popup">
@@ -379,53 +384,63 @@ function select(category){
 										<h2 class="card-title" style="text-align: left">${list.lqa_title }</h2>
 										<h6 style="text-align: left"> ${list.u_id }</h6>
 										<p class="card-text">
-										<label style="border: 1px solid rgb(201, 236, 219); width: 750px; height: 300px;"><strong>Q</strong> ${list.lqa_content }</label><br>
-										<c:if test="${list.lqar_content ne null }">
-										<label style="border: 1px solid rgb(201, 236, 219); width: 750px; height: 300px;"><strong>A</strong> ${list.lqar_content }</label>
-										</c:if>
-										</p>
+										<div style="border: 1px solid rgb(201, 236, 219);height:150px; text-align: left"><strong>Q.</strong> ${list.lqa_content }</div><br>
+										
+										<c:choose>
+											<c:when test="${list.lqar_content ne null }">
+											<div style="border: 1px solid rgb(201, 236, 219);height:150px; text-align: left"><strong>A.</strong>${list.lqar_content } </div>
+											</c:when>
+											<c:otherwise>
+											<div style="border: 1px solid rgb(201, 236, 219);height:150px; text-align: left"><strong>선생님이 답변작성중이에요</strong> </div>
+											</c:otherwise>
+										</c:choose>
 									</div>
+										
 								</div>
 							</div>
 						</c:forEach>
 						</table>
-					
+						<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
 			</div>			
 	
 					
 		<div class="row tab-content" id="tab-2">
-		<jsp:include page="./board.jsp"/>
-	
-		
-			<%-- <table class="table table-hover" style="width: 90%; margin: 0 auto" >
+		<c:if test="${sessionScope.u_id ne null }">
+		<div id = "more_btn_div" align="right">
+			<a class="btn btn-primary" role="button" href="./boardWrite" style="width: 120px;float:right; margin: 4px auto; margin-right: 30px;">Write</a>	
+		</div>
+		</c:if>		
+		 <table class="table table-hover" style="width: 90%; margin: 0 auto" >
 						  <thead class="thead-dark">
 						    <tr>
-						      <th>ID no.</th>
-						      <th>강의카테고리</th>
+						      <th>no.</th>
 						      <th>제목</th>
 						      <th>닉네임</th>
 						      <th>날짜</th>
-						      <th>답변여부</th>
+						 	  <th>조회수</th>
 						    </tr>
 						  </thead>
-						<c:forEach items="${list }" var = "list"> 
+						<c:forEach items="${board }" var = "b"> 
 						  <tbody id = "detailTable">
-						   
-						   
-						   
+						   <tr>
+						   		<td>${b.b_no }</td>
+						   		
+						   		<td style="text-align: left"><a href = "./boardDetail?b_no=${b.b_no }"> ${b.b_title } </a> <small>[${b.commentTotal }]</small></td>
+						   		<td>${b.u_nickname }</td>
+						   		<td>${b.b_date }</td>
+						   		<td>${b.b_view }</td>
+						   </tr>
 						  </tbody>
 						</c:forEach>
-			</table>	 --%>
+			</table>	
 		</div> 
 
 		
 	
 		
 </div>
-<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
 					
 	</div>
-	<%-- <jsp:include page="./team.jsp"/> --%>
 	<jsp:include page="./footer.jsp" />
 
 </div>

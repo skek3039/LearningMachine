@@ -32,4 +32,8 @@ public class PaymentDAO {
 	public List<String> gender() {
 		return sqlSession.selectList("Payment.gender");
 	}
+
+	public List<String> refundRate() {
+		return sqlSession.selectList("Payment.refundRate");
+	}
 }

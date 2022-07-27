@@ -1,14 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 <meta charset="utf-8">
-<title>Learning Machine</title>
+<title>Learning Machine:강사 페이지</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
@@ -73,7 +73,7 @@
         padding: 15px 0;
     }
     
-       .background {
+           .background {
         position: fixed;
         top: 0;
         left: 0;
@@ -129,29 +129,24 @@
 		padding: 10px;
 	  }
 </style>
+
 <script type="text/javascript">
 function linkPage(pageNo){
-	location.href = "./student_list?pageNo=" + pageNo;
+	location.href = "./admin_community?pageNo=" + pageNo;
 	}
 
-
-function OpenModal(la_no){
-	var OpenModal = document.querySelector(".background" + la_no);
+function OpenModal(b_no){
+	var OpenModal = document.querySelector(".background" + b_no);
 	OpenModal.classList.add("show");
 }
 
-function CloseModal(lqa_no) {
-	var CloseModal = document.querySelector(".background" + lqa_no);
+function CloseModal(b_no) {
+	var CloseModal = document.querySelector(".background" + b_no);
 	CloseModal.classList.remove("show");
 }
 
-function report(l_code){
-	let ur_reason = $("#ur_reason").val();
-	alert(ur_reason);
-	location.href = "./lecture_student_report?l_code="+l_code+ "&ur_reason="+ur_reason ;
-}
-
 </script>
+
 </head>
 
 <body>
@@ -168,63 +163,57 @@ function report(l_code){
 
 
 		<jsp:include page="./header.jsp" />
-		<div style=" width: 100%; height: 950px;">
-				<jsp:include page="./lecture_nav.jsp"/>
-			<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;수강생조회</h3><hr style="border: solid 1px;"></div>
-		 			<div class="col-sm-offset-9" style=" text-align: center; padding-left: 890px"></div>
-		<div style="padding-top: 10px; height: 500px;">
-			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto; text-align: center;">
-					<tr>					
-						<th>강의명</th>
-						<th>이름</th>
-						<th>성별</th>
-						<th>포인트</th>
-						<th>진도율</th>			
-						<th>신고</th>			
-					</tr>
-					
-					<c:forEach items="${studentList}" var="s">
-					<tr>
-						<td>${s.l_name }</td>
-						<td>${s.u_id }</td>					
-						<td>${s.u_gender }</td>
-						<td>${s.u_paypoint }</td>
-						<td>${s.attendance_rate }</td>
-						<td><a href = "#" onclick="OpenModal(${s.l_code})">신고하기</a>
-						<form action="./lecture_student_report" method="get">
-									<div class="background background${s.l_code}">
-										<div class="window">
-											<div class="popup">
-												<button id="closebtn" onclick="CloseModal(${s.l_code});">닫기</button>
-												<h2 class="card-title">신고사유</h2>
-												<h6>수업 : ${s.l_name } | 수강생 : ${s.u_id }</h6>
-												<input type="hidden" name="u_id" value="${s.u_id }"> <input
-													type="hidden" name="l_code" value="${s.l_code }">
-												<p class="card-text">
-													<textarea name="ur_reason" id="ur_reason"
-														placeholder="신고사유를 적어주세요." required="required"
-														style="width: 100%; height: 100px;"></textarea>
-												</p>
-												<button type="submit" class="btn btn-outline-dark">신고</button>
-											</div>
-											<div>
-												<div></div>
-											</div>
-										</div>
+		<div style="width: 100%;">
+		<div style="position: relative;">
+		<jsp:include page="./admin_nav.jsp"/>
+		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;자유게시판</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 10px;padding-left: 120px; height: 770px">
+				<br><br><br>
+				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
+						  <thead class="thead-dark">
+						    <tr>
+						      <th>no.</th>
+						      <th>제목</th>
+						      <th>닉네임</th>
+						      <th>날짜</th>
+						 	  <th>삭제</th>
+						    </tr>
+						  </thead>
+						<c:forEach items="${boardList }" var = "b"> 
+						  <tbody id = "detailTable">
+						   <tr>
+						   		<td>${b.b_no }</td>
+						   		<td><a href = "#" onclick="OpenModal(${b.b_no })"> ${b.b_title } </a> <small></small></td>
+						   		<td>${b.u_nickname }</td>
+						   		<td>${b.b_date }</td>
+						   		<td><img onclick="location.href='./board_delete?b_no=${b.b_no}'" style="width: 20px; height: 20px;" id="delete" alt="" src="./img/delete.png" title="id"></td>
+						   </tr>
+						  </tbody>
+
+							<div class="background background${b.b_no}">
+								<div class="window">
+									<div class="popup">
+										<button id="closebtn" onclick="CloseModal(${b.b_no});">닫기</button>
+										<h2 class="card-title">${b.b_title }</h2>
+										<p class="card-text">
+										<label style="width: 100%; height: 100px;">${b.b_content }</label>
+
+										</p>
 									</div>
-								</form></td>
-						
-						<!-- <button type="button" onclick="locaion.href='lecture_student_report.jsp'">신고</button> -->
-					</tr>
-					</c:forEach>
+									<div>
+										<div></div>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
 			</table>
+	 	<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>	
+			</div>
 		</div>
-		<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
-	
-	</div>
+
 		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
-
+	</div>
 
 		<!-- Back to Top -->
 		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
@@ -240,7 +229,9 @@ function report(l_code){
 				}
 			});
 		</script>
-	</div>
+</div>
+
+
 
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -253,6 +244,6 @@ function report(l_code){
 
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
-</body>
 
+</body>
 </html>

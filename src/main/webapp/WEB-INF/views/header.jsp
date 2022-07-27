@@ -22,6 +22,7 @@
                                 <a href="./payment" class="dropdown-item">매출관리</a>
                                 <a href="./admin_student" class="dropdown-item">학생관리</a>
                                 <a href="./admin_student_refund" class="dropdown-item">강사관리</a>
+                                <a href="./admin_notice" class="dropdown-item">게시판관리</a>
                             </div>
                          </c:if>
                          <c:if test="${sessionScope.u_authority == 4 }">

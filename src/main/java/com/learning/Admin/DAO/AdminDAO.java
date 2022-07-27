@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.learning.DTO.BannedDTO;
+import com.learning.DTO.BoardDTO;
 import com.learning.DTO.LectureDTO;
 import com.learning.DTO.NoticeDTO;
 import com.learning.DTO.PageDTO;
@@ -109,12 +110,11 @@ public class AdminDAO {
 
 	public int lectureGet(Map<String, Object> map ) {
 		sqlSession.insert("Admin.lectureGet",map);
-		System.out.println(map.toString());
 		return sqlSession.insert("Admin.lectureCate",map);
 	}
 
-	public void lectureGet1(Map<String, Object> map) {
-		if(map.get("c1").equals("1")) {
+	public void lectureGet1(Map<String, Object> map, String c1) {
+		if(c1.equals("1")) {
 			sqlSession.update("Admin.lectureGet2",map);							
 		}else {
 			sqlSession.update("Admin.lectureGet3",map);							
@@ -177,5 +177,18 @@ public class AdminDAO {
 	public int notice_delete(NoticeDTO notice_delete) {
 		return sqlSession.delete("Admin.notice_delete", notice_delete);
 	}
+
+	public List<BoardDTO> boardList(Map<String, Object> map) {
+		return sqlSession.selectList("Admin.boardList", map);
+	}
+
+	public int community_totalCount() {
+		return sqlSession.selectOne("Admin.community_totalCount");
+	}
+
+	public int board_delete(BoardDTO board_delete) {
+		return sqlSession.delete("Admin.board_delete", board_delete);
+	}
+
 
 }
