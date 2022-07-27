@@ -67,10 +67,10 @@
 
       <section class="vh-100 gradient-custom">
          <div class="container py-5 h-100" >
-            <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100" style="margin-top: 100px; margin-bottom: 100px;">
             
                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                <div style="padding-top: 120px;">
+                <div style="padding-top: 120;">
                </div>
                   <div class="card bg-dark text-white"
                      style="border-radius: 1rem; background-color: #00B98E;">
@@ -306,15 +306,19 @@
       </script>
          
          
-      </section>
-
+     </section>
+	
+	<div>
+	<br><br><br><br><br><br><br><br>
       <jsp:include page="./footer.jsp" />
-
+	</div>
+	
+	<div>
       <!-- Back to Top -->
       <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
          class="bi bi-arrow-up"></i></a>
    </div>
-
+</div>
 
 
    <!-- Template Javascript -->
