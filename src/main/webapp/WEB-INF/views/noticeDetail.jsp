@@ -89,7 +89,7 @@
 
 		<jsp:include page="./header.jsp" />
 		<div style=" width: 100%;">
-		 <jsp:include page="./admin_nav.jsp"/>
+		 <jsp:include page="./notice_nav.jsp"/>
 		<div style="padding-top: 110px;"></div>
 		<div style="padding-top: 10px; padding-left: 400px; height: 835px;">
 				<table>
