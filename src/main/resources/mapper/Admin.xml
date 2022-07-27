@@ -184,4 +184,21 @@
  		DELETE FROM notice
  		WHERE n_no = #{n_no}
  	</delete>
+ 	
+  	<select id="boardList" parameterType="map" resultType="BoardDTO">
+ 		SELECT *
+ 		FROM user_board
+ 		ORDER BY b_no DESC
+		limit #{page.startPage} , #{page.lastPage} 
+ 	</select>	
+ 	
+ 	<select id="community_totalCount" resultType="integer">
+ 		select COUNT(*) AS count
+  		from user_board
+ 	</select>
+ 	
+  	<delete id="board_delete" parameterType="BoardDTO">
+ 		DELETE FROM user_board
+ 		WHERE b_no = #{b_no}
+ 	</delete>	
   </mapper>

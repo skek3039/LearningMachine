@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.learning.Admin.Service.AdminService;
 import com.learning.Admin.Service.PaymentService;
 import com.learning.DTO.BannedDTO;
+import com.learning.DTO.BoardDTO;
 import com.learning.DTO.LectureDTO;
 import com.learning.DTO.NoticeDTO;
 import com.learning.DTO.PageDTO;
@@ -546,7 +547,7 @@ public class AdminController {
 				
 			}
 		}
-		//승인 거부 글 수정
+		//공지사항 글 수정
 		@RequestMapping(value = "/notice_update")
 		public ModelAndView notice_update(HttpServletRequest request, HttpSession session) {
 			int n_no = Integer.parseInt(request.getParameter("n_no"));
@@ -594,6 +595,73 @@ public class AdminController {
 				adminService.notice_delete(notice_delete);
 				
 				return "redirect:/admin_notice";
+			} else {
+				return "redirect:/404";
+
+			}
+		}
+		
+		// 자유게시판 페이지
+		@RequestMapping(value = "/admin_community")
+		public ModelAndView admin_community(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+			request.setCharacterEncoding("UTF-8");
+			if ((int) session.getAttribute("u_authority") > 6) {
+				ModelAndView mv = new ModelAndView("admin_community");
+				String u_id = (String) session.getAttribute("u_id");
+				int pageNo = 1;
+				if (request.getParameter("pageNo")!=null) {
+					pageNo = Integer.parseInt(request.getParameter("pageNo"));
+				}
+				// recordCountPageNo 한 페이지당 게시되는 게시물 수 yes
+				int listScale = 10;
+				// pageSize = 페이지 리스트에 게시되는 페이지 수 yes
+				int pageScale = 10;			
+				// totalRecordCount 전체 게시물 건수				
+				int totalCount = adminService.community_totalCount();
+				
+				// 전자정부페이징 호출
+				PaginationInfo paginationInfo = new PaginationInfo();
+				// 값 대입
+				paginationInfo.setCurrentPageNo(pageNo);
+				paginationInfo.setRecordCountPerPage(listScale);
+				paginationInfo.setPageSize(pageScale);
+				paginationInfo.setTotalRecordCount(totalCount);
+				// 전자정부 계산하기
+				int startPage = paginationInfo.getFirstRecordIndex();
+				int lastpage = paginationInfo.getRecordCountPerPage();
+
+				// 서버로 보내기
+				PageDTO page = new PageDTO();
+				page.setStartPage(startPage);
+				page.setLastPage(lastpage);
+				
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("u_id", u_id);
+				map.put("page", page);
+
+				List<BoardDTO> boardList = adminService.boardList(map);
+				mv.addObject("boardList", boardList);
+				mv.addObject("paginationInfo", paginationInfo);
+				return mv;
+			} else {
+				ModelAndView mv = new ModelAndView("404");
+				return mv;
+			}
+		}
+		//글 삭제
+		@RequestMapping(value = "/board_delete")
+		public String board_delete(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+			request.setCharacterEncoding("UTF-8");
+			int b_no = Integer.parseInt(request.getParameter("b_no"));
+			if ((int) session.getAttribute("u_authority") > 6) {
+				String u_id = (String) session.getAttribute("u_id");
+				BoardDTO board_delete = new BoardDTO();
+				board_delete.setB_no(b_no);
+				board_delete.setU_id(u_id);
+				
+				adminService.board_delete(board_delete);
+				
+				return "redirect:/admin_community";
 			} else {
 				return "redirect:/404";
 
