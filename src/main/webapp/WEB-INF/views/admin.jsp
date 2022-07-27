@@ -95,7 +95,7 @@
 
 
       <jsp:include page="./header.jsp" />
-      <div style="width: 100%;">
+      <div style="width: 100%; height: 900px;">
             <div style="position: relative;">
             <jsp:include page="./admin_nav.jsp" />
             </div>
@@ -172,15 +172,17 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">환불률                                            </div>
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">환불률 </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                    ${refundRate[0].refundRate }%
+                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="progress progress-sm mr-2">
                                                         <div class="progress-bar bg-info" role="progressbar"
-                                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                            style="width:  ${refundRate[0].refundRate }%" aria-valuenow="50" aria-valuemin="0"
                                                             aria-valuemax="100"></div>
                                                     </div>
                                                 </div>
@@ -239,9 +241,9 @@
                     </div>             
   
       </div>
-      <jsp:include page="./footer.jsp" />
  </div>       
-                        
+      <jsp:include page="./footer.jsp" />
+           </div>                     
       <!-- Back to Top -->
       <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
          class="bi bi-arrow-up"></i></a>
@@ -256,7 +258,7 @@
             }
          });
       </script>
-       </div> 
+
    <!-- JavaScript Libraries -->
    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
