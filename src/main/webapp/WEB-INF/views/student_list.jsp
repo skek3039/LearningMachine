@@ -173,7 +173,7 @@ function report(l_code){
 			<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;수강생조회</h3><hr style="border: solid 1px;"></div>
 		 			<div class="col-sm-offset-9" style=" text-align: center; padding-left: 890px"></div>
 		<div style="padding-top: 10px; height: 500px;">
-			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
+			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto; text-align: center;">
 					<tr>					
 						<th>강의명</th>
 						<th>이름</th>

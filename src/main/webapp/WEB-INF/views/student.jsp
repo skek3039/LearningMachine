@@ -121,7 +121,7 @@ function linkPage(pageNo){
                           </form>
                    	</div>
 		<div style="padding-top: 10px;">
-			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
+			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto; text-align: center;">
 					<tr>
 						<th>강의 이름</th>
 						<th>카테고리</th>

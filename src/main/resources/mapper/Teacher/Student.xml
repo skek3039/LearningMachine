@@ -27,15 +27,18 @@
   		WHERE l_name LIKE '%' #{l_name } '%'
   	</select>
   	
-  	<select id="banList" parameterType="map" resultType="LectureDTO">
-  		SELECT *
-  		FROM user_banned
-  		WHERE u_id = #{u_id}
+  	<select id="banList" parameterType="map" resultType="map">
+	SELECT *
+	,(SELECT u_name FROM user u WHERE u.u_id = r.u_id)AS u_name
+	,(SELECT l_name FROM lecture l WHERE r.l_code = l.l_code ) AS l_name
+	,(SELECT u_nickname FROM user u WHERE u.u_id = r.u_id) AS u_nickname
+	FROM user_reported r
   	</select>
   	
   	<insert id="ban_reason" parameterType="LectureDTO">
   		INSERT INTO user_reported (u_id, t_id, ur_reason, l_code)
   		VALUES (#{u_id}, #{t_id}, #{ur_reason}, #{l_code})
+  		
   	</insert>
   	
   	

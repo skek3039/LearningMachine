@@ -183,6 +183,7 @@ public class StudentController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("u_id", u_id);
 		map.put("page", page);
+		
 		List<String> banList = studentService.banList(map);
 		System.out.println(banList);
 		mv.addObject("banList", banList);
@@ -201,12 +202,13 @@ public class StudentController {
 	public String lecture_student_report(HttpServletRequest request, HttpSession session) {
 		if ((int) session.getAttribute("u_authority") > 3) {
 			
+			
 			LectureDTO dto = new LectureDTO();
 			dto.setU_id(request.getParameter("u_id"));
-			dto.setT_id((String)request.getSession().getAttribute("u_id"));
+			dto.setT_id((String)session.getAttribute("u_id"));
 			dto.setL_code(request.getParameter("l_code"));
 			dto.setUr_reason(request.getParameter("ur_reason"));
-
+			System.out.println(dto);
 			studentService.ban_reason(dto);
 			
 			return "redirect:/student_list?l_code=" +request.getParameter("l_code"); 
