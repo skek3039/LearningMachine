@@ -35,6 +35,11 @@ public class NoticeController {
 		return "Lm";
 	}
 	
+	@GetMapping(value = "/faq")
+	public String faq(){
+		return "faq";
+	}
+	
 	@GetMapping(value = "/noticeWrite")
 	public String noticeWrite(HttpSession session) {
 		if (session.getAttribute("u_id") != null) {
