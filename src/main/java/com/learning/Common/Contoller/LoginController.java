@@ -136,7 +136,7 @@ public class LoginController {
 		return "join2";
 	}
 	
-	// 강사회원가입 후 관리자 승인 
+	// 강사회원가입 후 관리자 승인 대기
 	@PostMapping(value = "/join2")
 	public String join2(HttpServletRequest request, HttpSession session, HttpServletResponse response) throws IOException {
 		
@@ -162,9 +162,12 @@ public class LoginController {
 		int result1 = loginService.join3(dto1);
 		
 		if(result == 1 && result1 == 1) {
-			response.getWriter().println("<script>alert('강사회원가입성공 \\n로그인 창으로 이동 합니다.'); window.location.href = './login'; "+ "</script>");
+			response.getWriter().println("<script>alert('강사회원가입성공 \\n관리자승인대기중입니다.'); window.location.href = './login'; "+ "</script>");
+			return "redirect:/login";
+		}else {
+			response.getWriter().println("<script>alert('회원가입실패 \\n회원가입 창으로 이동 합니다.'); window.location.href = './join2'; "+ "</script>");			
+			return "redirect:/join2";
 		}
-		return "redirect:/join2";
 	}
 	
 	//유저 회원가입

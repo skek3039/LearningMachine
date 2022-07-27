@@ -54,4 +54,8 @@ public class PaymentService {
 		return paymentDAO.gender();
 	}
 
+	public List<String> refundRate() {
+		return paymentDAO.refundRate();
+	}
+
 }

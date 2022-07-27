@@ -237,6 +237,10 @@
 
 					alert('권한이 없습니다.');
 					CloseModal('qna');
+				}else if(result == 2){
+
+					alert('질문은 최대 3개만 올릴 수 있습니다.');
+					CloseModal('qna');
 				}
 			});
 		}
@@ -268,6 +272,10 @@
 				}else if(result == 0){
 
 					alert('권한이 없습니다.');
+					CloseModal('Review');
+				}else if(result == 2){
+
+					alert('이미 리뷰를 등록했습니다.');
 					CloseModal('Review');
 				}
 			});

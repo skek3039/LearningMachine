@@ -375,13 +375,8 @@ function select(category){
 						    </tr>
 						  </thead>
 						<c:forEach items="${list }" var = "list"> 
-						  <tbody id = "detailTable">
-						   
-						   
-						   
+						  <tbody id = "detailTable">					   
 						  </tbody>
-						  
-						  
 							<div class="background background${list.lqa_no }">
 								<div class="window">
 									<div class="popup">
@@ -389,12 +384,18 @@ function select(category){
 										<h2 class="card-title" style="text-align: left">${list.lqa_title }</h2>
 										<h6 style="text-align: left"> ${list.u_id }</h6>
 										<p class="card-text">
-										<label style="border: 1px solid rgb(201, 236, 219); width: 750px; height: 300px;"><strong>Q</strong> ${list.lqa_content }</label><br>
-										<c:if test="${list.lqar_content ne null }">
-										<label style="border: 1px solid rgb(201, 236, 219); width: 750px; height: 300px;"><strong>A</strong> ${list.lqar_content }</label>
-										</c:if>
-										</p>
+										<div style="border: 1px solid rgb(201, 236, 219);height:150px; text-align: left"><strong>Q.</strong> ${list.lqa_content }</div><br>
+										
+										<c:choose>
+											<c:when test="${list.lqar_content ne null }">
+											<div style="border: 1px solid rgb(201, 236, 219);height:150px; text-align: left"><strong>A.</strong>${list.lqar_content } </div>
+											</c:when>
+											<c:otherwise>
+											<div style="border: 1px solid rgb(201, 236, 219);height:150px; text-align: left"><strong>선생님이 답변작성중이에요</strong> </div>
+											</c:otherwise>
+										</c:choose>
 									</div>
+										
 								</div>
 							</div>
 						</c:forEach>

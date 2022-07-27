@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.learning.DTO.userDTO;
 import com.learning.User.Form.ULectureForm;
+import com.learning.User.Form.ULectureQnaForm;
+import com.learning.User.Form.ULectureReviewForm;
 import com.learning.User.Form.URegiForm;
 import com.learning.User.Form.UserAttendanceForm;
 
@@ -69,5 +71,15 @@ public class UserDAO {
 	public int UpdateVideoAttendance(UserAttendanceForm form) {
 		
 		return sqlSession.update(namespace + ".UpdateVideoAttendance", form);
+	}
+	
+	public int CheckLectureReview(ULectureReviewForm form) {
+		
+		return sqlSession.selectOne(namespace + ".CheckLectureReivew",form);
+	}
+	
+	public int CheckLectureQnaCount(ULectureQnaForm form) {
+		
+		return sqlSession.selectOne(namespace + ".CheckLectureQnaCount", form);
 	}
 }

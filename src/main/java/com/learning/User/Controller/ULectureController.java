@@ -11,6 +11,8 @@ import com.learning.User.Service.UserService;
 
 import java.text.ParseException;
 import java.util.*;
+
+import com.learning.User.DAO.UserDAO;
 import com.learning.User.Form.*;
 
 @Controller
@@ -38,7 +40,8 @@ public class ULectureController {
 	}
 
 	@GetMapping(value = "/LectureDetail")
-	public String lectureDetail(@RequestParam(name = "l_code") String l_code, HttpServletRequest rq) throws ParseException {
+	public String lectureDetail(@RequestParam(name = "l_code") String l_code, HttpServletRequest rq)
+			throws ParseException {
 
 		String u_id = (String) rq.getSession().getAttribute("u_id");
 
@@ -46,7 +49,7 @@ public class ULectureController {
 		rq.setAttribute("LectureDetail", lectureService.LectureDetail(u_id, l_code));
 		rq.setAttribute("LectureQnas", lectureService.LuectureQnas(u_id, l_code));
 		rq.setAttribute("LectureReviews", lectureService.LectureReviews(l_code));
-		
+
 		Map<Integer, VideoForm> LectureVideoMap = lectureService.LectureVideos(u_id, l_code);
 		rq.setAttribute("LectureVideos", LectureVideoMap);
 		if (LectureVideoMap.size() != 0) {
@@ -87,9 +90,9 @@ public class ULectureController {
 				UAForm.setU_id(u_id);
 				UAForm.setL_code(l_code);
 				userService.LectureVideoAttendance(UAForm);
-				
+
 				videoform = Videos.get(order);
-				
+
 				rq.setAttribute("LectureVideos", lectureService.LectureVideos(u_id, l_code));
 				rq.setAttribute("Video", videoform);
 				rq.setAttribute("VideoQnas", lectureService.LectureVideoQnas(v_no));
@@ -112,12 +115,12 @@ public class ULectureController {
 			}
 			if (order > 3) {
 
-				return "redirect:/Pay?l_code=" + l_code; //payment컨트롤러에서 유저확인 후 로그인 보낼지 확인
+				return "redirect:/Pay?l_code=" + l_code; // payment컨트롤러에서 유저확인 후 로그인 보낼지 확인
 			} else {
 				try {
 
 					videoform = Videos.get(order);
-					
+
 					rq.setAttribute("LectureVideos", lectureService.LectureVideos(u_id, l_code));
 					rq.setAttribute("Video", videoform);
 					rq.setAttribute("VideoQnas", lectureService.LectureVideoQnas(v_no));
@@ -129,43 +132,74 @@ public class ULectureController {
 			}
 			return "user/video";
 		}
-		
+
 	}
-	
+
 	@PostMapping(value = "/LectureReviewWrite.do")
 	@ResponseBody
-	public int LectureReview(@RequestParam(name = "l_code")String l_code, HttpServletRequest rq) {
-		
+	public int LectureReview(@RequestParam(name = "l_code") String l_code, HttpServletRequest rq) {
+
 		String u_id = (String) rq.getSession().getAttribute("u_id");
 		String lr_title = rq.getParameter("lr_title");
 		String lr_content = rq.getParameter("lr_content");
-		
-		System.out.println("title = " + lr_title + "content = "+lr_content + "l code = "+l_code);
-		if(u_id == null) {
-			
+		ULectureReviewForm lectureReviewForm = null;
+
+		if (u_id == null) {
+			System.out.println("로그인하셈");
 			return 0;
-		}else {
-			
-			return 1;
+		} else {
+
+			if (userService.CheckLectureReview(u_id, l_code) == 1) {
+
+				return 2;
+			} else {
+				if (userService.CheckLectureRegist(u_id, l_code) == 1) {
+
+					lectureReviewForm = new ULectureReviewForm();
+
+					lectureReviewForm.setU_id(u_id);
+					lectureReviewForm.setLr_title(lr_title);
+					lectureReviewForm.setLr_content(lr_content);
+					lectureReviewForm.setL_code(l_code);
+
+					return lectureService.InsertLectureReview(lectureReviewForm);
+				} else {
+
+					return 0;
+				}
+			}
 		}
 	}
-	
+
 	@RequestMapping(value = "/LectureQnaWrite.do")
 	@ResponseBody
-	public int LectureQnA(@RequestParam(name = "l_code")String l_code, HttpServletRequest rq) {
-		
+	public int LectureQnA(@RequestParam(name = "l_code") String l_code, HttpServletRequest rq) {
+
 		String u_id = (String) rq.getSession().getAttribute("u_id");
-		String lqa_title = rq.getParameter("lqa_title");
-		String lqa_content = rq.getParameter("lqa_content");
-		
-		System.out.println(lqa_title + lqa_content + l_code);
-		if(u_id == null) {
-			
+		String lqa_title = null;
+		String lqa_content = null;
+
+		ULectureQnaForm qnaform = null;
+		if (u_id == null) {
+
 			return 0;
-		}else {
-			
-			return 1;
+		} else {
+			if (userService.CheckLectureQnaCount(u_id, l_code) >= 3) {
+				System.out.println(userService.CheckLectureQnaCount(u_id, l_code));
+				return 2;
+			} else {
+				lqa_title = rq.getParameter("lqa_title");
+				lqa_content = rq.getParameter("lqa_content");
+				qnaform = new ULectureQnaForm();
+
+				qnaform.setU_id(u_id);
+				qnaform.setL_code(l_code);
+				qnaform.setLqa_title(lqa_title);
+				qnaform.setLqa_content(lqa_content);
+
+				return lectureService.InsertLectureQnA(qnaform);
+			}
 		}
 	}
-	
+
 }

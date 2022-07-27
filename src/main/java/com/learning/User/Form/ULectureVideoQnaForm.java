@@ -3,7 +3,7 @@ package com.learning.User.Form;
 import lombok.Data;
 
 @Data
-public class ULectureViedoQnaForm {
+public class ULectureVideoQnaForm {
 
 	private int vq_no;
 	private int v_no;

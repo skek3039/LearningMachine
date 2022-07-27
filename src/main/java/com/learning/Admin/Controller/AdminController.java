@@ -49,6 +49,9 @@ public class AdminController {
 			List<String> refund = adminService.refundList();
 			List<String> lecture = adminService.admin_lectureRequest(null);
 			List<String> payment = paymentService.paymentList(null);
+			List<String> refundRate = paymentService.refundRate();
+		
+			mv.addObject("refundRate",refundRate);
 			mv.addObject("report",report);
 			mv.addObject("refund",refund);
 			mv.addObject("lecture",lecture);
