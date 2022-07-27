@@ -133,7 +133,16 @@ function linkPage(pageNo){
 					<tr>
 						<td>${l.l_name }</td>
 						<td>${l.l_category }</td>
-						<td>${l.l_curriculum }</td>
+						<td>
+						<c:choose>
+							<c:when test="${fn:length(l.l_curriculum ) > 10 }">
+							<c:out value="${fn:substring(l.l_curriculum , 0, 9)} ...">
+							</c:out></c:when>
+							<c:otherwise>
+							<c:out value="${l.l_curriculum  }">
+							</c:out></c:otherwise>
+						</c:choose>
+						</td>
 						<td><a href="./student_list?l_code=${l.l_code }">조회</a></td>
 					</tr>
 					</c:forEach>

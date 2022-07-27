@@ -9,7 +9,7 @@
   
   	<select id="student_lectureList" parameterType="map" resultType="LectureDTO">
   		SELECT *
-  		FROM lecture
+  		FROM lecture_info_view
   		WHERE t_id = #{u_id}
   		ORDER BY l_date DESC
   		limit #{page.startPage} , #{page.lastPage}
