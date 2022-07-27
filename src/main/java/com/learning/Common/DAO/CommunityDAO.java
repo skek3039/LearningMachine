@@ -60,4 +60,12 @@ public class CommunityDAO {
 		return sqlSession.update("Community.boardCountUp", b_no);
 	}
 
+	public List<String> commentTotal() {
+		return sqlSession.selectList("Community.commentTotal");
+	}
+
+	public void commentDelete(int br_no) {
+		sqlSession.delete("Community.commentDelete", br_no);
+	}
+
 }

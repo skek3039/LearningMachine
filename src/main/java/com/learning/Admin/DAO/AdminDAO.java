@@ -110,12 +110,11 @@ public class AdminDAO {
 
 	public int lectureGet(Map<String, Object> map ) {
 		sqlSession.insert("Admin.lectureGet",map);
-		System.out.println(map.toString());
 		return sqlSession.insert("Admin.lectureCate",map);
 	}
 
-	public void lectureGet1(Map<String, Object> map) {
-		if(map.get("c1").equals("1")) {
+	public void lectureGet1(Map<String, Object> map, String c1) {
+		if(c1.equals("1")) {
 			sqlSession.update("Admin.lectureGet2",map);							
 		}else {
 			sqlSession.update("Admin.lectureGet3",map);							

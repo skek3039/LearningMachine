@@ -66,4 +66,12 @@ public class CommunityService {
 		return communityDAO.boardCountUp(b_no);
 	}
 
+	public List<String> commentTotal() {
+		return communityDAO.commentTotal();
+	}
+
+	public void commentDelete(int br_no) {
+		communityDAO.commentDelete(br_no);
+	}
+
 }

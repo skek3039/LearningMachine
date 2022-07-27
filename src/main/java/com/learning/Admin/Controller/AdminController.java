@@ -128,9 +128,9 @@ public class AdminController {
 				map.put("dto", dto);
 				map.put("c_name", (String)request.getParameter("c_name"));
 				map.put("c_code", (String)request.getParameter("c_code"));
-				result = adminService.admin_lectureGet(map);
 				map.put("la_no", request.getParameter("la_no"));
-				adminService.admin_lectureGet1(map);
+				result = adminService.admin_lectureGet(map);
+				adminService.admin_lectureGet1(map,c1);
 				if (result == 1) {
 					check = "redirect:/admin_lecture_request";
 				} else {
@@ -141,9 +141,9 @@ public class AdminController {
 				Map<String, Object> map = new HashMap<String, Object>();
 				if ((int) session.getAttribute("u_authority") == 7) {
 					map.put("la_no", request.getParameter("la_no"));
-					map.put("c1", c1);
+					map.put("c1", "2");
 					map.put("la_reason", request.getParameter("la_reason"));
-					adminService.admin_lectureGet1(map);
+					adminService.admin_lectureGet1(map,c1);
 					check = "redirect:/admin_lecture_request";
 				} else {
 					check = "redirect:/404";

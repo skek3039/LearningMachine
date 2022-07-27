@@ -33,9 +33,9 @@
   	
   	
   	<select id="boardList" resultType="BoardDTO">
-  		select * 
-  		from user_board
-  		where b_del = 0
+		SELECT * ,(SELECT COUNT(*) FROM user_board_view v WHERE u.b_no= v.b_no)AS commentTotal
+		FROM user_board u
+		WHERE b_del = 0
   		order by b_no desc;
   	</select>	
   	
@@ -72,4 +72,14 @@
   	<update id="boardCountUp" parameterType="integer" >
   		update user_board set b_view = b_view+1 where b_no = #{b_no}
   	</update>
+  	
+  	<select id="commentTotal" resultType="map">
+  		SELECT b_no,COUNT(*) AS count
+		FROM user_board_view
+		GROUP BY b_no
+  	</select>
+
+	<delete id="commentDelete" parameterType="integer">
+		delete from user_board_reply where br_no = #{br_no}	
+	</delete>
   </mapper>

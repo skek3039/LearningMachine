@@ -198,6 +198,16 @@ ul.tabs li.current{
 
 </style>
 <script type="text/javascript">
+function OpenModal(br_no){
+	var OpenModal = document.querySelector(".background" + br_no);
+	OpenModal.classList.add("show");
+}
+
+function CloseModal(br_no) {
+	var CloseModal = document.querySelector(".background" + br_no);
+	CloseModal.classList.remove("show");
+}
+
 function search(){
 	var lqa_title= document.getElementById("lqa_title").value;
 	if(lqa_title != ""){
@@ -213,6 +223,19 @@ function enterkey() {
 		search();
 	}
 	
+}
+
+function commentDelete(br_no,b_no){
+	if(confirm("댓글을 삭제하시겠습니까?")){
+		location.href="./commentDelete?br_no="+br_no + "&b_no="+b_no;
+	}
+}
+
+function commentUpdate(br_no, b_no){
+	if(confirm("댓글을 수정하시겠습니까?")){
+		
+	}
+
 }
 </script>
 
@@ -267,6 +290,22 @@ function enterkey() {
 						  	<c:forEach items="${comment }" var="c">
 						  	<tr>
 						  		<td colspan="8" style="height: 15px; text-align: left;background-color :#F0FFF0;">${c.u_nickname }
+						  		<c:if test="${sessionScope.u_nickname eq c.u_nickname }">
+						  			<img alt="수정" src="./img/update.png" onclick="OpenModal(${c.br_no})" style="width: 15px;cursor: pointer; height: 15px;">
+						  			<img alt="삭제" src="./img/delete.png" onclick="commentDelete('${c.br_no}','${boardDetail.b_no }')" style="width: 15px;cursor: pointer; height: 15px;">
+						  		</c:if>
+						  		<div class="background background${c.br_no }">
+								<div class="window">
+									<div class="popup">
+										<button id="closebtn" class="btn btn-outline-dark" onclick="CloseModal(${c.br_no});">닫기</button>
+										<h2 class="card-title" style="text-align: left">${c.u_nickname }</h2>
+										<p class="card-text">
+										<input type="text" value="${c.br_content }" style="border: 1px solid rgb(201, 236, 219); width: 750px; height: 300px;"><br>
+										<button type="submit" class="btn btn-outline-dark" onclick="commentUpdate('${c.br_no}','${boardDetail.b_no }')" >수정</button>
+										</p>
+									</div>
+								</div>
+							</div>
 						  		<fmt:parseDate value="${c.br_date}" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
             				    <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
 			
@@ -296,24 +335,6 @@ function enterkey() {
 						  	
 						  </tfoot>	 			   						   
 						</table>
-						  
-							<%-- <div class="background background${board.lqa_no }">
-								<div class="window">
-									<div class="popup">
-										<button id="closebtn" class="btn btn-outline-dark" onclick="CloseModal(${list.lqa_no});">닫기</button>
-										<h2 class="card-title" style="text-align: left">${list.lqa_title }</h2>
-										<h6 style="text-align: left"> ${list.u_id }</h6>
-										<p class="card-text">
-										<label style="border: 1px solid rgb(201, 236, 219); width: 750px; height: 300px;"><strong>Q</strong> ${list.lqa_content }</label><br>
-										<c:if test="${list.lqar_content ne null }">
-										<label style="border: 1px solid rgb(201, 236, 219); width: 750px; height: 300px;"><strong>A</strong> ${list.lqar_content }</label>
-										</c:if>
-										</p>
-									</div>
-								</div>
-							</div> --%>
-						
-					
 			</div>			
 					
 					

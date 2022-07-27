@@ -89,8 +89,8 @@ public class AdminService {
 		return adminDAO.lectureGet(map);
 	}
 
-	public void admin_lectureGet1(Map<String, Object> map) {
-		adminDAO.lectureGet1(map);
+	public void admin_lectureGet1(Map<String, Object> map, String c1) {
+		adminDAO.lectureGet1(map,c1);
 	}
 
 	public List<String> teacherDetail(String u_id) {

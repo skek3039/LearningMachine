@@ -423,7 +423,8 @@ function select(category){
 						  <tbody id = "detailTable">
 						   <tr>
 						   		<td>${b.b_no }</td>
-						   		<td><a href = "./boardDetail?b_no=${b.b_no }"> ${b.b_title } </a> <small></small></td>
+						   		
+						   		<td style="text-align: left"><a href = "./boardDetail?b_no=${b.b_no }"> ${b.b_title } </a> <small>[${b.commentTotal }]</small></td>
 						   		<td>${b.u_nickname }</td>
 						   		<td>${b.b_date }</td>
 						   		<td>${b.b_view }</td>

@@ -151,8 +151,11 @@ public class HomeController {
 		List<BoardDTO> board = communityService.boardList();
 		
 		List<String> category = adminService.categoryList();
-		mv.addObject("list",list);
 		
+		List<String> commentTotal = communityService.commentTotal();
+		
+		mv.addObject("list",list);
+		mv.addObject("commentTotal",commentTotal);
 		mv.addObject("board",board);
 		mv.addObject("category",category);
 		mv.addObject("paginationInfo", paginationInfo);
@@ -241,5 +244,15 @@ public class HomeController {
 		PrintWriter pw = response.getWriter();
 		pw.print(result);
 		
+	}
+	
+	@RequestMapping(value = "/commentDelete")
+	public String commentDelete(HttpServletRequest request) {
+		int b_no = Integer.parseInt(request.getParameter("b_no"));
+		int br_no = Integer.parseInt(request.getParameter("br_no"));
+			
+		communityService.commentDelete(br_no);
+
+		return "redirect:/boardDetail?b_no="+b_no;
 	}
 }

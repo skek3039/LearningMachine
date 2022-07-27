@@ -80,8 +80,9 @@
 		if(l_recognize = 0 ,"승인대기","승인거부") AS request,
 		(SELECT c_name FROM category WHERE category.c_code = lecture_apply.c_code) AS c_name
 		FROM lecture_apply
+		where l_recognize != 1
  		<if test = "la_no != null">
-  		where la_no = ${la_no}
+  		AND la_no = ${la_no}
   		</if>
   	</select>
 
