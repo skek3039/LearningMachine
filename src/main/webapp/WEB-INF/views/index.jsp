@@ -51,7 +51,10 @@
     	margin : auto;
     	margin-bottom: 20px;
     }
+    
     </style>
+
+
 </head>
 
 <body>
@@ -83,7 +86,7 @@
                     <div class="col-md-6 text-center mb-n5 d-none d-md-block">
                         <img class="img-fluid mt-5" style="max-height: 250px;" src="img/newsletter.png">
                     </div>
-                </div>
+                </div> 
             </div>
         </div>
         <!-- Newsletter End -->
@@ -99,23 +102,28 @@
                 <div class="row g-4">
                      <c:forEach items="${popLecture}" var="pop" step="1" end="5">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="service-item rounded h-100" style="border-color:  #F0FFF0">
-                            <div class="d-flex justify-content-between" style="height: 10px;">
-                            <small>현재 ${pop.total_register } 명 수강중</small>
-                                <a class="service-btn" href="">
+                        <div class="service-item rounded h-100" style="border-color:  #F0FFF0; background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),  url(${pop.l_thumbnail}); ">
+                            <div class="d-flex justify-content-between" style="height: 10px; ">
+                           <div style="color: #F0FFF0;"> <small>현재 ${pop.total_register } 명 수강중</small></div>
+                                <a class="service-btn" href="./LectureDetail?l_code=${pop.l_code }"">
                                     <i class="fa fa-link fa-2x"></i>
                                 </a>
                             </div>
                             <div class="p-5" style="padding-top: 10px;">
-                                <h5 class="mb-3">${pop.l_name }</h5>
-                                <span><strong>${pop.t_nickname } </strong></span><br>
+                                <h5 class="mb-2" style="border-radius:10px;color: white"> ${pop.l_name } </h5>
+                                <span style="background-color:white; ; border-radius:10px;color: black"><strong>${pop.t_nickname } </strong></span><br>
                                 <c:choose>
-								<c:when test="${fn:length(pop.l_curriculum ) > 25 }">
-                               <c:out value="${fn:substring(pop.l_curriculum , 0, 25)} ..." />
+								<c:when test="${fn:length(pop.l_curriculum ) > 30 }">
+								 <div style="background-color:#F0FFF0; border-radius:10px; color: black">
+                               <c:out value="${fn:substring(pop.l_curriculum , 0, 30)} ..."/>
+                          		</div>
                           		</c:when>
                           		<c:otherwise>
-								<c:out value="${pop.l_curriculum  }">
-							</c:out></c:otherwise>
+                          		 <div style="background-color:#F0FFF0; border-radius:10px; color: black">
+								<c:out value="${pop.l_curriculum  }"/>
+								</div>
+							</c:otherwise>
+								
 							</c:choose>
                             </div>
                         </div>

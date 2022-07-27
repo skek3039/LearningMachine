@@ -73,9 +73,7 @@
 						u_id: '${UserInfo.u_id}'
 					}
 				}).done(function (data) {
-
 					console.log(data);
-
 					// 위의 rsp.paid_amount 와 data.response.amount를 비교한후 로직 실행 (import 서버검증)
 					if (rsp.success) {
 						location.href = "/web/LectureDetail?l_code=${LectureInfo.l_code}";
@@ -96,41 +94,62 @@
 		<div class="container-xxl py-6">
 			<div class="container">
 				<div class="mx-auto text-center wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-					<div class="d-inline-block border rounded-pill text-primary px-4 mb-3">강의 정보</div>
-					<h2 class="mb-5">${LectureInfo.l_name}</h2>
+					<div class="d-inline-block border rounded-pill text-primary px-4 mb-3">결제 정보</div>
+					<h2 class="mb-5">${LectureInfo.l_name}
+					</h2>
 				</div>
+			
 				<div class="row justify-content-center">
 					<div class="col-lg-7 wow fadeInUp" data-wow-delay="0.3s">
 						<p class="text-center mb-4">${LectureInfo.l_info}</p>
 						<form>
 							<div class="row g-3">
-								<div class="col-md-6">
+								<div class="col-12">
 									<div class="form-floating">
-										<input type="text" class="form-control" id="name" placeholder="Your Name">
-										<label for="name">Your Name</label>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-floating">
-										<input type="email" class="form-control" id="email" placeholder="Your Email">
-										<label for="email">Your Email</label>
+										<table class="table table-condensed">
+										<tr>
+											<th> ${LectureInfo.l_name } 강의  </th>
+											<td style="text-align: right"> <small> [ ${LectureInfo.l_category } ]</small></td> 
+										</tr>
+										<tr>
+											<th colspan="2" style="text-align: right">${LectureInfo.t_nickname } 선생님 </th> 
+										</tr>
+										<tr>
+											<th colspan="2" style="text-align: left">구매자정보</th> 
+										</tr>
+										<tr style="text-align: left">
+											<th colspan="2" style="width: 120px; background-color: 	#F0FFF0">이름 : ${UserInfo.u_name} | 이메일 : ${UserInfo.u_email} | 아이디 :${UserInfo.u_id}</th> 
+										</tr>
+										<tr>
+											<th colspan="2" style="text-align: right">결제금액 : ${LectureInfo.l_price } 원 </th> 
+										</tr>
+										
+										<tr>
+											<td colspan="2" > <textarea readonly="readonly" style="width: 100%; height: 100px;">구매조건 및 개인정보취급방침  
+제 19조. 유료서비스의 제공“회원”은 “회사”가 제공하는 절차에 의하여 유료서비스 이용계약(이하 “청약”을 신청합니다. “회사”는 원칙적으로 “회원”의 청약 신청을 승낙합니다. 다만, 다음 각 호에 해당하는 경우에는 승낙하지 않거나 승낙을 유보할 수 있습니다.
+실명이 아니거나 타인의 명의를 이용한 경우
+허위의 정보를 기재하거나, "회사”가 제시하는 내용을 기재하지 않은 경우
+미성년자가 청소년보호법 등 관련법에 의해서 이용이 금지되는 유료 서비스를 이용하고자 하는 경우
+"서비스"의 위상이나 명예에 부정적인 영향을 줄 수 있는 경우
+“유료서비스"에서 제공하는 서비스의 공급량의 제한의 이유로 "서비스"를 제공할 수 없는 경우
+이 약관에 위배되는 내용을 “회사”에 요구한 이력이 있는 “회원”일 경우
+질문에 대한 권리는 “유료서비스”에 포함되지 않습니다
+청약의 성립시기는 결제가 완료된 시점으로 합니다.
+“회사”는 계약 체결 전에 “회원”이 청약의 내용을 확인하고, 정정 또는 취소할 수 있도록 적절한 절차를 갖추어야 합니다.
+“회원”는 계약 전에 이 약관 및 개별 안내 페이지에서 “회사”가 안내하는 사항을 숙지하여 착오 없이 거래할 수 있도록 하여야 합니다.
+											
+											</textarea> </td>
+										</tr>
+										<tr>
+											<td colspan="2" > <small>회원 본인은 주문내용을 확인했으며,
+											구매조건 및 개인정보취급방침과 결제에 동의합니다.</small></td>
+										</tr>
+										</table>
 									</div>
 								</div>
 								<div class="col-12">
-									<div class="form-floating">
-										<input type="text" class="form-control" id="subject" placeholder="Subject">
-										<label for="subject">Subject</label>
-									</div>
-								</div>
-								<div class="col-12">
-									<div class="form-floating">
-										<textarea class="form-control" placeholder="Leave a message here" id="message"
-											style="height: 150px; resize: none;" readonly></textarea>
-										<label for="message">Message</label>
-									</div>
-								</div>
-								<div class="col-12">
-									<button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+									<input type="hidden" name="l_price" value="${LectureInfo.l_price }">
+									<button class="btn btn-primary w-100 py-3" onclick="pay()">결제</button>
 								</div>
 							</div>
 						</form>
@@ -139,8 +158,7 @@
 			</div>
 		</div>
 
-		<input name="l_price" value="${LectureInfo.l_price }">
-		<button onclick="pay()">결제</button>
+	
 	</div>
 </body>
 
