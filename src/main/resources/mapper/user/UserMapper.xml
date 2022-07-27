@@ -45,7 +45,7 @@
 	
 	<select id="CheckLectureRegist" parameterType="com.learning.User.Form.URegiForm" resultType="int">
 	
-		SELECT COUNT(0) FROM user_lecture_registration WHERE u_id = #{l_code} AND l_code = #{l_code}
+		SELECT COUNT(0) FROM user_lecture_registration WHERE u_id = #{u_id} AND l_code = #{l_code}
 	
 	</select>
 	
@@ -60,4 +60,16 @@
 		UPDATE lecture_video_attendance SET va_attendance = 1, va_date = CURRENT_TIMESTAMP() WHERE v_no = #{v_no} AND u_id = #{u_id} AND l_code = #{l_code}
 	
 	</update>
+	
+	<select id="CheckLectureReivew" parameterType="com.learning.User.Form.ULectureReviewForm" resultType="int">
+	
+		SELECT COUNT(0) FROM lecture_review WHERE u_id = #{u_id} AND l_code = #{l_code}
+	
+	</select>
+	
+	<select id="CheckLectureQnaCount" parameterType="com.learning.User.Form.ULectureQnaForm" resultType="int">
+	
+		SELECT COUNT(0) FROM lecture_qna WHERE u_id = #{u_id} AND l_code = #{l_code}
+	
+	</select>
   </mapper>

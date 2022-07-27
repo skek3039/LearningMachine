@@ -172,7 +172,7 @@ public class ULectureService {
 		
 	}
 
-	public List<ULectureViedoQnaForm> LectureVideoQnas(int v_no){
+	public List<ULectureVideoQnaForm> LectureVideoQnas(int v_no){
 		
 		return lectureDAO.LectureVideoQnas(v_no);
 	}
@@ -206,5 +206,15 @@ public class ULectureService {
 		}
 		
 		return list;
+	}
+	
+	public int InsertLectureQnA(ULectureQnaForm form) {
+		
+		return lectureDAO.InsertLectureQnA(form);
+	}
+	
+	public int InsertLectureReview(ULectureReviewForm form) {
+		
+		return lectureDAO.InsertLectureReview(form);
 	}
 }

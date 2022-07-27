@@ -39,6 +39,7 @@
 				,(SELECT COUNT(0) FROM lecture_qna_reply where lecture_qna.lqa_no = lqa_no) as reply_whether
 		FROM lecture_qna
 		WHERE l_code = #{l_code}
+		ORDER BY lqa_date DESC
 	</select>
 	
 	<select id="ULectureQnaReplys" parameterType="int" resultType="com.learning.User.Form.ULectureQnaReplyForm">	
@@ -48,7 +49,7 @@
 		WHERE lqa_no = #{lqa_no}
 	</select>
 	
-	<select id="ULectureVideoQnas" parameterType="int" resultType="com.learning.User.Form.ULectureViedoQnaForm">
+	<select id="ULectureVideoQnas" parameterType="int" resultType="com.learning.User.Form.ULectureVideoQnaForm">
 		SELECT 
 			*
 		FROM
@@ -77,6 +78,22 @@
 	</insert>
 	
 	<select id="UVideoLectureCheck" parameterType="Integer" resultType="String">
+	
 		SELECT l_code FROM lecture_video WHERE v_no = #{v_no}
+		
 	</select>
+	
+	<insert id="InsertLectureReview" parameterType="com.learning.User.Form.ULectureReviewForm">
+	
+		INSERT INTO lecture_review(l_code, u_id, lr_title, lr_content) VALUES(#{l_code}, #{u_id}, #{lr_title}, #{lr_content})
+	
+	</insert>
+	
+	<insert id="InsertLectureQnA" parameterType="com.learning.User.Form.ULectureQnaForm">
+	
+		INSERT INTO lecture_qna(l_code, u_id, lqa_title, lqa_content) VALUES(#{l_code}, #{u_id}, #{lqa_title}, #{lqa_content})
+	
+	</insert>
+	
+	<insert id="InsertLectureVideoQnA" parameterType="com.learning.User.Form.ULectureVideoQnaForm"></insert>
   </mapper>

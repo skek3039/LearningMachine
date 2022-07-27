@@ -51,7 +51,7 @@ public class ULectureDAO {
 		return sqlSession.selectOne(namespace + ".ULectureQnaReplys", lqa_no);
 	}
 
-	public List<ULectureViedoQnaForm> LectureVideoQnas(int v_no) {
+	public List<ULectureVideoQnaForm> LectureVideoQnas(int v_no) {
 
 		return sqlSession.selectList(namespace + ".ULectureVideoQnas", v_no);
 	}
@@ -72,7 +72,7 @@ public class ULectureDAO {
 		return sqlSession.insert(namespace + ".InsertLectureQnA", form);
 	}
 	
-	public int InsertLectureVideoQnA(ULectureViedoQnaForm form) {
+	public int InsertLectureVideoQnA(ULectureVideoQnaForm form) {
 		
 		return sqlSession.insert(namespace + ".InsertLectureVideoQnA", form);
 	}

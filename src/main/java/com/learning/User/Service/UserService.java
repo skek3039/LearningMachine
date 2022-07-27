@@ -97,4 +97,23 @@ public class UserService {
 		return userDAO.CheckLectureRegist(form);
 	}
 	
+	public int CheckLectureReview(String u_id, String l_code) {
+		
+		ULectureReviewForm form = new ULectureReviewForm();
+		
+		form.setU_id(u_id);;
+		form.setL_code(l_code);
+		
+		return userDAO.CheckLectureReview(form);
+	}
+	
+	public int CheckLectureQnaCount(String u_id, String l_code) {
+		
+		ULectureQnaForm form = new ULectureQnaForm();
+		
+		form.setU_id(u_id);
+		form.setL_code(l_code);
+		
+		return userDAO.CheckLectureQnaCount(form);
+	}
 }
