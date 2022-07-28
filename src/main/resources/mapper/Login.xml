@@ -3,7 +3,7 @@
   <mapper namespace="Login">
 
   	<select id="login"  parameterType="userDTO" resultType="userDTO">
-  		select * from user where u_id=#{u_id} and u_pw = #{u_pw}
+  		select * from user where u_id=#{u_id} and u_pw = #{u_pw} and u_del = 0
   	</select>
   
   <insert id="join" parameterType="userDTO">
