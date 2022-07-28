@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 <meta charset="utf-8">
-<title>Learning Machine</title>
+<title>Learning Machine:강사 페이지</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
@@ -69,34 +69,17 @@
 
     details > summary {
         color: white;
-        font-size: 14px;
+        font-size: 17px;
         padding: 15px 0;
     }
-    
-    th {
-	background-color: #c0c0c0;
-	height: 30px;
-	border-bottom: 1px solid purple;
-	text-align: center;
-}
-
-#r1 {
-	width: 3%;
-}
-
-#r2 {
-	width: 8%;
-}
-
-#r3 {
-	width: 40%;
-	text-align: left;
-}
-#r4{
-	width: 5%;
-}
-    
 </style>
+
+<script type="text/javascript">
+function linkPage(pageNo){
+	location.href = "./notice?n_cate${n_cate}&pageNo=" + pageNo;
+	}
+
+</script>
 
 </head>
 
@@ -114,46 +97,68 @@
 
 
 		<jsp:include page="./header.jsp" />
-		<div style=" width: 100%;">
+		<div style="width: 100%;">
 		<div style="position: relative;">
 		<jsp:include page="./notice_nav.jsp"/>
-		 </div>
 		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;공지사항</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px;padding-left: 120px; height: 620px;">
-				 <table class="table table-bordered table-sm" style=" width: 800px; margin: 0 auto;"> 
+		<div style="padding-top: 10px;padding-left: 120px; height: 620px"><br><br>
+				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
 						<th>번호</th>
 						<th>제목</th>
 						<th>조회수</th>
 						<th>날짜</th>
 					</tr>
+					
 					<c:forEach items="${noticeList}" var="n">
-					<tr onclick="location.href='noticedetail?n_no=${n.n_no}'"style="cursor: pointer;">
-						<th id="r1">${n.n_no }</th>
-						<th id="r3">${n.n_title }</th>
-						<th id="r4">${n.n_view}</th>
-						<th id="r2">${n.n_date }</th>
+					<tr>
+						<td><a href="./noticedetail?n_no=${n.n_no}">${n.n_no }</a></td>
+						<td>
+							<c:choose>
+							<c:when test="${fn:length(n.n_title ) > 10 }">
+							<c:out value="${fn:substring(n.n_title , 0, 9)} ...">
+							</c:out></c:when>
+							<c:otherwise>
+							<c:out value="${n.n_title  }">
+							</c:out></c:otherwise>
+							</c:choose>
+						</td>
+						<td>${n.n_view}</td>
+						<td>${n.n_date}</td>
+						
 					</tr>
 					</c:forEach>
 			</table>
-		<br>
-<div id="pagination" style="border-top: 1px solid black; text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
-					<c:if test="${ a_authority ne 7}" > 
-					<a href="./noticeWrite"><button type="button" style="position: fixed; left: 73%; ">글쓰기</button></a>
-					</c:if>
+	 	<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>	
+			</div>
 		</div>
-		<jsp:include page="./footer.jsp" />
 
-</div>
+		<%-- <jsp:include page="./team.jsp"/> --%>
+		<jsp:include page="./footer.jsp" />
+	</div>
 
 		<!-- Back to Top -->
 		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
 			class="bi bi-arrow-up"></i></a>
-	</div>
-	
+		<script type="text/javascript">
+			$('body > ul > li').click(function() {
+				if ($(this).hasClass('active')) {
+					$(this).find(' > ul').stop().slideUp(300);
+					$(this).removeClass('active');
+				} else {
+					$(this).find(' > ul').stop().slideDown(300);
+					$(this).addClass('active');
+				}
+			});
+		</script>
+</div>
+
+
+
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="./resources/lib/wow/wow.min.js"></script>
 	<script src="./resources/lib/easing/easing.min.js"></script>
 	<script src="./resources/lib/waypoints/waypoints.min.js"></script>
@@ -162,8 +167,5 @@
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
 
-	<script type="text/javascript">function linkPage(pageNo){location.href = "./notice?n_cate${n_cate}&pageNo=" + pageNo;}</script>		
-	
 </body>
-
 </html>
