@@ -72,6 +72,11 @@
         font-size: 17px;
         padding: 15px 0;
     }
+    
+    #ad{
+    	overflow-y: auto;
+    }
+    
 </style>
 
 </head>
@@ -109,12 +114,12 @@
 					</tr></table><br>
 					<table>
 					<tr>
-						<td style="word-break:break-all; width: 820px">${dto.lqa_content }</td>
+						<td id="ad" style="word-break:break-all; width: 820px;"><textarea readonly="readonly" style="width: 810px; height: 220px; "> ${dto.lqa_content }</textarea></td>
 					</tr>
 					</table>
-					<div style="padding-top: 150px;">
+	
 					<hr style="width: 820px; height: 2px;"><br>
-					</div>
+					
 					<br>
 				<div id="writeform" style="padding-right: 100px;">
 				<form action="./qna_reply.do?lqa_no=${dto.lqa_no }" method="post">
