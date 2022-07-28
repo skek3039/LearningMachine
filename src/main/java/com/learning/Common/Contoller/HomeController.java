@@ -27,6 +27,7 @@ import com.learning.Common.Service.MyService;
 import com.learning.DTO.BoardDTO;
 import com.learning.DTO.LectureDTO;
 import com.learning.DTO.PageDTO;
+import com.learning.DTO.PaymentDTO;
 import com.learning.DTO.userDTO;
 import com.learning.utill.Util;
 
@@ -236,10 +237,9 @@ public class HomeController {
 		return list1; 	
 	}	
 
-	//강의검색불러오기
+	//검색불러오기
 	@GetMapping(value = "/community_communityName" , produces="text/plain;charset=utf-8")
 	public ModelAndView community_communityName(HttpServletRequest request, HttpSession session) {	
-		Map<String, Object> map = new HashMap<String, Object>();
 			String lqa_title = request.getParameter("lqa_title"); 
 		
 			List<String> category = adminService.categoryList();
@@ -300,11 +300,62 @@ public class HomeController {
 		return mv;
 	}
 	
+	//나의 결제내역
 	
-	@RequestMapping(value = "/myPament")
-	public ModelAndView myPayment(HttpServletRequest rq) {
-		ModelAndView mv = new ModelAndView("myPayment");
+	@PostMapping(value = "/myPayment")
+	public String myPayment(HttpServletRequest rq, HttpServletResponse rs) {
+		int p_no = Integer.parseInt(rq.getParameter("p_no"));
+		String u_id = rq.getSession().getAttribute("u_id").toString();
 		
+		PaymentDTO dto = new PaymentDTO();
+		dto.setP_no(p_no);
+		dto.setU_id(u_id);
+		
+		int result = Myservice.myPaymentRefund(dto);
+		return "redirect:/myPayment";
+	}
+	
+	
+	@RequestMapping(value = "/myPayment")
+	public ModelAndView myPayment(HttpServletRequest rq) throws UnsupportedEncodingException {
+		rq.setCharacterEncoding("UTF-8");
+
+		ModelAndView mv = new ModelAndView("myPayment");
+		String u_id = rq.getSession().getAttribute("u_id").toString();
+		
+		int pageNo = 1;
+		if (rq.getParameter("pageNo") != null) {
+			pageNo = Integer.parseInt(rq.getParameter("pageNo"));
+		}
+		// recordCountPageNo 한 페이지당 게시되는 게시물 수 yes
+		int listScale = 7;
+		// pageSize = 페이지 리스트에 게시되는 페이지 수 yes
+		int pageScale = 5;
+		// totalRecordCount 전체 게시물 건수
+		int totalCount = Myservice.totalCount();
+		// 전자정부페이징 호출
+		PaginationInfo paginationInfo = new PaginationInfo();
+		// 값 대입
+		paginationInfo.setCurrentPageNo(pageNo);
+		paginationInfo.setRecordCountPerPage(listScale);
+		paginationInfo.setPageSize(pageScale);
+		paginationInfo.setTotalRecordCount(totalCount);
+		// 전자정부 계산하기
+		int startPage = paginationInfo.getFirstRecordIndex();
+		int lastpage = paginationInfo.getRecordCountPerPage();
+
+		// 서버로 보내기
+		PageDTO page = new PageDTO();
+		page.setStartPage(startPage);
+		page.setLastPage(lastpage);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("u_id",u_id);
+		map.put("page", page);
+		List<Map<String, String>> myPay = Myservice.myPayment(map);
+		
+		mv.addObject("paginationInfo", paginationInfo);
+		mv.addObject("myPay",myPay);
 		return mv;
 	}
 //==========================================================================================================================================================================================================

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?> <!-- 맵퍼파일 -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="MyService">
+  	<select id="totalCount" resultType="integer">
+  		select count(*)
+  		from lecture_apply_user_view 
+		where u_id = #{u_id}
+  	</select>
+  
 	<select id="myLectureList" parameterType="String" resultType="map">
 		select * ,(SELECT c.c_name  FROM category c WHERE c.c_code = v.l_code)AS c_name
 		from lecture_apply_user_view v
@@ -12,4 +18,22 @@
   		from user
   		where u_id =#{u_id}
   	</select>
+  	
+  	<select id ="myPayment" parameterType="map" resultType="map">
+  		SELECT *,
+  		(SELECT c_name FROM category c WHERE c.c_code = v.l_code)AS cate,
+  		(SELECT u_name FROM user u WHERE u.u_id = v.u_id)AS name
+  		from payment_lecture_view2 v
+  		where u_id = #{u_id}
+   		order by p_date desc 		
+  		limit #{page.startPage},#{page.lastPage}
+  	</select>
+  	
+  	<insert id="myPaymentRefund" parameterType="PaymentDTO">
+  		insert into payment_refund_apply (p_no, u_id) values(#{p_no},#{u_id})
+  	</insert>
+  	<update id="myPaymentRefund2" parameterType="PaymentDTO">
+  		update payment_log set p_refund = 2 where p_no = #{p_no}
+  	</update>
+  	
   </mapper>

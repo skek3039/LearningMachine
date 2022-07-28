@@ -8,7 +8,7 @@
 
 <head>
 <meta charset="utf-8">
-<title>Learning Machine:  ${list[0].u_name } Page</title>
+<title>Learning Machine:   Page</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
@@ -179,7 +179,7 @@ ul.tabs li.current{
 
         /* 임시 지정 */
         width: 50%;
-        height: 60%;
+        height: 30%;
 
         /* 초기에 약간 아래에 배치 */
         transform: translate(-50%, -40%);
@@ -201,14 +201,8 @@ ul.tabs li.current{
 
 </style>
 <script type="text/javascript">
-function search(){
-	var lqa_title= document.getElementById("lqa_title").value;
-	if(lqa_title != ""){
-		location.href = "./community_communityName?lqa_title="+lqa_title;
-	}else{
-		location.href="./community";
-	}
-		
+function linkPage(pageNo){
+	location.href = "./myPayment?pageNo=" + pageNo;
 }
 
 function enterkey() {
@@ -225,17 +219,26 @@ function linkPage(pageNo){
 }
 
 
-function OpenModal(lqa_no){
-	var OpenModal = document.querySelector(".background" + lqa_no);
+function OpenModal(p_no){
+	var OpenModal = document.querySelector(".background" + p_no);
 	OpenModal.classList.add("show");
 }
 
-function CloseModal(lqa_no) {
-	var CloseModal = document.querySelector(".background" + lqa_no);
+function CloseModal(p_no) {
+	var CloseModal = document.querySelector(".background" + p_no);
 	CloseModal.classList.remove("show");
 }
 
-
+function refund(p_refund,p_no){
+	if(p_refund == "1"){
+		alert("이미 환불완료된 건입니다.");
+	}else if(p_refund == "2"){
+		alert("환불 신청된 건입니다.");
+	}else if(p_refund == "0"){
+		OpenModal(p_no);		
+	}
+	
+}
 
 $(document).ready(function(){
 	   
@@ -255,11 +258,9 @@ $(document).ready(function(){
 			</div>
 		</div>
 		<!-- Spinner End -->
-
-
 		<jsp:include page="./header.jsp" />
 		<div style="padding-top: 110px;">
-			<h3>&nbsp;&nbsp; My Lecture</h3> <small>현재 ${list[0].u_name }님 수강중인 강의 정보입니다.</small>
+			<h3>&nbsp;&nbsp; My Lecture</h3> <small>현재 ${myPay[0].name }님 수강중인 강의 정보입니다. <strong style="text-align: right">환불을 원하시는 강의가 있으시면 <span style="color: red"> 오른쪽 결제완료버튼</span>을 눌러진행해주세요.</strong></small>
 			<hr style="border: solid 1px;">
 		</div>
 		<div style="padding-top: 5px; text-align: center;">
@@ -269,43 +270,76 @@ $(document).ready(function(){
 					<a href="javascript:select('${c.c_name}')">${c.c_name }</a>
 				</p>
 			</c:forEach>
-				<div class="content" style="height: 800px; margin: 0 auto; width: 900px; ">
-				<table class="table table-condensed">
+				<div class="content" style="height: 600px; margin: 0 auto; width: 1000px; ">
+				<table class="table table-hover">
 					<thead class="thead-dark">
-						<tr>
-							<th style="text-align: left">강의명</th>
-							<th>카테고리</th>
-							<th>강사명</th>
-							<th>출석률</th>
-							<th>강의등록일</th>
+						<tr style="background-color: #F0F8FF;">
+							<th style="text-align: left; width: 300px;">강의명</th>
+							<th style="width: 100px;">카테고리</th>
+							<th style="width: 120px; ">금액</th>
+							<th>결제일</th>
+							<th style="width: 120px;">결제상태</th>
 						</tr>
 					</thead>
-					<c:forEach items="${list }" var="list">
+					<c:forEach items="${myPay }" var="p">
 						<tbody id="detailTable">
 							<tr>
-								<th style="text-align: left"><a href="./LectureDetail?l_code=${list.l_code }">${list.l_name }</a></th>
-								<th style="width:80px; ">${list.c_name }</th>
-								<td>${list.t_nickname }</td>
-							<c:if test="${list.attendace_rate eq null }">
-								<td>0 %</td>
-							</c:if>
-							<c:if test="${list.attendace_rate ne null }">
-								<td>${list.attendance_rate } %</td>
-							</c:if>
-								<td>${list.lr_date }</td>
+								<th style="text-align: left"><a href="./LectureDetail?l_code=${p.l_code }">${p.l_name }</a></th>
+								<th style="width:80px; ">${p.cate }</th>
+								<td style="text-align: right;"><fmt:formatNumber value="${p.p_price2 }" pattern="#,###"  />원</td>
+								<td>
+								 <fmt:parseDate value="${p.p_date}" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
+                                 <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm"/>
+								${time }</td>
+								<td><button class="btn btn-outline-dark" onclick="refund('${p.p_refund}','${p.p_no }')">
+								<c:choose>
+									<c:when test="${p.p_refund eq 1 }">
+									 	환불완료
+									</c:when>
+									<c:when test="${p.p_refund eq 2 }">
+									 	환불대기
+									</c:when>
+									<c:otherwise>
+										결제완료
+									</c:otherwise>
+								</c:choose>
+								</button> </td>
+							
 							</tr>
+							
 						</tbody>
+
+						<div class="background background${p.p_no }">
+							<div class="window">
+								<div class="popup">
+								<form action="./myPayment" method="post">
+									<input type="hidden" id="p_no" name="p_no" value="${p.p_no }">
+									<button id="closebtn" class="btn btn-outline-dark" onclick="CloseModal(${p.p_no});">닫기</button>
+									<h2 class="card-title" style="text-align: left">환불신청</h2>
+									<p class="card-text">
+									<div style="border: 1px solid rgb(201, 236, 219); height: 150px; text-align: left">
+										강의명 : ${p.l_name }<br>
+										강사명 : ${p.t_nickname }<br><br><br>
+									<h6 style="text-align: right"><fmt:formatNumber value="${p.p_price2 }" pattern="#,###"  />원을 환불신청합니다. </h6>
+									</div>
+									<button type="submit" class="btn btn-outline-dark" style="padding-top: 10px;">환불신청</button>
+									<br>
+								</form>
+								</div>
+
+							</div>
+						</div>
 					</c:forEach>
 				</table>
-				</div>
-				
-			
+				</div>				
+					<div id="pagination" style="text-align: center;padding-bottom: 10px;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
 			</div>
 
 		<jsp:include page="./footer.jsp" />
-		</div>
 
+	</div>
 
+		
 
 	<!-- Back to Top -->
 	<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i

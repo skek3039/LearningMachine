@@ -1,11 +1,13 @@
 package com.learning.Common.Service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.learning.Common.DAO.MyServiceDAO;
+import com.learning.DTO.PaymentDTO;
 
 @Service
 public class MyService {
@@ -18,6 +20,18 @@ public class MyService {
 
 	public List<String> myInfo(String u_id) {
 		return myServiceDAO.myInfo(u_id);
+	}
+
+	public List<Map<String, String>> myPayment(Map<String, Object> map) {
+		return myServiceDAO.myPayment(map);
+	}
+
+	public int totalCount() {
+		return myServiceDAO.totalCount();
+	}
+
+	public int myPaymentRefund(PaymentDTO dto) {
+		return myServiceDAO.myPaymentRefund(dto);
 	}
 	
 }

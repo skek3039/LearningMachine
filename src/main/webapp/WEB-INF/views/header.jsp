@@ -36,8 +36,7 @@
                             <div class="dropdown-menu m-0">
                                 <a href="./myInfo" class="dropdown-item">내정보보기</a>
                                 <a href="./myLecture" class="dropdown-item">내학습</a>
-                                <a href="./myBoard" class="dropdown-item">작성한 게시글보기</a>
-                                <a href="./myPay" class="dropdown-item">구매내역</a>
+                                <a href="./myPayment" class="dropdown-item">구매내역</a>
                             </div>
                            </c:if>
                         </div>
