@@ -124,7 +124,7 @@ function enterkey() {
                                     <i class="fa fa-link fa-2x"></i>
                                 </a>
                             </div>
-                            <div class="p-5" style="padding-top: 10px;">
+                            <div class="p-5" style="padding-top: 10px; ">
                                 <h5 class="mb-2" style="border-radius:10px;color: white"> ${pop.l_name } </h5>
                                 <span style="background-color:white; ; border-radius:10px;color: black"><strong>${pop.t_nickname } </strong></span><br>
                                 <c:choose>

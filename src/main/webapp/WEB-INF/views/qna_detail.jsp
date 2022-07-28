@@ -110,7 +110,7 @@
 					</table><br>
 					<table>
 					<tr>
-						<td style="word-break:break-all; width: 820px; height: 220px;"><textarea readonly="readonly" style="width: 810px; height: 220px; "> ${dto.lqa_content }</textarea></td>
+						<td style="word-break:break-all; width: 820px; height: 220px;"><div readonly="readonly" style="width: 810px; height: 220px; overflow: auto;"> ${dto.lqa_content }</div></td>
 					</tr>
 					</table>
 					
@@ -134,7 +134,7 @@
 					</tr></table><br>
 					<table>
 					<tr>
-						<td style="word-break:break-all; width: 820px;"><textarea readonly="readonly" style="width: 810px; height: 220px; ">${dto.lqar_content }</textarea></td>
+						<td style="word-break:break-all; width: 820px;"><div readonly="readonly" style="width: 810px; height: 220px; overflow: auto;">${dto.lqar_content }</div></td>
 					</tr>
 					</table>
 		</div>
