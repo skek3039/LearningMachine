@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 
 <html lang="en">
-
+ 
 <head>
     <meta charset="utf-8">
     <title>Learning Machine</title>
@@ -53,7 +55,20 @@
     }
     
     </style>
+    
+<script type="text/javascript">
+function search(){
+	var l_name = $("#l_name").val();
+	location.href = "./index_search?l_name="+l_name;
+}
 
+function enterkey() {
+	if (window.event.keyCode == 13) {
+		search();
+	}
+	
+}
+</script>
 
 </head>
 
@@ -79,8 +94,8 @@
                         <h3 class="text-white">듣고싶은 강의를 검색해주세요.</h3>
                         <small class="text-white">연봉올리기 가장 쉬운 방법</small>
                         <div class="position-relative w-100 mt-3">
-                            <input id="l_name" name="l_name" class="form-control border-0 rounded-pill w-100 ps-4 pe-5" type="text" placeholder="배우고싶은 지식을 입력해보세요." style="height: 48px;">
-                            <button type="button" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2"><i class="fa fa-paper-plane text-primary fs-4"></i></button>
+                            <input id="l_name" name="l_name" class="form-control border-0 rounded-pill w-100 ps-4 pe-5" type="text" placeholder="배우고싶은 지식을 입력해보세요." style="height: 48px;" onkeyup="enterkey()">
+                            <button type="submit" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2" id="search" onclick="search()"><i class="fa fa-paper-plane text-primary fs-4"></i></button>
                         </div>
                     </div>
                     <div class="col-md-6 text-center mb-n5 d-none d-md-block">

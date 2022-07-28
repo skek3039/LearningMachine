@@ -72,4 +72,9 @@ public class CommunityDAO {
 		sqlSession.update("Community.commentUpdate",dto);
 	}
 
+	public List<String> index_search(String l_name) {
+		return sqlSession.selectList("Community.index_search", l_name);
+	}
+
+
 }

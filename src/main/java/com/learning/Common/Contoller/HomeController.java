@@ -295,7 +295,23 @@ public class HomeController {
 		mv.addObject("list",list);
 		return mv;
 	}
+	//=====================================================================================
 	
+	//검색
+	@GetMapping(value = "/index_search", produces = "text/plain;charset=utf-8")
+		public ModelAndView index_search(HttpServletRequest request, HttpSession session,HttpServletResponse response) throws IOException {
+		String l_name = request.getParameter("l_name");
+		List<String> indexsearch = communityService.index_search(l_name);
+		if (indexsearch == null) {
+			response.getWriter().println("<script>alert('검색하신 강의가 존재하지 않습니다.'); window.history.back();"+"</script>");     
+		}else {
+			ModelAndView mv = new ModelAndView("index_search");
+			mv.addObject("indexsearch",indexsearch);		
+			mv.addObject("l_name",l_name);
+			return mv;
+		}
+		return null;
+	}
 	
 	
 }
