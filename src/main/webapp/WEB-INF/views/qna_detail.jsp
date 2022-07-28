@@ -106,27 +106,41 @@
                                             <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
                     						${time }
 					</h6></td>
+					</tr>
+					</table><br>
+					<table>
+					<tr>
+						<td style="word-break:break-all; width: 820px; height: 220px;"><textarea readonly="readonly" style="width: 810px; height: 220px; "> ${dto.lqa_content }</textarea></td>
+					</tr>
+					</table>
+					
+					<hr style="width: 820px; height: 2px;"><br>
+					
+					<br>
+				<table>
+					<tr>
+						<th><img style="width: 50px; height: 50px;" id="up" alt="" src="./img/a.png" title="답변"></th>
+						<td style="padding-top: 10px; word-break:break-all; width: 750px"><h5>${dto.lqar_title }</h5></td>
+					</tr>
+					<tr>
+						<td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/id.png" title="id">
+						${dto.t_id }</h6></td><td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/date.png" title="date">
+                                            <fmt:parseDate value="${dto.lqar_date }" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
+                                            <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
+                    						${time }&nbsp;
+                    	<img onclick="location.href='./v_qna_update?vq_no=${lqar.vq_no}'" style="width: 20px; height: 20px;" id="update" alt="" src="./img/update.png" title="id">
+					</h6></td>
+					
 					</tr></table><br>
 					<table>
 					<tr>
-						<td style="word-break:break-all; width: 820px">${dto.lqa_content }</td>
+						<td style="word-break:break-all; width: 820px;"><textarea readonly="readonly" style="width: 810px; height: 220px; ">${dto.lqar_content }</textarea></td>
 					</tr>
 					</table>
-					<div style="padding-top: 150px;">
-					<hr style="width: 820px; height: 2px;"><br>
-					</div>
-					<br>
-				<div id="writeform" style="padding-right: 100px;">
-				<form action="./qna_reply.do?lqa_no=${dto.lqa_no }" method="post">
-					<input style="width: 820px;" type="text" name="title" required="required">
-					<textarea name="content" id="summernote" required="required" ></textarea>
-					<input type="hidden" name="b_cate" value="">
-					<button type="submit" style="float:right;">답변등록</button>
-				</form>
-			</div>
 		</div>
 
 </div>
+	<br><br><br><br><br><br><br><br><br>
 		<jsp:include page="./footer.jsp" />
 
 

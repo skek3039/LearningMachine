@@ -125,12 +125,14 @@ public class QnaController {
 			request.setCharacterEncoding("UTF-8");
 			int lqa_no = Integer.parseInt(request.getParameter("lqa_no"));
 			if ((int) session.getAttribute("u_authority") > 3) {
-				
+				System.out.println(lqa_no);
 				LectureDTO qna_detail = new LectureDTO();
 				qna_detail.setLqa_no(lqa_no);
 				
 				request.setAttribute("dto", qnaService.qna_detail(qna_detail));
-				return "video_qna_detail";
+				System.out.println(qnaService.qna_detail(qna_detail).toString());
+				
+				return "qna_detail";
 			} else {
 				return "redirect:/404";
 			}
@@ -173,7 +175,9 @@ public class QnaController {
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("lqa_no", lqa_no);
 				map.put("page", page);
+				
 				List<LectureDTO> qna_answer = qnaService.qna_answer(map);
+				
 				mv.addObject("qna_answer", qna_answer);
 				mv.addObject("paginationInfo", paginationInfo);
 				return mv;
