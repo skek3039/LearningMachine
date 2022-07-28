@@ -42,4 +42,7 @@ public class LoginDAO {
 	public int join3(TeacherDTO dto1) {
 		return sqlSession.insert("Login.join3", dto1);
 	}
+	public int myDrop(String u_id) {
+		return sqlSession.update("Login.myDrop",u_id);
+	}
 }

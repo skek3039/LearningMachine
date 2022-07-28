@@ -47,4 +47,8 @@ public class LoginService {
 	public int join3(TeacherDTO dto1) {
 		return loginDAO.join3(dto1);
 	}
+
+	public int myDrop(String u_id) {
+		return loginDAO.myDrop(u_id);
+	}
 }

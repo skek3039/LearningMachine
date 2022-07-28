@@ -29,16 +29,15 @@
                             <a href="./admin" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">강사</a>
                             <div class="dropdown-menu m-0">                            	
                                 <a href="./lecture" class="dropdown-item">강사페이지</a>
-                                <a href="./student" class="dropdown-item">수강생관리</a>                            </div>
+                                <a href="./student" class="dropdown-item">수강생관리</a> </div>
                          </c:if>
                           <c:if test="${sessionScope.u_authority == 1 }">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><img src="./img/myInfo.png" style="width: 30px; height: 30px;"> </a>
                             <div class="dropdown-menu m-0">
-                                <a href="feature.html" class="dropdown-item">Features</a>
-                                <a href="quote.html" class="dropdown-item">Free Quote</a>
-                                <a href="team.html" class="dropdown-item">Our Team</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="404.html" class="dropdown-item">404 Page</a>
+                                <a href="./myInfo" class="dropdown-item">내정보보기</a>
+                                <a href="./myLecture" class="dropdown-item">내학습</a>
+                                <a href="./myBoard" class="dropdown-item">작성한 게시글보기</a>
+                                <a href="./myPay" class="dropdown-item">구매내역</a>
                             </div>
                            </c:if>
                         </div>

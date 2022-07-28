@@ -23,13 +23,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.learning.Admin.Service.AdminService;
 import com.learning.Common.Service.CommunityService;
+import com.learning.Common.Service.MyService;
 import com.learning.DTO.BoardDTO;
 import com.learning.DTO.LectureDTO;
 import com.learning.DTO.PageDTO;
+import com.learning.DTO.userDTO;
 import com.learning.utill.Util;
 
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 import retrofit2.http.GET;
+import retrofit2.http.HTTP;
 
 @Controller
 public class HomeController {
@@ -38,6 +41,8 @@ public class HomeController {
 	private CommunityService communityService;
 	@Autowired
 	private AdminService adminService;
+	@Autowired
+	private MyService Myservice;
 	
 	private String name = null;
 	
@@ -269,4 +274,28 @@ public class HomeController {
 
 		return "redirect:/boardDetail?b_no="+b_no;
 	}
+	
+	//==============================================================================================================	
+	//유저마이페이지 관련 컨트롤러
+
+	@RequestMapping(value = "/myInfo")
+	public ModelAndView myInfo(HttpServletRequest rq) {
+		ModelAndView mv = new ModelAndView("myInfo");
+		String u_id = rq.getSession().getAttribute("u_id").toString();
+		List<String> myinfo = Myservice.myInfo(u_id);
+		mv.addObject("myinfo",myinfo);
+		return mv;
+	}
+	
+	@RequestMapping(value = "/myLecture")
+	public ModelAndView myLecture(HttpServletRequest rq) {
+		ModelAndView mv = new ModelAndView("myLecture");
+		String u_id = rq.getSession().getAttribute("u_id").toString();
+		List<String> list = Myservice.myLectureList(u_id);
+		mv.addObject("list",list);
+		return mv;
+	}
+	
+	
+	
 }

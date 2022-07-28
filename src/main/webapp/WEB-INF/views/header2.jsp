@@ -9,7 +9,7 @@
 				<div class="row g-5 align-items-center">
 					<div class="col-lg-6 text-center text-lg-start">
 						<h1 class="text-white mb-4 animated zoomIn">Learning Machine</h1>
-						<p class="text-white pb-3 animated zoomIn">나누는 보람만큼 커지는 보상</p>
+						<p class="text-white pb-3 animated zoomIn">마케팅보다는 좋은 콘텐츠에 집중합니다.<br> 좋지 않은 콘텐츠라도 홍보와 포장을 통해 이윤을 남길 수 있지만,<br><strong><I> 우리는 콘텐츠에 집중합니다.</I></strong> <br> 좋은 콘텐츠를 통해 자연스럽게 알려지고, 소개하게 되어 모두 함께 성장하는 공간을 만들겠습니다.</p>
 						<a href="./LectureList"
 							class="btn btn-outline-light rounded-pill border-2 py-3 px-5 animated slideInRight">강의 살펴보기</a>
 					</div>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?> <!-- 맵퍼파일 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="MyService">
+	<select id="myLectureList" parameterType="String" resultType="map">
+		select * ,(SELECT c.c_name  FROM category c WHERE c.c_code = v.l_code)AS c_name
+		from lecture_apply_user_view v
+		where v.u_id = #{u_id}
+	</select>
+  
+  	<select id="myInfo" parameterType="String" resultType="map">
+  		select * 
+  		from user
+  		where u_id =#{u_id}
+  	</select>
+  </mapper>

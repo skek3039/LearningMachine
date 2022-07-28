@@ -213,5 +213,21 @@ public class LoginController {
 		}
 		return "redirect:/login";
 	}
+	
+	
+	//탈퇴처리
+	@GetMapping(value = "/myDrop")
+	public void myDrop(HttpServletRequest rq , HttpServletResponse rs) throws IOException {
+		String u_id = rq.getSession().getAttribute("u_id").toString();
+		int result = loginService.myDrop(u_id);
+		System.out.println(u_id);
+		System.out.println(result);
+		if(result == 1) {
+			rs.getWriter().println(result);
+		}else {	
+			rs.getWriter().println(result);
+		}
+		
+	}
 
 }
