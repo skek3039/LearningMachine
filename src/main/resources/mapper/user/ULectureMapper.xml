@@ -38,7 +38,7 @@
 				,(SELECT u_nickname FROM user WHERE user.u_id = lecture_qna.u_id) as 'u_nickname'
 				,(SELECT COUNT(0) FROM lecture_qna_reply where lecture_qna.lqa_no = lqa_no) as reply_whether
 		FROM lecture_qna
-		WHERE l_code = #{l_code}
+		WHERE l_code = #{l_code} AND lqa_del = 0
 		ORDER BY lqa_date DESC
 	</select>
 	
@@ -46,7 +46,7 @@
 		SELECT *
 				,(SELECT u_nickname FROM user WHERE user.u_id = lecture_qna_reply.t_id) as t_nickname
 		FROM lecture_qna_reply
-		WHERE lqa_no = #{lqa_no}
+		WHERE lqa_no = #{lqa_no} 
 	</select>
 	
 	<select id="ULectureVideoQnas" parameterType="int" resultType="com.learning.User.Form.ULectureVideoQnaForm">
@@ -56,13 +56,14 @@
 			lecture_video_qna_and_reply
 		WHERE
 			vq_del = 0 AND v_no = #{v_no}
+		ORDER BY lqa_date desc
 	</select>
 
 	<select id="ULectureReviews" parameterType="String" resultType="com.learning.User.Form.ULectureReviewForm">
 		SELECT *,
 			(SELECT u_nickname FROM user WHERE lecture_review.u_id = user.u_id) as u_nickname
 		FROM lecture_review
-		WHERE l_code = #{l_code}
+		WHERE l_code = #{l_code} AND lr_del = 0
 		ORDER BY lr_date desc
 	</select>
 	<select id="UCheckAttendance" parameterType="com.learning.User.Form.UserAttendanceForm" resultType="integer">
@@ -95,5 +96,73 @@
 	
 	</insert>
 	
-	<insert id="InsertLectureVideoQnA" parameterType="com.learning.User.Form.ULectureVideoQnaForm"></insert>
+	<insert id="InsertLectureVideoQnA" parameterType="com.learning.User.Form.ULectureVideoQnaForm">
+	
+		INSERT INTO lecture_video_qna(l_code, v_no, u_id, vq_title, vq_content)
+		VALUES
+		(#{l_code}, #{v_no}, #{u_id}, #{vq_title}, #{vq_content})	
+	
+	</insert>
+	
+	<update id="UpdateLectureReview">
+	
+		UPDATE lecture_review SET lr_title = #{lr_title}, lr_content = #{lr_content} WHERE lqa_no = #{lr_no}  
+	
+	</update>
+	
+	<update id="UpdateLectureQna">
+	
+		UPDATE lecture_qna SET lqa_title = #{lqa_title}, lqa_content = #{lqa_content} WHERE lqa_no = #{lqa_no}  
+	
+	</update>
+	
+	<update id="UpdateLectureVideoQna">
+	
+		UPDATE lecture_qna SET vq_title = #{vq_title}, vq_content = #{vq_content} WHERE vq_no = #{vq_no}  
+	
+	</update>
+	
+	<update id="RemoveLectureReview">
+	
+		UPDATE lecture_review SET vq_del = 1 WHERE lr_no = #{lr_no}
+	
+	</update>
+	
+	<delete id="RemoveLectureQna">
+	
+		DELETE FROM lecutre_qna WHERE lqa_no = #{lqa_no}
+	
+	</delete>
+	
+	<delete id="RemoveLectureVideoQna">
+	
+	
+		DELETE FROM lecture_video_qna WHERE vq_no = #{vq_no}
+	
+	</delete>
   </mapper>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

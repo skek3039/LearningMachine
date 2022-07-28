@@ -102,7 +102,6 @@
 				<div class="row justify-content-center">
 					<div class="col-lg-7 wow fadeInUp" data-wow-delay="0.3s">
 						<p class="text-center mb-4">${LectureInfo.l_info}</p>
-						<form>
 							<div class="row g-3">
 								<div class="col-12">
 									<div class="form-floating">
@@ -148,11 +147,9 @@
 									</div>
 								</div>
 								<div class="col-12">
-									<input type="hidden" name="l_price" value="${LectureInfo.l_price }">
 									<button class="btn btn-primary w-100 py-3" onclick="pay()">결제</button>
 								</div>
 							</div>
-						</form>
 					</div>
 				</div>
 			</div>

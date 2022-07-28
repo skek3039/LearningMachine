@@ -202,4 +202,56 @@ public class ULectureController {
 		}
 	}
 
+	@RequestMapping(value = "/LectureReviewEdit.do")
+	@ResponseBody
+	public int LectureReviewEdit(HttpServletRequest rq) {
+		
+		return 0;
+	}
+	
+	@RequestMapping(value = "/LectureReviewRemove.do")
+	@ResponseBody
+	public int LectureReviewRemove(HttpServletRequest rq) {
+		
+		return 0;
+	}
+	
+	@RequestMapping(value = "/LectureQnaEdit.do")
+	@ResponseBody
+	public int LectureQnaEdit(HttpServletRequest rq) {
+		
+		return 0;
+	}
+	
+	@RequestMapping(value = "/LectureQnaRemove.do")
+	@ResponseBody
+	public int LectureQnaRemove(HttpServletRequest rq) {
+		
+		return 0;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

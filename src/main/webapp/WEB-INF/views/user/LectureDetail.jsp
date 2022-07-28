@@ -49,9 +49,10 @@
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
 	<style type="text/css">
-		#rDone{
+		#rDone {
 			margin: 0 auto;
 		}
+
 		body {
 			font-family: LeferiPoint-WhiteObliqueA;
 		}
@@ -176,6 +177,11 @@
 			right: 0;
 			padding: 10px;
 		}
+
+		#ubutton {
+
+			width: 24px;
+		}
 	</style>
 
 	<script type="text/javascript">
@@ -209,35 +215,35 @@
 			CloseModal.classList.remove("show");
 		}
 
-		function LectureQNASubmit(){
-			
+		function LectureQNASubmit() {
+
 			var lqa_title = $('input[name=lqa_title]').val();
 			var lqa_content = $('textarea[name="lqa_content"]').val();
 			$.ajax({
 
-				type : "post",
-				url : "/web/LectureQnaWrite.do?l_code="+'${LectureDetail.l_code}',
-				data : {
-					lqa_title : lqa_title,
-					lqa_content : lqa_content
+				type: "post",
+				url: "/web/LectureQnaWrite.do?l_code=" + '${LectureDetail.l_code}',
+				data: {
+					lqa_title: lqa_title,
+					lqa_content: lqa_content
 				},
-				success : function(){
-					
-					$('#qnatab').load(location.href+' #qnatab');
+				success: function () {
+
+					$('#qnatab').load(location.href + ' #qnatab');
 				},
-				error : function(){
+				error: function () {
 					alert('머선 일이고');
 				}
-			}).done(function(result){
-				if(result == 1){
+			}).done(function (result) {
+				if (result == 1) {
 					$('input[name=lqa_title]').val("");
 					alert('질문이 등록되었습니다');
 					CloseModal('qna');
-				}else if(result == 0){
+				} else if (result == 0) {
 
 					alert('권한이 없습니다.');
 					CloseModal('qna');
-				}else if(result == 2){
+				} else if (result == 2) {
 
 					alert('질문은 최대 3개만 올릴 수 있습니다.');
 					CloseModal('qna');
@@ -245,38 +251,87 @@
 			});
 		}
 
-		function LectureReviewSubmit(){
-			
+		function LectureReviewSubmit() {
+
 			var lr_title = $('input[name=lr_title]').val();
 			var lr_content = $('textarea[name="lr_content"]').val();
 			$.ajax({
 
-				type : "post",
-				url : "/web/LectureReviewWrite.do?l_code="+'${LectureDetail.l_code}',
-				data : {
-					lr_title : lr_title,
-					lr_content : lr_content
+				type: "post",
+				url: "/web/LectureReviewWrite.do?l_code=" + '${LectureDetail.l_code}',
+				data: {
+					lr_title: lr_title,
+					lr_content: lr_content
 				},
-				success : function(){
-					
-					$('#reviewtab').load(location.href+' #reviewtab');
+				success: function () {
+
+					$('#reviewtab').load(location.href + ' #reviewtab');
 				},
-				error : function(){
+				error: function () {
 					alert('머선 일이고');
 				}
-			}).done(function(result){
-				if(result == 1){
+			}).done(function (result) {
+				if (result == 1) {
 					$('input[name=lr_title]').val("");
 					alert('리뷰가 등록되었습니다');
 					CloseModal('Review');
-				}else if(result == 0){
+				} else if (result == 0) {
 
 					alert('권한이 없습니다.');
 					CloseModal('Review');
-				}else if(result == 2){
+				} else if (result == 2) {
 
 					alert('이미 리뷰를 등록했습니다.');
 					CloseModal('Review');
+				}
+			});
+		}
+
+		function LectureReviewRemove() {
+				$.ajax({
+
+					type: "post",
+					url: "/web/LectureReviewEdit.do?l_code=" + '${LectureDetail.l_code}',
+					success: function () {
+
+						$('#reviewtab').load(location.href + ' #reviewtab');
+					},
+					error: function () {
+						alert('머선 일이고');
+					}
+				}).done(function (result) {
+					
+					alert('리뷰가 삭제되었습니다');
+				});
+			}
+		
+		function LectureReviewEdit(){
+
+			var lr_title = $('input[name=lr_title]').val();
+			var lr_content = $('textarea[name="lr_content"]').val();
+			$.ajax({
+
+				type: "post",
+				url: "/web/LectureReviewEdit.do?l_code=" + '${LectureDetail.l_code}',
+				data: {
+					lr_title: lr_title,
+					lr_content: lr_content
+				},
+				success: function () {
+
+					$('#reviewtab').load(location.href + ' #reviewtab');
+				},
+				error: function () {
+					alert('머선 일이고');
+				}
+			}).done(function (result) {
+				if (result == 1) {
+					alert('리뷰가 수정이 완료되었습니다');
+					CloseModal('ReviewEdit');
+				} else if (result == 0) {
+
+					alert('권한이 없습니다.');
+					CloseModal('ReviewEdit');
 				}
 			});
 		}
@@ -306,7 +361,7 @@
 					<c:choose>
 						<c:when test="${sessionScope.u_id eq null || LectureDetail.payment_whether eq 0}">
 							<c:choose>
-								<c:when test = "${LectureDetail.l_thumbnail eq null}">
+								<c:when test="${LectureDetail.l_thumbnail eq null}">
 									<img class="img-fluid" src="./resources/img/spring.png" width="100%">
 								</c:when>
 								<c:otherwise>
@@ -386,7 +441,7 @@
 								<h6>${LectureDetail.l_name} 강의 가격</h6>
 								<h4><strong
 										style="color: red; vertical-align: middle;">${LectureDetail.l_price}</Strong>원
-									</h4>
+								</h4>
 							</div>
 						</div>
 					</div>
@@ -413,9 +468,11 @@
 					</div>
 					<c:choose>
 						<c:when test="${sessionScope.u_id eq null}">
-							<a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="./Pay?l_code=${LectureDetail.l_code}">결제하기</a>
-							<a href=" ./Wish?l_code=${LectureDetail.l_code}" class="btn btn-outline-light rounded-pill border-2 py-3 px-5 animated slideInRight"
-									style="color: gray;">찜하기</a>
+							<a class="btn btn-primary rounded-pill py-3 px-5 mt-2"
+								href="./Pay?l_code=${LectureDetail.l_code}">결제하기</a>
+							<a href=" ./Wish?l_code=${LectureDetail.l_code}"
+								class="btn btn-outline-light rounded-pill border-2 py-3 px-5 animated slideInRight"
+								style="color: gray;">찜하기</a>
 						</c:when>
 						<c:otherwise>
 							<c:choose>
@@ -429,8 +486,10 @@
 									</c:if>
 								</c:when>
 								<c:otherwise>
-									<a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="./Pay?l_code=${LectureDetail.l_code}">결제하기</a>
-									<a href=" ./Wish?l_code=${LectureDetail.l_code}" class="btn btn-outline-light rounded-pill border-2 py-3 px-5 animated slideInRight"
+									<a class="btn btn-primary rounded-pill py-3 px-5 mt-2"
+										href="./Pay?l_code=${LectureDetail.l_code}">결제하기</a>
+									<a href=" ./Wish?l_code=${LectureDetail.l_code}"
+										class="btn btn-outline-light rounded-pill border-2 py-3 px-5 animated slideInRight"
 										style="color: gray;">찜하기</a>
 								</c:otherwise>
 							</c:choose>
@@ -466,7 +525,8 @@
 								<div class="row g-3">
 									<div class="col-md-6">
 										<div class="form-floating">
-											<input type="text" class="form-control" id="name" name = "lr_title"placeholder="리뷰 제목">
+											<input type="text" class="form-control" id="name" name="lr_title"
+												placeholder="리뷰 제목">
 											<label for="name">제목</label>
 										</div>
 									</div>
@@ -474,7 +534,8 @@
 										style="height: 150px; resize: none; z-index: 1100;"></textarea>
 								</div>
 								<div class="col-12">
-									<button class="btn btn-primary w-100 py-3" type="button" onclick="LectureReviewSubmit()">리뷰 제출하기</button>
+									<button class="btn btn-primary w-100 py-3" type="button"
+										onclick="LectureReviewSubmit()">리뷰 제출하기</button>
 								</div>
 							</form>
 						</div>
@@ -484,12 +545,45 @@
 					</div>
 				</div>
 			</c:if>
+
 			<div class="row gx-4 gx-lg-5" style="margin: 0 auto;" id="reviewtab">
 				<c:forEach items="${LectureReviews}" var="i">
 					<div class="col-md-4 mb-5" style="height: 330px;">
 						<div class="card h-100">
 							<div class="card-body">
-								<h2 class="card-title">${i.lr_title }</h2>
+								<h2 class="card-title">${i.lr_title }
+									<c:if test="${i.u_id eq sessionScope.u_id}">
+										<img id="ubutton" src="./resources/img/Uremove.png" onclick="LectureReviewRemove();">
+										<img id="ubutton" src="./resources/img/Uedit.png" onclick="OpenModal('ReviewEdit');">
+										<!-- 리뷰는 강의 당 하나이므로 하나의 모달창 생성 -->
+										<div class="background backgroundReviewEdit">
+											<div class="window">
+												<div class="popup">
+													<button id="closebtn" onclick="CloseModal('ReviewEdit');">닫기</button>
+													<form>
+														<div class="row g-3">
+															<div class="col-md-6">
+																<div class="form-floating">
+																	<input type="text" class="form-control" id="name"
+																		name="lr_title" placeholder="리뷰 제목" value="${i.lr_title}">
+																</div>
+															</div>
+															<textarea class="summernote" id="message" name="lr_content"
+																style="height: 150px; resize: none; z-index: 1100;">${i.lr_content}</textarea>
+														</div>
+														<div class="col-12">
+															<button class="btn btn-primary w-100 py-3" type="button"
+																onclick="LectureReviewEdit()">리뷰 제출하기</button>
+														</div>
+													</form>
+												</div>
+												<div>
+													<div></div>
+												</div>
+											</div>
+										</div>
+									</c:if>
+								</h2>
 								<h6>${i.u_nickname} / <small style="color: rgb(51, 179, 211);">${i.lr_grade}점</small>
 								</h6>
 								<c:set var="content" value="${i.lr_content}" />
@@ -538,7 +632,8 @@
 							<div class="row g-3">
 								<div class="col-md-6">
 									<div class="form-floating">
-										<input type="text" class="form-control" id="name" name="lqa_title" placeholder="질문 제목">
+										<input type="text" class="form-control" id="name" name="lqa_title"
+											placeholder="질문 제목">
 										<label for="name">제목</label>
 									</div>
 								</div>
@@ -546,14 +641,15 @@
 									style="height: 150px; resize: none; z-index: 1100;" name="lqa_content"></textarea>
 							</div>
 							<div class="col-12">
-								<button class="btn btn-primary w-100 py-3" type="button" onclick="LectureQNASubmit()">질문 제출하기</button>
+								<button class="btn btn-primary w-100 py-3" type="button" onclick="LectureQNASubmit()">질문
+									제출하기</button>
 							</div>
 						</div>
 					</div>
 				</div>
 			</c:if>
 			<!--/ 질문하기 모달창 -->
-			<div class="row gx-4 gx-lg-5" style="margin: 0 auto;" id = "qnatab">
+			<div class="row gx-4 gx-lg-5" style="margin: 0 auto;" id="qnatab">
 				<c:forEach items="${LectureQnas}" var="i">
 					<!-- 질문과 답변 모달창 -->
 					<div class="background background${i.lqa_no}${i.u_id}">
@@ -574,9 +670,17 @@
 						<div class="card h-100">
 							<div class="card-body">
 								<c:if test="${i.lqa_confirm eq 1}">
-									<div id="rDone" class="d-inline-block border rounded-pill text-primary px-4 mb-3">답변완료</div>
+									<div id="rDone" class="d-inline-block border rounded-pill text-primary px-4 mb-3">
+										답변완료</div>
 								</c:if>
-								<h2 class="card-title">${i.lqa_title}</h2>
+								<h2 class="card-title">${i.lqa_title}
+									<c:if test="${i.u_id eq sessionScope.u_id}">
+										<img id="ubutton" src="./resources/img/Uremove.png" onclick="">
+									</c:if>
+									<c:if test="${i.u_id eq sessionScope.u_id && i.lqa_confirm eq 0}">
+										<img id="ubutton" src="./resources/img/Uedit.png" onclick="">
+									</c:if>
+								</h2>
 								<h6>${i.u_nickname}</h6>
 								<c:set var="content" value="${i.lqa_content}" />
 								<c:choose>
