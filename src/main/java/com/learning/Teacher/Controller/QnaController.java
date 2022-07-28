@@ -66,7 +66,7 @@ public class QnaController {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("lqa_no", lqa_no);
 			map.put("page", page);
-			List<LectureDTO> qnaList = qnaService.qnalist();
+			List<LectureDTO> qnaList = qnaService.qnalist(page);
 			mv.addObject("qnaList", qnaList);
 			mv.addObject("paginationInfo", paginationInfo);
 			return mv;

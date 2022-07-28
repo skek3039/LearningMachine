@@ -7,14 +7,13 @@
   		from lecture_qna
   	</select>
 	
-	<select id="qnaList" resultType="lectureDTO" parameterType="map">
+	<select id="qnaList" resultType="lectureDTO" parameterType="PageDTO">
 		SELECT * 
 		,(SELECT u_nickname FROM user WHERE u_id = q.u_id) AS u_id 
 		,(SELECT l_name FROM lecture l WHERE l.l_code = q.l_code) AS l_name
 		FROM lecture_qna q
 		WHERE lqa_confirm = 0
-		<if test="lqa_no != null">and lqa_no= #{lqa_no}
-		</if>
+		LIMIT #{startPage} , #{lastPage}
 	</select>
 
 	<select id="qna_reply" parameterType="map" resultType="LectureDTO">

@@ -8,14 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.learning.DTO.LectureDTO;
+import com.learning.DTO.PageDTO;
 
 @Repository
 public class QnaDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public List<LectureDTO> qnaList() {
-		return sqlSession.selectList("QnA.qnaList");
+	public List<LectureDTO> qnaList(PageDTO page) {
+		return sqlSession.selectList("QnA.qnaList",page);
 	}
 
 

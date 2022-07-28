@@ -7,14 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.learning.DTO.LectureDTO;
+import com.learning.DTO.PageDTO;
 import com.learning.Teacher.DAO.QnaDAO;
 
 @Service
 public class QnaService {
 	@Autowired QnaDAO qnaDAO;
 	
-	public List<LectureDTO> qnalist() {
-		return qnaDAO.qnaList();
+	public List<LectureDTO> qnalist(PageDTO page) {
+		return qnaDAO.qnaList(page);
 	}
 
 	public LectureDTO qna_reply(LectureDTO qna_reply) {
