@@ -45,7 +45,6 @@ public class LoginController {
 	         if(dto.getU_authority() > 6) {
 	            return "redirect:/admin";            
 	         }else if(dto.getU_authority() > 3) {            
-	            System.out.println("강사");
 	            return "redirect:/lecture";                        
 	         }
 	         return "redirect:/";
@@ -223,6 +222,8 @@ public class LoginController {
 		System.out.println(u_id);
 		System.out.println(result);
 		if(result == 1) {
+			rq.getSession().removeAttribute("u_id");
+			rq.getSession().removeAttribute("u_authority");
 			rs.getWriter().println(result);
 		}else {	
 			rs.getWriter().println(result);
