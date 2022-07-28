@@ -38,7 +38,7 @@
 				,(SELECT u_nickname FROM user WHERE user.u_id = lecture_qna.u_id) as 'u_nickname'
 				,(SELECT COUNT(0) FROM lecture_qna_reply where lecture_qna.lqa_no = lqa_no) as reply_whether
 		FROM lecture_qna
-		WHERE l_code = #{l_code} AND lqa_del = 0
+		WHERE l_code = #{l_code}
 		ORDER BY lqa_date DESC
 	</select>
 	
@@ -56,7 +56,7 @@
 			lecture_video_qna_and_reply
 		WHERE
 			vq_del = 0 AND v_no = #{v_no}
-		ORDER BY lqa_date desc
+		ORDER BY vq_date desc
 	</select>
 
 	<select id="ULectureReviews" parameterType="String" resultType="com.learning.User.Form.ULectureReviewForm">
@@ -84,9 +84,28 @@
 		
 	</select>
 	
+	<select id="CheckLectureReviewWriter" parameterType="com.learning.User.Form.ULectureReviewForm" resultType="Integer">
+	
+		SELECT COUNT(0) FROM lecture_review WHERE u_id = #{u_id} AND l_code = #{l_code} 
+	
+	</select>
+	
+	<select id="CheckLectureQna" parameterType="Integer" resultType="HashMap">
+	
+		SELECT u_id, lqa_confirm FROM lecture_qna WHERE lqa_no = #{lqa_no}
+	
+	</select>
+	
+	<select id="CheckLectureVideoQna" parameterType="Integer" resultType="HashMap">
+	
+		SELECT u_id, vq_confirm FROM lecture_video_qna WHERE vq_no = #{vq_no}
+	
+	</select>
+	
+	<!-- 리뷰, 질문, 비디오질문 입력 -->
 	<insert id="InsertLectureReview" parameterType="com.learning.User.Form.ULectureReviewForm">
 	
-		INSERT INTO lecture_review(l_code, u_id, lr_title, lr_content) VALUES(#{l_code}, #{u_id}, #{lr_title}, #{lr_content})
+		INSERT INTO lecture_review(l_code, u_id, lr_title, lr_content, lr_grade) VALUES(#{l_code}, #{u_id}, #{lr_title}, #{lr_content}, #{lr_grade})
 	
 	</insert>
 	
@@ -103,14 +122,17 @@
 		(#{l_code}, #{v_no}, #{u_id}, #{vq_title}, #{vq_content})	
 	
 	</insert>
+	<!--/ 입력  -->
 	
-	<update id="UpdateLectureReview">
 	
-		UPDATE lecture_review SET lr_title = #{lr_title}, lr_content = #{lr_content} WHERE lqa_no = #{lr_no}  
+	<!-- 리뷰, 질문, 비디오질문 수정 -->
+	<update id="UpdateLectureReview" parameterType="com.learning.User.Form.ULectureVideoQnaForm">
+	
+		UPDATE lecture_review SET lr_title = #{lr_title}, lr_content = #{lr_content} WHERE l_code = #{l_code} AND u_id = #{u_id} 
 	
 	</update>
 	
-	<update id="UpdateLectureQna">
+	<update id="UpdateLectureQna" parameterType="com.learning.User.Form.ULectureQnaForm">
 	
 		UPDATE lecture_qna SET lqa_title = #{lqa_title}, lqa_content = #{lqa_content} WHERE lqa_no = #{lqa_no}  
 	
@@ -121,25 +143,29 @@
 		UPDATE lecture_qna SET vq_title = #{vq_title}, vq_content = #{vq_content} WHERE vq_no = #{vq_no}  
 	
 	</update>
+	<!--/ 수정  -->
 	
-	<update id="RemoveLectureReview">
 	
-		UPDATE lecture_review SET vq_del = 1 WHERE lr_no = #{lr_no}
+	<!-- 리뷰, 질문, 비디오질문 삭제 -->
+	<update id="RemoveLectureReview" parameterType="com.learning.User.Form.ULectureReviewForm">
+	
+		UPDATE lecture_review SET lr_del = 1 WHERE u_id = #{u_id} AND l_code = #{l_code}
 	
 	</update>
 	
-	<delete id="RemoveLectureQna">
+	<delete id="RemoveLectureQna" parameterType="Integer">
 	
-		DELETE FROM lecutre_qna WHERE lqa_no = #{lqa_no}
+		DELETE FROM lecture_qna WHERE lqa_no = #{lqa_no}
 	
 	</delete>
 	
-	<delete id="RemoveLectureVideoQna">
+	<delete id="RemoveLectureVideoQna" parameterType="Integer">
 	
 	
 		DELETE FROM lecture_video_qna WHERE vq_no = #{vq_no}
 	
 	</delete>
+	<!--/삭제  -->
   </mapper>
   
   

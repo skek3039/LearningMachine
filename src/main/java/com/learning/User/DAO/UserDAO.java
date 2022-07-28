@@ -82,4 +82,28 @@ public class UserDAO {
 		
 		return sqlSession.selectOne(namespace + ".CheckLectureQnaCount", form);
 	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

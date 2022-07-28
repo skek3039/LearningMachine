@@ -117,3 +117,24 @@ public class UserService {
 		return userDAO.CheckLectureQnaCount(form);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -101,23 +101,55 @@
 			display: flex;
 		}
 
-		.star-rating {
+		.star-rating1 {
 			width: 304px;
 			height: 10px;
 		}
 
-		.star-rating,
-		.star-rating span {
+		.star-rating1,
+		.star-rating1 span {
 			display: inline-block;
 			height: 55px;
 			overflow: hidden;
 			background: url(./img/ReviewStar.png)no-repeat;
 		}
 
-		.star-rating span {
+		.star-rating1 span {
 			background-position: left bottom;
 			line-height: 0;
 			vertical-align: top;
+		}
+
+		.star-rating {
+			display: flex;
+			flex-direction: row-reverse;
+			font-size: 2.25rem;
+			line-height: 2.5rem;
+			justify-content: space-around;
+			padding: 0 0.2em;
+			text-align: center;
+			width: 5em;
+		}
+
+		.star-rating input {
+			display: none;
+		}
+
+		.star-rating label {
+			-webkit-text-fill-color: transparent;
+			/* Will override color (regardless of order) */
+			-webkit-text-stroke-width: 2.3px;
+			-webkit-text-stroke-color: #2b2a29;
+			cursor: pointer;
+		}
+
+		.star-rating :checked~label {
+			-webkit-text-fill-color: gold;
+		}
+
+		.star-rating label:hover,
+		.star-rating label:hover~label {
+			-webkit-text-fill-color: #fff58c;
 		}
 
 
@@ -229,7 +261,7 @@
 				},
 				success: function () {
 
-					$('#qnatab').load(location.href + ' #qnatab');
+					window.location.reload();
 				},
 				error: function () {
 					alert('머선 일이고');
@@ -255,17 +287,19 @@
 
 			var lr_title = $('input[name=lr_title]').val();
 			var lr_content = $('textarea[name="lr_content"]').val();
+			var lr_grade = $("input[type=radio][name='rating']:checked").val();
 			$.ajax({
 
 				type: "post",
 				url: "/web/LectureReviewWrite.do?l_code=" + '${LectureDetail.l_code}',
 				data: {
 					lr_title: lr_title,
-					lr_content: lr_content
+					lr_content: lr_content,
+					lr_grade : lr_grade
 				},
 				success: function () {
 
-					$('#reviewtab').load(location.href + ' #reviewtab');
+					window.location.reload();
 				},
 				error: function () {
 					alert('머선 일이고');
@@ -287,39 +321,52 @@
 			});
 		}
 
-		function LectureReviewRemove() {
-				$.ajax({
+		function LectureReviewRemove(u_id) {
+				if (confirm("리뷰를 삭제하시겠습니까? 리뷰를 삭제하면 다시 리뷰를 달 수 없습니다.")) {
+					$.ajax({
 
-					type: "post",
-					url: "/web/LectureReviewEdit.do?l_code=" + '${LectureDetail.l_code}',
-					success: function () {
+						type: "post",
+						url: "/web/LectureReviewRemove.do?l_code=" + '${LectureDetail.l_code}',
+						data :{
+							u_id : u_id
+						},
+						success: function () {
 
-						$('#reviewtab').load(location.href + ' #reviewtab');
-					},
-					error: function () {
-						alert('머선 일이고');
-					}
-				}).done(function (result) {
-					
-					alert('리뷰가 삭제되었습니다');
-				});
+							window.location.reload();
+						},
+						error: function () {
+							alert('머선 일이고');
+						}
+					}).done(function (result) {
+
+						if(result == 0){
+
+							alert('삭제 권한이 없습니다.');
+						}else{
+							
+							alert('리뷰가 삭제되었습니다');
+						}
+					});
+				}
 			}
 		
-		function LectureReviewEdit(){
+		function LectureReviewEdit(u_id){
 
-			var lr_title = $('input[name=lr_title]').val();
-			var lr_content = $('textarea[name="lr_content"]').val();
+			var lr_title = $('input[name="Elr_title"]').val();
+			var lr_content = $('textarea[name="Elr_content"]').val();
+			
 			$.ajax({
 
 				type: "post",
 				url: "/web/LectureReviewEdit.do?l_code=" + '${LectureDetail.l_code}',
 				data: {
+					u_id : u_id,
 					lr_title: lr_title,
 					lr_content: lr_content
 				},
 				success: function () {
 
-					$('#reviewtab').load(location.href + ' #reviewtab');
+					window.location.reload();
 				},
 				error: function () {
 					alert('머선 일이고');
@@ -332,6 +379,62 @@
 
 					alert('권한이 없습니다.');
 					CloseModal('ReviewEdit');
+				}
+			});
+		}
+
+		function LectureQnaRemove(lqa_no) {
+				if (confirm("질문을 삭제하시겠습니까?")) {
+					$.ajax({
+
+						type: "post",
+						url: "/web/LectureQnaRemove.do?lqa_no=" + lqa_no,
+						success: function () {
+
+							window.location.reload();
+						},
+						error: function () {
+							alert('머선 일이고');
+						}
+					}).done(function (result) {
+						if (result == 1) {
+							alert('질문이 삭제되었습니다');
+						} else if (result == 0) {
+							alert('삭제 권한이 없습니다.');
+						}
+						CloseModal('QnaEdit' + lqa_no);
+					});
+				}
+			}
+		
+		function LectureQnaEdit(lqa_no){
+
+			var lqa_title = $('input[name=Elqa_title]').val();
+			var lqa_content = $('textarea[name="Elqa_content"]').val();
+			$.ajax({
+
+				type: "post",
+				url: "/web/LectureQnaEdit.do?lqa_no=" + lqa_no,
+				data: {
+					lqa_title: lqa_title,
+					lqa_content: lqa_content
+				},
+				success: function () {
+
+					// $('#qnatab').load(location.href + ' #qnatab');
+					window.location.reload();
+				},
+				error: function () {
+					alert('머선 일이고');
+				}
+			}).done(function (result) {
+				if (result == 1) {
+					alert('질문 수정이 완료되었습니다');
+					CloseModal('QnaEdit' + lqa_no);
+				} else if (result == 0) {
+
+					alert('수정 권한이 없습니다.');
+					CloseModal('QnaEdit' + lqa_no);
 				}
 			});
 		}
@@ -411,7 +514,7 @@
 					<h3 class="mb-4">강의 소개</h3>
 					<h6><small>${LectureDetail.total_register}명 수강중</small>, <small>${LectureDetail.total_review}명의
 							리뷰(${LectureDetail.grade_avg }점)</small></h6>
-					<span class='star-rating'>
+					<span class='star-rating1'>
 						<span style="width : ${LectureDetail.grade_avg * 20}%;"></span>
 					</span>
 					<p class="mb-4">${LectureDetail.l_info}</p>
@@ -525,13 +628,24 @@
 								<div class="row g-3">
 									<div class="col-md-6">
 										<div class="form-floating">
-											<input type="text" class="form-control" id="name" name="lr_title"
-												placeholder="리뷰 제목">
+											<input type="text" class="form-control" id="name" name="lr_title" placeholder="리뷰 제목">
 											<label for="name">제목</label>
 										</div>
 									</div>
 									<textarea class="summernote" id="message" name="lr_content"
 										style="height: 150px; resize: none; z-index: 1100;"></textarea>
+									<div class="star-rating space-x-4 mx-auto">
+										<input type="radio" id="5-stars" name="rating" value="5" v-model="ratings" />
+										<label for="5-stars" class="star pr-4">★</label>
+										<input type="radio" id="4-stars" name="rating" value="4" v-model="ratings" />
+										<label for="4-stars" class="star">★</label>
+										<input type="radio" id="3-stars" name="rating" value="3" v-model="ratings" checked />
+										<label for="3-stars" class="star">★</label>
+										<input type="radio" id="2-stars" name="rating" value="2" v-model="ratings" />
+										<label for="2-stars" class="star">★</label>
+										<input type="radio" id="1-star" name="rating" value="1" v-model="ratings" />
+										<label for="1-star" class="star">★</label>
+									</div>
 								</div>
 								<div class="col-12">
 									<button class="btn btn-primary w-100 py-3" type="button"
@@ -553,7 +667,7 @@
 							<div class="card-body">
 								<h2 class="card-title">${i.lr_title }
 									<c:if test="${i.u_id eq sessionScope.u_id}">
-										<img id="ubutton" src="./resources/img/Uremove.png" onclick="LectureReviewRemove();">
+										<img id="ubutton" src="./resources/img/Uremove.png" onclick="LectureReviewRemove('${i.u_id}');">
 										<img id="ubutton" src="./resources/img/Uedit.png" onclick="OpenModal('ReviewEdit');">
 										<!-- 리뷰는 강의 당 하나이므로 하나의 모달창 생성 -->
 										<div class="background backgroundReviewEdit">
@@ -565,15 +679,15 @@
 															<div class="col-md-6">
 																<div class="form-floating">
 																	<input type="text" class="form-control" id="name"
-																		name="lr_title" placeholder="리뷰 제목" value="${i.lr_title}">
+																		name="Elr_title" placeholder="리뷰 제목" value="${i.lr_title}">
 																</div>
 															</div>
-															<textarea class="summernote" id="message" name="lr_content"
+															<textarea class="summernote" id="message" name="Elr_content"
 																style="height: 150px; resize: none; z-index: 1100;">${i.lr_content}</textarea>
 														</div>
 														<div class="col-12">
 															<button class="btn btn-primary w-100 py-3" type="button"
-																onclick="LectureReviewEdit()">리뷰 제출하기</button>
+																onclick="LectureReviewEdit('${i.u_id}')">리뷰 수정하기</button>
 														</div>
 													</form>
 												</div>
@@ -656,9 +770,13 @@
 						<div class="window">
 							<div class="popup">
 								<button id="closebtn" onclick="CloseModal('${i.lqa_no}${i.u_id}');">닫기</button>
-								<h2 class="card-title">답변된 질문</h2>
-								${i.lqar_title}<br>
-								${i.lqar_content}
+								<h2 class="card-title">질문</h2>
+								<h6>제목 : ${i.lqa_title}<br></h6>
+								<h6>내용 : ${i.lqa_content}</h6>
+								<h2 class="card-title">답변</h2>
+								<h6>제목 : ${i.lqar_title}<br></h6>
+								<h6>내용 : ${i.lqar_content}</h6>
+
 							</div>
 							<div>
 								<div></div>
@@ -675,21 +793,47 @@
 								</c:if>
 								<h2 class="card-title">${i.lqa_title}
 									<c:if test="${i.u_id eq sessionScope.u_id}">
-										<img id="ubutton" src="./resources/img/Uremove.png" onclick="">
+										<img id="ubutton" src="./resources/img/Uremove.png" onclick="LectureQnaRemove('${i.lqa_no}')">
 									</c:if>
 									<c:if test="${i.u_id eq sessionScope.u_id && i.lqa_confirm eq 0}">
-										<img id="ubutton" src="./resources/img/Uedit.png" onclick="">
+										<img id="ubutton" src="./resources/img/Uedit.png" onclick="OpenModal('QnaEdit${i.lqa_no}')">
+										<div class="background backgroundQnaEdit${i.lqa_no}">
+											<div class="window">
+												<div class="popup">
+													<button id="closebtn" onclick="CloseModal('QnaEdit${i.lqa_no}');">닫기</button>
+													<form>
+														<div class="row g-3">
+															<div class="col-md-6">
+																<div class="form-floating">
+																	<input type="text" class="form-control" id="name"
+																		name="Elqa_title" placeholder="질문 제목" value="${i.lqa_title}">
+																</div>
+															</div>
+															<textarea class="summernote" id="message" name="Elqa_content"
+																style="height: 150px; resize: none; z-index: 1100;">${i.lqa_content}</textarea>
+														</div>
+														<div class="col-12">
+															<button class="btn btn-primary w-100 py-3" type="button"
+																onclick="LectureQnaEdit('${i.lqa_no}')">질문 수정하기</button>
+														</div>
+													</form>
+												</div>
+												<div>
+													<div></div>
+												</div>
+											</div>
+										</div>
 									</c:if>
 								</h2>
 								<h6>${i.u_nickname}</h6>
 								<c:set var="content" value="${i.lqa_content}" />
 								<c:choose>
-									<c:when test="${fn:length(content) < 100}">
+									<c:when test="${fn:length(content) < 101}">
 										<p class="card-text">${i.lqa_content}</p>
 									</c:when>
 									<c:otherwise>
 										<p class="card-text">
-											${fn:substring(content,0,101)}
+											${fn:substring(content,0,51)}
 										</p>
 									</c:otherwise>
 								</c:choose>
