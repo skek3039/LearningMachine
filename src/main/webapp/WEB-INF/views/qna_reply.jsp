@@ -114,7 +114,7 @@
 					</tr></table><br>
 					<table>
 					<tr>
-						<td id="ad" style="word-break:break-all; width: 820px;"><textarea readonly="readonly" style="width: 810px; height: 220px; "> ${dto.lqa_content }</textarea></td>
+						<td id="ad" style="word-break:break-all; width: 820px;"><div readonly="readonly" style="width: 810px; height: 220px; overflow: auto;"> ${dto.lqa_content }</div></td>
 					</tr>
 					</table>
 	
@@ -123,7 +123,7 @@
 					<br>
 				<div id="writeform" style="padding-right: 100px;">
 				<form action="./qna_reply.do?lqa_no=${dto.lqa_no }" method="post">
-					<input style="width: 820px;" type="text" name="title" required="required">
+					<input style="width: 820px;" type="text" name="title" required="required" placeholder="제목을 입력해주세요.">
 					<textarea name="content" id="summernote" required="required" ></textarea>
 					<input type="hidden" name="b_cate" value="">
 					<button type="submit" style="float:right;">답변등록</button>

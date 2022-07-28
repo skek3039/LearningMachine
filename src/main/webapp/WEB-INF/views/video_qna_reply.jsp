@@ -108,7 +108,7 @@
 					</tr></table><br>
 					<table>
 					<tr>
-						<td style="word-break:break-all; width: 820px"><textarea readonly="readonly" style="width: 810px; height: 220px; ">${dto.vq_content }</textarea></td>
+						<td style="word-break:break-all; width: 820px"><div readonly="readonly" style="width: 810px; height: 220px; overflow: auto;">${dto.vq_content }</div></td>
 					</tr>
 					</table>
 					<div style="padding-top: 70px;">
