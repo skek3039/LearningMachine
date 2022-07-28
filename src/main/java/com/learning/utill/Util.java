@@ -20,7 +20,7 @@ public class Util {
 	}
 
 	// 2. html tag
-	public String html(String str) {
+	public static String html(String str) {
 		str = str.replaceAll("<", "&lt;");
 		str = str.replaceAll(">", "&gt;");
 		str = str.replaceAll("\n", "<br>");

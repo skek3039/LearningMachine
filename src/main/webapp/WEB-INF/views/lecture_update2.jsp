@@ -224,7 +224,7 @@
 				        maxHeight: null,       
 				        focus: true,             
 				        lang: "ko-KR",          
-				        placeholder: '내용을 입력해주세요.' 
+				        placeholder: '${dto.l_curriculum }' 
 				          
 				   });
 				});

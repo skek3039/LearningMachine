@@ -108,10 +108,10 @@
 					</tr></table><br>
 					<table>
 					<tr>
-						<td style="word-break:break-all; width: 820px">${dto.vq_content }</td>
+						<td style="word-break:break-all; width: 820px"><textarea readonly="readonly" style="width: 810px; height: 220px; ">${dto.vq_content }</textarea></td>
 					</tr>
 					</table>
-					<div style="padding-top: 150px;">
+					<div style="padding-top: 70px;">
 					<hr style="width: 850px; height: 2px;">
 					</div>
 					<br>
@@ -132,7 +132,7 @@
 					</tr></table><br>
 					<table>
 					<tr>
-						<td style="word-break:break-all; width: 820px">${dto.vqr_content }</td>
+						<td style="word-break:break-all; width: 820px"><textarea readonly="readonly" style="width: 810px; height: 220px; ">${dto.vqr_content }</textarea></td>
 					</tr>
 					</table>
 					
@@ -172,9 +172,6 @@
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
 </body>
-<script>
-$(document).ready(function() {$("#summernote").summernote({height : 200});});
-</script>
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 </html>

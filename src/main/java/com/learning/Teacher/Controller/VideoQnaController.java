@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.learning.DTO.LectureDTO;
 import com.learning.DTO.PageDTO;
 import com.learning.Teacher.Service.Video_QnaService;
+import com.learning.utill.Util;
 
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
@@ -98,8 +99,8 @@ public class VideoQnaController {
 			LectureDTO video_qna = new LectureDTO();
 			video_qna.setT_id(u_id);
 			video_qna.setVqr_title(request.getParameter("title"));
-			video_qna.setVqr_content(request.getParameter("content"));
 			video_qna.setVq_no(Integer.parseInt(request.getParameter("vq_no")));
+			video_qna.setVqr_content(request.getParameter("content"));
 			int result = video_qnaService.video_qna(video_qna);
 			System.out.println(result);
 			if(result ==1) {	

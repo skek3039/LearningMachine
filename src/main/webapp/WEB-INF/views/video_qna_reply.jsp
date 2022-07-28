@@ -108,10 +108,10 @@
 					</tr></table><br>
 					<table>
 					<tr>
-						<td style="word-break:break-all; width: 820px">${dto.vq_content }</td>
+						<td style="word-break:break-all; width: 820px"><textarea readonly="readonly" style="width: 810px; height: 220px; ">${dto.vq_content }</textarea></td>
 					</tr>
 					</table>
-					<div style="padding-top: 150px;">
+					<div style="padding-top: 70px;">
 					<hr style="width: 820px; height: 2px;">
 					</div>
 					<br>
