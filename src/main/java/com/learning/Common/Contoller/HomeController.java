@@ -291,6 +291,29 @@ public class HomeController {
 		return mv;
 	}
 	
+	
+	//내 정보 수정하기
+	@RequestMapping(value = "/myInfoUpdate")
+	public void myInfoUpdate(HttpServletRequest rq , HttpServletResponse rs) {
+		String u_nickname = rq.getParameter("u_nickname"); 
+		String u_pw = rq.getParameter("u_pw");
+		String u_id = rq.getSession().getAttribute("u_id").toString();
+		if(u_nickname.equals("")) {
+			u_nickname = null;
+		}
+		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("u_id", u_id);
+		map.put("u_pw", u_pw);
+		map.put("u_nickname", u_nickname);
+		
+		System.out.println(map.toString());
+		
+		int result = Myservice.myInfoUpdate(map);
+	}
+	
+	
 	@RequestMapping(value = "/myLecture")
 	public ModelAndView myLecture(HttpServletRequest rq) {
 		ModelAndView mv = new ModelAndView("myLecture");

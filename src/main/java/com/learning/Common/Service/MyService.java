@@ -33,5 +33,9 @@ public class MyService {
 	public int myPaymentRefund(PaymentDTO dto) {
 		return myServiceDAO.myPaymentRefund(dto);
 	}
+
+	public int myInfoUpdate(Map<String, Object> map) {
+		return myServiceDAO.myInfoUpdate(map);
+	}
 	
 }

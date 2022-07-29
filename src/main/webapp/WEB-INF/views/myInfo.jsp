@@ -178,8 +178,8 @@ function drop(u_id) {
 						<div style="text-align: left;">
 						</div>
 						<div style="text-align: left;">
-							<input type="text" class="form-control" placeholder="닉네임 (${myinfo[0].u_nickname }) 변경을 원하시면 입력해주세요." id="u_nickname" name="u_nickname">  
-							<p id="check"></p>
+							<input type="text" class="form-control" placeholder="닉네임 (${myinfo[0].u_nickname }) 변경을 원하시면 입력해주세요." id="u_nickname" name="u_nickname" onchange="checkNick()">  
+							<p id="checkNick">
 						</div>
 						<div style="text-align: left;">
 							<p id="category">생년월일 : ${myinfo[0].u_birth }</p>
@@ -188,14 +188,14 @@ function drop(u_id) {
 					
 					</div>
 					</div>
-					<br>
+					<br><br><br><br><br><br>
 					<h3>비밀번호변경</h3> 
 					<div style="border-radius:10px; padding:10px; box-sizing:border-box;	border: 1px solid rgb(102, 202, 152);">
-						<input type="password" name="u_pw1" id="u_pw1" class="form-control" placeholder="비밀번호입력">
-						<input type="password" name="u_pw2" id="u_pw2" class="form-control" placeholder="비밀번호확인">
-						<p id="checkpw"></p>
+						<input type="password" name="u_pw1" id="u_pw1" class="form-control" required="required" placeholder="비밀번호입력">
+						<input type="password" name="u_pw2" id="u_pw2" class="form-control" required="required" placeholder="비밀번호확인" onchange="checkPW()">
+						<p id="checkPW">
 					</div>
-						<a class="btn btn-primary" role="button" href="#" style="width: 80px; margin: 4px auto;">저장</a>	
+						<button type="button" disabled="disabled" class="btn btn-primary" id="infoSave" onclick="infoSave()"  style="width: 80px; margin: 4px auto;">저장</button>
 						<a class="btn btn-dark" role="button" href="javascript:drop('${myinfo[0].u_id }')" style="width: 80px; float:right; margin: 4px auto; margin-right: 30px;">탈퇴</a>	
 					
 					
@@ -208,8 +208,7 @@ function drop(u_id) {
 
 
 	<!-- Back to Top -->
-	<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
-		class="bi bi-arrow-up"></i></a>
+	<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 	<script type="text/javascript">
 		$('body > ul > li').click(function() {
 			if ($(this).hasClass('active')) {
@@ -220,6 +219,106 @@ function drop(u_id) {
 				$(this).addClass('active');
 			}
 		});
+		
+		
+		
+ 	 	//유효성검사 함수
+		function strCheck(str, type){
+			var REGEX = {
+				pw_rule : /^(?=.*[a-zA-Z])((?=.*\W)).{6,16}$/,
+				nick_rule : /^[가-힣a-zA-Z]+$/
+			};
+			
+			if(type == "pw"){
+				return REGEX.pw_rule.test(str);
+			}else if(type =="nick"){
+				return REGEX.nick_rule.test(str);
+			}else{
+				return false;
+			}
+		}
+ 	 	
+		
+		function checkNick(){
+			var u_nickname = $("#u_nickname").val();
+			if(u_nickname.length < 3){
+				alert("닉네임은 2자 이상 입력해주세요.");
+			}else{
+				if(!strCheck(u_nickname,"nick")){
+		            $("#u_nickname").focus();
+		            document.getElementById("u_nickname").value ="";
+					alert("닉네임은 2자 이상 16자 이하, 영어 또는 숫자 또는 한글로 입력해주세요.(초성 입력불가능)");
+					return false;
+				}else{
+				$.ajax({
+					url : "./checkNickname",
+					type : "post",
+					dataType : "html",
+					data : {"u_nickname" : u_nickname},
+					success : function(data){
+						if (data == 0) {
+		                     $("#checkNick").css("color","#00B98E");
+		                     $("#checkNick").text("쓸수 있는 닉네임 입니다.");
+		                     $("#infoSave").attr("disabled",false);
+		                  } else {
+		                     $("#checkNick").css("color","red");
+		                     $("#checkNick").text("쓸수 없는 닉네임 입니다.");
+		                     $("#infoSave").attr("disabled",true);
+		                  }
+					},error : function () {
+		                  $("#checkNick").text("비정상입니다.");
+		                  $("#infoSave").attr("disabled", true);
+					}
+				});
+				}
+			}
+		}
+	
+ 	 	
+		function checkPW(){
+			//최소 8자리, 숫자 문자 특문 각각 1개이상 포함
+			var u_pw1 = $("#u_pw1").val();
+			var u_pw2 = $("#u_pw2").val();
+			
+			if(u_pw1 == u_pw2){
+				if(!strCheck(u_pw2,"pw")){
+					alert("비밀번호는 영문/숫자/특수문자(!@#$%^&*)를 포함하여 6~16자로 입력해야합니다.");
+					$("#infoSave").attr("disabled",true);
+					return false;
+				}else{
+					$("#checkPW").html("비밀번호가 일치합니다. 변경을 진행해주세요.");
+					$("#checkPW").css("color","#00B98E");	
+					$("#infoSave").attr("disabled",false);
+				}				
+			}else{
+				$("#checkPW").html("비밀번호가 불일치합니다. 다시입력해주세요.");
+				$("#checkPW").css("color","red");	
+				$("#infoSave").attr("disabled",true);
+				return false;
+			}	
+		}
+		
+		
+		
+		 function infoSave(){
+			var u_nickname = $("#u_nickname").val();
+			var u_pw1 = $("#u_pw1").val();
+			
+			$.ajax({
+				url : "./myInfoUpdate",
+				type : "post",
+				dataType : "html",
+				data : {"u_nickname" : u_nickname,
+						"u_pw" : u_pw1
+				},
+				success : function(data){
+					alert("변경완료");
+				},error : function () {
+	                alert("통신에러. 다시진행해주세요");
+				}
+			});
+		} 
+		
 	</script>
 </body>
 

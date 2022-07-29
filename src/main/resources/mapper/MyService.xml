@@ -36,4 +36,12 @@
   		update payment_log set p_refund = 2 where p_no = #{p_no}
   	</update>
   	
+  	<update id="myInfoUpdate" parameterType="map">
+  		update user set u_pw = #{u_pw} 
+  		<if test="u_nickname != null">
+  		, u_nickname = #{u_nickname}
+  		</if>
+  		where u_id = #{u_id}
+  	</update>
+  	
   </mapper>

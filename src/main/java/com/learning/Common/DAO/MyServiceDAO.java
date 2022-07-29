@@ -34,4 +34,8 @@ public class MyServiceDAO {
 		sqlSession.update("MyService.myPaymentRefund2",dto);
 		return sqlSession.insert("MyService.myPaymentRefund",dto);
 	}
+
+	public int myInfoUpdate(Map<String, Object> map) {
+		return sqlSession.update("MyService.myInfoUpdate", map);
+	}
 }
