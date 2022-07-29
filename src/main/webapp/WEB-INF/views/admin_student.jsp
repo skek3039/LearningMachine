@@ -146,7 +146,7 @@ function linkPage(pageNo){
                                     <tfoot>
                                         <tr>
                                             <th colspan="2" style="text-align: right">전체가입학생수 </th>                                       
-                                            <th><fmt:formatNumber value="50" pattern="#,###"  /></th>    
+                                            <th><fmt:formatNumber value="${list[0].count }" pattern="#,###"  /></th>    
                                         </tr>
                                     </tfoot>
                                     <tbody> 

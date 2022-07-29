@@ -15,7 +15,7 @@
 	</select>
 
   	<select id="userList" resultType="userDTO">
-  		select * from user where u_authority IN (1,2,3)
+  		SELECT *, (select COUNT(*) FROM user ) as count from user where u_authority IN (1,2,3)
   	</select>
   	
   	<select id="userSearch" parameterType="string" resultType="userDTO">
@@ -57,7 +57,7 @@
  	</delete>
  	
  	<select id="teacherList" resultType="HashMap">
- 		SELECT *,SUM(total_register)AS COUNT, COUNT(l_name) AS t_idcount from AllTeacher_Lecture_view GROUP BY t_id
+ 		SELECT *,(select COUNT(*) FROM teacher)AS COUNT1 ,SUM(total_register)AS COUNT, COUNT(l_name) AS t_idcount from AllTeacher_Lecture_view GROUP BY t_id
  	</select>
  	
  	<select id="studentBanList" resultType="HashMap">

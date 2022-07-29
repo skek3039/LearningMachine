@@ -142,7 +142,7 @@ function enterkey() {
 								<tfoot>
 									<tr>
 										<th colspan="2" style="text-align: right">전체강사수</th>
-										<th><fmt:formatNumber value="50" pattern="#,###" /></th>
+										<th><fmt:formatNumber value="${list[0].COUNT1 }" pattern="#,###" /></th>
 									</tr>
 								</tfoot>
 								<tbody>
