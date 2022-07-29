@@ -38,6 +38,13 @@ public class QnaService {
 		return qnaDAO.qna_answer(map);
 	}
 
+	public Object qna_update(LectureDTO qna_update) {
+		return qnaDAO.qna_update(qna_update);
+	}
+
+	public int qna_write(LectureDTO qna_write) {
+		return qnaDAO.qna_write(qna_write);
+	}
 
 	
 	

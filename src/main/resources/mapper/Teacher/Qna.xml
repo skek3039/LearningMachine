@@ -51,5 +51,15 @@
 		<if test="lqa_no != null">and lqa_no= #{lqa_no}
 		</if>
 	</select>
+
+	<select id="qna_update" parameterType="LectureDTO" resultType="LectureDTO">
+		SELECT *
+		FROM lecture_qna_reply
+		WHERE lqa_no = #{lqa_no}
+	</select>
 	
+	<update id="qna_write" parameterType="LectureDTO">
+		UPDATE lecture_qna_reply SET lqar_title=#{lqar_title}, lqar_content=#{lqar_content}
+		WHERE lqa_no=#{lqa_no} 
+	</update>	
   </mapper>

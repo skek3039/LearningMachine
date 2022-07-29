@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,12 +73,6 @@
     }
 </style>
 
-<script type="text/javascript">
-function linkPage(pageNo){
-	location.href = "./student_ban?pageNo=" + pageNo;
-	}
-
-</script>
 </head>
 
 <body>
@@ -96,49 +89,20 @@ function linkPage(pageNo){
 
 
 		<jsp:include page="./header.jsp" />
-		<div style=" width: 100%; height: 950px;">
-				<jsp:include page="./lecture_nav.jsp"/>
-			<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;신고자리스트</h3><hr style="border: solid 1px;"></div>
-		 			<div class="col-sm-offset-9" style=" text-align: center; padding-left: 840px"></div>
-						
-		<div style="padding-top: 10px;">
-			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto; text-align: center;">
-					<tr>
-						<th>이름</th>
-						<th>아이디</th>
-						<th>닉네임</th>
-						<th>신고당한 강의</th>
-						<th>신고 사유</th>
-						<th>신고 일자</th>
-					</tr>
-					
-					<c:forEach items="${banList }" var="b">
-					<tr>
-						<td>${b.u_name}</td>
-						<td>${b.u_id}</td>
-						<td>${b.u_nickname}</td>
-						<td>${b.l_name}</td>
-						<td>
-						<c:choose>
-							<c:when test="${fn:length(b.ur_reason ) > 10 }">
-							<c:out value="${fn:substring(b.ur_reason , 0, 9)} ...">
-							</c:out></c:when>
-							<c:otherwise>
-							<c:out value="${b.ur_reason  }">
-							</c:out></c:otherwise>
-						</c:choose>
-						</td>
-						<td>
-                        <fmt:parseDate value="${b.ur_date}" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
-                        <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
-                    	${time }</td>
-					</tr>
-					</c:forEach>
-			</table>
+		<div style=" width: 100%;">
+		 <jsp:include page="./lecture_nav.jsp"/>
+		<div style="padding-top: 110px;"></div>
+		<div style="padding-top: 100px; padding-left: 400px; height: 835px;">
+				<div id="writeform" style="padding-right: 100px;">
+				<form action="./qna_update.do?lqa_no=${dto.lqa_no }" method="post">
+					<input style="width: 820px;" type="text" name="title" required="required" placeholder="${dto.lqar_title }">
+					<textarea name="content" id="summernote" required="required"></textarea>
+					<button type="submit" style="float:right;">답변등록</button>
+				</form>
+			</div>
 		</div>
-		<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
-	</div>
-		<%-- <jsp:include page="./team.jsp"/> --%>
+
+</div>
 		<jsp:include page="./footer.jsp" />
 
 
@@ -170,5 +134,20 @@ function linkPage(pageNo){
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
 </body>
-
+<script>
+$(document).ready(function() {
+	   //여기 아래 부분
+	   $('#summernote').summernote({
+	        height: 400,        
+	        minHeight: null,        
+	        maxHeight: null,       
+	        focus: true,             
+	        lang: "ko-KR",          
+	        placeholder: '${dto.lqar_content }' 
+	          
+	   });
+	});
+</script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 </html>

@@ -41,7 +41,13 @@ public class QnaDAO {
 		return sqlSession.selectList("QnA.qna_answer", map);
 	}
 
-	
+	public Object qna_update(LectureDTO qna_update) {
+		return sqlSession.selectOne("QnA.qna_update", qna_update);
+	}
+
+	public int qna_write(LectureDTO qna_write) {
+		return sqlSession.update("QnA.qna_write",qna_write);
+	}	
 
 	
 

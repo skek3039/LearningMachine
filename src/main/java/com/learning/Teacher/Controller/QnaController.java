@@ -186,4 +186,49 @@ public class QnaController {
 				return mv;
 			}
 		}
+		//글 수정
+		@RequestMapping(value = "/qna_update")
+		public ModelAndView qna_update(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+			request.setCharacterEncoding("UTF-8");
+			int lqa_no = Integer.parseInt(request.getParameter("lqa_no"));
+			if ((int) session.getAttribute("u_authority") > 3) {
+				ModelAndView mv = new ModelAndView("qna_update");
+				LectureDTO qna_update = new LectureDTO();
+				qna_update.setLqa_no(lqa_no);
+				request.setAttribute("dto", qnaService.qna_update(qna_update));
+				
+				return mv;
+			} else {
+				ModelAndView mv = new ModelAndView("404");
+				return mv;
+			}
+		}
+		//수정 글 쓰기
+		@RequestMapping(value = "/qna_update.do")
+		public String update(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+			request.setCharacterEncoding("UTF-8");
+			if ((int) session.getAttribute("u_authority") > 3) {
+				String u_id = (String) session.getAttribute("u_id");
+
+				LectureDTO qna_write = new LectureDTO();
+				qna_write.setT_id(u_id);
+				qna_write.setLqar_title(request.getParameter("title"));
+				qna_write.setLqar_content(request.getParameter("content"));
+				qna_write.setLqa_no(Integer.parseInt(request.getParameter("lqa_no")));
+				int result = qnaService.qna_write(qna_write);
+				System.out.println(result);
+				if(result ==1) {	
+					return "redirect:/qna_answer";
+				}else {
+					return "redirect:/404";
+					
+				}
+			} else {
+				return "redirect:/404";
+
+			}
+		}
+	
+
 }
+

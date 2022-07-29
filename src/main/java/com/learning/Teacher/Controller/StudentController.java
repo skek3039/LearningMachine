@@ -66,6 +66,9 @@ public class StudentController {
 			map.put("page", page);
 			
 			List<LectureDTO> lectureList = studentService.lectureList(map);
+			for(int i=0;i<lectureList.size();i++) {
+				lectureList.get(i).setL_curriculum(lectureList.get(i).getL_curriculum().replaceAll("<(.*?)>", ""));
+			}
 			mv.addObject("lectureList", lectureList);
 			mv.addObject("paginationInfo", paginationInfo);
 			return mv;

@@ -90,14 +90,14 @@
 
 
 		<jsp:include page="./header.jsp" />
-		<div style=" width: 100%; height: 705px;">
+		<div style=" width: 100%;">
 		 <jsp:include page="./lecture_nav.jsp"/>
 		<div style="padding-top: 110px;"></div>
-		<div style="padding-top: 10px; padding-left: 400px">
+		<div style="padding-top: 10px; padding-left: 400px; height: 620px;">
 				<table>
 					<tr>
 					<th><img style="width: 50px; height: 50px;" id="up" alt="" src="./img/q.png" title="질문"></th>
-						<td style="padding-top: 10px; word-break:break-all; width: 750px"><h5>${dto.lqa_title }</h5></td>
+						<td style="padding-top: 10px; word-break:break-all; width: 750px"><div readonly="readonly" style="width: 510px; height: 50px; overflow: auto;"><h5>${dto.lqa_title }</h5></div></td>
 					</tr>
 					<tr>
 						<td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/id.png" title="id">
@@ -120,7 +120,7 @@
 				<table>
 					<tr>
 						<th><img style="width: 50px; height: 50px;" id="up" alt="" src="./img/a.png" title="답변"></th>
-						<td style="padding-top: 10px; word-break:break-all; width: 750px"><h5>${dto.lqar_title }</h5></td>
+						<td style="padding-top: 10px; word-break:break-all; width: 750px"><div readonly="readonly" style="width: 510px; height: 50px; overflow: auto;"><h5>${dto.lqar_title }</h5></div></td>
 					</tr>
 					<tr>
 						<td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/id.png" title="id">
@@ -128,7 +128,7 @@
                                             <fmt:parseDate value="${dto.lqar_date }" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
                                             <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
                     						${time }&nbsp;
-                    	<img onclick="location.href='./v_qna_update?vq_no=${lqar.vq_no}'" style="width: 20px; height: 20px;" id="update" alt="" src="./img/update.png" title="id">
+                    	<img onclick="location.href='./qna_update?lqa_no=${dto.lqa_no}'" style="width: 20px; height: 20px;" id="update" alt="" src="./img/update.png" title="id">
 					</h6></td>
 					
 					</tr></table><br>
