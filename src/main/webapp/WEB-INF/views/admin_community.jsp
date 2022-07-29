@@ -167,7 +167,7 @@ function CloseModal(b_no) {
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;자유게시판</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px;padding-left: 120px; height: 770px">
+		<div style="padding-top: 10px;padding-left: 120px; height: 995px">
 				<br><br><br>
 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 						  <thead class="thead-dark">

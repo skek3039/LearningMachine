@@ -150,6 +150,10 @@ public class AdminService {
 		return adminDAO.board_delete(board_delete);
 		
 	}
+
+	public Object notice_update1(NoticeDTO notice_update1) {
+		return adminDAO.notice_update1(notice_update1);
+	}
 	
 
 

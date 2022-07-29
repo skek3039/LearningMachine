@@ -180,6 +180,12 @@
  		WHERE n_no = #{n_no}
  	</select>
  	
+ 	<update id="notice_update1" parameterType="NoticeDTO">
+ 		UPDATE notice
+		SET n_title = #{n_title}, n_content = #{n_content}
+		WHERE u_id = #{u_id}
+ 	</update>
+ 	
  	<delete id="notice_delete" parameterType="NoticeDTO">
  		DELETE FROM notice
  		WHERE n_no = #{n_no}

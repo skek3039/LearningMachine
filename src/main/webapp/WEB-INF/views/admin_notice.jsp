@@ -101,7 +101,7 @@ function linkPage(pageNo){
 		<div style="position: relative;">
 		<jsp:include page="./admin_nav.jsp"/>
 		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;공지사항</h3><hr style="border: solid 1px;"></div>
-		<div style="padding-top: 10px;padding-left: 120px; height: 770px">
+		<div style="padding-top: 10px;padding-left: 120px; height: 995px">
 				<div style="padding-top: 10px; padding-left: 1060px;">
 					<button type="button" class="btn btn-outline-dark" onclick="location.href='./notice_request'">글쓰기</button>
 				</div><br>

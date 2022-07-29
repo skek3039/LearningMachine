@@ -573,11 +573,11 @@ public class AdminController {
 			if ((int) session.getAttribute("u_authority") > 6) {
 				String u_id = (String) session.getAttribute("u_id");
 
-				NoticeDTO notice_request = new NoticeDTO();
-				notice_request.setU_id(u_id);
-				notice_request.setN_title(request.getParameter("title"));
-				notice_request.setN_content(request.getParameter("content"));
-				adminService.notice_request(notice_request);
+				NoticeDTO notice_update1 = new NoticeDTO();
+				notice_update1.setU_id(u_id);
+				notice_update1.setN_title(request.getParameter("title"));
+				notice_update1.setN_content(request.getParameter("content"));
+				adminService.notice_update1(notice_update1);
 					return "redirect:/admin_notice";
 				}else {
 					return "redirect:/404";

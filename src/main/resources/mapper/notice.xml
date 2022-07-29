@@ -5,7 +5,7 @@
   	<select id="notice"  parameterType="PageDTO" resultType="noticeDTO" >
   		select * from notice 
   		where n_category = 1 
-  		ORDER BY n_date DESC
+  		ORDER BY n_no DESC
   		LIMIT #{startPage} , #{lastPage}
   	</select>
   
