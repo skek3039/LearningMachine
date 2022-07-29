@@ -86,7 +86,7 @@
 		<div style=" width: 100%;">
 		 <jsp:include page="./admin_nav.jsp"/>
 		<div style="padding-top: 110px;"></div>
-		<div style="padding-top: 10px; padding-left: 400px; height: 835px;">
+		<div style="padding-top: 10px; padding-left: 400px; height: 1060px;">
 				<table>
 					<tr>
 					<th><img style="width: 50px; height: 50px; " id="up" alt="" src="./img/notice.png" title="공지"></th>
@@ -102,7 +102,7 @@
 					</tr></table><br>
 					<table>
 					<tr>
-						<td style="word-break:break-all; width: 820px">${dto.n_content }</td>
+						<td style="word-break:break-all; width: 820px"><div readonly="readonly" style="width: 810px; height: 600px; overflow: auto;">${dto.n_content }</div></td>
 					</tr>
 					</table>
 					<div style="padding-top: auto;">

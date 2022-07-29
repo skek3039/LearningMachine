@@ -92,7 +92,7 @@
 		<div style=" width: 100%;">
 		 <jsp:include page="./admin_nav.jsp"/>
 		<div style="padding-top: 110px;"></div>
-		<div style="padding-top: 100px; padding-left: 400px; height: 835px;">
+		<div style="padding-top: 100px; padding-left: 400px; height: 1065px;">
 				<div id="writeform" style="padding-right: 100px;">
 				<form action="./notice_update.do" method="post">
 					<input style="width: 820px;" type="text" name="title" required="required" placeholder="${dto.n_title }">
