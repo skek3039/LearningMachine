@@ -120,12 +120,12 @@ function enterkey() {
                         <div class="service-item rounded h-100" style="border-color:  #F0FFF0; background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),  url(${pop.l_thumbnail}); ">
                             <div class="d-flex justify-content-between" style="height: 10px; ">
                            <div style="color: #F0FFF0;"> <small>현재 ${pop.total_register } 명 수강중</small></div>
-                                <a class="service-btn" href="./LectureDetail?l_code=${pop.l_code }"">
+                                <a class="service-btn" href="./LectureDetail?l_code=${pop.l_code }">
                                     <i class="fa fa-link fa-2x"></i>
                                 </a>
                             </div>
                             <div class="p-5" style="padding-top: 10px; ">
-                                <h5 class="mb-2" style="border-radius:10px;color: white"> ${pop.l_name } </h5>
+                                <h5 class="mb-2" style="border-radius:10px;color: white; word-break:break-all;"> ${pop.l_name } </h5>
                                 <span style="background-color:white; ; border-radius:10px;color: black"><strong>${pop.t_nickname } </strong></span><br>
                                 <c:choose>
 								<c:when test="${fn:length(pop.l_curriculum ) > 30 }">

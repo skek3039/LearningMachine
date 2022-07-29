@@ -153,7 +153,7 @@
 						<tbody>
 							<tr>
 								<td class="tg-llyw">강의 이름</td>
-								<td class="tg-0pky">${dto.l_name }</td>
+								<td class="tg-0pky" style="word-break:break-all;">${dto.l_name }</td>
 							</tr>
 							<tr>
 								<td class="tg-llyw">강의 정보</td>
@@ -165,7 +165,7 @@
 							</tr>
 							<tr>
 								<td class="tg-llyw">커리큘럼</td>
-								<td class="tg-0pky" style="word-break:break-all;">${dto.l_curriculum }</td>
+								<td class="tg-0pky" style="word-break:break-all;"><div readonly="readonly" style="width: 790px; height: 200px; overflow: auto;">${dto.l_curriculum }</div></td>
 							</tr>
 							<tr>
 								<td class="tg-llyw">썸네일</td>
@@ -181,6 +181,7 @@
 				<div style="padding-top: 10px; padding-left: 865px;">
 					<img onclick="location.href='./video_upload?l_code=${dto.l_code }'" style="width: 30px; height: 30px;" id="update" alt="" src="./img/video.png" title="id"></img>
 				</div>
+				<div readonly="readonly" style="width: 950px; height: 200px; overflow: auto;">
 				<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
 						<th>비디오 번호</th>
@@ -225,7 +226,7 @@
 						</td>
 					</tr>
 					</c:forEach>
-			</table>
+			</table></div>
 			</div>
 				</div>
 			</div>

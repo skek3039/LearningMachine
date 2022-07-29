@@ -96,7 +96,7 @@
 				<table>
 					<tr>
 					<th><img style="width: 50px; height: 50px;" id="up" alt="" src="./img/q.png" title="질문"></th>
-						<td style="padding-top: 10px; word-break:break-all; width: 750px"><h5>${dto.vq_title }</h5></td>
+						<td style="padding-top: 10px; word-break:break-all; width: 750px"><div readonly="readonly" style="width: 510px; height: 50px; overflow: auto;"><h5>${dto.vq_title }</h5></div></td>
 					</tr>
 					<tr>
 						<td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/id.png" title="id">

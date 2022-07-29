@@ -157,11 +157,11 @@
 							</tr>
 							<tr>
 								<td class="tg-llyw">비디오 제목</td>
-								<td class="tg-0pky">${dto.v_videotitle }</td>
+								<td class="tg-0pky" style="word-break:break-all;">${dto.v_videotitle }</td>
 							</tr>
 							<tr>
 								<td class="tg-llyw">비디오 소개</td>
-								<td class="tg-0pky">${dto.v_introduce }</td>
+								<td class="tg-0pky" style="word-break:break-all;"><div readonly="readonly" style="width: 790px; height: 100px; overflow: auto;">${dto.v_introduce }</div></td>
 							</tr>
 							<tr>
 								<td class="tg-llyw">비디오 코드</td>

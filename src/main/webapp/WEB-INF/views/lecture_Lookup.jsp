@@ -148,7 +148,7 @@
 						</colgroup>
 						<tbody>
 							<tr>
-								<td class="tg-llyw">강의 이름</td>
+								<td class="tg-llyw" style="word-break:break-all;">강의 이름</td>
 								<td class="tg-0pky">${dto.l_name }</td>
 							</tr>
 							<tr>
@@ -161,7 +161,7 @@
 							</tr>
 							<tr>
 								<td class="tg-llyw">커리큘럼</td>
-								<td class="tg-0pky" style="word-break:break-all;">${dto.l_curriculum }</td>
+								<td class="tg-0pky" style="word-break:break-all;"><div readonly="readonly" style="width: 790px; height: 200px; overflow: auto;">${dto.l_curriculum }</div></td>
 							</tr>
 						</tbody>
 					</table>

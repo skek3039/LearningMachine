@@ -129,7 +129,16 @@ function linkPage(pageNo){
 					<c:forEach items="${lectureList}" var="l">
 					<tr>
 						<td>
-							<a href="./lecture_Lookup2?l_code=${l.l_code }">${l.l_name }</a>
+							<a href="./lecture_Lookup2?l_code=${l.l_code }">
+							<c:choose>
+							<c:when test="${fn:length(l.l_name ) > 10 }">
+							<c:out value="${fn:substring(l.l_name  , 0, 9)} ...">
+							</c:out></c:when>
+							<c:otherwise>
+							<c:out value="${l.l_name }">
+							</c:out></c:otherwise>
+							</c:choose>
+							</a>
 						</td>
 						<td>${l.l_category }</td>
 						<td>

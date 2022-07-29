@@ -153,7 +153,7 @@
 						<tbody>
 							<tr>
 								<td class="tg-llyw">강의 이름</td>
-								<td class="tg-0pky">${dto.l_name }</td>
+								<td class="tg-0pky" style="word-break:break-all;">${dto.l_name }</td>
 							</tr>
 							<tr>
 								<td class="tg-llyw">강의 정보</td>
@@ -165,7 +165,7 @@
 							</tr>
 							<tr>
 								<td class="tg-llyw">커리큘럼</td>
-								<td class="tg-0pky" style="word-break:break-all;">${dto.l_curriculum }</td>
+								<td class="tg-0pky" style="word-break:break-all;"><div readonly="readonly" style="width: 790px; height: 200px; overflow: auto;">${dto.l_curriculum }</div></td>
 							</tr>
 							<tr>
 								<td class="tg-llyw">승인거부 이유</td>
