@@ -99,8 +99,7 @@ public class HomeController {
 		dto.setB_no(b_no);
 		dto.setBr_content((String)request.getParameter("br_content"));
 		dto.setBr_no(Integer.parseInt(request.getParameter("br_no")));
-		System.out.println(dto);
-		
+	
 		communityService.commentUpdate(dto);
 		
 		return "redirect:/boardDetail?b_no="+b_no;
@@ -117,7 +116,7 @@ public class HomeController {
 		dto.setB_content(request.getParameter("b_content"));
 		
 		int result = communityService.boardWrite(dto);
-		System.out.println(result);
+	
 		
 		return "redirect:/community";
 	}
@@ -175,9 +174,8 @@ public class HomeController {
 		
 		List<String> commentTotal = communityService.commentTotal();
 		
-	System.out.println(list);
-		System.out.println(board);
-		
+	
+	
 		mv.addObject("list",list);
 		mv.addObject("commentTotal",commentTotal);
 		mv.addObject("board",board);
@@ -235,9 +233,13 @@ public class HomeController {
 		
 		if(request.getParameter("c_name") != null) {			
 			map.put("c_name", request.getParameter("c_name"));
+			System.out.println(request.getParameter("c_name"));
+		}else {
+			map.put("c_name", null);
+			System.out.println(request.getParameter("c_name"));
 		}
 		List<String> list1 = communityService.QnAList(map);
-		return list1; 	
+		return list1; 
 	}	
 
 	//검색불러오기
@@ -311,8 +313,7 @@ public class HomeController {
 		map.put("u_pw", u_pw);
 		map.put("u_nickname", u_nickname);
 		
-		System.out.println(map.toString());
-		
+	
 		int result = Myservice.myInfoUpdate(map);
 	}
 	

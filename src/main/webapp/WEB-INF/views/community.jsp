@@ -253,16 +253,12 @@ $(document).ready(function(){
 	 
 	 
 	 //자유게시판 
-	 
-	 
-	 
-	 
-	 
 	  
 	});
 	
 	
 function select(category){
+
 	let c_name = category;
 	let arr = new Array();
 	 
@@ -275,12 +271,13 @@ function select(category){
 		success : function(data){	
 			var result = data.json;
 				$("#detailTable").empty();  
-				$("#detailTable").remove();  
+		//		$("#detailTable").remove();
+		
 			for(var i=0 in data){                                                        
 				html = "<tr>";
 				html += "<td>" + data[i].lqa_no + "</td>";
 				html += "<td>" + data[i].c_name + "</td>";
-				html += "<td>" + data[i].lqa_title + "</td>";
+				html += "<td>"+"<a href=javascript:OpenModal('"+data[i].lqa_no+"')>"  + data[i].lqa_title + "</a></td>";
 				html += "<td>" + data[i].u_id + "</td>";
 				html += "<td>" + data[i].lqa_date + "</td>";
 				html += "<td>" + data[i].confirm + "</td>";
