@@ -84,7 +84,7 @@ public class PaymentController {
 	         
 	         //원형 그래프 메소드
 	        List<String> circle = paymentService.circle();
-	        System.out.println(circle);
+
 	        List<String> gender = paymentService.gender();
 	        
 	         mv.addObject("circle",circle);

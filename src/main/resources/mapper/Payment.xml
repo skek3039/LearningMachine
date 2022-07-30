@@ -36,10 +36,10 @@
   	
   	
   	<select id="circle" resultType="map">
-		SELECT COUNT(*)AS COUNT, 
-		(SELECT c_name FROM category c WHERE c.c_code = v.l_code )AS 'category'
-		FROM lecture_apply_user_view v
-		GROUP BY category
+		SELECT COUNT(*)AS COUNT ,i.l_category
+		FROM lecture_apply_user_view v JOIN lecture_info_view i
+		ON i.l_code = v.l_code
+	
   	</select>
 	
 	<select id = "gender" resultType="map">

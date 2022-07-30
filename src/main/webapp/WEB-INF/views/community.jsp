@@ -318,7 +318,7 @@ function select(category){
 				
 				$("#detailTable").append(html);   
 			}
-		},
+		},	`
 		error : function(){
 			alert("실패 ㅠ");
 			}

@@ -8,10 +8,11 @@
   	</select>
   	
   	<select id="qnaList" parameterType="map" resultType="map">
-		SELECT q.*, v.c_name,v.lqar_title,v.lqar_content, if(q.lqa_confirm=0,"답변미완료","답변완료")AS confirm 
+		SELECT q.*,v.lqar_title,v.lqar_content, 
+		(SELECT l_category FROM lecture_info_view l WHERE l.l_code = q.l_code)AS c_name ,
+		if(q.lqa_confirm=0,"답변미완료","답변완료")AS confirm 
 		FROM lecture_qna_view v RIGHT JOIN lecture_qna q
 		ON v.lqa_no = q.lqa_no
-
   		<if test="c_name != null">
   		where c_name = #{c_name}
   		</if>

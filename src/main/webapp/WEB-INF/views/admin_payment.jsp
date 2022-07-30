@@ -127,7 +127,7 @@ window.onload = function() {
 		var datas = new Array();
 		
 		<c:forEach items="${circle}" var = "c">
-			labels.push("${c.category}");
+			labels.push("${c.l_category}");
 			datas.push("${c.COUNT}");
 		</c:forEach>
 

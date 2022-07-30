@@ -125,9 +125,9 @@
                               </div>
 
                               <div class="form-outline form-white mb-4">
-                                 <input type="radio" id="u_gender" name="u_gender" value="남성"
+                                 <input type="radio" id="u_gender" name="u_gender" value="남"
                                     checked="checked">남 <input type="radio"
-                                    id="u_gender" name="u_gender" value="여성" checked="checked">여
+                                    id="u_gender" name="u_gender" value="여" checked="checked">여
                               </div>
 
                               <div class="form-outline form-white mb-4">
