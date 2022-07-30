@@ -102,7 +102,7 @@ public class QnaController {
 
 				LectureDTO qna_reply2 = new LectureDTO();
 				qna_reply2.setT_id(u_id);
-				qna_reply2.setLqar_content(request.getParameter("title"));
+				qna_reply2.setLqar_title(request.getParameter("title"));
 				qna_reply2.setLqar_content(request.getParameter("content"));
 				qna_reply2.setLqa_no(Integer.parseInt(request.getParameter("lqa_no")));
 				int result = qnaService.qna_reply2(qna_reply2);
