@@ -199,7 +199,7 @@
 			$.ajax({
 
 				type: "post",
-				url: "/web/LectureVideoQnaWrite.do?v_no=${Video.v_no}",
+				url: "/web/LectureVideoQnaWrite.do",
 				data: {
 					vq_title: vq_title,
 					vq_content: vq_content
@@ -340,8 +340,16 @@
 					</c:forEach>
 				</table>
 				<div class="col-12">
-					<button class="btn btn-primary w-100 py-3" type="button" style="position: fixed;"
-						onclick="CloseNOpen('qnas', 'Write')">질문작성하러가기</button>
+					<c:choose>
+						<c:when test="${Video.pay_whether eq 1}">
+							<button class="btn btn-primary w-100 py-3" type="button" style="position: fixed;"
+								onclick="CloseNOpen('qnas', 'Write')">질문작성하러가기</button>
+						</c:when>
+						<c:otherwise>
+							<button class="btn btn-primary w-100 py-3" type="button" style="position: fixed;"
+								href ="./login">로그인</button>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 		</div>
