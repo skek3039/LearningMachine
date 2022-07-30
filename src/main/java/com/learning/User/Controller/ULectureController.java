@@ -92,7 +92,8 @@ public class ULectureController {
 				userService.LectureVideoAttendance(UAForm);
 
 				videoform = Videos.get(order);
-
+				videoform.setPay_whether(1);
+				
 				rq.setAttribute("LectureVideos", lectureService.LectureVideos(u_id, l_code));
 				rq.setAttribute("Video", videoform);
 				rq.setAttribute("VideoQnas", lectureService.LectureVideoQnas(v_no));

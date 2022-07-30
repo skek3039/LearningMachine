@@ -25,25 +25,15 @@ public class ULectureService {
 	public List<ULectureForm> PopularLectureList(String u_id) {
 
 		List<ULectureForm> LectureList = lectureDAO.LectureList();// 기본적으로 인기순으로 강의가져옴
-		List<ULectureForm> RegistedList = null;
 		List<WishlistDTO> WishList = null;
 
 		if (u_id == null) {
 
 			return LectureList;
 		} else {
-			RegistedList = userDAO.RegistedLecture(u_id);
 			WishList = userDAO.Wishlist(u_id);
 
 			for (ULectureForm lectureform : LectureList) {
-
-				for (ULectureForm registedform : RegistedList) {
-
-					if (lectureform.getL_code().equals(registedform.getL_code())) {
-
-						lectureform.setPayment_whether(1);
-					}
-				}
 
 				for (WishlistDTO wishdto : WishList) {
 
@@ -174,7 +164,7 @@ public class ULectureService {
 		List<VideoForm> vList = lectureDAO.LectureVideos(l_code);
 
 		UserAttendanceForm attnForm = null;
-
+		List<URegiForm>regiform = null;
 		Map<Integer, VideoForm> vMap = new HashMap<Integer, VideoForm>();
 
 		if (u_id == null) {
@@ -186,6 +176,8 @@ public class ULectureService {
 			return vMap;
 		} else {
 
+			regiform = userDAO.RegiList(u_id);
+			
 			for (int i = 0; i < vList.size(); i++) {
 				attnForm = new UserAttendanceForm();
 
@@ -198,6 +190,16 @@ public class ULectureService {
 					vList.get(i).setAttendance(Integer.parseInt(userDAO.CheckAttendance(attnForm)));
 				}
 
+				if(regiform.size() !=0) {
+					
+					for(URegiForm form : regiform) {
+						
+						if(form.getL_code().equals(l_code)) {
+							
+							vList.get(i).setPay_whether(1);
+						}
+					}
+				}
 				vMap.put(i + 1, vList.get(i));
 			}
 

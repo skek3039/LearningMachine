@@ -133,7 +133,7 @@
                               <div class="form-outline form-white mb-4">
                                  <input type="text" id="u_birth" name="u_birth"
                                     class="form-control form-control-md" required="required"
-                                    placeholder="생일을 입력해주세요." />
+                                    placeholder="생년월일을 입력해주세요.예)601010" />
                               </div>
 
                               <button class="btn btn-outline-light btn-lg px-5"
@@ -308,7 +308,7 @@
          
      </section>
 	
-	<div>
+	<div style="padding-top: 160px;">
 	<br><br><br><br><br><br><br><br>
       <jsp:include page="./footer.jsp" />
 	</div>
