@@ -91,7 +91,7 @@ function accept(u_id){
 			data : {"u_id" : u_id , 
 			},
 			success : function(data){
-				location.href = "./admin_teacher_report";
+				location.href = "./admin_teacher";
 			},error:function(request, status, error){
 				alert("문제발생"+error);
 			}

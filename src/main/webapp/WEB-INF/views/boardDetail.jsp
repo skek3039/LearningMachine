@@ -230,14 +230,6 @@ function commentDelete(br_no,b_no){
 		location.href="./commentDelete?br_no="+br_no + "&b_no="+b_no;
 	}
 }
-
-function commentUpdate(br_no, b_no){
-	let br_content = $("#br_content").val();
-	if(confirm("댓글을 수정하시겠습니까?")){
-		location.href="./commentUpdate.do?br_no="+br_no + "&b_no="+b_no + "&br_content="+br_content;
-	}
-
-}
 </script>
 
 </head>
@@ -286,7 +278,7 @@ function commentUpdate(br_no, b_no){
 						  </thead>
 						  <tbody id = "detailTable">
 						  	<tr>
-						  		<td colspan="8" style="height: 600px;"> ${boardDetail.b_content } </td>
+						  		<td colspan="8" style="height: 600px;"><textarea style="height: 600px; width: 100%" readonly="readonly"> ${boardDetail.b_content } </textarea></td>
 						  	</tr>
 						  	<c:forEach items="${comment }" var="c">
 						  	<tr>
@@ -298,12 +290,16 @@ function commentUpdate(br_no, b_no){
 						  		<div class="background background${c.br_no }">
 								<div class="window">
 									<div class="popup">
+									<form action="./commentUpdate.do" method="get">
 										<button id="closebtn" class="btn btn-outline-dark" onclick="CloseModal(${c.br_no});">닫기</button>
 										<h2 class="card-title" style="text-align: left">${c.u_nickname }</h2>
 										<p class="card-text">
-										<input type="text" name="br_content" id = "br_content" value="${c.br_content }" style="border: 1px solid rgb(201, 236, 219); width: 750px; height: 150px;"><br><br>
-										<button type="submit" class="btn btn-outline-dark" style="margin: 0 auto;text-align: center;" onclick="commentUpdate('${c.br_no}','${boardDetail.b_no }')" >수정</button>
+										<input type="hidden" name = "br_no" id = "br_no" value="${c.br_no }">
+										<input type="hidden" name = "b_no" id = "b_no" value="${boardDetail.b_no }">
+										<input type="text" name="br_content" id = "br_content"  placeholder="${c.br_content }" style="border: 1px solid rgb(201, 236, 219); width: 750px; height: 150px;"><br><br>
+										<button type="submit" class="btn btn-outline-dark" style="margin: 0 auto;text-align: center;" >수정</button>
 										</p>
+									</form>
 									</div>
 								</div>
 							</div>
@@ -329,8 +325,7 @@ function commentUpdate(br_no, b_no){
 							</td>
 								<td>
 						  		<input type="hidden" id="b_no" value="${boardDetail.b_no }">
-						  		<button id="textCount" onclick="boardCommentwrite()" class ="btn btn-outline-dark" style="width: 100%;">댓글쓰기<br>(0/280)</button>
-						  		
+						  		<button id="textCount" onclick="boardCommentwrite()" class ="btn btn-outline-dark" style="width: 100%;">댓글쓰기<br>(0/280)</button>						  		
 						  		</td>
 						  	</tr>
 						  	

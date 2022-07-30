@@ -99,6 +99,7 @@ public class HomeController {
 		dto.setB_no(b_no);
 		dto.setBr_content((String)request.getParameter("br_content"));
 		dto.setBr_no(Integer.parseInt(request.getParameter("br_no")));
+		System.out.println(dto);
 		
 		communityService.commentUpdate(dto);
 		
