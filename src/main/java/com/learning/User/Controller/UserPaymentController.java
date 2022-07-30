@@ -113,7 +113,7 @@ public class UserPaymentController {
 				//적용된 p_price가격도 수정
 				paydto.setP_price(rq.getParameter("l_price"));
 				if(paymentService.PayDone(regiform, paydto) == 1) {
-					
+					System.out.println(api.paymentByImpUid(imp_uid).getResponse().getStatus().equals("paid"));;
 					return api.paymentByImpUid(imp_uid);
 				}else {
 					

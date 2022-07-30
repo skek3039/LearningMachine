@@ -25,4 +25,5 @@ public class ULectureForm {
 	private int total_register;
 	private int payment_whether;
 	private String attendance_rate;
+	private int wish;
 }

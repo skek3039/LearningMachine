@@ -322,7 +322,7 @@
 		}
 
 		function LectureReviewRemove(u_id) {
-				if (confirm("리뷰를 삭제하시겠습니까? 리뷰를 삭제하면 다시 리뷰를 달 수 없습니다.")) {
+				if (confirm("리뷰를 삭제하시겠습니까? 리뷰를 삭제하면 다시 리뷰를 작성할 수 없습니다.")) {
 					$.ajax({
 
 						type: "post",
@@ -409,8 +409,8 @@
 		
 		function LectureQnaEdit(lqa_no){
 
-			var lqa_title = $('input[name=Elqa_title]').val();
-			var lqa_content = $('textarea[name="Elqa_content"]').val();
+			var lqa_title = $('input[name=' + lqa_no + 'lqa_title]').val();
+			var lqa_content = $('textarea[name=' + lqa_no + 'lqa_content]').val();
 			$.ajax({
 
 				type: "post",
@@ -435,6 +435,31 @@
 
 					alert('수정 권한이 없습니다.');
 					CloseModal('QnaEdit' + lqa_no);
+				}
+			});
+		}
+
+		function WishAdd(l_code, wish){
+			$.ajax({
+
+				type: "post",
+				url: "/web/addwish?l_code=" + l_code,
+				success: function () {
+
+					window.location.reload();
+				},
+				error: function () {
+					alert('머선 일이고');
+				}
+			}).done(function (result) {
+				if (result == 1 && wish == 0) {
+					alert('강의를 찜했습니다');
+				} else if(result == 1&& wish == 1){
+					alert('찜을 취소했습니다');
+				} else if (result == 0) {
+
+					alert('권한이 없습니다.');
+					CloseModal('Review');
 				}
 			});
 		}
@@ -573,9 +598,7 @@
 						<c:when test="${sessionScope.u_id eq null}">
 							<a class="btn btn-primary rounded-pill py-3 px-5 mt-2"
 								href="./Pay?l_code=${LectureDetail.l_code}">결제하기</a>
-							<a href=" ./Wish?l_code=${LectureDetail.l_code}"
-								class="btn btn-outline-light rounded-pill border-2 py-3 px-5 animated slideInRight"
-								style="color: gray;">찜하기</a>
+							<img src="./resources/img/empty_heart.png" onclick="location.href = './login'">
 						</c:when>
 						<c:otherwise>
 							<c:choose>
@@ -591,9 +614,14 @@
 								<c:otherwise>
 									<a class="btn btn-primary rounded-pill py-3 px-5 mt-2"
 										href="./Pay?l_code=${LectureDetail.l_code}">결제하기</a>
-									<a href=" ./Wish?l_code=${LectureDetail.l_code}"
-										class="btn btn-outline-light rounded-pill border-2 py-3 px-5 animated slideInRight"
-										style="color: gray;">찜하기</a>
+										<c:choose>
+											<c:when test="${LectureDetail.wish eq 0}">
+												<img src="./resources/img/empty_heart.png" onclick="WishAdd('${LectureDetail.l_code}', '${LectureDetail.wish}')">
+											</c:when>
+											<c:otherwise>
+												<img src="./resources/img/heart.png" onclick="WishAdd('${LectureDetail.l_code}', '${LectureDetail.wish}')">
+											</c:otherwise>
+										</c:choose>
 								</c:otherwise>
 							</c:choose>
 						</c:otherwise>
@@ -806,10 +834,10 @@
 															<div class="col-md-6">
 																<div class="form-floating">
 																	<input type="text" class="form-control" id="name"
-																		name="Elqa_title" placeholder="질문 제목" value="${i.lqa_title}">
+																		name="${i.lqa_no}lqa_title" placeholder="질문 제목" value="${i.lqa_title}">
 																</div>
 															</div>
-															<textarea class="summernote" id="message" name="Elqa_content"
+															<textarea class="summernote" id="message" name="${i.lqa_no}lqa_content"
 																style="height: 150px; resize: none; z-index: 1100;">${i.lqa_content}</textarea>
 														</div>
 														<div class="col-12">

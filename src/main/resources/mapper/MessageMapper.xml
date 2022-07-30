@@ -8,4 +8,75 @@
 	
 	</select>
 	
+	<select id="ChattingRoom" parameterType="com.learning.DTO.MessageDTO" resultType="com.learning.DTO.MessageDTO">
+	
+		SELECT 
+			m.le_no
+			, m.from_id
+			, u.u_nickname
+			, m.to_id
+			, m.le_content
+			, m.le_date
+			, m.le_confirm
+		FROM
+			 message m 
+		JOIN
+			user u
+		ON
+			m.from_id = u.u_id
+		WHERE
+				(((m.from_id = #{from_id} AND m.to_id = #{to_id})
+			OR
+				(m.from_id = #{to_id} AND m.to_id = #{form_id})))
+			AND
+				(le_del = 0 AND (le_del = 1 AND le_confirm = 1))
+		ORDER BY
+			le_no DESC
+			
+	
+	</select>
+	
+	<update id="ReadMessage" parameterType="com.learning.DTO.MessageDTO">
+	
+		UPDATE message SET 
+			le_confirm = 1
+		WHERE
+			from_id = #{from_id} AND to_id = #{to_id} AND le_del = 0
+	
+	</update>
+	
+	<select id="CheckMessageWriter" parameterType="Integer" resultType="String">
+	
+		SELECT to_id FROM message WHERE le_no = #{le_no}	
+	
+	</select>
+	
+	<update id="DeleteMessage" parameterType="Integer">
+	
+		UPDATE message SET le_del = 1 WHERE le_no = #{le_no}
+	
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

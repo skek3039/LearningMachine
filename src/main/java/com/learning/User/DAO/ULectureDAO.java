@@ -116,11 +116,11 @@ public class ULectureDAO {
 
 	public int UpdateLectureVideoQna(ULectureVideoQnaForm form) {
 
-		return sqlSession.update(namespace + ".UpdateLectureQna", form);
+		return sqlSession.update(namespace + ".UpdateLectureVideoQna", form);
 	}
 
 	public int RemoveLectureVideoQna(int vq_no) {
 
-		return sqlSession.delete(namespace + ".RemoveLectureQna", vq_no);
+		return sqlSession.delete(namespace + ".RemoveLectureVideoQna", vq_no);
 	}
 }

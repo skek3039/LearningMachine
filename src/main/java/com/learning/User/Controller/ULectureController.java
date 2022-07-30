@@ -329,7 +329,6 @@ public class ULectureController {
 		String vq_content = null;
 
 		ULectureVideoQnaForm lecturVideoQnaForm = null;
-
 		if (u_id == null) {
 
 			return 0;

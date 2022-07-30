@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.util.*;
 
 import com.learning.User.DAO.*;
+import com.learning.User.DTO.WishlistDTO;
 import com.learning.User.Form.*;
 import com.learning.utill.Util;
 import com.learning.DTO.*;
@@ -116,25 +117,52 @@ public class UserService {
 		
 		return userDAO.CheckLectureQnaCount(form);
 	}
+	
+	//wishlist
+	public List<WishlistDTO> WishList(String u_id){
+		
+		return userDAO.Wishlist(u_id);
+	}
+
+	public int addWish(String u_id, String l_code) {
+		
+		WishlistDTO dto = null;
+		
+		if(u_id == null) {
+			
+			return 0;
+		}else {
+			
+			dto = new WishlistDTO();
+			
+			dto.setU_id(u_id);
+			dto.setL_code(l_code);
+			
+			if(userDAO.CheckWishList(dto) == 0) {
+				
+				return userDAO.AddWishlist(dto);
+			}else {
+				
+				return userDAO.DeleteWishList(dto);
+			}
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

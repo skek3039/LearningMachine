@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.learning.User.DAO.ULectureDAO;
 import com.learning.User.DAO.UserDAO;
+import com.learning.User.DTO.WishlistDTO;
 
 import java.text.ParseException;
 import java.util.*;
@@ -24,11 +25,15 @@ public class ULectureService {
 	public List<ULectureForm> PopularLectureList(String u_id) {
 
 		List<ULectureForm> LectureList = lectureDAO.LectureList();// 기본적으로 인기순으로 강의가져옴
+		List<ULectureForm> RegistedList = null;
+		List<WishlistDTO> WishList = null;
+
 		if (u_id == null) {
 
 			return LectureList;
 		} else {
-			List<ULectureForm> RegistedList = userDAO.RegistedLecture(u_id);
+			RegistedList = userDAO.RegistedLecture(u_id);
+			WishList = userDAO.Wishlist(u_id);
 
 			for (ULectureForm lectureform : LectureList) {
 
@@ -37,6 +42,14 @@ public class ULectureService {
 					if (lectureform.getL_code().equals(registedform.getL_code())) {
 
 						lectureform.setPayment_whether(1);
+					}
+				}
+
+				for (WishlistDTO wishdto : WishList) {
+
+					if (lectureform.getL_code().equals(wishdto.getL_code())) {
+
+						lectureform.setWish(1);
 					}
 				}
 			}
@@ -48,7 +61,8 @@ public class ULectureService {
 	public List<ULectureForm> RecentLectureList(String u_id) {
 
 		List<ULectureForm> LectureList = lectureDAO.LectureList();
-
+		List<ULectureForm> RegistedList = null;
+		List<WishlistDTO> WishList = null;
 		// lectureListComparator 객체에서 override를 통해 LectureForm의 l_date로 정렬
 		// 최신순서대로 정렬 됨
 		Collections.sort(LectureList, new LectureListComparator());
@@ -57,7 +71,9 @@ public class ULectureService {
 
 			return LectureList;
 		} else {
-			List<ULectureForm> RegistedList = userDAO.RegistedLecture(u_id);
+			
+			WishList = userDAO.Wishlist(u_id);
+			RegistedList = userDAO.RegistedLecture(u_id);
 
 			for (ULectureForm lectureform : LectureList) {
 
@@ -66,6 +82,14 @@ public class ULectureService {
 					if (lectureform.getL_code().equals(registedform.getL_code())) {
 
 						lectureform.setPayment_whether(1);
+					}
+				}
+
+				for (WishlistDTO wishdto : WishList) {
+
+					if (lectureform.getL_code().equals(wishdto.getL_code())) {
+
+						lectureform.setWish(1);
 					}
 				}
 			}
@@ -79,22 +103,34 @@ public class ULectureService {
 		ULectureForm LectureForm = lectureDAO.LectureDetail(l_code);
 		LectureForm.setL_price(Util.PriceCut(LectureForm.getL_price()));
 		List<URegiForm> regiList = null;
-
+		List<WishlistDTO> wishList = null;
 		if (u_id == null) {
 
 			return LectureForm;
 		} else {
 
+			wishList = userDAO.Wishlist(u_id);
 			regiList = userDAO.RegiList(u_id);
 			if (regiList.size() != 0) {
 				for (URegiForm form : regiList) {
 
 					if (LectureForm.getL_code().equals(form.getL_code())) {
 						LectureForm.setPayment_whether(1);
+						break;
 					}
 				}
 			}
-
+			
+			if(wishList.size() != 0) {
+				
+				for(WishlistDTO dto : wishList) {
+					if(LectureForm.getL_code().equals(dto.getL_code())) {
+						
+						LectureForm.setWish(1);
+						break;
+					}
+				}
+			}
 			return LectureForm;
 		}
 
@@ -215,10 +251,22 @@ public class ULectureService {
 
 		return lectureDAO.InsertLectureReview(form);
 	}
-	
+
 	public int InsertLectureVideoQna(ULectureVideoQnaForm form) {
 
-		return lectureDAO.InsertLectureVideoQnA(form);
+		String l_code = lectureDAO.VideoLectureCheck(form.getV_no());
+		URegiForm regiform = new URegiForm();
+		
+		regiform.setL_code(l_code);
+		regiform.setU_id(form.getU_id());
+		
+		if(userDAO.CheckLectureRegist(regiform) == 1) {
+			
+			return lectureDAO.InsertLectureVideoQnA(form);
+		}else {
+			
+			return 0;
+		}
 	}
 
 	public int EditLectureReview(ULectureReviewForm form) {
@@ -273,7 +321,7 @@ public class ULectureService {
 
 					return 3;
 				} else {
-					
+
 					return lectureDAO.UpdateLectureQna(form);
 				}
 			} else {
@@ -287,23 +335,22 @@ public class ULectureService {
 		}
 	}
 
-	
 	public int RemoveLectureQna(String u_id, int lqa_no) {
-		
+
 		Map<String, Object> CheckLectureQna = lectureDAO.CheckLectureQna(lqa_no);
-		
-		if(((String)CheckLectureQna.get("u_id")).equals(u_id)) {
-			
+
+		if (((String) CheckLectureQna.get("u_id")).equals(u_id)) {
+
 			return lectureDAO.RemoveLectureQna(lqa_no);
-		}else {
-			
+		} else {
+
 			return 0;
 		}
 	}
-	
+
 	public int UpdateLectureVideoQna(ULectureVideoQnaForm form) {
 
-		Map<String, Object> CheckLectureVideoQna = lectureDAO.CheckLectureQna(form.getVq_no());
+		Map<String, Object> CheckLectureVideoQna = lectureDAO.CheckLectureVideoQna(form.getVq_no());
 		String u_id = null;
 		int vq_confirm = 0;
 
@@ -313,11 +360,11 @@ public class ULectureService {
 			vq_confirm = (int) CheckLectureVideoQna.get("vq_confirm");
 
 			if (form.getU_id().equals(u_id)) {
-				if (vq_confirm != 0) {
+				if (vq_confirm == 1) {
 
 					return 3;
 				} else {
-					
+
 					return lectureDAO.UpdateLectureVideoQna(form);
 				}
 			} else {
@@ -331,37 +378,16 @@ public class ULectureService {
 		}
 	}
 
-	
 	public int RemoveLectureVideoQna(String u_id, int vq_no) {
-		
+
 		Map<String, Object> CheckLectureVideoQna = lectureDAO.CheckLectureVideoQna(vq_no);
-		
-		if(((String)CheckLectureVideoQna.get("u_id")).equals(u_id)) {
-			
+
+		if (((String) CheckLectureVideoQna.get("u_id")).equals(u_id)) {
+
 			return lectureDAO.RemoveLectureVideoQna(vq_no);
-		}else {
-			
+		} else {
+
 			return 0;
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

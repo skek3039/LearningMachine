@@ -30,8 +30,65 @@ public class MessageService {
 	}
 
 	//특정인(from_id)과의 대화 내용들리스트
+	public List<MessageDTO> ChattingRoom(String to_id, String from_id){
+		
+		MessageDTO dto = new MessageDTO();
+		
+		dto.setTo_id(to_id);
+		dto.setFrom_id(from_id);
+		
+		return messageDAO.ChattingRoom(dto);
+	}
 	
+	//메시지 확인
+	public int ReadMessage(String to_id, String from_id) {
 	
+		MessageDTO dto = new MessageDTO();
+		
+		dto.setFrom_id(from_id);
+		dto.setTo_id(to_id);
+		
+		return messageDAO.ReadMessage(dto);
+	}
 	
 	//메시지 삭제
+	public int DeleteMessage(int le_no, String u_id) {
+		
+		if(messageDAO.CheckMessageWriter(le_no).equals(u_id)) {
+			
+			return messageDAO.DeleteMessage(le_no);
+		}else {
+			
+			return 0;
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

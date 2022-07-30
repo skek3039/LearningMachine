@@ -7,7 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.learning.Common.Service.MessageService;
 import com.learning.User.Form.ULectureForm;
@@ -49,5 +52,24 @@ public class UController {
 		} else {
 			return "index";
 		}
+	}
+	
+	@GetMapping(value = "/wishlist")
+	public String wishList(HttpServletRequest rq) {
+		
+		String u_id = (String)rq.getSession().getAttribute("u_id");
+
+		rq.setAttribute("WishList", userService.WishList(u_id));
+		
+		return "wishlist";
+	}
+	
+	@RequestMapping(value = "/addwish")
+	@ResponseBody
+	public int AddWish(@RequestParam(name = "l_code")String l_code, HttpServletRequest rq) {
+		
+		String u_id = (String)rq.getSession().getAttribute("u_id");
+		
+		return userService.addWish(u_id, l_code);
 	}
 }

@@ -182,6 +182,108 @@
 			var CloseModal = document.querySelector(".background" + lqa_no);
 			CloseModal.classList.remove("show");
 		}
+
+		function CloseNOpen(close, open){
+
+			var CloseModal = document.querySelector(".background" + close);
+			var OpenModal = document.querySelector(".background" + open);
+			OpenModal.classList.add("show");
+			CloseModal.classList.remove("show");
+		}
+
+		function write(){
+			var vq_title = $('input[name=vq_title]').val();
+			var vq_content = $('textarea[name="vq_content"]').val();
+			alert(vq_title);
+			alert(vq_content);
+			$.ajax({
+
+				type: "post",
+				url: "/web/LectureVideoQnaWrite.do?v_no=${Video.v_no}",
+				data: {
+					vq_title: vq_title,
+					vq_content: vq_content
+				},
+				success: function () {
+
+					window.location.reload();
+				},
+				error: function () {
+					alert('머선 일이고');
+				}
+			}).done(function (result) {
+				if (result == 1) {
+					$('input[name=lr_title]').val("");
+					alert('리뷰가 등록되었습니다');
+					CloseModal('Review');
+				} else if (result == 0) {
+
+					alert('권한이 없습니다.');
+					CloseModal('Review');
+				} else if (result == 2) {
+
+					alert('이미 리뷰를 등록했습니다.');
+					CloseModal('Review');
+				}
+			});
+		}
+
+		function edit(vq_no){
+			var vq_title = $('input[name=' + vq_no + 'vq_title]').val();
+			var vq_content = $('textarea[name=' + vq_no + 'vq_content]').val();
+			
+			alert(vq_title);
+			alert(vq_content);
+			$.ajax({
+
+				type: "post",
+				url: "/web/LectureVideoQnaEdit.do?vq_no=" + vq_no,
+				data: {
+					vq_title: vq_title,
+					vq_content: vq_content
+				},
+				error: function () {
+					alert('머선 일이고');
+				}
+			}).done(function (result) {
+				if (result == 1) {
+					alert('질문 수정이 완료되었습니다');
+				} else if (result == 0) {
+
+					alert('수정 권한이 없습니다.');
+				} else if(result == 3){
+
+					alert('답변이 달린 질문은 수정할 수 없습니다.');
+				}else{
+
+					alert('이상한짓 하지 마세요');
+				}
+				window.location.reload();
+			});
+		}
+
+		function remove(vq_no){
+			if (confirm("질문을 삭제하시겠습니까?")) {
+					$.ajax({
+
+						type: "post",
+						url: "/web/LectureVideoQnaRemove.do?vq_no=" + vq_no,
+						success: function () {
+
+							window.location.reload();
+						},
+						error: function () {
+							alert('머선 일이고');
+						}
+					}).done(function (result) {
+						if (result == 1) {
+							alert('질문이 삭제되었습니다');
+						} else if (result == 0) {
+							alert('삭제 권한이 없습니다.');
+						}
+					});
+				}
+		}
 	</script>
 </head>
 
@@ -192,7 +294,7 @@
 		</button>
 		<div class="dropdown-content">
 			<a onclick="javascript:history.back()">뒤로가기</a>
-			<a onclick="OpenModal()">강의목록</a>
+			<a onclick="OpenModal('List')">강의목록</a>
 			<a onclick="OpenModal('qnas')">질문목록</a>
 		</div>
 	</div>
@@ -208,11 +310,11 @@
 		<div class="window">
 			<div class="popup">
 				<button id="closebtn" onclick="CloseModal('qnas');">닫기</button>
-				<table class="table table-hover">
+				<table class="table table-hover" style="overflow-y: auto;">
 					<c:forEach items = "${VideoQnas}" var = "i">
 						<c:set var="title" value = "${i.vq_title}" />
 						<c:set var="content" value = "${i.vq_content}" />
-						<tr>
+						<tr onclick="CloseNOpen('qnas', '${i.vq_no}')">
 							<td style="width: 30%;">
 								<c:choose>
 									<c:when test = "${fn:length(title) > 20}">
@@ -237,9 +339,101 @@
 						</tr>
 					</c:forEach>
 				</table>
+				<div class="col-12">
+					<button class="btn btn-primary w-100 py-3" type="button" style="position: fixed;"
+						onclick="CloseNOpen('qnas', 'Write')">질문작성하러가기</button>
+				</div>
 			</div>
 		</div>
 	</div>
+	<div class="background backgroundWrite">
+		<div class="window">
+			<div class="popup">
+				<button id="closebtn" onclick="CloseNOpen('Write', 'qnas');">질문으로 돌아가기</button>
+				<div class="row g-3">
+					<div class="col-md-6">
+						<div class="form-floating">
+							<input type="text" class="form-control" id="name"
+								name="vq_title" placeholder="리뷰 제목">
+						</div>
+					</div>
+					<textarea class="summernote" id="message" name="vq_content"
+						style="height: 150px; resize: none; z-index: 1100;"></textarea>
+				</div>
+				<div class="col-12">
+					<button class="btn btn-primary w-100 py-3" type="button"
+						onclick="write()">제출</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="background backgroundList">
+		<div class="window">
+			<div class="popup">
+				<button id="closebtn" onclick="CloseModal('List');">닫기</button>
+				<table class="table table-hover" style="overflow-y: auto;">
+					<tbody>
+						<c:forEach items="${LectureVideos}" var="Map" begin="0" end="2">
+							<c:set var="key" value="${Map.key}" />
+							<tr>
+								<td>[${Map.key}강] ${Map.value.v_videotitle}</td>
+								<td><a class="btn btn-outline-light"
+										style="background-color: rgba(55, 110, 92, 0.781);"
+										href="./LectureVideo?v_no=${Map.value.v_no}">듣기</a></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<c:forEach items = "${VideoQnas}" var = "i">
+
+		<c:if test = "${sessionScope.u_id eq i.u_id}">
+			<div class="background backgroundEdit${i.vq_no}">
+				<div class="window">
+					<div class="popup">
+						<button id="closebtn" onclick="CloseNOpen('Edit${i.vq_no}', '${i.vq_no}');">질문으로 돌아가기</button>
+						<div class="row g-3">
+							<div class="col-md-6">
+								<div class="form-floating">
+									<input type="text" class="form-control" id="name"
+										name="${i.vq_no}vq_title" placeholder="리뷰 제목" value="${i.vq_title}">
+								</div>
+							</div>
+							<textarea class="summernote" id="message" name="{i.vq_no}vq_content"
+								style="height: 150px; resize: none; z-index: 1100;">${i.vq_content}</textarea>
+						</div>
+						<div class="col-12">
+							<button class="btn btn-primary w-100 py-3" type="button"
+								onclick="edit('${i.vq_no}')">질문 수정하기</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</c:if>
+		<div class="background background${i.vq_no}">
+			<div class="window">
+				<div class="popup">
+					<button id="closebtn" onclick="CloseNOpen('${i.vq_no}', 'qnas');">뒤로가기</button>
+					<h2 class="card-title">질문</h2>
+					<c:if test="${sessionScope.u_id eq i.u_id}">
+						<img id="ubutton" src="./resources/img/Uremove.png" onclick="remove('${i.vq_no}')">
+						<c:if test="${i.vq_confirm eq 0}">
+							<img id="ubutton" src="./resources/img/Uedit.png" onclick="CloseNOpen('${i.vq_no}', 'Edit${i.vq_no}')">
+						</c:if>
+					</c:if>
+					<h6 style="color: black;">${i.u_nickname}</h6>
+					<h6>제목 : ${i.vq_title}</h6><br>
+					<h6>내용 : ${i.vq_content}</h6><br><br>
+					<h2 class="card-title">답변</h2>
+					<h6 style="color: black;">${i_t_nickname}</h6>
+					<h6>제목 : ${i.vqr_title}</h6><br>
+					<h6>내용 : ${i.vqr_content}</h6>
+				</div>
+			</div>
+		</div>
+	</c:forEach>
 </div>
 </body>
 

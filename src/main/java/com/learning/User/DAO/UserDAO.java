@@ -6,7 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.learning.DTO.MessageDTO;
 import com.learning.DTO.userDTO;
+import com.learning.User.DTO.WishlistDTO;
 import com.learning.User.Form.ULectureForm;
 import com.learning.User.Form.ULectureQnaForm;
 import com.learning.User.Form.ULectureReviewForm;
@@ -83,27 +85,45 @@ public class UserDAO {
 		return sqlSession.selectOne(namespace + ".CheckLectureQnaCount", form);
 	}
 
+	//wishlist
+	
+	public int CheckWishList(WishlistDTO dto) {
+		
+		return sqlSession.selectOne(namespace + ".CheckWishList", dto);
+	}
+	
+	public List<WishlistDTO> Wishlist(String u_id){
+		
+		return sqlSession.selectList(namespace + ".WishList", u_id);
+	}
+
+	public int AddWishlist(WishlistDTO dto) {
+		
+		return sqlSession.insert(namespace + ".AddWishlist", dto);
+	}
+	
+	public int DeleteWishList(WishlistDTO dto) {
+		
+		return sqlSession.delete(namespace + ".DeleteWishList", dto);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

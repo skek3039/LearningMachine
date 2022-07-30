@@ -138,9 +138,9 @@
 	
 	</update>
 	
-	<update id="UpdateLectureVideoQna">
+	<update id="UpdateLectureVideoQna" parameterType="com.learning.User.Form.ULectureVideoQnaForm">
 	
-		UPDATE lecture_qna SET vq_title = #{vq_title}, vq_content = #{vq_content} WHERE vq_no = #{vq_no}  
+		UPDATE lecture_video_qna SET vq_title = #{vq_title}, vq_content = #{vq_content} WHERE vq_no = #{vq_no}  
 	
 	</update>
 	<!--/ 수정  -->

@@ -72,4 +72,77 @@
 		SELECT COUNT(0) FROM lecture_qna WHERE u_id = #{u_id} AND l_code = #{l_code}
 	
 	</select>
+	
+	<!-- 위시리스트 -->
+	
+	<select id="WishList" parameterType="String" resultType="com.learning.User.DTO.WishlistDTO">
+	
+		SELECT
+			w.u_id
+			, w.l_code
+			, l.l_name
+			, l.t_id
+			, (SELECT u_nickname FROM user WHERE user.u_id = w.u_id) AS t_nickname
+			, l.l_price
+			, l.l_info
+			, l.l_thumbnail
+			, l.l_date
+			, w.w_date
+		FROM
+			wishlist w
+		JOIN
+			lecture l
+		ON
+			w.l_code = l.l_code
+		WHERE
+			u_id = #{u_id}
+	</select>
+	
+	<select id="CheckWishList" parameterType="com.learning.User.DTO.WishlistDTO" resultType="Integer">
+	
+		SELECT COUNT(0) FROM wishlist WHERE u_id = #{u_id} AND l_code = #{l_code}
+	
+	</select>
+	
+	<insert id="AddWishlist" parameterType="com.learning.User.DTO.WishlistDTO">
+	
+		INSERT INTO wishlist(u_id, l_code) VALUES(#{u_id}, #{l_code})
+	
+	</insert>
+	
+	<delete id="DeleteWishList" parameterType="com.learning.User.DTO.WishlistDTO">
+	
+		DELETE FROM wishlist WHERE u_id = #{u_id} AND l_code = #{l_code}
+	
+	</delete>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
   </mapper>

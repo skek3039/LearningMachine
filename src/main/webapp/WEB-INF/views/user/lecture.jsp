@@ -159,6 +159,31 @@
 			})
 
 		});
+
+		function WishAdd(l_code, wish){
+			$.ajax({
+
+				type: "post",
+				url: "/web/addwish?l_code=" + l_code,
+				success: function () {
+
+					window.location.reload();
+				},
+				error: function () {
+					alert('머선 일이고');
+				}
+			}).done(function (result) {
+				if (result == 1 && wish == 0) {
+					alert('강의를 찜했습니다');
+				} else if(result == 1&& wish == 1){
+					alert('찜을 취소했습니다');
+				} else if (result == 0) {
+
+					alert('권한이 없습니다.');
+					CloseModal('Review');
+				}
+			});
+		}
 	</script>
 </head>
 
@@ -215,12 +240,17 @@
 											role="button">이동하기</a>
 										<c:choose>
 											<c:when test="${i.payment_whether eq 0 && sessionScope.u_id ne null}">
-												<a href="./WishlistLecture?l_code=${i.l_code }" id="wish"
-													class="btn btn-default" role="button">찜하기</a>
+												<c:choose>
+													<c:when test="${i.wish eq 0}">
+														<img src="./resources/img/empty_heart.png" onclick="WishAdd('${i.l_code}', '${i.wish}')">
+													</c:when>
+													<c:otherwise>
+														<img src="./resources/img/heart.png" onclick="WishAdd('${i.l_code}', '${i.wish}')">
+													</c:otherwise>
+												</c:choose>
 											</c:when>
 											<c:when test="${i.payment_whether eq 0 && sessionScope.u_id eq null}">
-												<a href="./login" id="wish" class="btn btn-primary"
-													role="button">찜하기</a>
+												<img src="./resources/img/empty_heart.png" onclick="location.href = './login'">
 											</c:when>
 											<c:otherwise>
 												<a id="paydone" class="btn btn-default" role="button">구매 완료</a>
@@ -260,12 +290,17 @@
 											role="button">이동하기</a>
 										<c:choose>
 											<c:when test="${i.payment_whether eq 0 && sessionScope.u_id ne null}">
-												<a href="./WishlistLecture?l_code=${i.l_code }" id="wish"
-													class="btn btn-default" role="button">찜하기</a>
+												<c:choose>
+													<c:when test = "${i.wish eq 0}">
+														<img src="./resources/img/empty_heart.png" onclick="WishAdd('${i.l_code}', '${i.wish}')">
+													</c:when>
+													<c:otherwise>
+														<img src="./resources/img/heart.png" onclick="WishAdd('${i.l_code}', '${i.wish}')">
+													</c:otherwise>
+												</c:choose>
 											</c:when>
 											<c:when test="${i.payment_whether eq 0 && sessionScope.u_id eq null}">
-												<a href="./login" id="wish" class="btn btn-primary"
-													role="button">찜하기</a>
+												<img src="./resources/img/empty_heart.png" onclick="location.href = './login'">
 											</c:when>
 											<c:otherwise>
 												<a id="paydone" class="btn btn-default" role="button">구매 완료</a>
