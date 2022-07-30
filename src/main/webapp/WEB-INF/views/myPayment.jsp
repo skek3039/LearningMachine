@@ -229,7 +229,7 @@ function CloseModal(p_no) {
 	CloseModal.classList.remove("show");
 }
 
-function refund(p_refund,p_no){
+function refund(p_refund,p_no){1
 	if(p_refund == "1"){
 		alert("이미 환불완료된 건입니다.");
 	}else if(p_refund == "2"){
@@ -312,9 +312,9 @@ $(document).ready(function(){
 						<div class="background background${p.p_no }">
 							<div class="window">
 								<div class="popup">
+									<button id="closebtn" class="btn btn-outline-dark" onclick="CloseModal('${p.p_no}');">닫기</button>
 								<form action="./myPayment" method="post">
 									<input type="hidden" id="p_no" name="p_no" value="${p.p_no }">
-									<button id="closebtn" class="btn btn-outline-dark" onclick="CloseModal(${p.p_no});">닫기</button>
 									<h2 class="card-title" style="text-align: left">환불신청</h2>
 									<p class="card-text">
 									<div style="border: 1px solid rgb(201, 236, 219); height: 150px; text-align: left">

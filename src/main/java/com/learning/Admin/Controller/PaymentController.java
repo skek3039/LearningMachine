@@ -179,6 +179,7 @@ public class PaymentController {
 			ModelAndView mv = new ModelAndView("admin_student_refund");
 			
 			List<String> list = adminService.refundList();
+			System.out.println(list);
 			mv.addObject("list", list);
 
 			return mv;
