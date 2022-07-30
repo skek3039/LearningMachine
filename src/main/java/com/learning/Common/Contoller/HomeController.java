@@ -391,7 +391,10 @@ public class HomeController {
 	@GetMapping(value = "/index_search", produces = "text/plain;charset=utf-8")
 		public ModelAndView index_search(HttpServletRequest request, HttpSession session,HttpServletResponse response) throws IOException {
 		String l_name = request.getParameter("l_name");
-		List<String> indexsearch = communityService.index_search(l_name);
+		List<LectureDTO> indexsearch = communityService.index_search(l_name);
+		for(int i=0;i<indexsearch.size();i++) {
+			indexsearch.get(i).setL_curriculum(indexsearch.get(i).getL_curriculum().replaceAll("<(.*?)>", ""));
+		}
 		if (indexsearch == null) {
 			response.getWriter().println("<script>alert('검색하신 강의가 존재하지 않습니다.'); window.history.back();"+"</script>");     
 		}else {

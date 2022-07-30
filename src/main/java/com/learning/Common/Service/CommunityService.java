@@ -78,7 +78,7 @@ public class CommunityService {
 		communityDAO.commentUpdate(dto);
 	}
 
-	public List<String> index_search(String l_name) {
+	public List<LectureDTO> index_search(String l_name) {
 		return communityDAO.index_search(l_name);
 	}
 

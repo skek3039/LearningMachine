@@ -114,17 +114,17 @@ function linkPage(pageNo){
 					
 					<c:forEach items="${noticeList}" var="n">
 					<tr>
-						<td><a href="./noticedetail2?n_no=${n.n_no}">${n.n_no }</a></td>
-						<td>
+						<td>${n.n_no }</td>
+						<td><a href="./noticedetail2?n_no=${n.n_no}">
 							<c:choose>
-							<c:when test="${fn:length(n.n_title ) > 10 }">
-							<c:out value="${fn:substring(n.n_title , 0, 9)} ...">
+							<c:when test="${fn:length(n.n_title ) > 25 }">
+							<c:out value="${fn:substring(n.n_title , 0, 24)} ...">
 							</c:out></c:when>
 							<c:otherwise>
 							<c:out value="${n.n_title  }">
 							</c:out></c:otherwise>
 							</c:choose>
-						</td>
+						</a></td>
 						<td>${n.n_date}</td>
 						
 					</tr>

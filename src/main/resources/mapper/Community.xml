@@ -88,7 +88,7 @@
 		update user_board_reply set br_content = #{br_content} 	where br_no = #{br_no}
 	</update>
 	
-	<select id="index_search" parameterType="String" resultType="map">
+	<select id="index_search" parameterType="String" resultType="LectureDTO">
 		SELECT *
 		FROM lecture
 		WHERE l_name LIKE '%' #{l_name} '%'
