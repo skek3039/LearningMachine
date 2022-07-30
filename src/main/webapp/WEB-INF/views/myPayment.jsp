@@ -260,7 +260,7 @@ $(document).ready(function(){
 		<!-- Spinner End -->
 		<jsp:include page="./header.jsp" />
 		<div style="padding-top: 110px;">
-			<h3>&nbsp;&nbsp; My Lecture</h3> <small>현재 ${myPay[0].name }님 수강중인 강의 정보입니다. <strong style="text-align: right">환불을 원하시는 강의가 있으시면 <span style="color: red"> 오른쪽 결제완료버튼</span>을 눌러진행해주세요.</strong></small>
+			<h3>&nbsp;&nbsp; 결제내역</h3> <small>현재 ${myPay[0].name }님 수강중인 강의 정보입니다. <strong style="text-align: right">환불을 원하시는 강의가 있으시면 <span style="color: red"> 오른쪽 결제완료버튼</span>을 눌러진행해주세요.</strong></small>
 			<hr style="border: solid 1px;">
 		</div>
 		<div style="padding-top: 5px; text-align: center;">
@@ -275,7 +275,6 @@ $(document).ready(function(){
 					<thead class="thead-dark">
 						<tr style="background-color: #F0F8FF;">
 							<th style="text-align: left; width: 300px;">강의명</th>
-							<th style="width: 100px;">카테고리</th>
 							<th style="width: 120px; ">금액</th>
 							<th>결제일</th>
 							<th style="width: 120px;">결제상태</th>
@@ -285,7 +284,6 @@ $(document).ready(function(){
 						<tbody id="detailTable">
 							<tr>
 								<th style="text-align: left"><a href="./LectureDetail?l_code=${p.l_code }">${p.l_name }</a></th>
-								<th style="width:80px; ">${p.cate }</th>
 								<td style="text-align: right;"><fmt:formatNumber value="${p.p_price2 }" pattern="#,###"  />원</td>
 								<td>
 								 <fmt:parseDate value="${p.p_date}" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
