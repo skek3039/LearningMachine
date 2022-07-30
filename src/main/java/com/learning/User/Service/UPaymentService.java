@@ -20,7 +20,8 @@ public class UPaymentService {
 	
 	public int PayDone(URegiForm regiform, UPaymentDTO paydto) {
 		
-		if(paymentDAO.PaymentRegist(paydto) == 1) {
+		paydto = paymentDAO.PaymentRegist(paydto);
+		if(paydto.getP_no() != 0) {
 			
 			WishlistDTO dto = new WishlistDTO();
 			
@@ -28,6 +29,8 @@ public class UPaymentService {
 			dto.setU_id(regiform.getU_id());
 			
 			userDAO.DeleteWishList(dto);
+			
+			regiform.setP_no(paydto.getP_no());
 			
 			return paymentDAO.LectureRegist(regiform);
 		}else {

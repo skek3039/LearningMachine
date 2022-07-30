@@ -3,15 +3,16 @@
   <mapper namespace="UPaymentMapper">
 	<insert id="LectureRegist" parameterType="com.learning.User.DTO.ULectureDTO">
 	
-		INSERT INTO user_lecture_registration(u_id, l_code) 
+		INSERT INTO user_lecture_registration(u_id, l_code, p_no) 
 		VALUES(
 			#{u_id}
 			,#{l_code}
+			,#{p_no}
 		)
 	
 	</insert>
 	
-	<insert id="PaymentRegist" parameterType="com.learning.User.DTO.UPaymentDTO">
+	<insert id="PaymentRegist" parameterType="com.learning.User.DTO.UPaymentDTO"  useGeneratedKeys="true" keyProperty="p_no">
 	
 		INSERT INTO payment_log(u_id, l_code, p_price, p_order)
 		VALUES(

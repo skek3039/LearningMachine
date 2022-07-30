@@ -21,8 +21,12 @@ public class UPaymentDAO {
 		return sqlSession.insert(namespace + ".LectureRegist", dto);
 	}
 	
-	public int PaymentRegist(UPaymentDTO dto) {
+	public UPaymentDTO PaymentRegist(UPaymentDTO dto) {
 		
-		return sqlSession.insert(namespace + ".PaymentRegist", dto);
+		sqlSession.insert(namespace + ".PaymentRegist", dto);
+		
+		System.out.println(dto.getP_no());
+		
+		return dto;
 	}
 }

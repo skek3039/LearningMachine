@@ -419,11 +419,6 @@
 					lqa_title: lqa_title,
 					lqa_content: lqa_content
 				},
-				success: function () {
-
-					// $('#qnatab').load(location.href + ' #qnatab');
-					window.location.reload();
-				},
 				error: function () {
 					alert('머선 일이고');
 				}
@@ -543,7 +538,7 @@
 						<span style="width : ${LectureDetail.grade_avg * 20}%;"></span>
 					</span>
 					<p class="mb-4">${LectureDetail.l_info}</p>
-					<c:if test="${sessionScope.u_id eq null}">
+					<c:if test="${LectureDetail.payment_whether eq 0}">
 						<div>
 							<ul class="tabs">
 								<li class="tab-link current" data-tab="tab-3">강의정보</li>

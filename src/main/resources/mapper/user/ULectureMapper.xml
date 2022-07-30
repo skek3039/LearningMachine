@@ -161,7 +161,6 @@
 	
 	<delete id="RemoveLectureVideoQna" parameterType="Integer">
 	
-	
 		DELETE FROM lecture_video_qna WHERE vq_no = #{vq_no}
 	
 	</delete>

@@ -25,6 +25,7 @@ public class ULectureService {
 	public List<ULectureForm> PopularLectureList(String u_id) {
 
 		List<ULectureForm> LectureList = lectureDAO.LectureList();// 기본적으로 인기순으로 강의가져옴
+		List<ULectureForm> RegistedList = null;
 		List<WishlistDTO> WishList = null;
 
 		if (u_id == null) {
@@ -32,8 +33,17 @@ public class ULectureService {
 			return LectureList;
 		} else {
 			WishList = userDAO.Wishlist(u_id);
+			RegistedList = userDAO.RegistedLecture(u_id);
 
 			for (ULectureForm lectureform : LectureList) {
+				
+				for (ULectureForm registedform : RegistedList) {
+
+					if (lectureform.getL_code().equals(registedform.getL_code())) {
+
+						lectureform.setPayment_whether(1);
+					}
+				}
 
 				for (WishlistDTO wishdto : WishList) {
 

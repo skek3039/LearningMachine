@@ -236,12 +236,18 @@
 										<strong style="color: rgb(50, 50, 155);">${i.grade_avg}점</strong><small>(${i.total_register}명 수강)</small>
 									</p>
 									<p>
-										<a href="./LectureDetail?l_code=${i.l_code }" class="btn btn-primary"
+										<c:if test = "${i.payment_whether eq 1}">
+											<a href="./LectureDetail?l_code=${i.l_code }" class="btn btn-default"
+											role="button">결제완료</a>
+										</c:if>
+										<c:if test = "${i.payment_whether eq 0}">
+											<a href="./LectureDetail?l_code=${i.l_code }" class="btn btn-primary"
 											role="button">이동하기</a>
+										</c:if>
 										<c:choose>
 											<c:when test="${i.payment_whether eq 0 && sessionScope.u_id ne null}">
 												<c:choose>
-													<c:when test="${i.wish eq 0}">
+													<c:when test = "${i.wish eq 0}">
 														<img src="./resources/img/empty_heart.png" onclick="WishAdd('${i.l_code}', '${i.wish}')">
 													</c:when>
 													<c:otherwise>
@@ -252,9 +258,6 @@
 											<c:when test="${i.payment_whether eq 0 && sessionScope.u_id eq null}">
 												<img src="./resources/img/empty_heart.png" onclick="location.href = './login'">
 											</c:when>
-											<c:otherwise>
-												<a id="paydone" class="btn btn-default" role="button">구매 완료</a>
-											</c:otherwise>
 										</c:choose>
 									</p>
 								</div>
@@ -284,10 +287,16 @@
 									<p id="category">${i.l_category }</p>
 									<p id="teacher">${i.t_nickname}</p>
 									<strong style="color: red;">${i.l_price}원</strong>
-									<p><small>${i.grade_avg}점(${i.total_register}명 수강)</small></p>
+									<p><strong style="color: rgb(50, 50, 155);">${i.grade_avg}점</strong><small>(${i.total_register}명 수강)</small></p>
 									<p>
-										<a href="./LectureDetail?l_code=${i.l_code }" class="btn btn-primary"
+										<c:if test = "${i.payment_whether eq 1}">
+											<a href="./LectureDetail?l_code=${i.l_code }" class="btn btn-default"
+											role="button">결제완료</a>
+										</c:if>
+										<c:if test = "${i.payment_whether eq 0}">
+											<a href="./LectureDetail?l_code=${i.l_code }" class="btn btn-primary"
 											role="button">이동하기</a>
+										</c:if>
 										<c:choose>
 											<c:when test="${i.payment_whether eq 0 && sessionScope.u_id ne null}">
 												<c:choose>
@@ -302,9 +311,6 @@
 											<c:when test="${i.payment_whether eq 0 && sessionScope.u_id eq null}">
 												<img src="./resources/img/empty_heart.png" onclick="location.href = './login'">
 											</c:when>
-											<c:otherwise>
-												<a id="paydone" class="btn btn-default" role="button">구매 완료</a>
-											</c:otherwise>
 										</c:choose>
 									</p>
 								</div>
