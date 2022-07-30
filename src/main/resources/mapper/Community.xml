@@ -46,7 +46,7 @@
   		where b_no = ${b_no}
   	</select>
   	
-  	<select id="commentList" parameterType="Integer" resultType="map">
+  	<select id="commentList" parameterType="Integer" resultType="BoardDTO">
   		select * 
   		from user_board_reply
   		where b_no = ${b_no}

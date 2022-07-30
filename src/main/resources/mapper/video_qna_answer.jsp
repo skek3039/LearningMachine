@@ -106,7 +106,6 @@ function linkPage(pageNo){
 					<tr>
 						<th>번호</th>
 						<th>제목</th>
-						<th>내용</th>
 						<th>아이디</th>
 						<th>강의 이름</th>
 						<th>날짜</th>
@@ -123,16 +122,6 @@ function linkPage(pageNo){
 							</c:out></c:when>
 							<c:otherwise>
 							<c:out value="${v.vq_title  }">
-							</c:out></c:otherwise>
-							</c:choose>
-						</td>
-						<td>
-							<c:choose>
-							<c:when test="${fn:length(v.vq_content ) > 10 }">
-							<c:out value="${fn:substring(v.vq_content, 0, 9)} ...">
-							</c:out></c:when>
-							<c:otherwise>
-							<c:out value="${v.vq_content }">
 							</c:out></c:otherwise>
 							</c:choose>
 						</td>

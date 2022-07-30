@@ -205,9 +205,10 @@ ul.tabs li.current{
 $(document).ready(function () {
 
 	$('.summernote').summernote({
-		placeholder: 'content',
-		minHeight: 370,
-		maxHeight: null,
+		placeholder: '내용을 입력해주세요.',
+		height: 400, 
+		minHeight: null,        
+        maxHeight: null,  
 		focus: true,
 		lang: 'ko-KR'
 	});

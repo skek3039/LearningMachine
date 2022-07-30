@@ -278,7 +278,7 @@ function commentDelete(br_no,b_no){
 						  </thead>
 						  <tbody id = "detailTable">
 						  	<tr>
-						  		<td colspan="8" style="height: 600px;"><textarea style="height: 600px; width: 100%" readonly="readonly"> ${boardDetail.b_content } </textarea></td>
+						  		<td colspan="8" style="height: 600px;"><div style=" overflow: auto; height: 600px; width: 100%" readonly="readonly"> ${boardDetail.b_content } </div></td>
 						  	</tr>
 						  	<c:forEach items="${comment }" var="c">
 						  	<tr>

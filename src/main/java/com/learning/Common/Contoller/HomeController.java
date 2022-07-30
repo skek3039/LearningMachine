@@ -221,7 +221,6 @@ public class HomeController {
 		}
 		
 		List<BoardDTO> comment = communityService.commentList(b_no);
-		
 		mv.addObject("comment",comment);
 		mv.addObject("boardDetail",board);
 		return mv;

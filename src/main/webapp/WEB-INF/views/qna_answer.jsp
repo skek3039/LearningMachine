@@ -104,7 +104,6 @@ function linkPage(pageNo){
 					<tr>
 						<th>번호</th>
 						<th>제목</th>
-						<th>내용</th>
 						<th>아이디</th>
 						<th>강의이름</th>
 						<th>날짜</th>
@@ -122,17 +121,6 @@ function linkPage(pageNo){
 							</c:out></c:when>
 							<c:otherwise>
 							<c:out value="${q.lqa_title }">
-							</c:out></c:otherwise>
-							</c:choose>
-						</td>
-						
-						<td>
-							<c:choose>
-							<c:when test="${fn:length(q.lqa_content) > 10}">
-							<c:out value="${fn:substring(q.lqa_content, 0, 9)} ... ">
-							</c:out></c:when>
-							<c:otherwise>
-							<c:out value ="${q.lqa_content}">
 							</c:out></c:otherwise>
 							</c:choose>
 						</td>
