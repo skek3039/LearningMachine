@@ -49,17 +49,15 @@
             </div>
         </div>
         <!-- Spinner End -->
-
-
+	<div style="padding-bottom: 100px;">
 	<jsp:include page="./header.jsp"/>
-	
+	</div>
 	<section class="vh-100 gradient-custom">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12 col-md-8 col-lg-6 col-xl-5" >
         <div class="card bg-dark text-white" style="border-radius: 1rem; background-color: #00B98E;">
           <div class="card-body p-5 text-center">
-
             <div class="mb-md-5 mt-md-4 pb-5">
 
               <h2 class="fw-bold mb-2 text-uppercase" style="color: white;">Login</h2>
@@ -88,16 +86,16 @@
               <p class="mb-0">Don't have an account? <a href="./join2" class="text-white-50 fw-bold">Teacher_Sign Up</a>
               </p>
             </div>
-
-          </div>
+			</div>
         </div>
       </div>
     </div>
   </div>
   </div>
 </section>
-  
+  		<div style="padding-top: 70px;">
 		<jsp:include page="./footer.jsp"/>
+		</div>
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
