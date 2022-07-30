@@ -71,7 +71,8 @@
  	</select>
  	
  	<select id="refundList" resultType="hashmap">
- 		select * from user_paymentRefund_view
+ 		SELECT * ,(SELECT COUNT(*) FROM user_paymentRefund_view )AS sumtotal ,SUM(p_price)AS refundtotal 
+ 		from user_paymentRefund_view
  	</select>
  	
  	<select id="lectureRequest" parameterType="String" resultType="hashmap">

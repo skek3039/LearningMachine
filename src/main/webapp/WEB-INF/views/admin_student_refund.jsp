@@ -134,7 +134,7 @@ function refund(u_id,p_no){
 		 </div>
 		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;환불신청내역</h3><hr style="border: solid 1px;"></div>
 		<div style="padding-top: 10px;padding-left: 120px; height: 995px;  margin: 0 auto; ">
-		<div class="card shadow mb-4"style=" width: 800px; height: 800px;margin: 0 auto; ">
+		<div class="card shadow mb-4"style=" width: 900px; height: 800px;margin: 0 auto; ">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">
                            환불내역
@@ -145,7 +145,7 @@ function refund(u_id,p_no){
                                 <table class="table table-bordered" id="dataTable"  cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>학생ID</th>
+                                            <th style="width: 100px;">학생ID</th>
                                             <th>결제일자/환불일자</th>                                            
                                             <th>강의코드</th>
                                             <th>환불액</th>
