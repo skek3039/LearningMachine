@@ -66,22 +66,18 @@ style
 	font-weight: normal;
 	font-style: normal;
 }
-
 body {
 	font-family: LeferiPoint-WhiteObliqueA;
 }
-
 details {
 	border-bottom: 1px solid #efefef;
 	color: #666;
 	font-size: 16px;
 	padding: 15px;
 }
-
 details[open] summary {
 	font-weight: 800;
 }
-
 details>summary {
 	color: white;
 	font-size: 17px;
@@ -99,20 +95,16 @@ ul.tabs li{
   padding: 10px 25px;
   cursor: pointer;
 }
-
 ul.tabs li.current{
   background: #ededed;
   color: #222;
 }
-
 .tab-content{
   display: none;
 }
-
 .search.current{
   display: none;
 }
-
 .tab-content.current{
   display: flex;
 }
@@ -139,9 +131,6 @@ ul.tabs li.current{
 	background-color: rgb(201, 236, 219);
 	text-align: center;
 }
-
-
-
     	  .background {
         position: fixed;
         top: 0;
@@ -150,24 +139,20 @@ ul.tabs li.current{
         height: 100vh;
         background-color: rgba(0, 0, 0, 0.3);
         z-index: 1000;
-
         /* 숨기기 */
         z-index: -1;
         opacity: 0;
       }
-
       .show {
         opacity: 1;
         z-index: 1000;
         transition: all 0.5s;
       }
-
       .window {
         position: relative;
         width: 100%;
         height: 100%;
       }
-
       .popup {
 		padding: 10px;
         position: absolute;
@@ -176,29 +161,23 @@ ul.tabs li.current{
         transform: translate(-50%, -50%);
         background-color: #ffffff;
         box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
-
         /* 임시 지정 */
         width: 50%;
         height: 60%;
-
         /* 초기에 약간 아래에 배치 */
         transform: translate(-50%, -40%);
 		overflow-y: auto;
       }
-
       .show .popup {
         transform: translate(-50%, -50%);
         transition: all 0.5s;
       }
-
 	  #closebtn{
 		position: fixed;
 		top: 0;
         right: 0;
 		padding: 10px;
 	  }
-
-
 </style>
 <script type="text/javascript">
 function search(){
@@ -210,7 +189,6 @@ function search(){
 	}
 		
 }
-
 function enterkey() {
 	if (window.event.keyCode == 13) {
 		search();
@@ -219,24 +197,17 @@ function enterkey() {
 }
 </script>
 <script type="text/javascript">
-
 function linkPage(pageNo){
 	location.href = "./community?pageNo=" + pageNo;
 }
-
-
 function OpenModal(lqa_no){
 	var OpenModal = document.querySelector(".background" + lqa_no);
 	OpenModal.classList.add("show");
 }
-
 function CloseModal(lqa_no) {
 	var CloseModal = document.querySelector(".background" + lqa_no);
 	CloseModal.classList.remove("show");
 }
-
-
-
 $(document).ready(function(){
 	   
 	  $('ul.tabs li').click(function(){
@@ -248,7 +219,7 @@ $(document).ready(function(){
 	    $(this).addClass('current');
 	    $("#"+tab_id).addClass('current');
 	 
-	  });
+	  })
 	  
 	  
 	  var html = "";
@@ -268,7 +239,7 @@ $(document).ready(function(){
 		u_id.push("${l.u_id}");
 		confirm.push("${l.confirm}");
 	 </c:forEach>
-	 for(var i=0 in lqa_no){ 
+	 for(var i=0 in lqa_no){ 
 		html = "<tr>";
 		html += "<td>" + lqa_no[i] + "</td>";
 		html += "<td>" + c_name[i] + "</td>";
@@ -277,7 +248,7 @@ $(document).ready(function(){
 		html += "<td>" + lqa_date[i] + "</td>";
 		html += "<td>" + confirm[i] + "</td>";		
 		html += "</tr>"; 
-		$("#detailTable").append(html); 
+		$("#detailTable").append(html); 
 	 }
 	 
 	 
@@ -294,7 +265,7 @@ $(document).ready(function(){
 function select(category){
 	let c_name = category;
 	let arr = new Array();
-	 
+	 
 	var html = "";
 	$.ajax({
 		url : "./community_category",
@@ -303,10 +274,9 @@ function select(category){
 		data : {"c_name" : c_name},
 		success : function(data){	
 			var result = data.json;
-				$("#detailTable").empty();  
-				$("#detailTable").remove();  
-
-			for(var i=0 in data){                                                        
+				$("#detailTable").empty();  
+				$("#detailTable").remove();  
+			for(var i=0 in data){                                                        
 				html = "<tr>";
 				html += "<td>" + data[i].lqa_no + "</td>";
 				html += "<td>" + data[i].c_name + "</td>";
@@ -316,9 +286,9 @@ function select(category){
 				html += "<td>" + data[i].confirm + "</td>";
 				html += "</tr>";
 				
-				$("#detailTable").append(html);   
+				$("#detailTable").append(html);   
 			}
-		},	`
+		},
 		error : function(){
 			alert("실패 ㅠ");
 			}
@@ -375,8 +345,7 @@ function select(category){
 						    </tr>
 						  </thead>
 						<c:forEach items="${list }" var = "list"> 
-						  <tbody id = "detailTable">	
-						  				   
+						  <tbody id = "detailTable">					   
 						  </tbody>
 							<div class="background background${list.lqa_no }">
 								<div class="window">
@@ -424,7 +393,8 @@ function select(category){
 						<c:forEach items="${board }" var = "b"> 
 						  <tbody id = "detailTable">
 						   <tr>
-						   		<td>${b.b_no }</td>						
+						   		<td>${b.b_no }</td>
+						   		
 						   		<td style="text-align: left"><a href = "./boardDetail?b_no=${b.b_no }"> ${b.b_title } </a> <small>[${b.commentTotal }]</small></td>
 						   		<td>${b.u_nickname }</td>
 						   		<td>${b.b_date }</td>

@@ -98,8 +98,8 @@
  		update payment_log set p_refund = 1 where p_no = #{p_no}
  	</update>
  	
- 	<delete id="lecture_refund2">
-
+ 	<delete id="lecture_refund2" parameterType="String">
+		delete from user_lecture_registration where p_no = #{p_no} 
  	</delete>
  	
  	<insert id="lectureCate" parameterType="map">

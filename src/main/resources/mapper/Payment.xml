@@ -22,7 +22,7 @@
 		(SELECT SUM(p_price) FROM payment_log p WHERE p.p_refund !=0  )AS refundtotal,
 		(SELECT u_name FROM user WHERE user.u_id = l.u_id)AS NAME
 		FROM payment_log l  
-		WHERE l.p_refund != 0 
+		WHERE l.p_refund = 1
 		<if test = "month != null">
   		AND 
   		DATE(p_date) >= DATE_FORMAT(NOW(), '${year}-${month}-01')
