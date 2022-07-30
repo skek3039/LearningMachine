@@ -189,7 +189,7 @@ function report(l_code){
 						<td>${s.u_id }</td>					
 						<td>${s.u_gender }</td>
 						<td>${s.u_paypoint }</td>
-						<td>${s.attendance_rate }</td>
+						<td>${s.attendance_rate } %</td>
 						<td><a href = "#" onclick="OpenModal('${s.l_code}')">신고하기</a>
 						<form action="./lecture_student_report" method="get">
 									<div class="background background${s.l_code}">

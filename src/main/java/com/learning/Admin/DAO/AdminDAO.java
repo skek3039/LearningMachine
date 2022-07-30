@@ -104,6 +104,7 @@ public class AdminDAO {
 	}
 
 	public int lecture_refund(String p_no, String u_id) {
+		sqlSession.delete("Admin.lectrue_refund2",p_no);
 		sqlSession.delete("Admin.lecture_refund1",p_no);
 		return sqlSession.update("Admin.lecture_refund", p_no);
 	}

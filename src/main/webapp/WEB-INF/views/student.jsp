@@ -123,10 +123,10 @@ function linkPage(pageNo){
 		<div style="padding-top: 10px;">
 			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto; text-align: center;">
 					<tr>
-						<th>강의 이름</th>
-						<th>카테고리</th>
+						<th style="width: 250px;">강의 이름</th>
+						<th style="width: 100px;">카테고리</th>
 						<th>커리큘럼</th>
-						<th>수강생 조회</th>
+						<th style="width: 100px;">수강생 조회</th>
 					</tr>
 					
 					<c:forEach items="${lectureList}" var="l">
@@ -134,8 +134,8 @@ function linkPage(pageNo){
 						<td>
 							<a href="./lecture_Lookup2?l_code=${l.l_code }">
 							<c:choose>
-							<c:when test="${fn:length(l.l_name ) > 10 }">
-							<c:out value="${fn:substring(l.l_name  , 0, 9)} ...">
+							<c:when test="${fn:length(l.l_name ) > 20 }">
+							<c:out value="${fn:substring(l.l_name  , 0, 19)} ...">
 							</c:out></c:when>
 							<c:otherwise>
 							<c:out value="${l.l_name }">
@@ -146,8 +146,8 @@ function linkPage(pageNo){
 						<td>${l.l_category }</td>
 						<td>
 						<c:choose>
-							<c:when test="${fn:length(l.l_curriculum ) > 10 }">
-							<c:out value="${fn:substring(l.l_curriculum , 0, 9)} ...">
+							<c:when test="${fn:length(l.l_curriculum ) > 30 }">
+							<c:out value="${fn:substring(l.l_curriculum , 0, 29)} ...">
 							</c:out></c:when>
 							<c:otherwise>
 							<c:out value="${l.l_curriculum  }">

@@ -39,7 +39,7 @@
 		SELECT COUNT(*)AS COUNT ,i.l_category
 		FROM lecture_apply_user_view v JOIN lecture_info_view i
 		ON i.l_code = v.l_code
-	
+		GROUP BY i.l_code
   	</select>
 	
 	<select id = "gender" resultType="map">
