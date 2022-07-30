@@ -248,7 +248,7 @@ $(document).ready(function(){
 	    $(this).addClass('current');
 	    $("#"+tab_id).addClass('current');
 	 
-	  })
+	  });
 	  
 	  
 	  var html = "";
@@ -375,7 +375,8 @@ function select(category){
 						    </tr>
 						  </thead>
 						<c:forEach items="${list }" var = "list"> 
-						  <tbody id = "detailTable">					   
+						  <tbody id = "detailTable">	
+						  				   
 						  </tbody>
 							<div class="background background${list.lqa_no }">
 								<div class="window">

@@ -175,6 +175,9 @@ public class HomeController {
 		
 		List<String> commentTotal = communityService.commentTotal();
 		
+	System.out.println(list);
+		System.out.println(board);
+		
 		mv.addObject("list",list);
 		mv.addObject("commentTotal",commentTotal);
 		mv.addObject("board",board);
