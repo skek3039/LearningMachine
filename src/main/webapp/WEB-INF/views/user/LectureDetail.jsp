@@ -250,7 +250,7 @@
 		function LectureQNASubmit() {
 
 			var lqa_title = $('input[name=lqa_title]').val();
-			var lqa_content = $('textarea[name="lqa_content"]').val();
+			var lqa_content = $('textarea[name="lqa_content"]').summernote('code');
 			$.ajax({
 
 				type: "post",
@@ -286,7 +286,7 @@
 		function LectureReviewSubmit() {
 
 			var lr_title = $('input[name=lr_title]').val();
-			var lr_content = $('textarea[name="lr_content"]').val();
+			var lr_content = $('textarea[name="lr_content"]').summernote('code');
 			var lr_grade = $("input[type=radio][name='rating']:checked").val();
 			$.ajax({
 
@@ -353,7 +353,7 @@
 		function LectureReviewEdit(u_id){
 
 			var lr_title = $('input[name="Elr_title"]').val();
-			var lr_content = $('textarea[name="Elr_content"]').val();
+			var lr_content = $('textarea[name="Elr_content"]').summernote('code');
 			
 			$.ajax({
 
@@ -410,7 +410,7 @@
 		function LectureQnaEdit(lqa_no){
 
 			var lqa_title = $('input[name=' + lqa_no + 'lqa_title]').val();
-			var lqa_content = $('textarea[name=' + lqa_no + 'lqa_content]').val();
+			var lqa_content = $('textarea[name=' + lqa_no + 'lqa_content]').summernote('code');
 			$.ajax({
 
 				type: "post",
@@ -730,7 +730,7 @@
 									</c:when>
 									<c:otherwise>
 										<p class="card-text">
-											${fn:substring(content,0,101)}
+											<c:out value="${fn:substring(content,0,101).replaceAll('\\\<.*?\\\>','')}" />
 										</p>
 										<button onclick="OpenModal('${i.u_id}');">자세히 보기</button>
 										<div class="background background${i.u_id}">
@@ -856,7 +856,7 @@
 									</c:when>
 									<c:otherwise>
 										<p class="card-text">
-											${fn:substring(content,0,51)}
+											<c:out value="${fn:substring(content,0,51).replaceAll('\\\<.*?\\\>','')}"></c:out>
 										</p>
 									</c:otherwise>
 								</c:choose>

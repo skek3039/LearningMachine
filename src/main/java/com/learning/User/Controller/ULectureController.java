@@ -8,16 +8,17 @@ import org.springframework.web.bind.annotation.*;
 
 import com.learning.User.Service.ULectureService;
 import com.learning.User.Service.UserService;
+import com.learning.utill.*;
 
 import java.text.ParseException;
 import java.util.*;
 
-import com.learning.User.DAO.UserDAO;
 import com.learning.User.Form.*;
 
 @Controller
 public class ULectureController {
-
+	
+	
 	@Autowired
 	private UserService userService;
 
@@ -151,7 +152,7 @@ public class ULectureController {
 			System.out.println("로그인하셈");
 			return 0;
 		} else {
-
+			
 			if (userService.CheckLectureReview(u_id, l_code) == 1) {
 
 				return 2;
@@ -165,7 +166,7 @@ public class ULectureController {
 					lectureReviewForm = new ULectureReviewForm();
 
 					lectureReviewForm.setU_id(u_id);
-					lectureReviewForm.setLr_title(lr_title);
+					lectureReviewForm.setLr_title(Util.html(lr_title));
 					lectureReviewForm.setLr_content(lr_content);
 					lectureReviewForm.setL_code(l_code);
 					lectureReviewForm.setLr_grade(lr_grade);
@@ -202,7 +203,7 @@ public class ULectureController {
 
 				qnaform.setU_id(u_id);
 				qnaform.setL_code(l_code);
-				qnaform.setLqa_title(lqa_title);
+				qnaform.setLqa_title(Util.html(lqa_title));
 				qnaform.setLqa_content(lqa_content);
 
 				return lectureService.InsertLectureQnA(qnaform);
@@ -235,7 +236,7 @@ public class ULectureController {
 
 				lectureReviewForm.setU_id(s_id);
 				lectureReviewForm.setL_code(l_code);
-				lectureReviewForm.setLr_title(lr_title);
+				lectureReviewForm.setLr_title(Util.html(lr_title));
 				lectureReviewForm.setLr_content(lr_content);
 
 				return lectureService.EditLectureReview(lectureReviewForm);
@@ -273,7 +274,7 @@ public class ULectureController {
 
 			lectureQnaForm.setLqa_no(lqa_no);
 			lectureQnaForm.setU_id(u_id);
-			lectureQnaForm.setLqa_title(lqa_title);
+			lectureQnaForm.setLqa_title(Util.html(lqa_title));
 			lectureQnaForm.setLqa_content(lqa_content);
 
 			return lectureService.UpdateLectureQna(lectureQnaForm);
@@ -314,7 +315,7 @@ public class ULectureController {
 
 			lectureVideoQnaForm.setU_id(u_id);
 			lectureVideoQnaForm.setV_no(v_no);
-			lectureVideoQnaForm.setVq_title(vq_title);
+			lectureVideoQnaForm.setVq_title(Util.html(vq_title));
 			lectureVideoQnaForm.setVq_content(vq_content);
 
 			lectureService.InsertLectureVideoQna(lectureVideoQnaForm);
@@ -342,7 +343,7 @@ public class ULectureController {
 
 			lecturVideoQnaForm.setVq_no(vq_no);
 			lecturVideoQnaForm.setU_id(u_id);
-			lecturVideoQnaForm.setVq_title(vq_title);
+			lecturVideoQnaForm.setVq_title(Util.html(vq_title));
 			lecturVideoQnaForm.setVq_content(vq_content);
 
 			return lectureService.UpdateLectureVideoQna(lecturVideoQnaForm);

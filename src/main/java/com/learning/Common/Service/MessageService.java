@@ -51,7 +51,7 @@ public class MessageService {
 		return messageDAO.ReadMessage(dto);
 	}
 	
-	//메시지 삭제
+	//메시지 삭제(읽었을 경우 안읽었을경우에 처리 다르게)
 	public int DeleteMessage(int le_no, String u_id) {
 		
 		if(messageDAO.CheckMessageWriter(le_no).equals(u_id)) {

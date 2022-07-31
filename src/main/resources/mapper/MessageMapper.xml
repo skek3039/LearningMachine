@@ -29,7 +29,7 @@
 			OR
 				(m.from_id = #{to_id} AND m.to_id = #{form_id})))
 			AND
-				(le_del = 0 AND (le_del = 1 AND le_confirm = 1))
+				(le_del = 0 OR (le_del = 1 AND le_confirm = 1))
 		ORDER BY
 			le_no DESC
 			
@@ -51,13 +51,21 @@
 	
 	</select>
 	
+	<select id= "CheckMessageConfirm" parameterType="Integer" resultType="Integer">
+	
+	</select>
+	
 	<update id="DeleteMessage" parameterType="Integer">
 	
 		UPDATE message SET le_del = 1 WHERE le_no = #{le_no}
 	
 	</update>
 	
+	<delete id="RemoveMessage" parameterType="Integer">
 	
+		UPDATE message SET le_del = 1 WHERE le_no = #{le_no}
+	
+	</delete>
 	
 	
 	

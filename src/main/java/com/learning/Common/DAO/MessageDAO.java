@@ -36,8 +36,18 @@ public class MessageDAO {
 		return sqlSession.selectOne(namespace + ".CheckMessageWriter", le_no);
 	}
 	
+	public int CheckMessageConfirm(int le_no) {
+		
+		return sqlSession.selectOne(namespace + ".CheckMessageConfirm", le_no);
+	}
+	
 	public int DeleteMessage(int le_no) {
 		
 		return sqlSession.update(namespace + ".DeleteMessage", le_no);
+	}
+	
+	public int RemoveMessage(int le_no) {
+		
+		return sqlSession.delete(namespace + ".RemoveMessage", le_no);
 	}
 }

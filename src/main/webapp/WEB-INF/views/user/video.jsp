@@ -206,8 +206,9 @@
 			var vq_title = $('input[name=' + vq_no + 'vq_title]').val();
 			var vq_content = $('#'+ vq_no +'vq_content').summernote('code');
 
+			alert(vq_no);
 			alert(vq_title);
-			alert(vq_content);
+			alert('#'+ vq_no +'vq_content');
 			$.ajax({
 
 				type: "post",
@@ -268,6 +269,7 @@
 			<a onclick="javascript:history.back()">뒤로가기</a>
 			<a onclick="OpenModal('qnas')">질문목록</a>
 			<a onclick="OpenModal('List')">강의목록</a>
+			<a onclick="location.href = './'">홈으로</a>
 		</div>
 	</div>
 	<div id="video">
@@ -381,7 +383,7 @@
 											placeholder="리뷰 제목" value="${i.vq_title}">
 									</div>
 								</div>
-								<textarea class="summernote" id="message ${i.vq_no}vq_content" name="{i.vq_no}vq_content"
+								<textarea class="summernote" id="${i.vq_no}vq_content"
 									style="height: 150px; resize: none; z-index: 1100;">${i.vq_content}</textarea>
 							</div>
 							<div class="col-12">
@@ -404,12 +406,12 @@
 							</c:if>
 						</c:if>
 						<h6 style="color: black;">${i.u_nickname}</h6>
-						<h6>제목 : ${i.vq_title}</h6><br>
-						<h6>내용 : ${i.vq_content}</h6><br><br>
+						<h6>제목 : </h6>${i.vq_title}<br>
+						<h6>내용 : </h6>${i.vq_content}<br><br>
 						<h2 class="card-title">답변</h2>
 						<h6 style="color: black;">${i_t_nickname}</h6>
-						<h6>제목 : ${i.vqr_title}</h6><br>
-						<h6>내용 : ${i.vqr_content}</h6>
+						<h6>제목 : </h6>${i.vqr_title}<br>
+						<h6>내용 : </h6>${i.vqr_content}
 					</div>
 				</div>
 			</div>
