@@ -273,6 +273,7 @@ public class ULectureService {
 		regiform.setU_id(form.getU_id());
 		
 		if(userDAO.CheckLectureRegist(regiform) == 1) {
+			form.setL_code(l_code);
 			
 			return lectureDAO.InsertLectureVideoQnA(form);
 		}else {

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,7 +42,9 @@
 	<script src="./resources/lib/easing/easing.min.js"></script>
 	<script src="./resources/lib/waypoints/waypoints.min.js"></script>
 	<script src="./resources/lib/owlcarousel/owl.carousel.min.js"></script>
-
+	<script src="./resources/summernote/summernote-lite.js"></script>
+	<script src="./resources/summernote/lang/summernote-ko-KR.js"></script>
+	<link rel="stylesheet" href="./resources/summernote/summernote-lite.css">
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
 	<style>
@@ -174,6 +175,15 @@
 		}
 	</style>
 	<script>
+		$(document).ready(function () {
+			$('.summernote').summernote({
+				placeholder: 'content',
+				minHeight: 370,
+				maxHeight: null,
+				focus: true,
+				lang: 'ko-KR'
+			});
+		});
 		function OpenModal(lqa_no) {
 			var OpenModal = document.querySelector(".background" + lqa_no);
 			OpenModal.classList.add("show");
@@ -192,39 +202,9 @@
 			CloseModal.classList.remove("show");
 		}
 
-		function write() {
-			var vq_title = $('input[name=vq_title]').val();
-			var vq_content = $('textarea[name="vq_content"]').val();
-			alert(vq_title);
-			alert(vq_content);
-			$.ajax({
-
-				type: "post",
-				url: "/web/LectureVideoQnaWrite.do",
-				data: {
-					vq_title: vq_title,
-					vq_content: vq_content
-				},
-				error: function () {
-					alert('머선 일이고');
-				}
-			}).done(function (result) {
-				if (result == 1) {
-					alert('리뷰가 등록되었습니다');
-				} else if (result == 0) {
-
-					alert('권한이 없습니다.');
-				} else if (result == 2) {
-
-					alert('이미 리뷰를 등록했습니다.');
-				}
-				window.location.reload();
-			});
-		}
-
 		function edit(vq_no) {
 			var vq_title = $('input[name=' + vq_no + 'vq_title]').val();
-			var vq_content = $('textarea[name=' + vq_no + 'vq_content]').val();
+			var vq_content = $('#'+ vq_no +'vq_content').summernote('code');
 
 			alert(vq_title);
 			alert(vq_content);
@@ -262,10 +242,6 @@
 
 					type: "post",
 					url: "/web/LectureVideoQnaRemove.do?vq_no=" + vq_no,
-					success: function () {
-
-						window.location.reload();
-					},
 					error: function () {
 						alert('머선 일이고');
 					}
@@ -275,6 +251,8 @@
 					} else if (result == 0) {
 						alert('삭제 권한이 없습니다.');
 					}
+
+					window.location.reload();
 				});
 			}
 		}
@@ -288,8 +266,8 @@
 		</button>
 		<div class="dropdown-content">
 			<a onclick="javascript:history.back()">뒤로가기</a>
-			<a onclick="OpenModal('List')">강의목록</a>
 			<a onclick="OpenModal('qnas')">질문목록</a>
+			<a onclick="OpenModal('List')">강의목록</a>
 		</div>
 	</div>
 	<div id="video">
@@ -297,8 +275,7 @@
 			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 			allowfullscreen></iframe>
 	</div>
-	${Video}<br><br><br>
-	${VideoQnas}
+	${Video}
 	<div class="container">
 		<div class="background backgroundqnas">
 			<div class="window">
@@ -341,7 +318,7 @@
 							</c:when>
 							<c:otherwise>
 								<button class="btn btn-primary w-100 py-3" type="button" style="position: fixed;"
-									href="./login">로그인</button>
+									onclick="location.href = '/web/login'">로그인</button>
 							</c:otherwise>
 						</c:choose>
 					</div>
@@ -351,8 +328,8 @@
 		<div class="background backgroundWrite">
 			<div class="window">
 				<div class="popup">
-					<button id="closebtn" onclick="CloseNOpen('Write', 'qnas');">질문으로 돌아가기</button>
-					<form>
+					<button id="closebtn" onclick="CloseNOpen('Write', 'qnas');">돌아가기</button>
+					<form action="./LectureVideoQnaWrite.do?v_no=${Video.v_no}" method="post">
 						<div class="row g-3">
 							<div class="col-md-6">
 								<div class="form-floating">
@@ -364,7 +341,7 @@
 								style="height: 150px; resize: none; z-index: 1100;"></textarea>
 						</div>
 						<div class="col-12">
-							<button class="btn btn-primary w-100 py-3" type="button" onclick="write()">제출</button>
+							<button class="btn btn-primary w-100 py-3" type="submit">제출</button>
 						</div>
 					</form>
 				</div>
@@ -396,8 +373,7 @@
 				<div class="background backgroundEdit${i.vq_no}">
 					<div class="window">
 						<div class="popup">
-							<button id="closebtn" onclick="CloseNOpen('Edit${i.vq_no}', '${i.vq_no}');">질문으로
-								돌아가기</button>
+							<button id="closebtn" onclick="CloseNOpen('Edit${i.vq_no}', '${i.vq_no}');">돌아가기</button>
 							<div class="row g-3">
 								<div class="col-md-6">
 									<div class="form-floating">
@@ -405,12 +381,11 @@
 											placeholder="리뷰 제목" value="${i.vq_title}">
 									</div>
 								</div>
-								<textarea class="summernote" id="message" name="{i.vq_no}vq_content"
+								<textarea class="summernote" id="message ${i.vq_no}vq_content" name="{i.vq_no}vq_content"
 									style="height: 150px; resize: none; z-index: 1100;">${i.vq_content}</textarea>
 							</div>
 							<div class="col-12">
-								<button class="btn btn-primary w-100 py-3" type="button" onclick="edit('${i.vq_no}')">질문
-									수정하기</button>
+								<button class="btn btn-primary w-100 py-3" type="button" onclick="edit('${i.vq_no}')">질문 수정하기</button>
 							</div>
 						</div>
 					</div>

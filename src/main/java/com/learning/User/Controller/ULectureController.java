@@ -296,8 +296,7 @@ public class ULectureController {
 	}
 
 	@RequestMapping(value = "/LectureVideoQnaWrite.do")
-	@ResponseBody
-	public int LectureVideoQnaWrite(@RequestParam(name = "v_no") int v_no, HttpServletRequest rq) {
+	public String LectureVideoQnaWrite(@RequestParam(name = "v_no") int v_no, HttpServletRequest rq) {
 
 		String u_id = (String) rq.getSession().getAttribute("u_id");
 		String vq_title = null;
@@ -305,7 +304,7 @@ public class ULectureController {
 		ULectureVideoQnaForm lectureVideoQnaForm = null;
 		if (u_id == null) {
 
-			return 0;
+			return "redirect:/login";
 		} else {
 			// 질문 입력값 조건(길이 및 null)문 삽입
 
@@ -318,7 +317,9 @@ public class ULectureController {
 			lectureVideoQnaForm.setVq_title(vq_title);
 			lectureVideoQnaForm.setVq_content(vq_content);
 
-			return lectureService.InsertLectureVideoQna(lectureVideoQnaForm);
+			lectureService.InsertLectureVideoQna(lectureVideoQnaForm);
+			
+			return "redirect:/LectureVideo?v_no=" + v_no;
 		}
 	}
 
