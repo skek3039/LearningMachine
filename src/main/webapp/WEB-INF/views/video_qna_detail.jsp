@@ -111,7 +111,7 @@
 						<td style="word-break:break-all; width: 820px"><div readonly="readonly" style="width: 810px; height: 220px; overflow: auto;">${dto.vq_content }</div></td>
 					</tr>
 					</table>
-					<div style="padding-top: 70px;">
+					<div style="padding-top: 20px;">
 					<hr style="width: 850px; height: 2px;">
 					</div>
 					<br>
