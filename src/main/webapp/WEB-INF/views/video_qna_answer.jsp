@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,29 +50,30 @@
         font-weight: normal;
         font-style: normal;
     }
-
     body {
         font-family: LeferiPoint-WhiteObliqueA;
     }
-
     details {
         border-bottom: 1px solid #efefef;
         color: #666;
         font-size: 16px;
         padding: 15px;
     }
-
-
     details[open] summary {
         font-weight: 800;
     }
-
     details > summary {
         color: white;
         font-size: 17px;
         padding: 15px 0;
     }
 </style>
+
+<script type="text/javascript">
+function linkPage(pageNo){
+	location.href = "./lecture?pageNo=" + pageNo;
+	}
+</script>
 
 </head>
 
@@ -91,56 +93,48 @@
 		<jsp:include page="./header.jsp" />
 		<div style=" width: 100%;">
 		 <jsp:include page="./lecture_nav.jsp"/>
-		<div style="padding-top: 110px;"></div>
-		<div style="padding-top: 10px; padding-left: 400px; height: 835px;">
-				<table>
+		<div style="padding-top: 110px;"><h3>&nbsp;&nbsp;Q&A</h3><hr style="border: solid 1px;"></div>
+		<div style="padding-top: 40px;">
+				<div style="padding-top: 10px; height: 730px;">
+			<table class="table table-bordered table-sm" style="width: 900px; margin: 0 auto;">
 					<tr>
-					<th><img style="width: 50px; height: 50px;" id="up" alt="" src="./img/q.png" title="질문"></th>
-						<td style="padding-top: 10px; word-break:break-all; width: 750px"><div readonly="readonly" style="width: 510px; height: 50px; overflow: auto;"><h5>${dto.vq_title }</h5></div></td>
+						<th>번호</th>
+						<th>제목</th>
+						<th>아이디</th>
+						<th>강의 이름</th>
+						<th>날짜</th>
+						<th>Q&A</th>
 					</tr>
-					<tr>
-						<td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/id.png" title="id">
-						${dto.u_id }</h6></td><td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/date.png" title="날짜">
-											<fmt:parseDate value="${dto.vqr_date }" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
-                                            <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
-                    						${time }
-					</h6></td>
-					</tr></table><br>
-					<table>
-					<tr>
-						<td style="word-break:break-all; width: 820px"><div readonly="readonly" style="width: 810px; height: 220px; overflow: auto;">${dto.vq_content }</div></td>
-					</tr>
-					</table>
-					<div style="padding-top: 20px;">
-					<hr style="width: 850px; height: 2px;">
-					</div>
-					<br>
-					<table>
-					<tr>
-						<th><img style="width: 50px; height: 50px;" id="up" alt="" src="./img/a.png" title="답변"></th>
-						<td style="padding-top: 10px; word-break:break-all; width: 750px"><div readonly="readonly" style="width: 510px; height: 50px; overflow: auto;"><h5>${dto.vqr_title }</h5></div></td>
-					</tr>
-					<tr>
-						<td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/id.png" title="id">
-						${dto.t_id }</h6></td><td><h6><img style="width: 20px; height: 20px;" id="up" alt="" src="./img/date.png" title="date">
-                                            <fmt:parseDate value="${dto.vqr_date }" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
-                                            <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
-                    						${time }&nbsp;
-                    	<img onclick="location.href='./v_qna_update?vq_no=${dto.vq_no}'" style="width: 20px; height: 20px;" id="update" alt="" src="./img/update.png" title="id">
-					</h6></td>
 					
-					</tr></table><br>
-					<table>
+					<c:forEach items="${video_answer}" var="v">
 					<tr>
-						<td style="word-break:break-all; width: 820px"><div readonly="readonly" style="width: 810px; height: 220px; overflow: auto;">${dto.vqr_content }</div></td>
+						<td>${v.vq_no}</td>
+						<td>
+							<c:choose>
+							<c:when test="${fn:length(v.vq_title ) > 10 }">
+							<c:out value="${fn:substring(v.vq_title , 0, 9)} ...">
+							</c:out></c:when>
+							<c:otherwise>
+							<c:out value="${v.vq_title  }">
+							</c:out></c:otherwise>
+							</c:choose>
+						</td>
+						<td>${v.u_id}</td>
+						<td>${v.l_name }</td>
+						<td>
+                        <fmt:parseDate value="${v.vq_date}" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
+                        <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
+                    	${time }</td>
+						<td><a href="./video_qna_detail?vq_no=${v.vq_no}">답변 완료</a></td>
 					</tr>
-					</table>
-					
-				
-				
+					</c:forEach>
+			</table>
+		<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
+		</div>	
 		</div>
 
 </div>
+		<%-- <jsp:include page="./team.jsp"/> --%>
 		<jsp:include page="./footer.jsp" />
 
 
@@ -172,6 +166,5 @@
 	<!-- Template Javascript -->
 	<script src="./resources/js/main.js"></script>
 </body>
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
 </html>
