@@ -4,7 +4,10 @@
 
 	<select id = "RecentMessage" parameterType = "String" resultType = "com.learning.DTO.MessageDTO">
 	
-		SELECT * FROM message_list WHERE to_id = #{u_id} and le_confirm = 0 order by le_date desc
+		SELECT * FROM message_list 
+		WHERE 
+			to_id = #{u_id} and le_del = 0
+		order by le_date DESC
 	
 	</select>
 	
@@ -18,6 +21,7 @@
 			, m.le_content
 			, m.le_date
 			, m.le_confirm
+			, m.le_del
 		FROM
 			 message m 
 		JOIN
@@ -25,11 +29,9 @@
 		ON
 			m.from_id = u.u_id
 		WHERE
-				(((m.from_id = #{from_id} AND m.to_id = #{to_id})
+				((m.from_id = #{from_id} AND m.to_id = #{to_id})
 			OR
-				(m.from_id = #{to_id} AND m.to_id = #{form_id})))
-			AND
-				(le_del = 0 OR (le_del = 1 AND le_confirm = 1))
+				(m.from_id = #{to_id} AND m.to_id = #{form_id}))
 		ORDER BY
 			le_no DESC
 			

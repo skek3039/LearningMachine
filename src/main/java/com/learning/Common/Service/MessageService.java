@@ -37,7 +37,16 @@ public class MessageService {
 		dto.setTo_id(to_id);
 		dto.setFrom_id(from_id);
 		
-		return messageDAO.ChattingRoom(dto);
+		List<MessageDTO> MessageList = messageDAO.ChattingRoom(dto);
+		
+		for(MessageDTO message : MessageList) {
+			
+			if(message.getTo_id().equals(to_id) && message.getLe_del() == 1) {
+				
+				message.setDel(1);
+			}
+		}
+		return MessageList;
 	}
 	
 	//메시지 확인

@@ -11,5 +11,8 @@ public class MessageDTO {
 	private String to_id;
 	private String le_content;
 	private String le_date;
+	private int le_del;
 	private int le_confirm;
+	private int del;
+	private int send;
 }

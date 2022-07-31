@@ -34,7 +34,7 @@ public class MessageController {
 
 			rq.setAttribute("MessageList", messageService.RecentMessage(u_id));
 
-			return "messagae";
+			return "user/message";
 		}
 	}
 
@@ -49,7 +49,7 @@ public class MessageController {
 
 			return null;
 		} else {
-			Chat = messageService.ChattingRoom(u_id, u_id);
+			Chat = messageService.ChattingRoom(u_id, from_id);
 
 			if (Chat == null || Chat.size() == 0) {
 
