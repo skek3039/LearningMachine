@@ -163,7 +163,8 @@ public class LoginController {
 		dto.setU_gender(request.getParameter("u_gender"));
 		dto.setU_nickname(request.getParameter("u_nickname"));
 		dto.setU_birth(request.getParameter("u_birth"));
-
+		dto.setU_tel(request.getParameter("u_tel"));
+		
 		TeacherDTO dto1 = new TeacherDTO();
 		dto1.setT_id(request.getParameter("u_id"));
 		dto1.setT_introduce(request.getParameter("t_introduce"));
@@ -204,6 +205,7 @@ public class LoginController {
 		dto.setU_nickname(request.getParameter("u_nickname"));
 		dto.setU_gender(request.getParameter("u_gender"));
 		dto.setU_birth(request.getParameter("u_birth"));
+		dto.setU_tel(request.getParameter("u_tel"));
 		
 		int result = loginService.join(dto);
 		

@@ -128,6 +128,12 @@
 													checked="checked">남 <input type="radio"
 													id="u_gender" name="u_gender" value="여" checked="checked">여
 											</div>
+											
+											<div class="form-outline form-white mb-4">
+												<input type="text" id="u_tel" name="u_tel"
+													class="form-control form-control-md" required="required"
+													placeholder="전화번호를 - 빼고 입력해 주세요" />
+											</div>
 
 											<div class="form-outline form-white mb-4">
 												<input type="text" id="u_birth" name="u_birth"

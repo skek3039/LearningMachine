@@ -81,8 +81,8 @@
                 <input type="password" id="pw" name="pw" class="form-control form-control-md" required="required" placeholder="PW를 입력해주세요."/>
               </div>
 
-              <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="./forgotPW">Forgot password?</a></p>
-              <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="./find_id">find_id?</a></p>
+              <p class=""><a class="text-white-50" href="./forgotPW">Forgot password?</a></p>
+              <p class=""><a class="text-white-50" href="./find_id">find_id?</a></p>
 
               <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
 			</form>	

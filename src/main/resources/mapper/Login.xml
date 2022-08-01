@@ -7,8 +7,8 @@
   	</select>
   
   <insert id="join" parameterType="userDTO">
-		insert into  user (u_id, u_pw, u_email, u_name, u_nickname, u_gender, u_birth)
-		values (#{u_id},#{u_pw},#{u_email},#{u_name},#{u_nickname},#{u_gender},#{u_birth})
+		insert into  user (u_id, u_pw, u_email, u_name, u_nickname, u_gender, u_birth, u_tel)
+		values (#{u_id},#{u_pw},#{u_email},#{u_name},#{u_nickname},#{u_gender},#{u_birth},#{u_tel})
   </insert>
   
   <select id="checkID" parameterType="String" resultType="integer">
@@ -32,8 +32,8 @@
   </select>
   
   <insert id="join2" parameterType="userDTO">
-  	insert into user (u_id, u_pw, u_email, u_name, u_nickname, u_gender, u_birth)
-  	value (#{u_id},#{u_pw},#{u_email},#{u_name},#{u_nickname},#{u_gender},#{u_birth})
+  	insert into user (u_id, u_pw, u_email, u_name, u_nickname, u_gender, u_birth, u_tel)
+  	value (#{u_id},#{u_pw},#{u_email},#{u_name},#{u_nickname},#{u_gender},#{u_birth},#{u_tel})
   </insert>
   
   <insert id="join3" parameterType="teacherDTO">
