@@ -188,7 +188,7 @@
  	<update id="notice_update1" parameterType="NoticeDTO">
  		UPDATE notice
 		SET n_title = #{n_title}, n_content = #{n_content}
-		WHERE u_id = #{u_id}
+		WHERE n_no = #{n_no}
  	</update>
  	
  	<delete id="notice_delete" parameterType="NoticeDTO">

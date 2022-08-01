@@ -117,8 +117,8 @@ function linkPage(pageNo){
 						<td>${n.n_no }</td>
 						<td><a href="./noticedetail2?n_no=${n.n_no}">
 							<c:choose>
-							<c:when test="${fn:length(n.n_title ) > 25 }">
-							<c:out value="${fn:substring(n.n_title , 0, 24)} ...">
+							<c:when test="${fn:length(n.n_title ) > 40 }">
+							<c:out value="${fn:substring(n.n_title , 0, 39)} ...">
 							</c:out></c:when>
 							<c:otherwise>
 							<c:out value="${n.n_title  }">

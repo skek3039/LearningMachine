@@ -146,12 +146,12 @@
 							<tr>
 								<td class="tg-llyw">강의 이름</td>
 								<td class="tg-0pky"><input name="l_name" style="width: 790px;"
-									type="text" placeholder="${dto.l_name }"></td>
+									type="text" value="${dto.l_name }"></td>
 							</tr>
 							<tr>
 								<td class="tg-llyw">강의 정보</td>
 								<td class="tg-0pky"><input name="l_info" style="width: 790px;"
-								type="text" placeholder="${dto.l_info }"></td>
+								type="text" value="${dto.l_info }"></td>
 							</tr>
 							<tr>
 								<td class="tg-llyw">카테고리</td>
@@ -166,7 +166,7 @@
 							</tr>
 							<tr>
 								<td class="tg-llyw">커리큘럼</td>
-								<td class="tg-0pky"><textarea name="l_curriculum" id="summernote" required="required"></textarea></td>
+								<td class="tg-0pky"><textarea name="l_curriculum" id="summernote" required="required">${dto.l_curriculum}</textarea></td>
 							</tr>
 						</tbody>
 					</table>
@@ -219,7 +219,6 @@
 				        maxHeight: null,       
 				        focus: true,             
 				        lang: "ko-KR",          
-				        placeholder: "${dto.l_curriculum}"
 				          
 				   });
 				});

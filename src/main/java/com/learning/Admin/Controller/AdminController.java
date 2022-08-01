@@ -554,7 +554,7 @@ public class AdminController {
 		@RequestMapping(value = "/notice_update")
 		public ModelAndView notice_update(HttpServletRequest request, HttpSession session) {
 			int n_no = Integer.parseInt(request.getParameter("n_no"));
-			if ((int) session.getAttribute("u_authority") > 3) {
+			if ((int) session.getAttribute("u_authority") > 6) {
 				ModelAndView mv = new ModelAndView("notice_update");
 				NoticeDTO notice_update = new NoticeDTO();
 				notice_update.setN_no(n_no);
@@ -575,6 +575,7 @@ public class AdminController {
 
 				NoticeDTO notice_update1 = new NoticeDTO();
 				notice_update1.setU_id(u_id);
+				notice_update1.setN_no(Integer.parseInt(request.getParameter("n_no")));
 				notice_update1.setN_title(request.getParameter("title"));
 				notice_update1.setN_content(request.getParameter("content"));
 				adminService.notice_update1(notice_update1);

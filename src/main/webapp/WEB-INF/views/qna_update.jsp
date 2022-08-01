@@ -95,8 +95,8 @@
 		<div style="padding-top: 100px; padding-left: 400px; height: 835px;">
 				<div id="writeform" style="padding-right: 100px;">
 				<form action="./qna_update.do?lqa_no=${dto.lqa_no }" method="post">
-					<input style="width: 820px;" type="text" name="title" required="required" placeholder="${dto.lqar_title }">
-					<textarea name="content" id="summernote" required="required"></textarea>
+					<input style="width: 820px;" type="text" name="title" required="required" value="${dto.lqar_title }">
+					<textarea name="content" id="summernote" required="required">${dto.lqar_content }</textarea>
 					<button type="submit" style="float:right;">답변등록</button>
 				</form>
 			</div>
@@ -143,7 +143,6 @@ $(document).ready(function() {
 	        maxHeight: null,       
 	        focus: true,             
 	        lang: "ko-KR",          
-	        placeholder: '${dto.lqar_content }' 
 	          
 	   });
 	});

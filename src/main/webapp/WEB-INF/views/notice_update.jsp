@@ -95,8 +95,9 @@
 		<div style="padding-top: 100px; padding-left: 400px; height: 1065px;">
 				<div id="writeform" style="padding-right: 100px;">
 				<form action="./notice_update.do" method="post">
-					<input style="width: 820px;" type="text" name="title" required="required" placeholder="${dto.n_title }">
-					<textarea name="content" id="summernote" required="required"></textarea>
+					<input style="width: 820px;" type="text" name="title" required="required" value="${dto.n_title }">
+					<textarea name="content" id="summernote" required="required">${dto.n_content }</textarea>
+					<input type="hidden" name="n_no" value="${dto.n_no }">
 					<button type="submit" style="float:right;">수정하기</button>
 				</form>
 			</div>
@@ -142,8 +143,7 @@ $(document).ready(function() {
 	        minHeight: null,        
 	        maxHeight: null,       
 	        focus: true,             
-	        lang: "ko-KR",          
-	        placeholder: '${dto.n_content }' 
+	        lang: "ko-KR"
 	          
 	   });
 	});

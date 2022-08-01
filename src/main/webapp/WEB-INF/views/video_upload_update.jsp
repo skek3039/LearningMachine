@@ -146,17 +146,17 @@
                      <tr>
                         <td class="tg-llyw">비디오 제목</td>
                         <td class="tg-0pky"><input name="v_videotitle" style="width: 790px;"
-                           type="text" placeholder="${dto.v_videotitle }"></td>
+                           type="text" value="${dto.v_videotitle }"></td>
                      </tr>
                      <tr>
                         <td class="tg-llyw">비디오 소개</td>
                         <td class="tg-0pky"><input name="v_introduce" style="width: 790px;"
-                        type="text" placeholder="${dto.v_introduce }"></td>
+                        type="text" value="${dto.v_introduce }"></td>
                      </tr>
                      <tr>
                         <td class="tg-llyw">파일 경로</td>
                         <td class="tg-0pky"><input name="v_root" style="width: 790px;"
-                        type="text" placeholder="${dto.v_root }"></td>
+                        type="text" value="${dto.v_root }"></td>
                      </tr>
                   </tbody>
                </table>
