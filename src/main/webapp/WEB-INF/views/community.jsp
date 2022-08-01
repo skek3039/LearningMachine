@@ -318,8 +318,8 @@ function select(category){
 				<li class="tab-link" data-tab="tab-2">자유주제</li>
 			</ul>
 		</div>
-		<div style="padding-top: 20px; text-align: center;">
-				<div class ="search" style="width:500px; margin: 0 auto">
+		<div style="padding-top: 20px; text-align: center; height: 900px;">
+				<div class ="search" style="width:900px; margin: 0 auto">
 					 <input type="search" id="lqa_title" name="lqa_title" class="form-control" style="width: 350px;display: inline-block;" placeholder="궁금한 질문을 검색해보세요!" onkeyup="enterkey()">
 					 <button type="button" id="search" class="btn btn-success" style="display: inline-block;" onclick="search()">Search</button>
 				</div>	
@@ -351,14 +351,14 @@ function select(category){
 										<h2 class="card-title" style="text-align: left">${list.lqa_title }</h2>
 										<h6 style="text-align: left"> ${list.u_id }</h6>
 										<p class="card-text">
-										<div style="border: 1px solid rgb(201, 236, 219);height:150px; text-align: left"><strong>Q.</strong> ${list.lqa_content }</div><br>
+										<div style="overflow: auto ; border: 1px solid rgb(201, 236, 219); height:150px; text-align: left"><strong>Q.</strong> ${list.lqa_content }</div><br>
 										
 										<c:choose>
 											<c:when test="${list.lqar_content ne null }">
 											<div style="border: 1px solid rgb(201, 236, 219);height:150px; text-align: left"><strong>A.</strong>${list.lqar_content } </div>
 											</c:when>
 											<c:otherwise>
-											<div style="border: 1px solid rgb(201, 236, 219);height:150px; text-align: left"><strong>선생님이 답변작성중이에요</strong> </div>
+											<div style="overflow: auto ; border: 1px solid rgb(201, 236, 219);height:150px; text-align: left"><strong>선생님이 답변작성중이에요</strong> </div>
 											</c:otherwise>
 										</c:choose>
 									</div>
@@ -367,8 +367,8 @@ function select(category){
 							</div>
 						</c:forEach>
 						</table>
-						<div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
-			</div>			
+<br><br><br><br><br><div id="pagination" style="text-align: center;"><ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage" /></div>
+			</div>		
 	
 					
 		<div class="row tab-content" id="tab-2">
@@ -408,6 +408,7 @@ function select(category){
 </div>
 					
 	</div>
+	<br><br><br><br><br><br>
 	<jsp:include page="./footer.jsp" />
 
 </div>

@@ -179,7 +179,6 @@ public class PaymentController {
 			ModelAndView mv = new ModelAndView("admin_student_refund");
 			
 			List<String> list = adminService.refundList();
-			System.out.println(list);
 			mv.addObject("list", list);
 
 			return mv;
@@ -202,6 +201,7 @@ public class PaymentController {
 			String p_no = request.getParameter("p_no");
 			String u_id = request.getParameter("u_id");
 			result = adminService.lecture_refund(p_no, u_id);
+			
 
 			pw.print(result);
 		}

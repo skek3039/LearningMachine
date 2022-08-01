@@ -168,7 +168,7 @@ function search(){
                                     <thead>
                                         <tr>
                                             <th>이름(ID)</th>
-                                            <th>강의코드</th>
+                                            <th>강의명</th>
                                             <th>매출일자</th>
                                             <th>금액</th>
                                         </tr>
@@ -189,7 +189,7 @@ function search(){
                                     <c:forEach items="${list }" var="pay">
                                         <tr>
                                             <td>${pay.NAME }(${pay.u_id })</td>
-                                            <td>${pay.l_code }</td>
+                                            <td>${pay.l_name }</td>
                                             <td>
                                             <fmt:parseDate value="${pay.p_date}" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
                                             <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>

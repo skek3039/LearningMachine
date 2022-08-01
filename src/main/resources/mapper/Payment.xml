@@ -17,7 +17,7 @@
   	</select>
   	
   	<select id="refundList" parameterType="map" resultType="map">
-		SELECT * ,
+		SELECT * ,(SELECT l_name FROM categoryView v WHERE v.l_code = l.l_code) AS l_name,
 		(SELECT COUNT(*) FROM payment_log p WHERE p.p_refund !=0  )AS count,
 		(SELECT SUM(p_price) FROM payment_log p WHERE p.p_refund !=0  )AS refundtotal,
 		(SELECT u_name FROM user WHERE user.u_id = l.u_id)AS NAME
