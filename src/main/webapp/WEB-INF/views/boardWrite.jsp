@@ -232,6 +232,13 @@ function enterkey() {
 	}
 	
 }
+$(document).on("keyup","#b_title",function(){
+	if($(this).val().length >30){
+		alert("제목은 30자를 초과할 수 없습니다.");
+		$(this).val($(this).val().substring(0,30));
+        $(this).focus();
+	}
+});
 </script>
 
 </head>
@@ -259,7 +266,7 @@ function enterkey() {
 				<form action="./boardWrite.do" method="Post">
 					<table class="table" style="width: 90%; height:100%; margin: 0 auto" >						 
 						    <tr>
-						      <th style="width: 100px;"><input type="text" name="b_title" required="required"  placeholder="제목을 입력해주세요." style="width: 100%"> </th>
+						      <th style="width: 100px;"><input type="text" name="b_title" id ="b_title" required="required"  placeholder="제목을 입력해주세요." style="width: 100%"> </th>
 						    </tr>
 						 	<tr>
 						 		<td>	<textarea class="summernote" id="b_content" name="b_content" required="required" style="height: 150px; resize: none; z-index: 1100;"></textarea></td>

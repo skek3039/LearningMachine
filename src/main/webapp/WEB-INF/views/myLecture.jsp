@@ -286,12 +286,17 @@ $(document).ready(function(){
 								<th style="text-align: left"><a href="./LectureDetail?l_code=${list.l_code }">${list.l_name }</a></th>
 								<th style="width:80px; ">${list.c_name }</th>
 								<td>${list.t_nickname }</td>
-							<c:if test="${list.attendace_rate eq null }">
-								<td>0 %</td>
-							</c:if>
-							<c:if test="${list.attendace_rate ne null }">
-								<td>${list.attendance_rate } %</td>
-							</c:if>
+							<c:choose>
+								<c:when test="${list.attendance_rate ne 0 }">
+								<td>${list.attendance_rate } %</td>								
+								</c:when>
+								<c:otherwise>
+								<td>0 %</td>								
+								</c:otherwise>
+							</c:choose>
+							
+							
+							
 								<td>${list.lr_date }</td>
 							</tr>
 						</tbody>
