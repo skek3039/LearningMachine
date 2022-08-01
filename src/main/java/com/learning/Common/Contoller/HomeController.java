@@ -233,10 +233,10 @@ public class HomeController {
 		
 		if(request.getParameter("c_name") != null) {			
 			map.put("c_name", request.getParameter("c_name"));
-			System.out.println(request.getParameter("c_name"));
+		
 		}else {
 			map.put("c_name", null);
-			System.out.println(request.getParameter("c_name"));
+		
 		}
 		List<String> list1 = communityService.QnAList(map);
 		return list1; 

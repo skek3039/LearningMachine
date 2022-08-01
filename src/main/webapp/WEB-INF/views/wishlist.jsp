@@ -261,7 +261,7 @@ $(document).ready(function(){
 		<jsp:include page="./header.jsp" />
 		<div style="padding-top: 110px;">
 		
-			<h3>&nbsp;&nbsp; WishList</h3> <small>현재 ${WishList[0].t_nickname }님 수강중인 강의 정보입니다.</small> ${WishList }
+			<h3>&nbsp;&nbsp; WishList</h3> <small>현재 ${sessionScope.u_id }님 수강중인 강의 정보입니다.</small>
 			<hr style="border: solid 1px;">
 		</div>
 		<div style="padding-top: 5px; text-align: center;">
@@ -271,47 +271,32 @@ $(document).ready(function(){
 				<table class="table table-hover">
 					<thead class="thead-dark">
 						<tr style="background-color: #F0F8FF;">
-							<th style="text-align: left; width: 300px;">강의명</th>
-							<th>강의정보</th>
+							<th style="width: 300px;">강의명</th>
+							<th></th>
 							<th style="width: 120px; ">금액</th>
 							<th style="width: 120px;">찜한일자</th>
 						</tr>
 					</thead>
 					<c:forEach items="${WishList }" var="w">
 						<tbody id="detailTable">
+					<c:choose>
+					<c:when test="${WishList eq null }">
+						<tr><th> 찜한 강의가 없습니다.</th></tr>
+					</c:when>
+					<c:otherwise>
 							<tr>
 								<th style="text-align: left"><a href="./LectureDetail?l_code=${w.l_code }">${w.l_name }</a></th>
-								<td>
-								sadsadsadsadsdasadsadsadsa</td>
-								<td style="text-align: right;"><fmt:formatNumber value="${w.l_price }" pattern="#,###"  />원</td>
+								<td style="text-align: left"><img alt="" src="${w.l_thumbnail }" style="width: 130px; height: 80px;"> </td>
+								<td><fmt:formatNumber value="${w.l_price }" pattern="#,###"  />원</td>
 								<td> <fmt:parseDate value="${w.w_date}" var="time" pattern="yyyy-MM-dd HH:mm:ss.S" />
                                  <fmt:formatDate value="${time }" var="time" pattern="yyyy-MM-dd"/>
 								${time }</td>
 							
 							</tr>
 							
+					</c:otherwise>
+					</c:choose>
 						</tbody>
-
-						<div class="background background${p.p_no }">
-							<div class="window">
-								<div class="popup">
-									<button id="closebtn" class="btn btn-outline-dark" onclick="CloseModal('${p.p_no}');">닫기</button>
-								<form action="./myPayment" method="post">
-									<input type="hidden" id="p_no" name="p_no" value="${p.p_no }">
-									<h2 class="card-title" style="text-align: left">환불신청</h2>
-									<p class="card-text">
-									<div style="border: 1px solid rgb(201, 236, 219); height: 150px; text-align: left">
-										강의명 : ${p.l_name }<br>
-										강사명 : ${p.t_nickname }<br><br><br>
-									<h6 style="text-align: right"><fmt:formatNumber value="${p.p_price2 }" pattern="#,###"  />원을 환불신청합니다. </h6>
-									</div>
-									<button type="submit" class="btn btn-outline-dark" style="padding-top: 10px;">환불신청</button>
-									<br>
-								</form>
-								</div>
-
-							</div>
-						</div>
 					</c:forEach>
 				</table>
 				</div>				

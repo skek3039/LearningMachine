@@ -13,7 +13,9 @@
                         <a href="./notice" class="nav-item nav-link">공지사항</a>
                         <a href="./LectureList" class="nav-item nav-link">강의</a>
                         <a href="./community" class="nav-item nav-link">커뮤니티</a>
+                         <c:if test="${sessionScope.u_authority >= 1 }">
                         <a href="./wishlist" class="nav-item nav-link">WishList</a>
+                        </c:if>
                         <div class="nav-item dropdown">
                          <c:if test="${sessionScope.u_authority == 7 }">
                             <a href="./admin" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Admin</a>
