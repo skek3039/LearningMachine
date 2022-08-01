@@ -51,12 +51,14 @@ public class AdminController {
 			List<String> payment = paymentService.paymentList(null);
 			List<String> refundRate = paymentService.refundRate();
 		
+			int count = adminService.msgList();
+			mv.addObject("count",count);
 			mv.addObject("refundRate",refundRate);
 			mv.addObject("report",report);
 			mv.addObject("refund",refund);
 			mv.addObject("lecture",lecture);
 			mv.addObject("payment", payment);
-				
+			System.out.println(count);
 			return mv;
 		} else {
 			ModelAndView mv = new ModelAndView("404");
@@ -99,7 +101,7 @@ public class AdminController {
 			ModelAndView mv = new ModelAndView("admin_lecture_request");
 			String la_no = null;
 			List<String> list = adminService.admin_lectureRequest(la_no);
-
+		
 			mv.addObject("list", list);
 			return mv;
 		} else {

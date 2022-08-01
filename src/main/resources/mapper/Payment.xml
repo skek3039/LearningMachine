@@ -70,7 +70,7 @@
   		AND
   		DATE(p_date) >= DATE_FORMAT(NOW(), '${year}-${month}-01')
 		AND 
-		<![CDATA[ 
+		<![CDATA[                  
 		DATE(p_date) <= DATE('${year}-${month}-31')  
 		]]>	
 		</if>

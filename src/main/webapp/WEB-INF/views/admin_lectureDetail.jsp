@@ -180,13 +180,13 @@ function refuse(la_no){
 					<form action="./admin_lecture_get" method="get">
 						<input type="hidden" name="t_id" value="${list[0].t_id}">
 						<input type="hidden" name="la_no" value="${list[0].la_no}">
-						<input type="hidden" name="check" value="1"> <input
-							type="hidden" name="c_code" value="${list[0].c_code }"> <input
-							type="hidden" name="c_name" value="${list[0].c_name }"> <input
-							type="hidden" name="l_name" value="${list[0].l_name }"> <input
-							type="hidden" name="l_curriculum"
-							value="${list[0].l_curriculum }"> <input type="hidden"
-							name="l_info" value="${list[0].l_info }">
+						<input type="hidden" name="check" value="1"> 
+						<input type="hidden" name="c_code" value="${list[0].c_code }"> 
+						<input type="hidden" name="c_name" value="${list[0].c_name }"> 
+						<input type="hidden" name="l_curriculum" value="${list[0].l_curriculum }"> 
+						<input type="hidden" name="l_name" value="${list[0].l_name }"> 
+						
+						<input type="hidden" name="l_info" value="${list[0].l_info }">
 						<table class="table table-bordered table-sm" style="width: 900px;">
 							<tr>
 								<th>강사아이디 | ${list[0].t_id}</th>
@@ -219,9 +219,6 @@ function refuse(la_no){
 										<textarea name="la_reason"id="la_reason" placeholder="승인불가사유를 적어주세요." style="width: 100%; height: 100px;" ></textarea>
 										</p>
 										<button type="button" onclick="refuse('${list[0].la_no}');" class="btn btn-outline-dark">승인거부</button>
-									</div>
-									<div>
-										<div></div>
 									</div>
 								</div>
 							</div>

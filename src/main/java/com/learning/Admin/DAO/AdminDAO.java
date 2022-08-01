@@ -195,6 +195,10 @@ public class AdminDAO {
 		return sqlSession.update("Admin.notice_update1", notice_update1);
 	}
 
+	public int msgList() {
+		return sqlSession.selectOne("Admin.msgList");
+	}
+
 
 
 }

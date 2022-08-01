@@ -212,6 +212,12 @@
  		DELETE FROM user_board
  		WHERE b_no = #{b_no}
  	</delete>	
-
+ 	
+	<select id="msgList" resultType="integer">
+		SELECT count(*)as count
+		FROM message_list
+		WHERE to_id = 'admin' AND  le_confirm = 0
+	</select>
+	
  	
   </mapper>
