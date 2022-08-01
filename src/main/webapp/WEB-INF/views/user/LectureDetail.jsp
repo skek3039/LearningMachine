@@ -474,6 +474,7 @@
 		<!-- Spinner End -->
 
 		<jsp:include page="./header.jsp" />
+		<jsp:include page="./componentMSG.jsp" />
 		<div style="padding-top: 110px;">
 			<h3>&nbsp;&nbsp;${LectureDetail.l_name} ${LectureVideos.key['1'].value.v_videotitle}</h3>
 		</div>
@@ -532,7 +533,7 @@
 					<div class="d-inline-block border rounded-pill text-primary px-4 mb-3">${LectureDetail.l_category}
 					</div>
 					<h2>${LectureDetail.l_name}</h2>
-					<h3 class="mb-4">강의 소개</h3>
+					<h3 class="mb-4">강의 소개</h3><img src="./resources/img/letter.png" onclick = "mopenmodal('${LectureDetail.t_id}')">
 					<h6><small>${LectureDetail.total_register}명 수강중</small>, <small>${LectureDetail.total_review}명의
 							리뷰(${LectureDetail.grade_avg }점)</small></h6>
 					<span class='star-rating1'>

@@ -285,8 +285,8 @@
 
 					if(result == 1){
 						$('#message_text').val("");
-						CloseModal();
-						OpenModal(to_id);
+						 mclosemodal();
+						 mopenmodal(to_id);
 					}else if(result == 0){
 
 						alert('권한이 없어요');
@@ -299,8 +299,8 @@
 
 		}
 
-		function OpenModal(from_id) {
-				var OpenModal = document.querySelector(".backgroundChat");
+		function  mopenmodal(from_id) {
+				var  mopenmodal = document.querySelector(".backgroundChat");
 				$.ajax({
 					url: "/web/ChattingRoom?from_id=" + from_id,
 					type: "get",
@@ -340,7 +340,7 @@
 					}
 				});
 
-			OpenModal.classList.add("show");
+			 mopenmodal.classList.add("show");
 		}
 		function DeleteMessage(le_no) {
 				var to_id = $('#from_id_forsend').val();
@@ -351,8 +351,8 @@
 						success: function (result) {
 							if (result == 1) {
 								$('#message_text').val("");
-								CloseModal();
-								OpenModal(to_id);
+								 mclosemodal();
+								 mopenmodal(to_id);
 							} else if (result == 0) {
 
 								alert('권한이 없어요');
@@ -366,10 +366,10 @@
 				}
 			}
 
-		function CloseModal() {
-			var CloseModal = document.querySelector(".backgroundChat");
+		function  mclosemodal() {
+			var  mclosemodal = document.querySelector(".backgroundChat");
 			$('.chat').empty();
-			CloseModal.classList.remove("show");
+			 mclosemodal.classList.remove("show");
 		}
 
 	</script>
@@ -394,7 +394,7 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${MessageList}" var="i">
-							<tr onclick="OpenModal('${i.from_id}')">
+							<tr onclick=" mopenmodal('${i.from_id}')">
 								<td>${i.from_nickname}</td>
 								<td>${i.le_content}</td>
 								<td>${i.le_date}</td>
@@ -411,7 +411,7 @@
 				<div class="chat_wrap">
 					<div class="header">
 						CHAT
-						<button a class="btn btn-outline-light"  id="closebtn" style="color: black; margin : 4px;" onclick="CloseModal()">닫기</button>
+						<button a class="btn btn-outline-light"  id="closebtn" style="color: black; margin : 4px;" onclick=" mclosemodal()">닫기</button>
 					</div>
 					<div class="chat" style="overflow-y: auto; height: 500px;">
 					</div>
