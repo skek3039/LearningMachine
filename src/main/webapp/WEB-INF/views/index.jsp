@@ -223,13 +223,10 @@ function enterkey() {
                 </div>
             </div>
         </div>
-        <!-- Features End -->
+       
 
-        
-
-
+	
 		
-		<jsp:include page="./team.jsp"/>
 		<jsp:include page="./footer.jsp"/>
 
 
