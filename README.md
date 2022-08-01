@@ -6,7 +6,7 @@
 <hr>
 개발 환경
 
-    STS ver3.9.9 released / Tomcat 9.0 / 
+    STS ver3.9.9 released / Tomcat 9.0 / mariaDB 10.7
 
 
 
