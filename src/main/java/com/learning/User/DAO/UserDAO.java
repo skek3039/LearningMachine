@@ -12,6 +12,7 @@ import com.learning.User.DTO.WishlistDTO;
 import com.learning.User.Form.ULectureForm;
 import com.learning.User.Form.ULectureQnaForm;
 import com.learning.User.Form.ULectureReviewForm;
+import com.learning.User.Form.ULectureVideoQnaForm;
 import com.learning.User.Form.URegiForm;
 import com.learning.User.Form.UserAttendanceForm;
 
@@ -56,6 +57,10 @@ public class UserDAO {
 		}
 	}
 	
+	public List<ULectureVideoQnaForm> vQNAs(String u_id){
+		
+		return sqlSession.selectList(namespace + ".vQNAs", u_id);
+	}
 	public int CheckLectureRegist(URegiForm form) {
 		
 		return sqlSession.selectOne(namespace + ".CheckLectureRegist", form);

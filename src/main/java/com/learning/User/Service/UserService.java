@@ -77,6 +77,10 @@ public class UserService {
 
 	}
 	
+	public List<ULectureVideoQnaForm> vQNAs(String u_id){
+		
+		return userDAO.vQNAs(u_id);
+	}
 	public void LectureVideoAttendance(UserAttendanceForm form) {
 		String result = userDAO.CheckAttendance(form);
 

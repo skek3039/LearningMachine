@@ -55,11 +55,11 @@
 			margin: auto;
 			display: inline-block;
 		}
-
+	
 		.dropbtn_icon {
 			font-family: 'Material Icons';
 		}
-
+	
 		.dropbtn {
 			border: 1px solid rgb(37, 37, 37);
 			border-radius: 4px;
@@ -72,7 +72,7 @@
 			cursor: pointer;
 			font-size: 12px;
 		}
-
+	
 		.dropdown-content {
 			display: none;
 			position: absolute;
@@ -82,7 +82,7 @@
 			background-color: #f9f9f9;
 			min-width: 200px;
 		}
-
+	
 		.dropdown-content a {
 			display: block;
 			text-decoration: none;
@@ -90,21 +90,21 @@
 			font-size: 12px;
 			padding: 12px 20px;
 		}
-
+	
 		.dropdown-content a:hover {
 			background-color: #ececec
 		}
-
+	
 		.dropdown:hover .dropdown-content {
 			display: block;
 		}
-
+	
 		#video {
 			position: relative;
 			height: 0;
 			padding-bottom: 56.25%
 		}
-
+	
 		iframe {
 			position: absolute;
 			top: 0;
@@ -112,33 +112,33 @@
 			width: 100%;
 			height: 100%;
 		}
-
+	
 		.background {
 			position: fixed;
 			top: 0;
 			left: 0;
 			width: 100%;
-			height: 100vh;
+			height: 100%;
 			background-color: rgba(0, 0, 0, 0.3);
 			z-index: 1000;
-
+	
 			/* 숨기기 */
 			z-index: -1;
 			opacity: 0;
 		}
-
+	
 		.show {
 			opacity: 1;
 			z-index: 1000;
 			transition: all 0.5s;
 		}
-
+	
 		.window {
 			position: relative;
 			width: 100%;
 			height: 100%;
 		}
-
+	
 		.popup {
 			padding: 10px;
 			position: absolute;
@@ -147,21 +147,20 @@
 			transform: translate(-50%, -50%);
 			background-color: #ffffff;
 			box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
-
+	
 			/* 임시 지정 */
 			width: 70%;
 			height: 70%;
-
+	
 			/* 초기에 약간 아래에 배치 */
 			transform: translate(-50%, -40%);
-			overflow-y: auto;
 		}
-
+	
 		.show .popup {
 			transform: translate(-50%, -50%);
 			transition: all 0.5s;
 		}
-
+	
 		#closebtn {
 			position: fixed;
 			top: 0;
@@ -169,59 +168,95 @@
 			padding: 10px;
 			z-index: 500;
 		}
-
+	
 		#ubutton {
-
+	
 			width: 24px;
 		}
-
-		#chat_container {
-    	height: 50vh;
-        overflow: auto;
-    }
-    #chat_body {
-    	position: relative;
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
-        flex-direction: column;
-        width: 100%;
-        height: 100%;
-    }
-    #chat_messages {
-        position: relative;
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
-        flex-direction: column;
-        flex-wrap: wrap;
-        width: 100%;
-        padding: 16px;
-	}
-    .message_wrap.send {
-        flex-direction: row-reverse;
-        margin-left: auto;
-    }
-    .message_wrap {
-        position: relative;
-        display: flex;
-        align-items: flex-end;
-        justify-content: flex-end;
-        margin: 12px 0;
-    }
-    .message_wrap.send > span.message {
-        background-color: #94b5e7;
-    }
-    .message_wrap > span.message {
-        padding: 12px 24px;
-        border-radius: 8px;
-    }
-    .message_wrap.receive > span.message {
-        background-color: #eee;
-    }
-    .message_wrap.receive > span.message_time {
-        margin-left: 8px;
-    }
+	
+		* {
+			margin: 0;
+			padding: 0;
+		}
+	
+		.chat_wrap .header {
+			width: 100%;
+			font-size: 14px;
+			padding: 15px 0;
+			background: #F18C7E;
+			color: white;
+			text-align: center;
+			position: fixed;
+			margin: 0 auto;
+		}
+	
+		.chat_wrap .chat {
+			width: 100%;
+			padding-top: 40px;
+			padding-bottom: 40px;
+		}
+	
+		.chat_wrap .chat ul {
+			width: 100%;
+			list-style: none;
+		}
+	
+		.chat_wrap .chat ul li {
+			width: 100%;
+		}
+	
+		.chat_wrap .chat ul li.left {
+			text-align: left;
+		}
+	
+		.chat_wrap .chat ul li.right {
+			text-align: right;
+		}
+	
+		.chat_wrap .chat ul li>div {
+			font-size: 13px;
+		}
+	
+		.chat_wrap .chat ul li>div.sender {
+			margin: 10px 20px 0 20px;
+			font-weight: bold;
+		}
+	
+		.chat_wrap .chat ul li>div.message {
+			display: inline-block;
+			word-break: break-all;
+			margin: 5px 20px;
+			max-width: 75%;
+			border: 1px solid #888;
+			padding: 10px;
+			border-radius: 5px;
+			background-color: #FCFCFC;
+			color: #555;
+			text-align: left;
+		}
+	
+		.chat_wrap .input-div {
+			position: fixed;
+			bottom: 0;
+			width: 90%;
+			background-color: #FFF;
+			text-align: center;
+			border-top: 1px solid #F18C7E;
+			resize: none;
+			margin: 5px;
+		}
+	
+		.chat_wrap .input-div>textarea {
+			width: 100%;
+			height: 80px;
+			border: none;
+			padding: 10px;
+			resize: none;
+		}
+	
+		.format {
+			display: none;
+		}
 	</style>
 	<script>
 		$(document).ready(function () {
@@ -233,15 +268,110 @@
 				lang: 'ko-KR'
 			});
 		});
-		function OpenModal(lqa_no, from_id) {
-			var OpenModal = document.querySelector(".background" + lqa_no);
-			OpenModal.classList.add("show");
+		
+		function SendMessage(to_id){
+
+			var to_id = $('#from_id_forsend').val();
+			var le_content = $('#message_text').val();
+
+			$.ajax({
+				url : "/web/SendMessage",
+				data : {
+					to_id : to_id,
+					le_content : le_content
+				},
+				type : "POST",
+				success : function(result){
+
+					if(result == 1){
+						$('#message_text').val("");
+						CloseModal();
+						OpenModal(to_id);
+					}else if(result == 0){
+
+						alert('권한이 없어요');
+					}else if(result == 2){
+						
+						alert('메시지를 입력해주세요');
+					}
+				}
+			});
+
 		}
 
-		function CloseModal(lqa_no) {
-			var CloseModal = document.querySelector(".background" + lqa_no);
+		function OpenModal(from_id) {
+				var OpenModal = document.querySelector(".backgroundChat");
+				$.ajax({
+					url: "/web/ChattingRoom?from_id=" + from_id,
+					type: "get",
+					success: function (data) {
+						console.log(data);
+						var temp = '';
+						temp += '<input id = "from_id_forsend" type="hidden" value='+ from_id+'>';
+						temp +=('<ul class = "chatting" style = "margin= 70px;">');
+						for (var i = 1; i <= Object.keys(data).length; i++) {
+							var message = data[i];
+
+							if (message.del == 0) {
+								if (message.send == 1) {
+									temp +=('<li class = "right">');
+									temp +=('<div class = "sender">');
+									temp +=('<span>'+ '나' +'<small style = "color=red; textalign : center;" onclick="DeleteMessage('+message.le_no+')" >x</small></span>');
+									temp +=('</div>');
+									temp +=('<div class = "message">');
+									temp +=('<span>'+ message.le_content +'</span>');
+									temp +=('</div>');
+									temp +=('</li>');
+								} else {
+									temp +=('<li class = "left">');
+									temp +=('<div class = "sender">');
+									temp +=('<span>'+ message.u_nickname +'</span>');
+									temp +=('</div>');
+									temp +=('<div class = "message">');
+									temp +=('<span>'+ message.le_content +'</span>');
+									temp +=('</div>');
+									temp +=('</li>');
+								}
+							}
+						}
+						temp +=('</ul>');
+						$('.chat').append(temp);
+						$('div.chat').scrollTop($('div.chat').prop('scrollHeight'));
+					}
+				});
+
+			OpenModal.classList.add("show");
+		}
+		function DeleteMessage(le_no) {
+				var to_id = $('#from_id_forsend').val();
+				if (confirm('메시지를 삭제하시겠습니까?')) {
+					$.ajax({
+						url: "/web/DeleteMessage?le_no=" + le_no,
+						type: "get",
+						success: function (result) {
+							if (result == 1) {
+								$('#message_text').val("");
+								CloseModal();
+								OpenModal(to_id);
+							} else if (result == 0) {
+
+								alert('권한이 없어요');
+							} else if (result == 2) {
+
+								alert('메시지를 입력해주세요');
+							}
+						}
+
+					})
+				}
+			}
+
+		function CloseModal() {
+			var CloseModal = document.querySelector(".backgroundChat");
+			$('.chat').empty();
 			CloseModal.classList.remove("show");
 		}
+
 	</script>
 </head>
 
@@ -262,15 +392,15 @@
 						<th style="width: 55%;">내용</th>
 						<th style="width: 25%;">작성일</th>
 					</thead>
-					<c:forEach items="${MessageList}" var="i">
-						<tbody>
-							<tr onclick="OpenModal('Chat', '${i.from_id}')">
+					<tbody>
+						<c:forEach items="${MessageList}" var="i">
+							<tr onclick="OpenModal('${i.from_id}')">
 								<td>${i.from_nickname}</td>
 								<td>${i.le_content}</td>
 								<td>${i.le_date}</td>
 							</tr>
-						</tbody>
-					</c:forEach>
+						</c:forEach>
+					</tbody>
 				</table>
 			</c:otherwise>
 		</c:choose>
@@ -278,24 +408,15 @@
 	<div class="background backgroundChat">
 		<div class="window">
 			<div class="popup">
-				<button id="closebtn" type="button" onclick="CloseModal('Chat')">닫기</button>
-				<div id="chat_container">
-					<div id="chat_body">
-						<div id="chat_messages">.<div class="message_wrap send">
-							<span class="message">메시지 발송 테스트</span>
-							<span class="message_time">2021-01-27 15:18:50</span>
-						  </div>
-					
-						  <div class="message_wrap send">
-							<span class="message">ㅎㅎ</span>
-							<span class="message_time">2021-01-27 15:22:43</span>
-						  </div>
-					
-						  <div class="message_wrap receive">
-							<span class="message">ㅎㅇ</span>
-							<span class="message_time">2021-01-27 15:23:07</span>
-						  </div>
-						</div>
+				<div class="chat_wrap">
+					<div class="header">
+						CHAT
+						<button a class="btn btn-outline-light"  id="closebtn" style="color: black; margin : 4px;" onclick="CloseModal()">닫기</button>
+					</div>
+					<div class="chat" style="overflow-y: auto; height: 500px;">
+					</div>
+					<div class="input-div">
+						<textarea id = "message_text"></textarea><a class="btn btn-primary" onclick="SendMessage()">전송하기</a>
 					</div>
 				</div>
 			</div>

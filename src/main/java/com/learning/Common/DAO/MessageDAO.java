@@ -30,6 +30,10 @@ public class MessageDAO {
 		
 		return sqlSession.update(namespace + ".ReadMessage", dto);
 	}
+	public int SendMessage(MessageDTO dto) {
+	
+		return sqlSession.insert(namespace + ".SendMessage", dto);
+	}
 	
 	public String CheckMessageWriter(int le_no) {
 		

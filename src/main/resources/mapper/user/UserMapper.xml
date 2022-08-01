@@ -37,6 +37,12 @@
   	
   	</select>
   	
+  	<select id="vQNAs" parameterType="String" resultType="com.learning.User.Form.ULectureVideoQnaForm">
+  	
+  		SELECT * FROM lecture_video_qna_and_reply r WHERE u_id = #{u_id} ORDER BY vq_date
+  	
+  	</select>
+  	
   	<select id="UCheckAttendance" parameterType="com.learning.User.Form.UserAttendanceForm" resultType="String">
 	
 		SELECT va_attendance FROM lecture_video_attendance WHERE v_no = #{v_no} AND u_id = #{u_id} AND l_code = #{l_code}

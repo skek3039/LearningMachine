@@ -318,6 +318,10 @@
 								<button class="btn btn-primary w-100 py-3" type="button" style="position: fixed;"
 									onclick="CloseNOpen('qnas', 'Write')">질문작성하러가기</button>
 							</c:when>
+							<c:when test="${Video.pay_whether eq 0 && sessionScope.u_id ne null}">
+								<button class="btn btn-primary w-100 py-3" type="button" style="position: fixed;"
+									onclick="location.href = './Pay?l_code=${Video.l_code}'">질문작성하러가기</button>
+							</c:when>
 							<c:otherwise>
 								<button class="btn btn-primary w-100 py-3" type="button" style="position: fixed;"
 									onclick="location.href = '/web/login'">로그인</button>
@@ -370,7 +374,6 @@
 			</div>
 		</div>
 		<c:forEach items="${VideoQnas}" var="i">
-
 			<c:if test="${sessionScope.u_id eq i.u_id}">
 				<div class="background backgroundEdit${i.vq_no}">
 					<div class="window">

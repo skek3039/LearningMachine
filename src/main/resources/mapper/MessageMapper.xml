@@ -31,9 +31,9 @@
 		WHERE
 				((m.from_id = #{from_id} AND m.to_id = #{to_id})
 			OR
-				(m.from_id = #{to_id} AND m.to_id = #{form_id}))
+				(m.from_id = #{to_id} AND m.to_id = #{from_id}))
 		ORDER BY
-			le_no DESC
+			le_no
 			
 	
 	</select>
@@ -47,13 +47,22 @@
 	
 	</update>
 	
+	<insert id="SendMessage" parameterType="com.learning.DTO.MessageDTO">
+	
+		INSERT INTO message(from_id, to_id, le_content)
+		VALUES(#{from_id},#{to_id},#{le_content})
+	
+	</insert>
+	
 	<select id="CheckMessageWriter" parameterType="Integer" resultType="String">
 	
-		SELECT to_id FROM message WHERE le_no = #{le_no}	
+		SELECT from_id FROM message WHERE le_no = #{le_no}	
 	
 	</select>
 	
 	<select id= "CheckMessageConfirm" parameterType="Integer" resultType="Integer">
+	
+		SELECT le_confirm FROM message WHERE le_no = #{le_no}	
 	
 	</select>
 	

@@ -47,7 +47,7 @@ public class UController {
 			rq.setAttribute("RecentVideo", userService.RecentVideo(u_id));
 			rq.setAttribute("RecentMessage", messageService.RecentMessage(u_id));
 			rq.setAttribute("RegistedLecture", userService.RegistedLecture(u_id)); //유저가 수강하는 강의 목록
-			
+			rq.setAttribute("VideoQnas", userService.vQNAs(u_id));
 			return "index";
 		} else {
 			return "index";

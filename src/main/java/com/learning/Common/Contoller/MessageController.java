@@ -4,11 +4,14 @@ import java.text.ParseException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.JsonParser;
 import com.learning.Common.Service.MessageService;
 import java.util.*;
 import com.learning.DTO.*;
@@ -40,11 +43,11 @@ public class MessageController {
 
 	@RequestMapping(value = "/ChattingRoom")
 	@ResponseBody
-	public List<MessageDTO> chattingroom(HttpServletRequest rq) {
+	public Map<Integer, MessageDTO> chattingroom(@RequestParam(name = "from_id") String from_id,
+			HttpServletRequest rq) {
 
 		String u_id = (String) rq.getSession().getAttribute("u_id");
-		String from_id = rq.getParameter("form_id");
-		List<MessageDTO> Chat = null;
+		Map<Integer, MessageDTO> Chat = null;
 		if (u_id == null || from_id == null) {
 
 			return null;
@@ -55,51 +58,54 @@ public class MessageController {
 
 				return null;
 			} else {
-				if (messageService.ReadMessage(u_id, from_id) == 0) {
-					return null;
-				} else {
-					return Chat;
-				}
+
+				messageService.ReadMessage(u_id, from_id);
+
+				return Chat;
 			}
 		}
 	}
-	
+
+	@RequestMapping(value = "/SendMessage")
+	@ResponseBody
+	public int sendMessage(@RequestParam(name = "to_id") String to_id, HttpServletRequest rq) {
+
+		String from_id = (String) rq.getSession().getAttribute("u_id");
+		String le_content = rq.getParameter("le_content");
+		MessageDTO mdto = null;
+
+		if (from_id == null) {
+
+			return 0;
+		} else {
+			if (le_content.length() == 0) {
+
+				return 2;
+			} else {
+				mdto = new MessageDTO();
+				
+				mdto.setLe_content(le_content);
+				mdto.setTo_id(to_id);
+				mdto.setFrom_id(from_id);
+				
+				return messageService.SendMessage(mdto);
+			}
+		}
+	}
+
 	@RequestMapping(value = "/DeleteMessage")
 	@ResponseBody
-	public int deleteMessage(HttpServletRequest rq) {
-		
-		String u_id = (String)rq.getSession().getAttribute("u_id");
-		int le_no = (rq.getParameter("le_no") != null)?Integer.parseInt(rq.getParameter("le_no")):0;
-		
-		if(u_id == null || le_no == 0) {
-			
+	public int deleteMessage(@RequestParam(name="le_no")int le_no,HttpServletRequest rq) {
+
+		String u_id = (String) rq.getSession().getAttribute("u_id");
+
+		if (u_id == null || le_no == 0) {
+
 			return 0;
-		}else {
-			
+		} else {
+
 			return messageService.DeleteMessage(le_no, u_id);
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

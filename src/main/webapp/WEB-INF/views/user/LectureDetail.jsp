@@ -214,6 +214,10 @@
 
 			width: 24px;
 		}
+
+		.btn .btn-outline-light{
+			border: rgb(100, 89, 89);
+		}
 	</style>
 
 	<script type="text/javascript">
@@ -389,10 +393,6 @@
 
 						type: "post",
 						url: "/web/LectureQnaRemove.do?lqa_no=" + lqa_no,
-						success: function () {
-
-							window.location.reload();
-						},
 						error: function () {
 							alert('머선 일이고');
 						}
@@ -402,7 +402,7 @@
 						} else if (result == 0) {
 							alert('삭제 권한이 없습니다.');
 						}
-						CloseModal('QnaEdit' + lqa_no);
+						window.location.reload();
 					});
 				}
 			}
@@ -432,6 +432,7 @@
 					CloseModal('QnaEdit' + lqa_no);
 				}
 			});
+			window.location.reload();
 		}
 
 		function WishAdd(l_code, wish){
@@ -646,7 +647,7 @@
 				<div class="background backgroundReview">
 					<div class="window">
 						<div class="popup">
-							<button id="closebtn" onclick="CloseModal('Review');">닫기</button>
+							<a class="btn btn-outline-light"  id="closebtn"  style="color: black; margin : 4px;"onclick="CloseModal('Review');">닫기</a>
 							<form>
 								<div class="row g-3">
 									<div class="col-md-6">
@@ -696,7 +697,7 @@
 										<div class="background backgroundReviewEdit">
 											<div class="window">
 												<div class="popup">
-													<button id="closebtn" onclick="CloseModal('ReviewEdit');">닫기</button>
+													<a class="btn btn-outline-light"  id="closebtn" style="color: black; margin : 4px;" onclick="CloseModal('ReviewEdit');">닫기</a>
 													<form>
 														<div class="row g-3">
 															<div class="col-md-6">
@@ -732,11 +733,11 @@
 										<p class="card-text">
 											<c:out value="${fn:substring(content,0,101).replaceAll('\\\<.*?\\\>','')}" />
 										</p>
-										<button onclick="OpenModal('${i.u_id}');">자세히 보기</button>
+										<a class="btn btn-outline-light" style="color: black; margin : 4px;"onclick="OpenModal('${i.u_id}');">자세히 보기</a>
 										<div class="background background${i.u_id}">
 											<div class="window">
 												<div class="popup">
-													<button id="closebtn" onclick="CloseModal('${i.u_id}');">닫기</button>
+													<a class="btn btn-outline-light" style="color: black; margin : 4px;" id = "closebtn"onclick="CloseModal('${i.u_id}');">닫기</a>
 													<h2 class="card-title">${i.lr_title}</h2>
 													<h6>${i.u_nickname}</h6>
 													<p class="card-text">${i.lr_content}</p>
@@ -765,7 +766,7 @@
 				<div class="background backgroundqna">
 					<div class="window">
 						<div class="popup">
-							<button id="closebtn" onclick="CloseModal('qna');">닫기</button>
+							<a class="btn btn-outline-light"  id="closebtn" style="color: black; margin : 4px;" onclick="CloseModal('qna');">닫기</a>
 							<div class="row g-3">
 								<div class="col-md-6">
 									<div class="form-floating">
@@ -792,7 +793,7 @@
 					<div class="background background${i.lqa_no}${i.u_id}">
 						<div class="window">
 							<div class="popup">
-								<button id="closebtn" onclick="CloseModal('${i.lqa_no}${i.u_id}');">닫기</button>
+								<a class="btn btn-outline-light" id="closebtn" style="color: black; margin : 4px;"onclick="CloseModal('${i.lqa_no}${i.u_id}');">닫기</a>
 								<h2 class="card-title">질문</h2>
 								<h6>제목 : ${i.lqa_title}<br></h6>
 								<h6>내용 : ${i.lqa_content}</h6>
@@ -823,7 +824,7 @@
 										<div class="background backgroundQnaEdit${i.lqa_no}">
 											<div class="window">
 												<div class="popup">
-													<button id="closebtn" onclick="CloseModal('QnaEdit${i.lqa_no}');">닫기</button>
+													<a class="btn btn-outline-light"  id="closebtn"  style="color: black; margin : 4px;" onclick="CloseModal('QnaEdit${i.lqa_no}');">닫기</a>
 													<form>
 														<div class="row g-3">
 															<div class="col-md-6">
@@ -861,7 +862,7 @@
 									</c:otherwise>
 								</c:choose>
 								<c:if test="${i.lqa_confirm eq 1}">
-									<button onclick="OpenModal('${i.lqa_no}${i.u_id}');">답변 보기</button>
+									<a class="btn btn-outline-light" style="color: black; margin : 4px;" onclick="OpenModal('${i.lqa_no}${i.u_id}');">답변 보기</a>
 								</c:if>
 							</div>
 							<div class="card-footer">
