@@ -45,4 +45,7 @@ public class LoginDAO {
 	public int myDrop(String u_id) {
 		return sqlSession.update("Login.myDrop",u_id);
 	}
+	public String find_id(String u_email) throws Exception{
+		return sqlSession.selectOne("Login.find_id", u_email);
+	}
 }

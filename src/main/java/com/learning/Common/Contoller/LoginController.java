@@ -9,11 +9,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.learning.Common.Service.LoginService;
@@ -55,6 +57,16 @@ public class LoginController {
 	      
 	   }
 	   
+	@RequestMapping(value = "/find_id")
+	public String find_id() {
+		return "find_id";
+	}
+	
+	@RequestMapping(value = "/find_id", method = RequestMethod.POST)
+	public String find_id(HttpServletResponse response, @RequestParam("u_email") String u_email, Model md) throws Exception{
+		md.addAttribute("id", loginService.find_id(response, u_email)); 
+		return "find_id";
+	}
 	
 	//비밀번호 재설정 화면
 	@RequestMapping(value = "/resetPw", method = RequestMethod.GET )

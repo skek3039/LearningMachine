@@ -4,6 +4,16 @@
 
 <head>
     <meta charset="utf-8">
+    
+    <script type="text/javascript">
+    	$(function(){
+    		$("#find_id_btn").click(function(){
+    			location.href='../member/find_id';
+    		})
+    	})
+    
+    </script>
+    
     <title>Learning Machine</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
@@ -72,6 +82,7 @@
               </div>
 
               <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="./forgotPW">Forgot password?</a></p>
+              <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="./find_id">find_id?</a></p>
 
               <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
 			</form>	
