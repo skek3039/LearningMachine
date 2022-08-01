@@ -533,7 +533,7 @@
 					<div class="d-inline-block border rounded-pill text-primary px-4 mb-3">${LectureDetail.l_category}
 					</div>
 					<h2>${LectureDetail.l_name}</h2>
-					<h3 class="mb-4">강의 소개</h3><img src="./resources/img/letter.png" onclick = "mopenmodal('${LectureDetail.t_id}')">
+					<h3 class="mb-4">강의 소개<img src="./resources/img/letter.png" onclick = "mopenmodal('${LectureDetail.t_id}')" style="width: 24px;"></h3>
 					<h6><small>${LectureDetail.total_register}명 수강중</small>, <small>${LectureDetail.total_review}명의
 							리뷰(${LectureDetail.grade_avg }점)</small></h6>
 					<span class='star-rating1'>
