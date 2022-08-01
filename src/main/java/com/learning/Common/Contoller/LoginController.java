@@ -56,15 +56,17 @@ public class LoginController {
 	      }
 	      
 	   }
-	   
+	  
+	//아이디찾기 jsp
 	@RequestMapping(value = "/find_id")
 	public String find_id() {
 		return "find_id";
 	}
 	
+	//화면에 찾은 ID 띄우기
 	@RequestMapping(value = "/find_id", method = RequestMethod.POST)
 	public String find_id(HttpServletResponse response, @RequestParam("u_email") String u_email, Model md) throws Exception{
-		md.addAttribute("id", loginService.find_id(response, u_email)); 
+		md.addAttribute("id", loginService.find_id(response, u_email)); //response 으로 화면에 아이디 띄우기
 		return "find_id";
 	}
 	

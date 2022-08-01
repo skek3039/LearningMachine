@@ -78,27 +78,15 @@
 								<h1 class="h4 text-gray-900 mb-2">Find_ID?</h1>
 								<p class="mb-4">Email을 작성해 주세요</p>
 							</div>
-							<form action="find_id" method="post">
-								<div class="w3-center w3-large w3-margin-top">
-									<h3>아이디 찾기</h3>
-								</div>
-								<div>
-								
-									<p>
-										<label>Email</label> <input class="w3-input" type="text" id="u_email" name="u_email" required>
-									</p>
-								<h5>
-									${id } 
-								</h5>
-								<br>
-									<p class="w3-center">
-										<button type="submit" id=findBtn
-											class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">find</button>
-										<button type="button" onclick="history.go(-1);"
-											class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round">Cancel</button>
-									</p>
-								</div>
-							</form>
+							
+							<form action="./find_id" method="post">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-user" id="u_email" name="u_email" aria-describedby="EmailHelp" required="required"  placeholder="Enter your Email...">
+                                        </div>
+                                        <h2> ${id }</h2>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                                            Find_ID</button>
+                                          </form>
 							<hr>
 							<div class="text-center">
 								<a class="small" href="./join">Create an Account!</a>
