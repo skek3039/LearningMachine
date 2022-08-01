@@ -261,7 +261,7 @@ $(document).ready(function(){
 		<jsp:include page="./header.jsp" />
 		<div style="padding-top: 110px;">
 		
-			<h3>&nbsp;&nbsp; WishList</h3> <small>현재 ${sessionScope.u_id }님 수강중인 강의 정보입니다.</small>
+			<h3>&nbsp;&nbsp; WishList</h3> <small>현재 ${sessionScope.u_id }님이 찜하신 강의 정보입니다.</small>
 			<hr style="border: solid 1px;">
 		</div>
 		<div style="padding-top: 5px; text-align: center;">
