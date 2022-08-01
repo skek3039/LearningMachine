@@ -140,8 +140,8 @@ function OpenModal(la_no){
 	OpenModal.classList.add("show");
 }
 
-function CloseModal(lqa_no) {
-	var CloseModal = document.querySelector(".background" + lqa_no);
+function CloseModal(la_no) {
+	var CloseModal = document.querySelector(".background" + la_no);
 	CloseModal.classList.remove("show");
 }
 
@@ -198,11 +198,11 @@ function report(l_code){
 						<a href = "#" onclick="OpenModal('${s.l_code}')">신고하기</a>
 						</c:if>
 						
-						<form action="./lecture_student_report" method="get">
 									<div class="background background${s.l_code}">
 										<div class="window">
 											<div class="popup">
-												<button id="closebtn" onclick="CloseModal(${s.l_code});">닫기</button>
+												<button id="closebtn" onclick="CloseModal('${s.l_code}');">닫기</button>
+						<form action="./lecture_student_report" method="get">
 												<h2 class="card-title">신고사유</h2>
 												<h6>수업 : ${s.l_name } | 수강생 : ${s.u_id }</h6>
 												<input type="hidden" name="u_id" value="${s.u_id }"> <input
@@ -213,13 +213,14 @@ function report(l_code){
 														style="width: 100%; height: 100px;"></textarea>
 												</p>
 												<button type="submit" class="btn btn-outline-dark">신고</button>
+								</form>
 											</div>
 											<div>
 												<div></div>
 											</div>
 										</div>
 									</div>
-								</form></td>
+								</td>
 						
 						<!-- <button type="button" onclick="locaion.href='lecture_student_report.jsp'">신고</button> -->
 					</tr>

@@ -241,7 +241,8 @@ function drop(u_id) {
 		
 		function checkNick(){
 			var u_nickname = $("#u_nickname").val();
-			if(u_nickname.length < 3){
+			
+			if(u_nickname.length < 2){
 				alert("닉네임은 2자 이상 입력해주세요.");
 			}else{
 				if(!strCheck(u_nickname,"nick")){
